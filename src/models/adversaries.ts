@@ -1,19 +1,19 @@
 import type { Difficulty } from "./difficulty";
 
-export type InvaderName =
+export type AdversaryName =
 	"Kingdom of Brandenburg-Prussia" |
 	"Kingdom of England" |
 	"Kingdom of Sweden";
 
-export interface IInvader {
-	name: InvaderName,
+export interface IAdversary {
+	name: AdversaryName,
 	levels: {
 		level: 0 | 1 | 2 | 3 | 4 | 5 | 6,
 		difficulty: Difficulty,
 	}[],
 }
 
-export const INVADERS: IInvader[] = [
+export const ADVERSARIES: IAdversary[] = [
 	{
 		name: "Kingdom of Brandenburg-Prussia",
 		levels: [

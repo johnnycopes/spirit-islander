@@ -1,13 +1,12 @@
 import type { Difficulty } from "./difficulty";
 
-export type IslandMap = "Balanced" | "Thematic";
-
-export interface IIslandMap {
-	name: IslandMap;
+export type MapName = "Balanced" | "Thematic";
+export interface IMap {
+	name: MapName;
 	difficulty: Difficulty;
 }
 
-export const ISLAND_MAPS: IIslandMap[] = [
+export const MAPS: IMap[] = [
 	{
 		name: "Balanced",
 		difficulty: 0,
