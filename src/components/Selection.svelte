@@ -1,6 +1,8 @@
 <script lang="ts">
 	import { createEventDispatcher } from "svelte";
 	import Button from "./Button.svelte";
+	import FormField from "./FormField.svelte";
+	import Select from "./Select.svelte";
 	import type { ISelection } from "../models/selection";
 	import type { Difficulty } from "../models/game/difficulty";
 	import type { SpiritName } from "../models/game/spirits";
@@ -11,6 +13,8 @@
 	import { ADVERSARIES } from "../models/game/adversaries";
 	import { SCENARIOS } from "../models/game/scenarios";
 	import { MAPS } from "../models/game/maps";
+	import { pluralize } from "../utility/pluralize";
+	import { createArr } from "../utility/create-array";
 
 	const dispatcher = createEventDispatcher<{
 		selection: ISelection;
@@ -18,9 +22,9 @@
 	let players: 1 | 2 | 3 | 4 = 1;
 	let difficulty: Difficulty = 0;
 	let spirits: SpiritName[] = SPIRITS.map(spirit => spirit.name);
-	let adversaries: AdversaryName[] = ADVERSARIES.map(adversary => adversary.name);
-	let scenarios: ScenarioName[] = SCENARIOS.map(scenario => scenario.name);
-	let maps: MapName[] = MAPS.map(map => map.name);
+	let adversaries: AdversaryName[] = [];
+	let scenarios: ScenarioName[] = [];
+	let maps: MapName[] = ["Balanced"];
 
 	function onSubmit(): void {
 		const selection: ISelection = {
@@ -31,42 +35,26 @@
 </script>
 
 <form class="form">
-	<div class="form-field">
-		<label for="players-select">
-			Number of players:
-		</label>
-		<select
-			id="players-select"
-			name="players"
+	<FormField>
+		<Select id="players"
+			label="Number of players"
+			options={createArr(4)}
 			bind:value={players}
-		>
-			{#each Array(4) as _, i}
-				<option value={i + 1}>
-					{i + 1}
-				</option>
-			{/each}
-		</select>
-	</div>
+		/>
+	</FormField>
 
-	<div class="form-field">
-		<label for="difficulty-select">
-			Level of difficulty:
-		</label>
-		<select
-			id="difficulty-select"
-			name="difficulty"
+	<FormField>
+		<Select id="difficulty"
+			label="Level of difficulty"
+			options={createArr(10, 0)}
 			bind:value={difficulty}
-		>
-			{#each Array(11) as _, i}
-				<option value={i}>
-					{i}
-				</option>
-			{/each}
-		</select>
-	</div>
+		/>
+	</FormField>
 
-	<div class="form-field">
-		<p class="form-field__header">Spirits:</p>
+	<FormField header="Spirits"
+		error={players > spirits.length}
+		errorMessage={`At least ${players} ${pluralize(players, "spirit")} must be selected`}
+	>
 		<ul>
 			{#each SPIRITS as spirit}
 			<li>
@@ -81,10 +69,9 @@
 			</li>
 			{/each}
 		</ul>
-	</div>
+	</FormField>
 
-	<div class="form-field">
-		<p class="form-field__header">Adversaries:</p>
+	<FormField header="Adversaries">
 		<ul>
 			{#each ADVERSARIES as adversary}
 			<li>
@@ -99,10 +86,9 @@
 			</li>
 			{/each}
 		</ul>
-	</div>
+	</FormField>
 
-	<div class="form-field">
-		<p class="form-field__header">Scenarios:</p>
+	<FormField header="Scenarios">
 		<ul>
 			{#each SCENARIOS as scenario}
 			<li>
@@ -117,10 +103,12 @@
 			</li>
 			{/each}
 		</ul>
-	</div>
+	</FormField>
 
-	<div class="form-field">
-		<p class="form-field__header">Map:</p>
+	<FormField header="Map"
+		error={!maps.length}
+		errorMessage="At least 1 map must be selected"
+	>
 		<ul>
 			{#each MAPS as islandMap}
 			<li>
@@ -135,7 +123,7 @@
 			</li>
 			{/each}
 		</ul>
-	</div>
+	</FormField>
 
 	<Button on:clicked={onSubmit}>
 		Submit
@@ -148,22 +136,6 @@
 		display: grid;
 		grid-template-columns: 1fr 1fr;
 		gap: 8px;
-	}
-
-	.form-field {
-		padding: 16px;;
-		background: #343c3c;
-	}
-
-	.form-field__header {
-		margin-bottom: 8px;
-	}
-
-	select {
-		font-family: var(--font);
-		width: 64px;
-		padding: 8px;
-		font-size: 20px;
 	}
 
 	li {
