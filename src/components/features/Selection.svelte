@@ -1,21 +1,20 @@
 <script lang="ts">
 	import { createEventDispatcher } from "svelte";
-	import Button from "./Button.svelte";
-	import FormField from "./FormField.svelte";
-	import Select from "./Select.svelte";
-	import type { ISelection } from "../models/selection";
-	import type { Difficulty } from "../models/game/difficulty";
-	import type { SpiritName } from "../models/game/spirits";
-	import type { AdversaryName } from "../models/game/adversaries";
-	import type { ScenarioName } from "../models/game/scenarios";
-	import type { MapName } from "../models/game/maps";
-	import { SPIRITS } from "../models/game/spirits";
-	import { ADVERSARIES } from "../models/game/adversaries";
-	import { SCENARIOS } from "../models/game/scenarios";
-	import { MAPS } from "../models/game/maps";
-	import { pluralize } from "../utility/pluralize";
-	import { createArr } from "../utility/create-array";
-
+	import Button from "@shared/Button.svelte";
+	import FormField from "@shared/FormField.svelte";
+	import Select from "@shared/Select.svelte";
+	import type { ISelection } from "@models/selection";
+	import type { Difficulty } from "@models/game/difficulty";
+	import type { SpiritName } from "@models/game/spirits";
+	import type { AdversaryName } from "@models/game/adversaries";
+	import type { ScenarioName } from "@models/game/scenarios";
+	import type { MapName } from "@models/game/maps";
+	import { SPIRITS } from "@models/game/spirits";
+	import { ADVERSARIES } from "@models/game/adversaries";
+	import { SCENARIOS } from "@models/game/scenarios";
+	import { MAPS } from "@models/game/maps";
+	import { pluralize } from "@utility/pluralize";
+	import { createArr } from "@utility/create-array";
 	const dispatcher = createEventDispatcher<{
 		selection: ISelection;
 	}>();

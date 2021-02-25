@@ -6,8 +6,11 @@ import { terser } from 'rollup-plugin-terser';
 import sveltePreprocess from 'svelte-preprocess';
 import typescript from '@rollup/plugin-typescript';
 import css from 'rollup-plugin-css-only';
+import alias from '@rollup/plugin-alias';
+import path from 'path'
 
 const production = !process.env.ROLLUP_WATCH;
+const projectRootDir = path.resolve(__dirname);
 
 function serve() {
 	let server;
@@ -63,6 +66,15 @@ export default {
 		typescript({
 			sourceMap: !production,
 			inlineSources: !production
+		}),
+		alias({
+			resolve: ['.ts', '.svelte'],
+			entries: [
+				{ find: '@models', replacement: path.resolve(projectRootDir, 'src/models') },
+				{ find: '@utility', replacement: path.resolve(projectRootDir, 'src/utility') },
+				{ find: '@features', replacement: path.resolve(projectRootDir, 'src/components/features') },
+				{ find: '@shared', replacement: path.resolve(projectRootDir, 'src/components/shared') },
+			]
 		}),
 
 		// In dev mode, call `npm run start` once

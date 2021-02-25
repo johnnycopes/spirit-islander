@@ -1,9 +1,9 @@
 <script lang="ts">
-	import type { AdversaryName } from "../models/game/adversaries";
-	import type { Difficulty } from "../models/game/difficulty";
-	import type { MapName } from "../models/game/maps";
-	import type { ScenarioName } from "../models/game/scenarios";
-	import type { SpiritName } from "../models/game/spirits";
+	import type { AdversaryName } from "@models/game/adversaries";
+	import type { Difficulty } from "@models/game/difficulty";
+	import type { MapName } from "@models/game/maps";
+	import type { ScenarioName } from "@models/game/scenarios";
+	import type { SpiritName } from "@models/game/spirits";
 
 	export let players: 1 | 2 | 3 | 4;
 	export let difficulty: Difficulty;

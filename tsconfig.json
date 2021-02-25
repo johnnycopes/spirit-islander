@@ -6,6 +6,13 @@
 	"compilerOptions": {
 		"strict": true,
 		"noImplicitAny": true,
-		"strictNullChecks": true
+		"strictNullChecks": true,
+		"baseUrl": ".",
+		"paths": {
+			"@models/*": ["src/models/*"],
+			"@utility/*": ["src/utility/*"],
+			"@features/*": ["src/components/features/*"],
+			"@shared/*": ["src/components/shared/*"],
+		},
 	}
 }

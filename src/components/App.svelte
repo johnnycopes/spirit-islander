@@ -1,7 +1,7 @@
 <script lang="ts">
-	import Selection from "./Selection.svelte";
-	import Results from "./Results.svelte";
-	import type { ISelection } from "../models/selection";
+	import Selection from "@features/Selection.svelte";
+	import Results from "@features/Results.svelte";
+	import type { ISelection } from "@models/selection";
 
 	let selection: ISelection | undefined;
 </script>
