@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { createEventDispatcher } from "svelte";
 	import Button from "@shared/Button.svelte";
+	import Checkboxes from "@shared/Checkboxes.svelte";
 	import FormField from "@shared/FormField.svelte";
 	import Select from "@shared/Select.svelte";
 	import type { ISelection } from "@models/selection";
@@ -15,6 +16,7 @@
 	import { MAPS } from "@models/game/maps";
 	import { pluralize } from "@utility/pluralize";
 	import { createArr } from "@utility/create-array";
+
 	const dispatcher = createEventDispatcher<{
 		selection: ISelection;
 	}>();
@@ -35,7 +37,7 @@
 
 <form class="form">
 	<FormField>
-		<Select id="players"
+		<Select
 			label="Number of players"
 			options={createArr(4)}
 			bind:value={players}
@@ -43,7 +45,7 @@
 	</FormField>
 
 	<FormField>
-		<Select id="difficulty"
+		<Select
 			label="Level of difficulty"
 			options={createArr(10, 0)}
 			bind:value={difficulty}
@@ -54,74 +56,34 @@
 		error={players > spirits.length}
 		errorMessage={`At least ${players} ${pluralize(players, "spirit")} must be selected`}
 	>
-		<ul>
-			{#each SPIRITS as spirit}
-			<li>
-				<label>
-					<input 
-						type="checkbox"
-						value={spirit.name}
-						bind:group={spirits}
-					/>
-					{spirit.name}
-				</label>
-			</li>
-			{/each}
-		</ul>
+		<Checkboxes
+			items={SPIRITS.map(spirit => spirit.name)}
+			bind:group={spirits}
+		/>
 	</FormField>
 
 	<FormField header="Adversaries">
-		<ul>
-			{#each ADVERSARIES as adversary}
-			<li>
-				<label>
-					<input 
-						type="checkbox"
-						value={adversary.name}
-						bind:group={adversaries}
-					/>
-					{adversary.name}
-				</label>
-			</li>
-			{/each}
-		</ul>
+		<Checkboxes
+			items={ADVERSARIES.map(adversary => adversary.name)}
+			bind:group={adversaries}
+		/>
 	</FormField>
 
 	<FormField header="Scenarios">
-		<ul>
-			{#each SCENARIOS as scenario}
-			<li>
-				<label>
-					<input 
-						type="checkbox"
-						value={scenario.name}
-						bind:group={scenarios}
-					/>
-					{scenario.name}
-				</label>
-			</li>
-			{/each}
-		</ul>
+		<Checkboxes
+			items={SCENARIOS.map(scenario => scenario.name)}
+			bind:group={adversaries}
+		/>
 	</FormField>
 
 	<FormField header="Map"
 		error={!maps.length}
 		errorMessage="At least 1 map must be selected"
 	>
-		<ul>
-			{#each MAPS as islandMap}
-			<li>
-				<label>
-					<input 
-						type="checkbox"
-						value={islandMap.name}
-						bind:group={maps}
-					/>
-					{islandMap.name}
-				</label>
-			</li>
-			{/each}
-		</ul>
+		<Checkboxes
+			items={MAPS.map(map => map.name)}
+			bind:group={adversaries}
+		/>
 	</FormField>
 
 	<Button on:clicked={onSubmit}>
@@ -135,10 +97,6 @@
 		display: grid;
 		grid-template-columns: 1fr 1fr;
 		gap: 8px;
-	}
-
-	li {
-		margin-bottom: 4px;
 	}
 
 	.form :global(.button) {

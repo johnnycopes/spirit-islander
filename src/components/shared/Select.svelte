@@ -1,15 +1,16 @@
 <script type="ts">
-	export let id: string;
+	import { snakeCase } from "@utility/snake-case";
+
 	export let label: string;
 	export let options: unknown[];
 	export let value: unknown;
+	$: id = snakeCase(label);
 </script>
 
 <label for={id}>
 	{label}:
 </label>
-<select
-	id={id}
+<select {id}
 	name="players"
 	bind:value={value}
 >
