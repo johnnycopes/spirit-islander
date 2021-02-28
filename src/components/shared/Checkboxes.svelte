@@ -1,18 +1,43 @@
 <script type="ts">
 	import { snakeCase } from "@utility/snake-case";
 
-	export let name: string;
+	export let title: string;
 	export let items: {
 		name: string;
 		disabled?: boolean;
 	}[];
-	export let group: unknown[];
+	export let model: unknown[];
+	$: validItems = items.filter(item => !item.disabled);
 
+	// Filter out disabled items from the model
+	$: {
+		model = model.filter(modelItem => {
+			const modelItemValid = validItems.find(validItem => validItem.name === modelItem);
+			return modelItemValid;
+		});
+	}
+
+	function toggleAll(): void {
+		if (model.length < validItems.length) {
+			model = validItems.map(item => item.name);
+		} else {
+			model = [];
+		}
+	}
 </script>
 
 <ul>
-	<li>
-		{name}
+	<li class="header">
+		<input id={snakeCase(title)}
+			type="checkbox"
+			indeterminate={!!model.length && model.length !== validItems.length}
+			checked={!!model.length && model.length === validItems.length}
+			disabled={!validItems.length}
+			on:change={toggleAll}
+		/>
+		<label for={snakeCase(title)}>
+			{title}:
+		</label>
 	</li>
 	{#each items as { name, disabled }}
 		<li>
@@ -20,7 +45,7 @@
 				type="checkbox"
 				{disabled}
 				value={name}
-				bind:group={group}
+				bind:group={model}
 			/>
 			<label for={snakeCase(name)}
 				class:disabled={disabled}
@@ -34,6 +59,13 @@
 <style>
 	li {
 		margin-bottom: 4px;
+	}
+
+	.header {
+		font-weight: bold;
+		border-bottom: 1px solid darkgray;
+		padding-bottom: 4px;
+		margin-bottom: 8px;
 	}
 
 	.disabled {
