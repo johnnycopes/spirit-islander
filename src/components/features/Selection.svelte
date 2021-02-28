@@ -26,6 +26,9 @@
 	let adversaries: AdversaryName[] = [];
 	let scenarios: ScenarioName[] = [];
 	let maps: MapName[] = ["Balanced"];
+	$: spiritsError = players > spirits.length;
+	$: mapsError = !maps.length;
+	$: formDisabled = spiritsError || mapsError;
 
 	function onSubmit(): void {
 		const selection: ISelection = {
@@ -37,33 +40,31 @@
 
 <form class="form">
 	<FormField>
-		<Select
-			label="Number of players"
+		<Select label="Number of players"
 			options={createArr(4)}
 			bind:value={players}
 		/>
 	</FormField>
 
 	<FormField>
-		<Select
-			label="Level of difficulty"
+		<Select label="Level of difficulty"
 			options={createArr(10, 0)}
 			bind:value={difficulty}
 		/>
 	</FormField>
 
-	<FormField header="Spirits"
-		error={players > spirits.length}
+	<FormField
+		error={spiritsError}
 		errorMessage={`At least ${players} ${pluralize(players, "spirit")} must be selected`}
 	>
-		<Checkboxes
+		<Checkboxes name="Spirits"
 			items={SPIRITS.map(spirit => ({ name: spirit.name }) )}
 			bind:group={spirits}
 		/>
 	</FormField>
 
-	<FormField header="Adversaries">
-		<Checkboxes
+	<FormField>
+		<Checkboxes name="Adversaries"
 			items={ADVERSARIES.map(adversary => ({
 				name: adversary.name,
 				disabled: difficulty < 1
@@ -72,30 +73,32 @@
 		/>
 	</FormField>
 
-	<FormField header="Scenarios">
-		<Checkboxes
+	<FormField>
+		<Checkboxes name="Scenarios"
 			items={SCENARIOS.map(scenario => ({
 				name: scenario.name,
 				disabled: difficulty < scenario.difficulty
 			}))}
-			bind:group={adversaries}
+			bind:group={scenarios}
 		/>
 	</FormField>
 
-	<FormField header="Map"
-		error={!maps.length}
+	<FormField
+		error={mapsError}
 		errorMessage="At least 1 map must be selected"
 	>
-		<Checkboxes
+		<Checkboxes name="Maps"
 			items={MAPS.map(map => ({
 				name: map.name,
 				disabled: difficulty < map.difficulty
 			}))}
-			bind:group={adversaries}
+			bind:group={maps}
 		/>
 	</FormField>
 
-	<Button on:clicked={onSubmit}>
+	<Button on:clicked={onSubmit}
+		disabled={formDisabled}
+	>
 		Submit
 	</Button>
 </form>

@@ -1,16 +1,9 @@
 <script type="ts">
-	export let header: string = "";
 	export let error: boolean = false;
 	export let errorMessage: string = "";
 </script>
 
 <div class="form-field">
-	{#if header}
-		<p class="form-field__header">
-			{header}:
-		</p>
-	{/if}
-
 	<slot></slot>
 
 	{#if error}

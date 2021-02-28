@@ -1,6 +1,7 @@
 <script type="ts">
 	import { snakeCase } from "@utility/snake-case";
 
+	export let name: string;
 	export let items: {
 		name: string;
 		disabled?: boolean;
@@ -10,21 +11,23 @@
 </script>
 
 <ul>
-	{#each items as { name, disabled }}
-
 	<li>
-		<input id={snakeCase(name)}
-			type="checkbox"
-			{disabled}
-			value={name}
-			bind:group={group}
-		/>
-		<label for={snakeCase(name)}
-			class:disabled={disabled}
-		>
-			{name}
-		</label>
+		{name}
 	</li>
+	{#each items as { name, disabled }}
+		<li>
+			<input id={snakeCase(name)}
+				type="checkbox"
+				{disabled}
+				value={name}
+				bind:group={group}
+			/>
+			<label for={snakeCase(name)}
+				class:disabled={disabled}
+			>
+				{name}
+			</label>
+		</li>
 	{/each}
 </ul>
 
