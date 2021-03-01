@@ -71,7 +71,7 @@ export default {
 			resolve: ['.ts', '.svelte'],
 			entries: [
 				{ find: '@models', replacement: path.resolve(projectRootDir, 'src/models') },
-				{ find: '@utility', replacement: path.resolve(projectRootDir, 'src/utility') },
+				{ find: '@functions', replacement: path.resolve(projectRootDir, 'src/functions')},
 				{ find: '@features', replacement: path.resolve(projectRootDir, 'src/components/features') },
 				{ find: '@shared', replacement: path.resolve(projectRootDir, 'src/components/shared') },
 			]

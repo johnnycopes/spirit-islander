@@ -5,6 +5,7 @@
 	import FormField from "@shared/FormField.svelte";
 	import Select from "@shared/Select.svelte";
 	import type { ISelection } from "@models/selection.interface";
+	import type { Players } from "@models/game/players";
 	import type { Difficulty } from "@models/game/difficulty";
 	import type { SpiritName } from "@models/game/spirits";
 	import type { AdversaryName } from "@models/game/adversaries";
@@ -14,13 +15,14 @@
 	import { ADVERSARIES } from "@models/game/adversaries";
 	import { SCENARIOS } from "@models/game/scenarios";
 	import { MAPS } from "@models/game/maps";
-	import { pluralize } from "@utility/pluralize";
-	import { createArr } from "@utility/create-array";
+	import { pluralize } from "@functions/pluralize";
+	import { createArray } from "@functions/create-array";
+	import { tallyAdversaryDifficulty, tallyMapDifficulty, tallyScenarioDifficulty } from "@functions/calculations";
 
 	const dispatcher = createEventDispatcher<{
 		selection: ISelection;
 	}>();
-	export let players: 1 | 2 | 3 | 4;
+	export let players: Players;
 	export let difficulty: Difficulty;
 	export let spirits: SpiritName[];
 	export let adversaries: AdversaryName[];
@@ -42,35 +44,12 @@
 		};
 		dispatcher("selection", selection);
 	}
-
-	function tallyAdversaryDifficulty(model: AdversaryName[] = []): Difficulty {
-		return model.reduce((accum, current) => {
-			const adversary = ADVERSARIES.find(adversary => adversary.name === current);
-			return Math.max(
-				accum, adversary?.levels[adversary.levels.length - 1].difficulty ?? 0
-			) as Difficulty;
-		}, 0 as Difficulty);
-	}
-
-	function tallyScenarioDifficulty(model: ScenarioName[] = []): Difficulty {
-		return model.reduce((accum, current) => {
-			const scenario = SCENARIOS.find(scenario => scenario.name === current);
-			return Math.max(accum, scenario?.difficulty ?? 0) as Difficulty;
-		}, 0 as Difficulty);
-	}
-
-	function tallyMapDifficulty(model: MapName[] = []): number {
-		return model.reduce((accum, current) => {
-			const map = MAPS.find(map => map.name === current);
-			return Math.max(accum, map?.difficulty ?? 0) as Difficulty;
-		}, 0 as Difficulty);
-	}
 </script>
 
 <form class="form">
 	<FormField>
 		<Select label="Number of players"
-			options={createArr(4)}
+			options={createArray(4)}
 			bind:value={players}
 		/>
 	</FormField>
@@ -80,7 +59,7 @@
 		errorMessage="Value exceeds the difficulty of selected options in the form"
 	>
 		<Select label="Level of difficulty"
-			options={createArr(10, 0)}
+			options={createArray(10, 0)}
 			bind:value={difficulty}
 		/>
 	</FormField>
