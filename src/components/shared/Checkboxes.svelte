@@ -3,7 +3,8 @@
 
 	export let title: string;
 	export let items: {
-		name: string;
+		value: string;
+		display: string;
 		disabled?: boolean;
 	}[];
 	export let model: unknown[];
@@ -12,14 +13,14 @@
 	// Filter out disabled items from the model
 	$: {
 		model = model.filter(modelItem => {
-			const modelItemValid = validItems.find(validItem => validItem.name === modelItem);
+			const modelItemValid = validItems.find(validItem => validItem.value === modelItem);
 			return modelItemValid;
 		});
 	}
 
 	function toggleAll(): void {
 		if (model.length < validItems.length) {
-			model = validItems.map(item => item.name);
+			model = validItems.map(item => item.value);
 		} else {
 			model = [];
 		}
@@ -39,18 +40,18 @@
 			{title}:
 		</label>
 	</li>
-	{#each items as { name, disabled }}
+	{#each items as { value, display, disabled }}
 		<li>
-			<input id={snakeCase(name)}
+			<input id={snakeCase(value)}
 				type="checkbox"
+				{value}
 				{disabled}
-				value={name}
 				bind:group={model}
 			/>
-			<label for={snakeCase(name)}
+			<label for={snakeCase(value)}
 				class:disabled={disabled}
 			>
-				{name}
+				{display}
 			</label>
 		</li>
 	{/each}

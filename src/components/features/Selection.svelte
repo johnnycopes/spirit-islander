@@ -58,7 +58,10 @@
 		errorMessage={`At least ${players} ${pluralize(players, "spirit")} must be selected`}
 	>
 		<Checkboxes title="Spirits"
-			items={SPIRITS.map(spirit => ({ name: spirit.name }) )}
+			items={SPIRITS.map(spirit => ({
+				value: spirit.name,
+				display: spirit.name,
+			}))}
 			bind:model={spirits}
 		/>
 	</FormField>
@@ -66,7 +69,8 @@
 	<FormField>
 		<Checkboxes title="Adversaries"
 			items={ADVERSARIES.map(adversary => ({
-				name: adversary.name,
+				value: adversary.name,
+				display: `${adversary.name} (+${adversary.levels[0].difficulty} to +${adversary.levels[adversary.levels.length - 1].difficulty})`,
 				disabled: difficulty < 1
 			}))}
 			bind:model={adversaries}
@@ -76,7 +80,8 @@
 	<FormField>
 		<Checkboxes title="Scenarios"
 			items={SCENARIOS.map(scenario => ({
-				name: scenario.name,
+				value: scenario.name,
+				display: `${scenario.name} (+${scenario.difficulty})`,
 				disabled: difficulty < scenario.difficulty
 			}))}
 			bind:model={scenarios}
@@ -89,7 +94,8 @@
 	>
 		<Checkboxes title="Maps"
 			items={MAPS.map(map => ({
-				name: map.name,
+				value: map.name,
+				display: `${map.name} (+${map.difficulty})`,
 				disabled: difficulty < map.difficulty
 			}))}
 			bind:model={maps}

@@ -5,10 +5,12 @@ export type AdversaryName =
 	"Kingdom of England" |
 	"Kingdom of Sweden";
 
+export type AdversaryLevel = 0 | 1 | 2 | 3 | 4 | 5 | 6;
+
 export interface IAdversary {
 	name: AdversaryName,
 	levels: {
-		level: 0 | 1 | 2 | 3 | 4 | 5 | 6,
+		level: AdversaryLevel,
 		difficulty: Difficulty,
 	}[],
 }

@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { createEventDispatcher } from "svelte";
 	import Button from "@shared/Button.svelte";
-	import type { AdversaryName } from "@models/game/adversaries";
+	import type { AdversaryLevel, AdversaryName } from "@models/game/adversaries";
 	import type { Difficulty } from "@models/game/difficulty";
 	import type { MapName } from "@models/game/maps";
 	import type { ScenarioName } from "@models/game/scenarios";
@@ -14,9 +14,12 @@
 	export let players: 1 | 2 | 3 | 4;
 	export let difficulty: Difficulty;
 	export let spirits: SpiritName[];
-	export let adversary: AdversaryName;
-	export let scenario: ScenarioName;
 	export let map: MapName;
+	export let adversary: {
+		name: AdversaryName,
+		level: AdversaryLevel,
+	} | undefined = undefined;
+	export let scenario: ScenarioName | undefined = undefined;
 </script>
 
 <Button on:clicked={() => dispatcher("reset")}>
@@ -56,12 +59,17 @@
 				Adversary
 			</td>
 			<td>
-				{adversary || "None"}
+				{#if adversary}
+					{adversary.name}<br>
+					{adversary.level}
+				{:else}
+					None
+				{/if}
 			</td>
 		</tr>
 		<tr>
 			<td>
-				Scenarios
+				Scenario
 			</td>
 			<td>
 				{scenario || "None"}
