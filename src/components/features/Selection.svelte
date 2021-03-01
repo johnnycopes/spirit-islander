@@ -5,6 +5,7 @@
 	import FormField from "@shared/FormField.svelte";
 	import Select from "@shared/Select.svelte";
 	import type { ISelection } from "@models/selection.interface";
+	import type { Players } from "@models/game/players";
 	import type { Difficulty } from "@models/game/difficulty";
 	import type { SpiritName } from "@models/game/spirits";
 	import type { AdversaryName } from "@models/game/adversaries";
@@ -21,7 +22,7 @@
 	const dispatcher = createEventDispatcher<{
 		selection: ISelection;
 	}>();
-	export let players: 1 | 2 | 3 | 4;
+	export let players: Players;
 	export let difficulty: Difficulty;
 	export let spirits: SpiritName[];
 	export let adversaries: AdversaryName[];

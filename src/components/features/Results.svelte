@@ -2,6 +2,7 @@
 	import { createEventDispatcher } from "svelte";
 	import Button from "@shared/Button.svelte";
 	import type { AdversaryLevel, AdversaryName } from "@models/game/adversaries";
+	import type { Players } from "@models/game/players";
 	import type { Difficulty } from "@models/game/difficulty";
 	import type { MapName } from "@models/game/maps";
 	import type { ScenarioName } from "@models/game/scenarios";
@@ -11,7 +12,7 @@
 	const dispatcher = createEventDispatcher<{
 		reset: void;
 	}>();
-	export let players: 1 | 2 | 3 | 4;
+	export let players: Players;
 	export let difficulty: Difficulty;
 	export let spirits: SpiritName[];
 	export let map: MapName;
