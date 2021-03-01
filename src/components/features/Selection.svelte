@@ -11,9 +11,9 @@
 	import type { ScenarioName } from "@models/game/scenarios";
 	import type { MapName } from "@models/game/maps";
 	import { SPIRITS } from "@models/game/spirits";
-	import { ADVERSARIES } from "@models/game/adversaries";
-	import { SCENARIOS } from "@models/game/scenarios";
-	import { MAPS } from "@models/game/maps";
+	import { ADVERSARIES, tallyAdversaryDifficulty } from "@models/game/adversaries";
+	import { SCENARIOS, tallyScenarioDifficulty } from "@models/game/scenarios";
+	import { MAPS, tallyMapDifficulty } from "@models/game/maps";
 	import { pluralize } from "@utility/pluralize";
 	import { createArr } from "@utility/create-array";
 
@@ -41,29 +41,6 @@
 			players, difficulty, spirits, adversaries, scenarios, maps,
 		};
 		dispatcher("selection", selection);
-	}
-
-	function tallyAdversaryDifficulty(model: AdversaryName[] = []): Difficulty {
-		return model.reduce((accum, current) => {
-			const adversary = ADVERSARIES.find(adversary => adversary.name === current);
-			return Math.max(
-				accum, adversary?.levels[adversary.levels.length - 1].difficulty ?? 0
-			) as Difficulty;
-		}, 0 as Difficulty);
-	}
-
-	function tallyScenarioDifficulty(model: ScenarioName[] = []): Difficulty {
-		return model.reduce((accum, current) => {
-			const scenario = SCENARIOS.find(scenario => scenario.name === current);
-			return Math.max(accum, scenario?.difficulty ?? 0) as Difficulty;
-		}, 0 as Difficulty);
-	}
-
-	function tallyMapDifficulty(model: MapName[] = []): number {
-		return model.reduce((accum, current) => {
-			const map = MAPS.find(map => map.name === current);
-			return Math.max(accum, map?.difficulty ?? 0) as Difficulty;
-		}, 0 as Difficulty);
 	}
 </script>
 
