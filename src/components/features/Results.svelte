@@ -6,7 +6,7 @@
 	import type { MapName } from "@models/game/maps";
 	import type { ScenarioName } from "@models/game/scenarios";
 	import type { SpiritName } from "@models/game/spirits";
-	import { pluralize } from "@utility/pluralize";
+	import { pluralize } from "@functions/pluralize";
 
 	const dispatcher = createEventDispatcher<{
 		reset: void;

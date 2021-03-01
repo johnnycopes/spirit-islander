@@ -4,7 +4,7 @@
 	import Results from "@features/Results.svelte";
 	import type { ISelection } from "@models/selection.interface";
 	import type { IInstructions } from "@models/instructions.interface";
-	import { createInstructions } from "@utility/create-instructions";
+	import { createInstructions } from "@functions/create-instructions";
 
 	let page: "Selection" | "Results" = "Selection";
 	let selection: ISelection = {

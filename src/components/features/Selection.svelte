@@ -11,11 +11,12 @@
 	import type { ScenarioName } from "@models/game/scenarios";
 	import type { MapName } from "@models/game/maps";
 	import { SPIRITS } from "@models/game/spirits";
-	import { ADVERSARIES, tallyAdversaryDifficulty } from "@models/game/adversaries";
-	import { SCENARIOS, tallyScenarioDifficulty } from "@models/game/scenarios";
-	import { MAPS, tallyMapDifficulty } from "@models/game/maps";
-	import { pluralize } from "@utility/pluralize";
-	import { createArr } from "@utility/create-array";
+	import { ADVERSARIES } from "@models/game/adversaries";
+	import { SCENARIOS } from "@models/game/scenarios";
+	import { MAPS } from "@models/game/maps";
+	import { pluralize } from "@functions/pluralize";
+	import { createArray } from "@functions/create-array";
+	import { tallyAdversaryDifficulty, tallyMapDifficulty, tallyScenarioDifficulty } from "@functions/calculations";
 
 	const dispatcher = createEventDispatcher<{
 		selection: ISelection;
@@ -47,7 +48,7 @@
 <form class="form">
 	<FormField>
 		<Select label="Number of players"
-			options={createArr(4)}
+			options={createArray(4)}
 			bind:value={players}
 		/>
 	</FormField>
@@ -57,7 +58,7 @@
 		errorMessage="Value exceeds the difficulty of selected options in the form"
 	>
 		<Select label="Level of difficulty"
-			options={createArr(10, 0)}
+			options={createArray(10, 0)}
 			bind:value={difficulty}
 		/>
 	</FormField>

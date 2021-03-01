@@ -1,5 +1,4 @@
 import type { Difficulty } from "./difficulty";
-import { tallyDifficulty } from "@utility/tally-difficulty";
 
 export type AdversaryName =
 	"Kingdom of Brandenburg-Prussia" |
@@ -54,12 +53,3 @@ export const ADVERSARIES: IAdversary[] = [
 		]
 	},
 ];
-
-export function tallyAdversaryDifficulty(model: AdversaryName[] = []): Difficulty {
-	return tallyDifficulty(
-		model,
-		ADVERSARIES,
-		(adversary) => adversary.name,
-		(adversary) => adversary.levels[adversary.levels.length - 1].difficulty,
-	);
-}

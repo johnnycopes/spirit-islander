@@ -1,5 +1,4 @@
 import type { Difficulty } from "./difficulty";
-import { tallyDifficulty } from "@utility/tally-difficulty";
 
 export type ScenarioName =
 	"Blitz" |
@@ -30,12 +29,3 @@ export const SCENARIOS: IScenario[] = [
 		difficulty: 3
 	},
 ];
-
-export function tallyScenarioDifficulty(model: ScenarioName[] = []): Difficulty {
-	return tallyDifficulty(
-		model,
-		SCENARIOS,
-		(scenario) => scenario.name,
-		(scenario) => scenario.difficulty,
-	);
-}
