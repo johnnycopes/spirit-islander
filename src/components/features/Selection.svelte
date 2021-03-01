@@ -26,6 +26,11 @@
 	export let adversaries: AdversaryName[];
 	export let scenarios: ScenarioName[];
 	export let maps: MapName[];
+	
+	$: adversaryDifficulty = tallyAdversaryDifficulty(adversaries ?? []);
+	$: scenarioDifficulty = tallyScenarioDifficulty(scenarios ?? []);
+	$: mapDifficulty = tallyMapDifficulty(maps ?? []);
+
 	$: spiritsError = players > spirits.length;
 	$: mapsError = !maps.length;
 	$: formDisabled = spiritsError || mapsError;
@@ -35,6 +40,41 @@
 			players, difficulty, spirits, adversaries, scenarios, maps,
 		};
 		dispatcher("selection", selection);
+	}
+
+	function tallyAdversaryDifficulty(model: string[]): number {
+		const difficulty = model.reduce((accum, current) => {
+			const adversary = ADVERSARIES.find(adversary => adversary.name === current);
+			if (adversary) {
+				return accum + adversary.levels[adversary.levels.length - 1].difficulty;
+			}
+			console.log("adversaries", accum);
+			return accum;
+		}, 0);
+		console.log(difficulty);
+		return difficulty;
+	}
+
+	function tallyScenarioDifficulty(model: string[]): number {
+		return model.reduce((accum, current) => {
+			const scenario = SCENARIOS.find(scenario => scenario.name === current);
+			if (scenario) {
+				return accum + scenario.difficulty;
+			}
+			console.log("scenarios", accum);
+			return accum;
+		}, 0);
+	}
+
+	function tallyMapDifficulty(model: string[]): number {
+		return model.reduce((accum, current) => {
+			const map = MAPS.find(map => map.name === current);
+			if (map) {
+				return accum + map.difficulty;
+			}
+			console.log("maps", accum);
+			return accum;
+		}, 0);
 	}
 </script>
 
@@ -75,6 +115,7 @@
 			}))}
 			bind:model={adversaries}
 		/>
+		{adversaryDifficulty}
 	</FormField>
 
 	<FormField>
@@ -86,6 +127,7 @@
 			}))}
 			bind:model={scenarios}
 		/>
+		{scenarioDifficulty}
 	</FormField>
 
 	<FormField
@@ -100,6 +142,7 @@
 			}))}
 			bind:model={maps}
 		/>
+		{mapDifficulty}
 	</FormField>
 
 	<Button on:clicked={onSubmit}

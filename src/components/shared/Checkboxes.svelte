@@ -7,7 +7,7 @@
 		display: string;
 		disabled?: boolean;
 	}[];
-	export let model: unknown[];
+	export let model: string[];
 	$: validItems = items.filter(item => !item.disabled);
 
 	// Filter out disabled items from the model
