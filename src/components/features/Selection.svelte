@@ -26,15 +26,44 @@
 	export let adversaries: AdversaryName[];
 	export let scenarios: ScenarioName[];
 	export let maps: MapName[];
+	$: fieldsDifficulty = Math.max(
+		tallyAdversaryDifficulty(adversaries),
+		tallyScenarioDifficulty(scenarios),
+		tallyMapDifficulty(maps)
+	) as Difficulty;
 	$: spiritsError = players > spirits.length;
+	$: difficultyError = fieldsDifficulty < difficulty;
 	$: mapsError = !maps.length;
-	$: formDisabled = spiritsError || mapsError;
+	$: formDisabled = spiritsError || difficultyError || mapsError;
 
 	function onSubmit(): void {
 		const selection: ISelection = {
 			players, difficulty, spirits, adversaries, scenarios, maps,
 		};
 		dispatcher("selection", selection);
+	}
+
+	function tallyAdversaryDifficulty(model: AdversaryName[] = []): Difficulty {
+		return model.reduce((accum, current) => {
+			const adversary = ADVERSARIES.find(adversary => adversary.name === current);
+			return Math.max(
+				accum, adversary?.levels[adversary.levels.length - 1].difficulty ?? 0
+			) as Difficulty;
+		}, 0 as Difficulty);
+	}
+
+	function tallyScenarioDifficulty(model: ScenarioName[] = []): Difficulty {
+		return model.reduce((accum, current) => {
+			const scenario = SCENARIOS.find(scenario => scenario.name === current);
+			return Math.max(accum, scenario?.difficulty ?? 0) as Difficulty;
+		}, 0 as Difficulty);
+	}
+
+	function tallyMapDifficulty(model: MapName[] = []): number {
+		return model.reduce((accum, current) => {
+			const map = MAPS.find(map => map.name === current);
+			return Math.max(accum, map?.difficulty ?? 0) as Difficulty;
+		}, 0 as Difficulty);
 	}
 </script>
 
@@ -46,7 +75,10 @@
 		/>
 	</FormField>
 
-	<FormField>
+	<FormField
+		error={difficultyError}
+		errorMessage="Value exceeds the difficulty of selected options in the form"
+	>
 		<Select label="Level of difficulty"
 			options={createArr(10, 0)}
 			bind:value={difficulty}
