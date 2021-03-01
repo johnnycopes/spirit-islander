@@ -4,7 +4,7 @@
 	import Checkboxes from "@shared/Checkboxes.svelte";
 	import FormField from "@shared/FormField.svelte";
 	import Select from "@shared/Select.svelte";
-	import type { ISelection } from "@models/selection";
+	import type { ISelection } from "@models/selection.interface";
 	import type { Difficulty } from "@models/game/difficulty";
 	import type { SpiritName } from "@models/game/spirits";
 	import type { AdversaryName } from "@models/game/adversaries";
@@ -20,12 +20,12 @@
 	const dispatcher = createEventDispatcher<{
 		selection: ISelection;
 	}>();
-	let players: 1 | 2 | 3 | 4 = 1;
-	let difficulty: Difficulty = 0;
-	let spirits: SpiritName[] = SPIRITS.map(spirit => spirit.name);
-	let adversaries: AdversaryName[] = [];
-	let scenarios: ScenarioName[] = [];
-	let maps: MapName[] = ["Balanced"];
+	export let players: 1 | 2 | 3 | 4;
+	export let difficulty: Difficulty;
+	export let spirits: SpiritName[];
+	export let adversaries: AdversaryName[];
+	export let scenarios: ScenarioName[];
+	export let maps: MapName[];
 	$: spiritsError = players > spirits.length;
 	$: mapsError = !maps.length;
 	$: formDisabled = spiritsError || mapsError;
