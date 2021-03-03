@@ -1,5 +1,6 @@
 <script type="ts">
 	import Checkbox from "./Checkbox.svelte"
+	import CheckboxesField from "./CheckboxesField.svelte";
 
 	export let title: string;
 	export let items: {
@@ -35,41 +36,30 @@
 	}
 </script>
 
-<ul>
-	<li class="header">
-		<Checkbox
-			indeterminate={!!model.length && model.length !== validItems.length}
-			checked={!!model.length && model.length === validItems.length}
-			disabled={!validItems.length}
-			value={title}
-			on:change={toggleAll}
-		>
-			{title}
-		</Checkbox>
-	</li>
-	{#each items as { value, display, disabled }}
-		<li>
-			<Checkbox
-				checked={model.some(item => item === value)}
-				{disabled}
-				{value}
-				on:change={e => toggle(e.detail, value)}
-			>
-				{display}
-			</Checkbox>
-		</li>
-	{/each}
-</ul>
+<CheckboxesField
+	{title}
+	{model}
+	items={validItems}
+	on:change={toggleAll}
+>
+	<ul>
+		{#each items as { value, display, disabled }}
+			<li>
+				<Checkbox
+					checked={model.some(item => item === value)}
+					{disabled}
+					{value}
+					on:change={e => toggle(e.detail, value)}
+				>
+					{display}
+				</Checkbox>
+			</li>
+		{/each}
+	</ul>
+</CheckboxesField>
 
 <style>
 	li {
 		margin-bottom: 4px;
-	}
-
-	.header {
-		font-weight: bold;
-		border-bottom: 1px solid darkgray;
-		padding-bottom: 4px;
-		margin-bottom: 8px;
 	}
 </style>

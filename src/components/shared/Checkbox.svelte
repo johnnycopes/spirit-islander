@@ -20,13 +20,18 @@
 	on:change={_ => dispatcher("change", checked)}
 />
 <label for={snakeCase(value)}
-	class:disabled={disabled}
+	class="checkbox-label"
+	class:checkbox-label--disabled={disabled}
 >
 	<slot></slot>
 </label>
 
 <style>
-	:global(.disabled) {
+	:global(.checkbox-label) {
+		font-weight: 400;
+	}
+
+	:global(.checkbox-label--disabled) {
 		font-style: italic;
 		color: darkgray;
 	}
