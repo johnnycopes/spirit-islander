@@ -28,6 +28,7 @@
 	export let adversaries: AdversaryName[];
 	export let scenarios: ScenarioName[];
 	export let maps: MapName[];
+
 	$: fieldsDifficulty = Math.max(
 		tallyAdversaryDifficulty(adversaries),
 		tallyScenarioDifficulty(scenarios),
