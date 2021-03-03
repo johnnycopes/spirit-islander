@@ -1,5 +1,5 @@
 <script type="ts">
-	import { snakeCase } from "@functions/snake-case";
+	import Checkbox from "./Checkbox.svelte"
 
 	export let title: string;
 	export let items: {
@@ -18,6 +18,14 @@
 		});
 	}
 
+	function toggle(checked: boolean, value: string): void {
+		if (checked) {
+			model = [...model, value];
+		} else {
+			model = model.filter(item => item !== value);
+		}
+	}
+
 	function toggleAll(): void {
 		if (model.length < validItems.length) {
 			model = validItems.map(item => item.value);
@@ -29,30 +37,26 @@
 
 <ul>
 	<li class="header">
-		<input id={snakeCase(title)}
-			type="checkbox"
+		<Checkbox
 			indeterminate={!!model.length && model.length !== validItems.length}
 			checked={!!model.length && model.length === validItems.length}
 			disabled={!validItems.length}
+			value={title}
 			on:change={toggleAll}
-		/>
-		<label for={snakeCase(title)}>
-			{title}:
-		</label>
+		>
+			{title}
+		</Checkbox>
 	</li>
 	{#each items as { value, display, disabled }}
 		<li>
-			<input id={snakeCase(value)}
-				type="checkbox"
-				{value}
+			<Checkbox
+				checked={model.some(item => item === value)}
 				{disabled}
-				bind:group={model}
-			/>
-			<label for={snakeCase(value)}
-				class:disabled={disabled}
+				{value}
+				on:change={e => toggle(e.detail, value)}
 			>
 				{display}
-			</label>
+			</Checkbox>
 		</li>
 	{/each}
 </ul>
@@ -67,10 +71,5 @@
 		border-bottom: 1px solid darkgray;
 		padding-bottom: 4px;
 		margin-bottom: 8px;
-	}
-
-	.disabled {
-		font-style: italic;
-		color: darkgray;
 	}
 </style>

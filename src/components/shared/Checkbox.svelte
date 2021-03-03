@@ -1,31 +1,33 @@
 <script lang="ts">
 	import { createEventDispatcher } from "svelte";
-	import type { CheckboxModel } from "./checkbox-model.type"
 	import { snakeCase } from "@functions/snake-case";
 
-	export let id: string;
+	export let value: string;
+	export let checked: boolean = false;
+	export let indeterminate: boolean = false;
 	export let disabled: boolean = false;
-	export let model: CheckboxModel = "unchecked";
 	const dispatcher = createEventDispatcher<{
-		change: CheckboxModel;
+		change: boolean;
 	}>();
-
 </script>
 
-<input id={snakeCase(id)}
+<input id={snakeCase(value)}
 	type="checkbox"
-	indeterminate={model === "indeterminate"}
-	checked={model === "checked"}
+	bind:checked={checked}
+	{indeterminate}
 	{disabled}
-	on:change={() => {
-		const updatedModel = model === "checked" ? "unchecked" : "checked";
-		dispatcher("change", updatedModel);
-	}}
+	{value}
+	on:change={_ => dispatcher("change", checked)}
 />
-<label for={snakeCase(id)}>
+<label for={snakeCase(value)}
+	class:disabled={disabled}
+>
 	<slot></slot>
 </label>
 
 <style>
-
+	:global(.disabled) {
+		font-style: italic;
+		color: darkgray;
+	}
 </style>
