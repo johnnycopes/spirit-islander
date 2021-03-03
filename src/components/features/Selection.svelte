@@ -1,9 +1,12 @@
 <script lang="ts">
 	import { createEventDispatcher } from "svelte";
 	import Button from "@shared/Button.svelte";
+	import Checkbox from "@shared/Checkbox.svelte";
 	import Checkboxes from "@shared/Checkboxes.svelte";
+	import CheckboxesNew from "@shared/CheckboxesNew.svelte";
 	import FormField from "@shared/FormField.svelte";
 	import Select from "@shared/Select.svelte";
+	import type { CheckboxModel } from "@shared/checkbox-model.type";
 	import type { ISelection } from "@models/selection.interface";
 	import type { Players } from "@models/game/players";
 	import type { Difficulty } from "@models/game/difficulty";
@@ -25,9 +28,11 @@
 	export let players: Players;
 	export let difficulty: Difficulty;
 	export let spirits: SpiritName[];
+	export let spiritsObj: Record<string, CheckboxModel> = {};
 	export let adversaries: AdversaryName[];
 	export let scenarios: ScenarioName[];
 	export let maps: MapName[];
+
 	$: fieldsDifficulty = Math.max(
 		tallyAdversaryDifficulty(adversaries),
 		tallyScenarioDifficulty(scenarios),
@@ -45,6 +50,19 @@
 		dispatcher("selection", selection);
 	}
 </script>
+
+<CheckboxesNew
+	items={SPIRITS.map(spirit => ({
+		value: spirit.name,
+		display: spirit.name,
+	}))}
+	model={spiritsObj}
+	let:value
+	on:change={e => spiritsObj = e.detail}
+>
+	<p>{value}</p>
+</CheckboxesNew>
+<hr>
 
 <form class="form">
 	<FormField>
