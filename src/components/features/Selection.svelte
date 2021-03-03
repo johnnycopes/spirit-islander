@@ -2,6 +2,7 @@
 	import { createEventDispatcher } from "svelte";
 	import Button from "@shared/Button.svelte";
 	import Checkbox from "@shared/Checkbox.svelte";
+	import CheckboxNew from "@shared/CheckboxNew.svelte";
 	import Checkboxes from "@shared/Checkboxes.svelte";
 	import CheckboxesNew from "@shared/CheckboxesNew.svelte";
 	import FormField from "@shared/FormField.svelte";
@@ -32,6 +33,7 @@
 	export let adversaries: AdversaryName[];
 	export let scenarios: ScenarioName[];
 	export let maps: MapName[];
+	let checkboxModel = false;
 
 	$: fieldsDifficulty = Math.max(
 		tallyAdversaryDifficulty(adversaries),
@@ -50,6 +52,13 @@
 		dispatcher("selection", selection);
 	}
 </script>
+
+<CheckboxNew
+	value="My Value"
+	bind:checked={checkboxModel}
+>
+	display value goes here
+</CheckboxNew>
 
 <CheckboxesNew
 	items={SPIRITS.map(spirit => ({
