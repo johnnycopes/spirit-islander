@@ -81,7 +81,7 @@
 		<Checkboxes title="Adversaries"
 			items={ADVERSARIES.map(adversary => ({
 				value: adversary.name,
-				display: `${adversary.name} (+${adversary.levels[0].difficulty} to +${adversary.levels[adversary.levels.length - 1].difficulty})`,
+				display: `${adversary.name} (+${adversary.levels[0]} to +${adversary.levels[6]})`,
 				disabled: difficulty < 1
 			}))}
 			bind:model={adversaries}

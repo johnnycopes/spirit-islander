@@ -1,7 +1,7 @@
 import type { AdversaryLevel } from "@models/game/adversaries";
 import type { IInstructions } from "@models/instructions.interface";
 import type { ISelection } from "@models/selection.interface";
-import { selectRandom } from "src/functions/select-random";
+import { selectRandom } from "@functions/select-random";
 
 export function createInstructions(selection: ISelection): IInstructions {
 	const { players, difficulty, spirits, adversaries, scenarios, maps }: ISelection = selection;

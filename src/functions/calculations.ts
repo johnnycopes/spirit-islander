@@ -26,7 +26,7 @@ export function tallyAdversaryDifficulty(model: AdversaryName[] = []): Difficult
 		model,
 		ADVERSARIES,
 		(adversary) => adversary.name,
-		(adversary) => adversary.levels[adversary.levels.length - 1].difficulty,
+		(adversary) => adversary.levels[6],
 	);
 }
 
