@@ -1,5 +1,6 @@
 <script lang="ts">
 	import Checkbox from "./Checkbox.svelte";
+	import { getValuesRecursively } from "@functions/get-values-recursively";
 
 	export let level: number = 1; // for debugging; remove later
 	export let items: any[];
@@ -7,29 +8,28 @@
 	export let getId: (item: any) => string;
 	export let getDisabled: (item?: any) => boolean = () => false;
 	export let getChildren: (item?: any) => any[] = () => [];
-	
-	function toggle(checked: boolean, item: any): void {
-		const id = getId(item);
-		const children = getChildren(item);
-		if (checked) {
-			model = [...model, id];
-			console.log(id, children);
-		} else {
-			model = model.filter(item => item !== id);
-		}
 
-		if (children) {
-			const childrenIds = children.map(child => getId(child));
-			if (checked) {
-				// TODO: recurisvely build/filter model. Also need to implement this in CheckboxesField component, so extracting
-				// it as a utility function eventually would make sense
-				model = [...model, ...childrenIds];
-			} else {
-				model = model.filter(item => !childrenIds.includes(item));
-			}
+	function toggle(checked: boolean, item: any): void {
+		const ids: string[] = getValuesRecursively(item, getId, getChildren);
+		// const idContainer = [];
+		// const itemsToCheck = [item];
+		// while (itemsToCheck.length) {
+		// 	let currentItem = itemsToCheck.shift();
+		// 	let id = getId(currentItem);
+		// 	let children = getChildren(currentItem);
+
+		// 	idContainer.push(id);
+		// 	if (children?.length) {
+		// 		itemsToCheck.push(...children)
+		// 	}
+		// }
+
+		if (checked) {
+			model = [...model, ...ids];
+		} else {
+			model = model.filter(modelValue => !ids.includes(modelValue));
 		}
 	}
-
 </script>
 
 <ul class="checkboxes">
