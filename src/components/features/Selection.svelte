@@ -19,15 +19,15 @@
 	import { createArray } from "@functions/create-array";
 	import { tallyAdversaryDifficulty, tallyMapDifficulty, tallyScenarioDifficulty } from "@functions/calculations";
 
-	const dispatcher = createEventDispatcher<{
-		selection: ISelection;
-	}>();
 	export let players: Players;
 	export let difficulty: Difficulty;
 	export let spirits: SpiritName[];
 	export let adversaries: AdversaryName[];
 	export let scenarios: ScenarioName[];
 	export let maps: MapName[];
+	const dispatcher = createEventDispatcher<{
+		selection: ISelection;
+	}>();
 
 	$: fieldsDifficulty = Math.max(
 		tallyAdversaryDifficulty(adversaries),
@@ -70,34 +70,37 @@
 		errorMessage={`At least ${players} ${pluralize(players, "spirit")} must be selected`}
 	>
 		<Checkboxes title="Spirits"
-			items={SPIRITS.map(spirit => ({
-				value: spirit.name,
-				display: spirit.name,
-			}))}
+			items={SPIRITS}
+			getValue={(spirit) => spirit.name}
 			bind:model={spirits}
-		/>
+			let:item={spirit}
+		>
+			{spirit.name}
+		</Checkboxes>
 	</FormField>
 
 	<FormField>
 		<Checkboxes title="Adversaries"
-			items={ADVERSARIES.map(adversary => ({
-				value: adversary.name,
-				display: `${adversary.name} (+${adversary.levels[0]} to +${adversary.levels[6]})`,
-				disabled: difficulty < 1
-			}))}
+			items={ADVERSARIES}
+			getValue={(adversary => adversary.name)}
+			getDisabled={() => difficulty < 1}
 			bind:model={adversaries}
-		/>
+			let:item={adversary}
+		>
+			{adversary.name} (+{adversary.levels[0]} to +{adversary.levels[6]})
+		</Checkboxes>
 	</FormField>
 
 	<FormField>
 		<Checkboxes title="Scenarios"
-			items={SCENARIOS.map(scenario => ({
-				value: scenario.name,
-				display: `${scenario.name} (+${scenario.difficulty})`,
-				disabled: difficulty < scenario.difficulty
-			}))}
+			items={SCENARIOS}
+			getValue={(scenario) => scenario.name}
+			getDisabled={(scenario) => difficulty < scenario.difficulty}
+			let:item={scenario}
 			bind:model={scenarios}
-		/>
+		>
+			{scenario.name} (+{scenario.difficulty})
+		</Checkboxes>
 	</FormField>
 
 	<FormField
@@ -105,13 +108,14 @@
 		errorMessage="At least 1 map must be selected"
 	>
 		<Checkboxes title="Maps"
-			items={MAPS.map(map => ({
-				value: map.name,
-				display: `${map.name} (+${map.difficulty})`,
-				disabled: difficulty < map.difficulty
-			}))}
+			items={MAPS}
+			getValue={(map) => map.name}
+			getDisabled={(map) => difficulty < map.difficulty}
+			let:item={map}
 			bind:model={maps}
-		/>
+		>
+			{map.name} (+{map.difficulty})
+		</Checkboxes>
 	</FormField>
 
 	<Button on:clicked={onSubmit}
