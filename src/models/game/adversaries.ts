@@ -11,7 +11,7 @@ export interface IAdversary {
 	id: string;
 	name: AdversaryName,
 	levels: Record<AdversaryLevel, Difficulty>;
-	fakeLevels: { id: string, level: AdversaryLevel, difficulty: Difficulty }[];
+	fakeLevels: { id: string, level: AdversaryLevel, difficulty: Difficulty, fakeLevels?: any[] }[];
 }
 
 export const ADVERSARIES: IAdversary[] = [
@@ -31,7 +31,7 @@ export const ADVERSARIES: IAdversary[] = [
 			{ id: "BP-0", level: 0, difficulty: 1 },
 			{ id: "BP-1", level: 1, difficulty: 2 },
 			{ id: "BP-2", level: 2, difficulty: 4 },
-			{ id: "BP-3", level: 3, difficulty: 6 },
+			{ id: "BP-3", level: 3, difficulty: 6, fakeLevels: [{ id: "hey", level: 4, difficulty: 8}] },
 			{ id: "BP-4", level: 4, difficulty: 7 },
 			{ id: "BP-5", level: 5, difficulty: 9 },
 			{ id: "BP-6", level: 6, difficulty: 10 },

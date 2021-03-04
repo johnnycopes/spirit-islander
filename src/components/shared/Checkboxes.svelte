@@ -17,6 +17,17 @@
 		} else {
 			model = model.filter(item => item !== id);
 		}
+
+		if (children) {
+			const childrenIds = children.map(child => getId(child));
+			if (checked) {
+				// TODO: recurisvely build/filter model. Also need to implement this in CheckboxesField component, so extracting
+				// it as a utility function eventually would make sense
+				model = [...model, ...childrenIds];
+			} else {
+				model = model.filter(item => !childrenIds.includes(item));
+			}
+		}
 	}
 
 </script>
