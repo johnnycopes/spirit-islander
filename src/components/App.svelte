@@ -9,7 +9,7 @@
 	let page: "Selection" | "Results" = "Selection";
 	let selection: ISelection = {
 		players: 1,
-		difficulty: 0,
+		difficulty: 1,
 		spirits: SPIRITS.map(spirit => spirit.name),
 		adversaries: [],
 		scenarios: [],

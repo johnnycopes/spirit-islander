@@ -1,75 +1,57 @@
-<script type="ts">
-	import Checkbox from "./Checkbox.svelte"
+<script lang="ts">
+	import Checkbox from "./Checkbox.svelte";
 
-	export let title: string;
+	export let level: number = 1; // for debugging; remove later
 	export let items: any[];
 	export let model: string[];
-	export let getValue: (item: any) => string;
+	export let getId: (item: any) => string;
 	export let getDisabled: (item?: any) => boolean = () => false;
-
-	$: validItems = items.filter(item => !getDisabled(item));
-	// Filter out disabled items from the model
-	$: {
-		model = model.filter(modelValue => {
-			const modelValueValid = validItems.find(item => getValue(item) === modelValue);
-			return modelValueValid;
-		});
-	}
-
-	function toggle(checked: boolean, value: string): void {
+	export let getChildren: (item?: any) => any[] = () => [];
+	
+	function toggle(checked: boolean, item: any): void {
+		const id = getId(item);
+		const children = getChildren(item);
 		if (checked) {
-			model = [...model, value];
+			model = [...model, id];
+			console.log(id, children);
 		} else {
-			model = model.filter(item => item !== value);
+			model = model.filter(item => item !== id);
 		}
 	}
 
-	function toggleAll(): void {
-		if (model.length < validItems.length) {
-			model = validItems.map(item => getValue(item));
-		} else {
-			model = [];
-		}
-	}
 </script>
 
 <ul class="checkboxes">
-	<li class="header">
-		<Checkbox
-			indeterminate={!!model.length && model.length !== validItems.length}
-			checked={!!model.length && model.length === validItems.length}
-			disabled={!validItems.length}
-			value={title}
-			on:change={toggleAll}
-		>
-			{title}
-		</Checkbox>
-	</li>
 	{#each items as item}
-		<li>
+		<li class="checkboxes__item">
 			<Checkbox
-				checked={model.some(modelValue => modelValue === getValue(item))}
+				id={getId(item)}
+				checked={model.some(modelValue => modelValue === getId(item))}
 				disabled={getDisabled(item)}
-				value={getValue(item)}
-				on:change={e => toggle(e.detail, getValue(item))}
+				on:change={e => toggle(e.detail, item)}
 			>
 				<slot {item}></slot>
 			</Checkbox>
+			{#if getChildren(item)?.length}
+				<svelte:self
+					level={level + 1}
+					items={getChildren(item)}
+					{getId}
+					{getDisabled}
+					{getChildren}
+					{model}
+					on:change={e => toggle(e.detail, item)}
+					let:item
+				>
+					<slot {item}></slot>
+				</svelte:self>
+			{/if}
 		</li>
 	{/each}
+	L{level}: {model}
 </ul>
 
 <style>
-	.header {
-		margin-bottom: 8px;
-		padding-bottom: 4px;
-		border-bottom: 1px solid darkgray;
-	}
-
-	.header :global(.checkbox-label) {
-		font-weight: 700;
-	}
-
 	li {
 		margin-bottom: 4px;
 	}

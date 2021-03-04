@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { createEventDispatcher } from "svelte";
 	import Button from "@shared/Button.svelte";
-	import Checkboxes from "@shared/Checkboxes.svelte";
+	import CheckboxesField from "@shared/CheckboxesField.svelte";
 	import FormField from "@shared/FormField.svelte";
 	import Select from "@shared/Select.svelte";
 	import type { ISelection } from "@models/selection.interface";
@@ -69,53 +69,58 @@
 		error={spiritsError}
 		errorMessage={`At least ${players} ${pluralize(players, "spirit")} must be selected`}
 	>
-		<Checkboxes title="Spirits"
+		<CheckboxesField title="Spirits"
 			items={SPIRITS}
-			getValue={(spirit) => spirit.name}
+			getId={(spirit) => spirit.name}
 			bind:model={spirits}
 			let:item={spirit}
 		>
 			{spirit.name}
-		</Checkboxes>
+		</CheckboxesField>
 	</FormField>
 
 	<FormField>
-		<Checkboxes title="Adversaries"
+		<CheckboxesField title="Adversaries"
 			items={ADVERSARIES}
-			getValue={(adversary => adversary.name)}
+			getId={(adversary => adversary.id)}
 			getDisabled={() => difficulty < 1}
+			getChildren={(adversary) => adversary.fakeLevels}
 			bind:model={adversaries}
 			let:item={adversary}
 		>
-			{adversary.name} (+{adversary.levels[0]} to +{adversary.levels[6]})
-		</Checkboxes>
+			{#if adversary.name}
+				{adversary.name}
+			{:else}
+				Level {adversary.level} (+{adversary.difficulty})
+			{/if}
+		</CheckboxesField>
 	</FormField>
 
 	<FormField>
-		<Checkboxes title="Scenarios"
+		<CheckboxesField title="Scenarios"
 			items={SCENARIOS}
-			getValue={(scenario) => scenario.name}
+			getId={(scenario) => scenario.name}
 			getDisabled={(scenario) => difficulty < scenario.difficulty}
 			let:item={scenario}
 			bind:model={scenarios}
 		>
 			{scenario.name} (+{scenario.difficulty})
-		</Checkboxes>
+		</CheckboxesField>
 	</FormField>
 
 	<FormField
 		error={mapsError}
 		errorMessage="At least 1 map must be selected"
 	>
-		<Checkboxes title="Maps"
+		<CheckboxesField title="Maps"
 			items={MAPS}
-			getValue={(map) => map.name}
+			getId={(map) => map.name}
 			getDisabled={(map) => difficulty < map.difficulty}
 			let:item={map}
 			bind:model={maps}
 		>
 			{map.name} (+{map.difficulty})
-		</Checkboxes>
+		</CheckboxesField>
 	</FormField>
 
 	<Button on:clicked={onSubmit}
@@ -138,5 +143,9 @@
 		justify-self: center;
 		width: 256px;
 		margin-top: 48px;
+	}
+
+	.form :global(.checkboxes) :global(.checkboxes) {
+		margin-left: 24px;
 	}
 </style>
