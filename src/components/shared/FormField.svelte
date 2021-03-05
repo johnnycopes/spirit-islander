@@ -1,9 +1,12 @@
 <script type="ts">
+	export let gridArea: string | undefined;
 	export let error: boolean = false;
 	export let errorMessage: string = "";
 </script>
 
-<div class="form-field">
+<div class="form-field"
+	style="grid-area: {gridArea}"
+>
 	<slot></slot>
 
 	{#if error}

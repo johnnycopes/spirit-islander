@@ -35,7 +35,7 @@
 		tallyMapDifficulty(maps)
 	) as Difficulty;
 	$: spiritsError = players > spirits.length;
-	$: difficultyError = fieldsDifficulty < difficulty;
+	$: difficultyError = false;
 	$: mapsError = !maps.length;
 	$: formDisabled = spiritsError || difficultyError || mapsError;
 
@@ -48,14 +48,14 @@
 </script>
 
 <form class="form">
-	<FormField>
+	<FormField gridArea="players">
 		<Select label="Number of players"
 			options={createArray(4)}
 			bind:value={players}
 		/>
 	</FormField>
 
-	<FormField
+	<FormField gridArea="difficulty"
 		error={difficultyError}
 		errorMessage="Value exceeds the difficulty of selected options in the form"
 	>
@@ -65,7 +65,7 @@
 		/>
 	</FormField>
 
-	<FormField
+	<FormField gridArea="spirits"
 		error={spiritsError}
 		errorMessage={`At least ${players} ${pluralize(players, "spirit")} must be selected`}
 	>
@@ -79,24 +79,24 @@
 		</CheckboxesField>
 	</FormField>
 
-	<FormField>
+	<FormField gridArea="adversaries">
 		<CheckboxesField title="Adversaries"
 			items={ADVERSARIES}
-			getId={(adversary => adversary.id)}
-			getDisabled={(level) => difficulty < 1 || (level.difficulty !== undefined && difficulty < level.difficulty)}
-			getChildren={(adversary) => adversary.fakeLevels}
+			getId={(entity => entity.name || entity.id)}
+			getDisabled={(entity) => difficulty < 1 || (entity.difficulty !== undefined && difficulty < entity.difficulty)}
+			getChildren={(entity) => entity.levels}
 			bind:model={adversaries}
-			let:item={adversary}
+			let:item={entity}
 		>
-			{#if adversary.name}
-				{adversary.name}
+			{#if entity.name}
+				{entity.name}
 			{:else}
-				Level {adversary.level} (+{adversary.difficulty})
+				Level {entity.level} (+{entity.difficulty})
 			{/if}
 		</CheckboxesField>
 	</FormField>
 
-	<FormField>
+	<FormField gridArea="scenarios">
 		<CheckboxesField title="Scenarios"
 			items={SCENARIOS}
 			getId={(scenario) => scenario.name}
@@ -108,7 +108,7 @@
 		</CheckboxesField>
 	</FormField>
 
-	<FormField
+	<FormField gridArea="maps"
 		error={mapsError}
 		errorMessage="At least 1 map must be selected"
 	>
@@ -135,6 +135,12 @@
 	.form {
 		display: grid;
 		grid-template-columns: 1fr 1fr;
+		grid-template-rows: auto;
+		grid-template-areas:
+			"players difficulty"
+			"maps scenarios"
+			"spirits spirits"
+			"adversaries adversaries";
 		gap: 8px;
 	}
 
