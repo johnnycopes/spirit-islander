@@ -4,7 +4,6 @@
 	import { cleanArray } from "@functions/clean-array";
 	import { getItemsRecursively } from "@functions/get-values-recursively";
 
-	export let level: number = 1; // for debugging; remove later
 	export let items: any[];
 	export let model: string[];
 	export let getId: (item: any) => string;
@@ -31,27 +30,28 @@
 	function onChange(checked: boolean, item: any): void {
 		const items = getItemsRecursively(item, getChildren);
 		const ids: string[] = getValidIds(items);
+		let updatedModel: string[];
+
 		if (checked) {
-			dispatcher("change", cleanArray([...model, ...ids]));
+			updatedModel = [...model, ...ids];
 		} else {
-			dispatcher("change", model.filter(
-				modelValue => !ids.includes(modelValue)
-			));
+			updatedModel = model.filter(modelValue => !ids.includes(modelValue));
 		}
+		dispatcher("change", cleanArray(updatedModel));
 	}
 
 	function onChildrenChange(model: string[], parent: any) {
 		const children = getChildren(parent);
 		const ids: string[] = getValidIds(children);
 		const parentId = getId(parent);
+		let updatedModel: string[];
 
 		if (ids.every(id => model.includes(id))) {
-			dispatcher("change", cleanArray([...model, parentId]));
-		} else if (!ids.some(id => model.includes(id))) {
-			dispatcher("change", model.filter(modelValue => modelValue !== parentId));
+			updatedModel = [...model, parentId];
 		} else {
-			dispatcher("change", cleanArray(model));
+			updatedModel = model.filter(modelValue => modelValue !== parentId);
 		}
+		dispatcher("change", cleanArray(updatedModel));
 	}
 
 	function getValidIds(items: any[]): string[] {
@@ -75,7 +75,6 @@
 			</Checkbox>
 			{#if getChildren(item)?.length}
 				<svelte:self
-					level={level + 1}
 					items={getChildren(item)}
 					{getId}
 					{getDisabled}
@@ -89,7 +88,6 @@
 			{/if}
 		</li>
 	{/each}
-	L{level}: {model}
 </ul>
 
 <style>
