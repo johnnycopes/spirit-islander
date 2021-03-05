@@ -5,6 +5,7 @@
 	import type { Players } from "@models/game/players";
 	import type { Difficulty } from "@models/game/difficulty";
 	import type { MapName } from "@models/game/maps";
+	import type { ExpansionName } from "@models/game/expansions";
 	import type { ScenarioName } from "@models/game/scenarios";
 	import type { SpiritName } from "@models/game/spirits";
 	import { pluralize } from "@functions/pluralize";
@@ -15,6 +16,7 @@
 	export let players: Players;
 	export let difficulty: Difficulty;
 	export let spirits: SpiritName[];
+	export let expansions: ExpansionName[];
 	export let map: MapName;
 	export let adversary: {
 		name: AdversaryName,
@@ -35,6 +37,18 @@
 		</tr>
 	</thead>
 	<tbody>
+		<tr>
+			<td>
+				Expansion
+			</td>
+			<td>
+				<ul>
+					{#each expansions as expansion}
+						<li>{expansion}</li>
+					{/each}
+				</ul>
+			</td>
+		</tr>
 		<tr>
 			<td>
 				Spirits

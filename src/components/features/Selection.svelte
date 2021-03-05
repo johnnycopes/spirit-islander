@@ -1,26 +1,29 @@
 <script lang="ts">
 	import { createEventDispatcher } from "svelte";
 	import Button from "@shared/Button.svelte";
-	import Checkboxes from "@shared/Checkboxes.svelte";
+	import CheckboxesField from "@shared/CheckboxesField.svelte";
 	import FormField from "@shared/FormField.svelte";
 	import Select from "@shared/Select.svelte";
 	import type { ISelection } from "@models/selection.interface";
 	import type { Players } from "@models/game/players";
 	import type { Difficulty } from "@models/game/difficulty";
+	import type { MapName } from "@models/game/maps";
+	import type { ExpansionName } from "@models/game/expansions";
 	import type { SpiritName } from "@models/game/spirits";
 	import type { AdversaryName } from "@models/game/adversaries";
 	import type { ScenarioName } from "@models/game/scenarios";
-	import type { MapName } from "@models/game/maps";
 	import { SPIRITS } from "@models/game/spirits";
+	import { EXPANSIONS } from "@models/game/expansions";
+	import { MAPS } from "@models/game/maps";
 	import { ADVERSARIES } from "@models/game/adversaries";
 	import { SCENARIOS } from "@models/game/scenarios";
-	import { MAPS } from "@models/game/maps";
 	import { pluralize } from "@functions/pluralize";
 	import { createArray } from "@functions/create-array";
 	import { tallyAdversaryDifficulty, tallyMapDifficulty, tallyScenarioDifficulty } from "@functions/calculations";
 
 	export let players: Players;
 	export let difficulty: Difficulty;
+	export let expansions: ExpansionName[];
 	export let spirits: SpiritName[];
 	export let adversaries: AdversaryName[];
 	export let scenarios: ScenarioName[];
@@ -35,27 +38,27 @@
 		tallyMapDifficulty(maps)
 	) as Difficulty;
 	$: spiritsError = players > spirits.length;
-	$: difficultyError = fieldsDifficulty < difficulty;
+	$: difficultyError = false;
 	$: mapsError = !maps.length;
 	$: formDisabled = spiritsError || difficultyError || mapsError;
 
 	function onSubmit(): void {
 		const selection: ISelection = {
-			players, difficulty, spirits, adversaries, scenarios, maps,
+			players, difficulty, maps, expansions, spirits, adversaries, scenarios,
 		};
 		dispatcher("selection", selection);
 	}
 </script>
 
 <form class="form">
-	<FormField>
+	<FormField name="players">
 		<Select label="Number of players"
 			options={createArray(4)}
 			bind:value={players}
 		/>
 	</FormField>
 
-	<FormField
+	<FormField name="difficulty"
 		error={difficultyError}
 		errorMessage="Value exceeds the difficulty of selected options in the form"
 	>
@@ -65,57 +68,72 @@
 		/>
 	</FormField>
 
-	<FormField
-		error={spiritsError}
-		errorMessage={`At least ${players} ${pluralize(players, "spirit")} must be selected`}
-	>
-		<Checkboxes title="Spirits"
-			items={SPIRITS}
-			getValue={(spirit) => spirit.name}
-			bind:model={spirits}
-			let:item={spirit}
-		>
-			{spirit.name}
-		</Checkboxes>
-	</FormField>
-
-	<FormField>
-		<Checkboxes title="Adversaries"
-			items={ADVERSARIES}
-			getValue={(adversary => adversary.name)}
-			getDisabled={() => difficulty < 1}
-			bind:model={adversaries}
-			let:item={adversary}
-		>
-			{adversary.name} (+{adversary.levels[0]} to +{adversary.levels[6]})
-		</Checkboxes>
-	</FormField>
-
-	<FormField>
-		<Checkboxes title="Scenarios"
-			items={SCENARIOS}
-			getValue={(scenario) => scenario.name}
-			getDisabled={(scenario) => difficulty < scenario.difficulty}
-			let:item={scenario}
-			bind:model={scenarios}
-		>
-			{scenario.name} (+{scenario.difficulty})
-		</Checkboxes>
-	</FormField>
-
-	<FormField
+	<FormField name="maps"
 		error={mapsError}
 		errorMessage="At least 1 map must be selected"
 	>
-		<Checkboxes title="Maps"
+		<CheckboxesField title="Maps"
 			items={MAPS}
-			getValue={(map) => map.name}
+			getId={(map) => map.name}
 			getDisabled={(map) => difficulty < map.difficulty}
 			let:item={map}
 			bind:model={maps}
 		>
 			{map.name} (+{map.difficulty})
-		</Checkboxes>
+		</CheckboxesField>
+	</FormField>
+
+	<FormField name="expansions">
+		<CheckboxesField title="Expansions"
+			items={EXPANSIONS}
+			let:item={expansion}
+			bind:model={expansions}
+		>
+			{expansion}
+		</CheckboxesField>
+	</FormField>
+
+	<FormField name="spirits"
+		error={spiritsError}
+		errorMessage={`At least ${players} ${pluralize(players, "spirit")} must be selected`}
+	>
+		<CheckboxesField title="Spirits"
+			items={SPIRITS}
+			getId={(spirit) => spirit.name}
+			bind:model={spirits}
+			let:item={spirit}
+		>
+			{spirit.name}
+		</CheckboxesField>
+	</FormField>
+
+	<FormField name="adversaries">
+		<CheckboxesField title="Adversaries"
+			items={ADVERSARIES}
+			getId={(entity => entity.name || entity.id)}
+			getDisabled={(entity) => difficulty < 1 || (entity.difficulty !== undefined && difficulty < entity.difficulty)}
+			getChildren={(entity) => entity.levels}
+			bind:model={adversaries}
+			let:item={entity}
+		>
+			{#if entity.name}
+				{entity.name}
+			{:else}
+				Level {entity.level} (+{entity.difficulty})
+			{/if}
+		</CheckboxesField>
+	</FormField>
+
+	<FormField name="scenarios">
+		<CheckboxesField title="Scenarios"
+			items={SCENARIOS}
+			getId={(scenario) => scenario.name}
+			getDisabled={(scenario) => difficulty < scenario.difficulty}
+			let:item={scenario}
+			bind:model={scenarios}
+		>
+			{scenario.name} (+{scenario.difficulty})
+		</CheckboxesField>
 	</FormField>
 
 	<Button on:clicked={onSubmit}
@@ -130,6 +148,13 @@
 	.form {
 		display: grid;
 		grid-template-columns: 1fr 1fr;
+		grid-template-rows: auto;
+		grid-template-areas:
+			"players difficulty"
+			"maps expansions"
+			"spirits spirits"
+			"adversaries adversaries"
+			"scenarios scenarios";
 		gap: 8px;
 	}
 
@@ -138,5 +163,13 @@
 		justify-self: center;
 		width: 256px;
 		margin-top: 48px;
+	}
+
+	.form :global(.adversaries) :global(.checkboxes-level-1) {
+		display: flex;
+	}
+
+	.form :global(.checkbox-item-level-1) {
+		flex: 1;
 	}
 </style>

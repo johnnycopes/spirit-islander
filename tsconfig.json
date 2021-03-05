@@ -14,5 +14,9 @@
 			"@features/*": ["src/components/features/*"],
 			"@shared/*": ["src/components/shared/*"],
 		},
+		"lib": [
+			"esnext",
+			"dom"
+		],
 	}
 }

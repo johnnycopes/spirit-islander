@@ -1,75 +1,104 @@
-<script type="ts">
-	import Checkbox from "./Checkbox.svelte"
+<script lang="ts">
+	import { createEventDispatcher } from "svelte";
+	import Checkbox from "./Checkbox.svelte";
+	import { cleanArray } from "@functions/clean-array";
+	import { getItemsRecursively } from "@functions/get-values-recursively";
 
-	export let title: string;
 	export let items: any[];
 	export let model: string[];
-	export let getValue: (item: any) => string;
+	export let level: number = 1;
+	export let getId: (item: any) => string = (item) => item;
 	export let getDisabled: (item?: any) => boolean = () => false;
+	export let getChildren: (item?: any) => any[] = () => [];
+	const dispatcher = createEventDispatcher<{
+		change: string[];
+	}>();
 
-	$: validItems = items.filter(item => !getDisabled(item));
-	// Filter out disabled items from the model
-	$: {
-		model = model.filter(modelValue => {
-			const modelValueValid = validItems.find(item => getValue(item) === modelValue);
-			return modelValueValid;
-		});
+	function calculateIndeterminate(item: any, model: string[]): boolean | undefined {
+		const children = getChildren(item);
+		if (children?.length) {
+			const validChildrenIds = getValidIds(children);
+			const validChildrenSelected = validChildrenIds.reduce((accum, childId) => {
+				if (model.includes(childId)) {
+					return accum + 1;
+				}
+				return accum;
+			}, 0);
+			return validChildrenSelected > 0 && validChildrenSelected < validChildrenIds.length;
+		}
 	}
 
-	function toggle(checked: boolean, value: string): void {
+	function onChange(checked: boolean, item: any): void {
+		const items = getItemsRecursively(item, getChildren);
+		const ids: string[] = getValidIds(items);
+		let updatedModel: string[];
+
 		if (checked) {
-			model = [...model, value];
+			updatedModel = [...model, ...ids];
 		} else {
-			model = model.filter(item => item !== value);
+			updatedModel = model.filter(modelValue => !ids.includes(modelValue));
 		}
+		dispatcher("change", cleanArray(updatedModel));
 	}
 
-	function toggleAll(): void {
-		if (model.length < validItems.length) {
-			model = validItems.map(item => getValue(item));
+	function onChildrenChange(model: string[], parent: any) {
+		const children = getChildren(parent);
+		const ids: string[] = getValidIds(children);
+		const parentId = getId(parent);
+		let updatedModel: string[];
+
+		if (ids.every(id => model.includes(id))) {
+			updatedModel = [...model, parentId];
 		} else {
-			model = [];
+			updatedModel = model.filter(modelValue => modelValue !== parentId);
 		}
+		dispatcher("change", cleanArray(updatedModel));
+	}
+
+	function getValidIds(items: any[]): string[] {
+		return items
+			.filter(item => !getDisabled(item))
+			.map(item => getId(item));
 	}
 </script>
 
-<ul class="checkboxes">
-	<li class="header">
-		<Checkbox
-			indeterminate={!!model.length && model.length !== validItems.length}
-			checked={!!model.length && model.length === validItems.length}
-			disabled={!validItems.length}
-			value={title}
-			on:change={toggleAll}
-		>
-			{title}
-		</Checkbox>
-	</li>
+<ul class="checkboxes checkboxes-level-{level}"
+	style="margin-left: {(level -1) * 24}px"
+>
 	{#each items as item}
-		<li>
+		<li class="checkboxes-item checkbox-item-level-{level}">
 			<Checkbox
-				checked={model.some(modelValue => modelValue === getValue(item))}
+				id={getId(item)}
+				checked={model.includes(getId(item))}
+				indeterminate={calculateIndeterminate(item, model)}
 				disabled={getDisabled(item)}
-				value={getValue(item)}
-				on:change={e => toggle(e.detail, getValue(item))}
+				on:change={e => onChange(e.detail, item)}
 			>
 				<slot {item}></slot>
 			</Checkbox>
+			{#if getChildren(item)?.length}
+				<svelte:self
+					items={getChildren(item)}
+					level={level + 1}
+					{getId}
+					{getDisabled}
+					{getChildren}
+					{model}
+					on:change={e => onChildrenChange(e.detail, item)}
+					let:item
+					>
+					<slot {item}></slot>
+				</svelte:self>
+			{/if}
 		</li>
 	{/each}
 </ul>
 
 <style>
-	.header {
-		margin-bottom: 8px;
-		padding-bottom: 4px;
-		border-bottom: 1px solid darkgray;
+	ul {
+		margin-top: 4px;
 	}
-
-	.header :global(.checkbox-label) {
-		font-weight: 700;
-	}
-
+	
 	li {
 		margin-bottom: 4px;
 	}
