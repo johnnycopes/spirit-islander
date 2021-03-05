@@ -3,6 +3,8 @@
 // import type { IMap, MapName } from "./maps";
 // import type { IScenario, ScenarioName } from "./scenarios";
 
+export const CONFIGURATIONS = "";
+
 // export const CONFIGURATIONS: Record<Difficulty, {
 // 	map: MapName,
 // 	scenario: ScenarioName | undefined,

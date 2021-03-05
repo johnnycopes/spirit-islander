@@ -39,6 +39,10 @@
 	$: mapsError = !maps.length;
 	$: formDisabled = spiritsError || difficultyError || mapsError;
 
+	function assignEventToModel(model: string[]): void {
+		adversaries = model as AdversaryName[];
+	}
+
 	function onSubmit(): void {
 		const selection: ISelection = {
 			players, difficulty, spirits, adversaries, scenarios, maps,
@@ -83,7 +87,7 @@
 		<CheckboxesField title="Adversaries"
 			items={ADVERSARIES}
 			getId={(adversary => adversary.id)}
-			getDisabled={() => difficulty < 1}
+			getDisabled={(level) => difficulty < 1 || (level.difficulty !== undefined && difficulty < level.difficulty)}
 			getChildren={(adversary) => adversary.fakeLevels}
 			bind:model={adversaries}
 			let:item={adversary}

@@ -1,5 +1,4 @@
 <script type="ts">
-	import { onMount } from "svelte";
 	import Checkbox from "./Checkbox.svelte"
 	import Checkboxes from "./Checkboxes.svelte";
 
@@ -12,12 +11,12 @@
 
 	$: validItems = items.filter(item => !getDisabled(item));
 	// Filter out disabled items from the model
-	$: {
-		model = model.filter(modelValue => {
-			const modelValueValid = validItems.find(item => getId(item) === modelValue);
-			return modelValueValid;
-		});
-	}
+	// $: {
+	// 	model = model.filter(modelValue => {
+	// 		const modelValueValid = validItems.find(item => getId(item) === modelValue);
+	// 		return modelValueValid;
+	// 	});
+	// }
 
 	function toggleAll(): void {
 		if (model.length < validItems.length) {
@@ -27,11 +26,6 @@
 			model = [];
 		}
 	}
-
-	// onMount(() => {
-	// 	console.log(title, items);
-	// 	console.log(getChildren(items[0]));
-	// })
 
 </script>
 
