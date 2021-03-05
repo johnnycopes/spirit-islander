@@ -27,8 +27,9 @@
 	}
 
 	.error {
+		display: inline-block;
 		margin-top: 8px;
-		padding: 8px;
+		padding: 8px 16px;
 		background: hsl(3deg 90% 82%);
 		color: hsl(3deg 90% 37%);
 		font-weight: bold;

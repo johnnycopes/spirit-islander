@@ -10,35 +10,30 @@
 	import type { MapName } from "@models/game/maps";
 	import type { ExpansionName } from "@models/game/expansions";
 	import type { SpiritName } from "@models/game/spirits";
-	import type { AdversaryName } from "@models/game/adversaries";
+	import type { AdversaryLevelId, AdversaryName } from "@models/game/adversaries";
 	import type { ScenarioName } from "@models/game/scenarios";
 	import { SPIRITS } from "@models/game/spirits";
 	import { EXPANSIONS } from "@models/game/expansions";
 	import { MAPS } from "@models/game/maps";
 	import { ADVERSARIES } from "@models/game/adversaries";
 	import { SCENARIOS } from "@models/game/scenarios";
+	import { getDifficultyError } from "@functions/calculations";
 	import { pluralize } from "@functions/pluralize";
 	import { createArray } from "@functions/create-array";
-	import { tallyAdversaryDifficulty, tallyMapDifficulty, tallyScenarioDifficulty } from "@functions/calculations";
 
 	export let players: Players;
 	export let difficulty: Difficulty;
 	export let expansions: ExpansionName[];
 	export let spirits: SpiritName[];
-	export let adversaries: AdversaryName[];
+	export let adversaries: AdversaryLevelId[];
 	export let scenarios: ScenarioName[];
 	export let maps: MapName[];
 	const dispatcher = createEventDispatcher<{
 		selection: ISelection;
 	}>();
 
-	$: fieldsDifficulty = Math.max(
-		tallyAdversaryDifficulty(adversaries),
-		tallyScenarioDifficulty(scenarios),
-		tallyMapDifficulty(maps)
-	) as Difficulty;
 	$: spiritsError = players > spirits.length;
-	$: difficultyError = false;
+	$: difficultyError = getDifficultyError(difficulty, maps, adversaries, scenarios);
 	$: mapsError = !maps.length;
 	$: formDisabled = spiritsError || difficultyError || mapsError;
 
@@ -60,7 +55,7 @@
 
 	<FormField name="difficulty"
 		error={difficultyError}
-		errorMessage="Value exceeds the difficulty of selected options in the form"
+		errorMessage="Combination of selected options cannot generate a game with level {difficulty} difficulty"
 	>
 		<Select label="Level of difficulty"
 			options={createArray(10, 0)}
@@ -150,9 +145,9 @@
 		grid-template-columns: 1fr 1fr;
 		grid-template-rows: auto;
 		grid-template-areas:
-			"players difficulty"
-			"maps expansions"
+			"players expansions"
 			"spirits spirits"
+			"difficulty maps"
 			"adversaries adversaries"
 			"scenarios scenarios";
 		gap: 8px;

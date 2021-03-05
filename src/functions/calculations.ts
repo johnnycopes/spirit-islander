@@ -1,46 +1,43 @@
 import type { Difficulty } from "@models/game/difficulty";
-import { ADVERSARIES, AdversaryName } from "@models/game/adversaries";
+import { ADVERSARIES, AdversaryLevelId } from "@models/game/adversaries";
 import { MAPS, MapName } from "@models/game/maps";
 import { SCENARIOS, ScenarioName } from "@models/game/scenarios";
+import { cleanArray } from "@functions/clean-array";
 
-export function tallyMapDifficulty(model: MapName[] = []): Difficulty {
-	return tallyDifficulty(
-		model,
-		MAPS,
-		(map) => map.name,
-		(map) => map.difficulty,
-	);
-}
+export function getDifficultyError(
+	target: Difficulty,
+	maps: MapName[],
+	adversaries: AdversaryLevelId[],
+	scenarios: ScenarioName[]
+): boolean {
+	if (target === 0) {
+		return false;
+	}
 
-export function tallyScenarioDifficulty(model: ScenarioName[] = []): Difficulty {
-	return tallyDifficulty(
-		model,
-		SCENARIOS,
-		(scenario) => scenario.name,
-		(scenario) => scenario.difficulty,
-	);
-}
+	const mapsDifficulties = MAPS
+		.filter(map => maps.includes(map.name))
+		.map(map => map.difficulty);
 
-export function tallyAdversaryDifficulty(model: AdversaryName[] = []): Difficulty {
-	return tallyDifficulty(
-		model,
-		ADVERSARIES,
-		(adversary) => adversary.name,
-		(adversary) => adversary.levels[6],
-	);
-}
+	const scenariosDifficulties = SCENARIOS
+		.filter(scenario => scenarios.includes(scenario.name))
+		.map(scenario => scenario.difficulty);
 
-function tallyDifficulty<TName, TItem>(
-	model: TName[],
-	items: TItem[],
-	getName: (item: TItem) => TName,
-	getDifficulty: (item: TItem) => Difficulty
-): Difficulty {
-	return model.reduce((accum, current) => {
-		const foundItem = items.find(item => getName(item) === current);
-		if (foundItem) {
-			return Math.max(accum, getDifficulty(foundItem)) as Difficulty;
-		}
-		return accum;
-	}, 0 as Difficulty);
+	let adversariesDifficulties: Difficulty[] = [];
+	ADVERSARIES.forEach(adversary => {
+		const adversaryDifficulties = adversary.levels
+			.filter(level => adversaries.includes(level.id))
+			.map(level => level.difficulty);
+		adversariesDifficulties.push(...adversaryDifficulties);
+	});
+	adversariesDifficulties = cleanArray(adversariesDifficulties).sort();
+
+	if (
+		mapsDifficulties.includes(target) ||
+		scenariosDifficulties.includes(target) ||
+		adversariesDifficulties.includes(target)
+	) {
+		return false;
+	}
+
+	return true;
 }

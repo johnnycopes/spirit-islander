@@ -9,7 +9,7 @@
 	let page: "Selection" | "Results" = "Selection";
 	let selection: ISelection = {
 		players: 1,
-		difficulty: 1,
+		difficulty: 0,
 		maps: ["Balanced"],
 		expansions: [],
 		spirits: SPIRITS.map(spirit => spirit.name),
@@ -41,8 +41,9 @@
 
 <style>
 	.container {
-		margin: 32px auto;
-		max-width: 768px;
+		margin: 0 auto;
+		padding: 32px 0;
+		max-width: 1024px;
 	}
 
 	.title {
