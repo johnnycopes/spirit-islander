@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { createEventDispatcher } from "svelte";
 	import Checkbox from "./Checkbox.svelte";
+	import { cleanArray } from "@functions/clean-array";
 	import { getItemsRecursively } from "@functions/get-values-recursively";
 
 	export let level: number = 1; // for debugging; remove later
@@ -12,21 +13,6 @@
 	const dispatcher = createEventDispatcher<{
 		change: string[];
 	}>();
-
-	$: validItems = items
-			.flatMap(item => getItemsRecursively(item, getChildren))
-			.filter(item => !getDisabled(item));
-
-	function calculateChecked(item: any, model: string[]): boolean {
-		// const children = getChildren(item);
-		// if (children?.length) {
-		// 	const validChildrenIds = getValidIds(children);
-		// 	return validChildrenIds.every(validId => model.includes(validId));
-		// } else {
-		// 	return model.includes(getId(item));
-		// }
-		return model.includes(getId(item));
-	}
 
 	function calculateIndeterminate(item: any, model: string[]): boolean | undefined {
 		const children = getChildren(item);
@@ -43,11 +29,10 @@
 	}
 
 	function onChange(checked: boolean, item: any): void {
-		console.log(checked, item);
 		const items = getItemsRecursively(item, getChildren);
 		const ids: string[] = getValidIds(items);
 		if (checked) {
-			dispatcher("change", [...model, ...ids]);
+			dispatcher("change", cleanArray([...model, ...ids]));
 		} else {
 			dispatcher("change", model.filter(
 				modelValue => !ids.includes(modelValue)
@@ -55,18 +40,18 @@
 		}
 	}
 
-	function onChildChange(model: string[], parent: any) {
-		// console.log(model, parent);
-		// const checked = !!model.length;
-		// const parentId = getId(parent);
-		// onChange(checked, parent);
-		// if (checked) {
-		// 	dispatcher("change", [...model, parentId]);
-		// } else {
-		// 	dispatcher("change", model.filter(
-		// 		modelValue => modelValue !== parentId
-		// 	));
-		// }
+	function onChildrenChange(model: string[], parent: any) {
+		const children = getChildren(parent);
+		const ids: string[] = getValidIds(children);
+		const parentId = getId(parent);
+
+		if (ids.every(id => model.includes(id))) {
+			dispatcher("change", cleanArray([...model, parentId]));
+		} else if (!ids.some(id => model.includes(id))) {
+			dispatcher("change", model.filter(modelValue => modelValue !== parentId));
+		} else {
+			dispatcher("change", cleanArray(model));
+		}
 	}
 
 	function getValidIds(items: any[]): string[] {
@@ -96,10 +81,9 @@
 					{getDisabled}
 					{getChildren}
 					{model}
-					on:change
+					on:change={e => onChildrenChange(e.detail, item)}
 					let:item
 					>
-					<!-- on:change={e => onChildChange(e.detail, item)} -->
 					<slot {item}></slot>
 				</svelte:self>
 			{/if}

@@ -39,10 +39,6 @@
 	$: mapsError = !maps.length;
 	$: formDisabled = spiritsError || difficultyError || mapsError;
 
-	function assignEventToModel(model: string[]): void {
-		adversaries = model as AdversaryName[];
-	}
-
 	function onSubmit(): void {
 		const selection: ISelection = {
 			players, difficulty, spirits, adversaries, scenarios, maps,
