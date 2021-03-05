@@ -10,10 +10,11 @@
 	let selection: ISelection = {
 		players: 1,
 		difficulty: 1,
+		maps: ["Balanced"],
+		expansions: [],
 		spirits: SPIRITS.map(spirit => spirit.name),
 		adversaries: [],
 		scenarios: [],
-		maps: ["Balanced"],
 	};
 	let instructions: IInstructions | undefined;
 </script>

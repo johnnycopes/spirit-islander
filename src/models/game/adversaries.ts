@@ -1,9 +1,9 @@
 import type { Difficulty } from "./difficulty";
 
 export type AdversaryName =
-	"Kingdom of Brandenburg-Prussia" |
-	"Kingdom of England" |
-	"Kingdom of Sweden";
+	"Brandenburg-Prussia" |
+	"England" |
+	"Sweden";
 
 export type AdversaryLevel = 0 | 1 | 2 | 3 | 4 | 5 | 6;
 
@@ -18,7 +18,7 @@ export interface IAdversary {
 
 export const ADVERSARIES: IAdversary[] = [
 	{
-		name: "Kingdom of Brandenburg-Prussia",
+		name: "Brandenburg-Prussia",
 		levels: [
 			{ id: "BP Level 0", level: 0, difficulty: 1 },
 			{ id: "BP Level 1", level: 1, difficulty: 2 },
@@ -30,7 +30,7 @@ export const ADVERSARIES: IAdversary[] = [
 		],
 	},
 	{
-		name: "Kingdom of England",
+		name: "England",
 		levels: [
 			{ id: "E Level 0", level: 0, difficulty: 1 },
 			{ id: "E Level 1", level: 1, difficulty: 3 },
@@ -42,7 +42,7 @@ export const ADVERSARIES: IAdversary[] = [
 		],
 	},
 	{
-		name: "Kingdom of Sweden",
+		name: "Sweden",
 		levels: [
 			{ id: "S Level 0", level: 0, difficulty: 1 },
 			{ id: "S Level 1", level: 1, difficulty: 2 },

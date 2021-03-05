@@ -6,7 +6,7 @@
 	export let title: string;
 	export let items: any[];
 	export let model: string[];
-	export let getId: (item: any) => string;
+	export let getId: (item: any) => string = (item) => item;
 	export let getDisabled: (item?: any) => boolean = () => false;
 	export let getChildren: (item?: any) => any[] = () => [];
 		
@@ -30,7 +30,6 @@
 			model = [...validIds];
 		}
 	}
-
 </script>
 
 <p class="header">

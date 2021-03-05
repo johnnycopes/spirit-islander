@@ -1,6 +1,7 @@
 import type { Difficulty } from "./difficulty";
 
 export type MapName = "Balanced" | "Thematic";
+
 export interface IMap {
 	name: MapName;
 	difficulty: Difficulty;

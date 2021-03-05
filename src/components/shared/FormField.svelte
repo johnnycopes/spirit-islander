@@ -1,11 +1,11 @@
 <script type="ts">
-	export let gridArea: string | undefined;
+	export let name: string | undefined;
 	export let error: boolean = false;
 	export let errorMessage: string = "";
 </script>
 
-<div class="form-field"
-	style="grid-area: {gridArea}"
+<div class="form-field {name}"
+	style="grid-area: {name}"
 >
 	<slot></slot>
 

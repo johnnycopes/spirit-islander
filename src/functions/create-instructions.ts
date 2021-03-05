@@ -4,7 +4,7 @@ import type { ISelection } from "@models/selection.interface";
 import { selectRandom } from "@functions/select-random";
 
 export function createInstructions(selection: ISelection): IInstructions {
-	const { players, difficulty, spirits, adversaries, scenarios, maps }: ISelection = selection;
+	const { players, difficulty, expansions, spirits, adversaries, scenarios, maps }: ISelection = selection;
 	const map = selectRandom(maps)[0];
 	const adversary = adversaries.length ?
 		{
@@ -19,6 +19,7 @@ export function createInstructions(selection: ISelection): IInstructions {
 	return {
 		players,
 		difficulty,
+		expansions,
 		spirits: selectRandom(spirits, players),
 		adversary,
 		scenario,

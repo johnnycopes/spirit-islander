@@ -7,20 +7,23 @@
 	import type { ISelection } from "@models/selection.interface";
 	import type { Players } from "@models/game/players";
 	import type { Difficulty } from "@models/game/difficulty";
+	import type { MapName } from "@models/game/maps";
+	import type { ExpansionName } from "@models/game/expansions";
 	import type { SpiritName } from "@models/game/spirits";
 	import type { AdversaryName } from "@models/game/adversaries";
 	import type { ScenarioName } from "@models/game/scenarios";
-	import type { MapName } from "@models/game/maps";
 	import { SPIRITS } from "@models/game/spirits";
+	import { EXPANSIONS } from "@models/game/expansions";
+	import { MAPS } from "@models/game/maps";
 	import { ADVERSARIES } from "@models/game/adversaries";
 	import { SCENARIOS } from "@models/game/scenarios";
-	import { MAPS } from "@models/game/maps";
 	import { pluralize } from "@functions/pluralize";
 	import { createArray } from "@functions/create-array";
 	import { tallyAdversaryDifficulty, tallyMapDifficulty, tallyScenarioDifficulty } from "@functions/calculations";
 
 	export let players: Players;
 	export let difficulty: Difficulty;
+	export let expansions: ExpansionName[];
 	export let spirits: SpiritName[];
 	export let adversaries: AdversaryName[];
 	export let scenarios: ScenarioName[];
@@ -41,21 +44,21 @@
 
 	function onSubmit(): void {
 		const selection: ISelection = {
-			players, difficulty, spirits, adversaries, scenarios, maps,
+			players, difficulty, maps, expansions, spirits, adversaries, scenarios,
 		};
 		dispatcher("selection", selection);
 	}
 </script>
 
 <form class="form">
-	<FormField gridArea="players">
+	<FormField name="players">
 		<Select label="Number of players"
 			options={createArray(4)}
 			bind:value={players}
 		/>
 	</FormField>
 
-	<FormField gridArea="difficulty"
+	<FormField name="difficulty"
 		error={difficultyError}
 		errorMessage="Value exceeds the difficulty of selected options in the form"
 	>
@@ -65,7 +68,32 @@
 		/>
 	</FormField>
 
-	<FormField gridArea="spirits"
+	<FormField name="maps"
+		error={mapsError}
+		errorMessage="At least 1 map must be selected"
+	>
+		<CheckboxesField title="Maps"
+			items={MAPS}
+			getId={(map) => map.name}
+			getDisabled={(map) => difficulty < map.difficulty}
+			let:item={map}
+			bind:model={maps}
+		>
+			{map.name} (+{map.difficulty})
+		</CheckboxesField>
+	</FormField>
+
+	<FormField name="expansions">
+		<CheckboxesField title="Expansions"
+			items={EXPANSIONS}
+			let:item={expansion}
+			bind:model={expansions}
+		>
+			{expansion}
+		</CheckboxesField>
+	</FormField>
+
+	<FormField name="spirits"
 		error={spiritsError}
 		errorMessage={`At least ${players} ${pluralize(players, "spirit")} must be selected`}
 	>
@@ -79,7 +107,7 @@
 		</CheckboxesField>
 	</FormField>
 
-	<FormField gridArea="adversaries">
+	<FormField name="adversaries">
 		<CheckboxesField title="Adversaries"
 			items={ADVERSARIES}
 			getId={(entity => entity.name || entity.id)}
@@ -96,7 +124,7 @@
 		</CheckboxesField>
 	</FormField>
 
-	<FormField gridArea="scenarios">
+	<FormField name="scenarios">
 		<CheckboxesField title="Scenarios"
 			items={SCENARIOS}
 			getId={(scenario) => scenario.name}
@@ -105,21 +133,6 @@
 			bind:model={scenarios}
 		>
 			{scenario.name} (+{scenario.difficulty})
-		</CheckboxesField>
-	</FormField>
-
-	<FormField gridArea="maps"
-		error={mapsError}
-		errorMessage="At least 1 map must be selected"
-	>
-		<CheckboxesField title="Maps"
-			items={MAPS}
-			getId={(map) => map.name}
-			getDisabled={(map) => difficulty < map.difficulty}
-			let:item={map}
-			bind:model={maps}
-		>
-			{map.name} (+{map.difficulty})
 		</CheckboxesField>
 	</FormField>
 
@@ -138,9 +151,10 @@
 		grid-template-rows: auto;
 		grid-template-areas:
 			"players difficulty"
-			"maps scenarios"
+			"maps expansions"
 			"spirits spirits"
-			"adversaries adversaries";
+			"adversaries adversaries"
+			"scenarios scenarios";
 		gap: 8px;
 	}
 
@@ -151,7 +165,11 @@
 		margin-top: 48px;
 	}
 
-	.form :global(.checkboxes) :global(.checkboxes) {
-		margin-left: 24px;
+	.form :global(.adversaries) :global(.checkboxes-level-1) {
+		display: flex;
+	}
+
+	.form :global(.checkbox-item-level-1) {
+		flex: 1;
 	}
 </style>

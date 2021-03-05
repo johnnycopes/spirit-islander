@@ -6,7 +6,8 @@
 
 	export let items: any[];
 	export let model: string[];
-	export let getId: (item: any) => string;
+	export let level: number = 1;
+	export let getId: (item: any) => string = (item) => item;
 	export let getDisabled: (item?: any) => boolean = () => false;
 	export let getChildren: (item?: any) => any[] = () => [];
 	const dispatcher = createEventDispatcher<{
@@ -61,9 +62,11 @@
 	}
 </script>
 
-<ul class="checkboxes">
+<ul class="checkboxes checkboxes-level-{level}"
+	style="margin-left: {(level -1) * 24}px"
+>
 	{#each items as item}
-		<li class="checkboxes__item">
+		<li class="checkboxes-item checkbox-item-level-{level}">
 			<Checkbox
 				id={getId(item)}
 				checked={model.includes(getId(item))}
@@ -76,6 +79,7 @@
 			{#if getChildren(item)?.length}
 				<svelte:self
 					items={getChildren(item)}
+					level={level + 1}
 					{getId}
 					{getDisabled}
 					{getChildren}
