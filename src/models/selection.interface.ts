@@ -3,7 +3,7 @@ import type { Difficulty } from "./game/difficulty";
 import type { MapName } from "./game/maps";
 import type { ExpansionName } from "./game/expansions";
 import type { SpiritName } from "./game/spirits";
-import type { AdversaryLevelId } from "./game/adversaries";
+import type { AdversaryName, AdversaryLevelId } from "./game/adversaries";
 import type { ScenarioName } from "./game/scenarios";
 
 export interface ISelection {
@@ -12,6 +12,6 @@ export interface ISelection {
 	maps: MapName[];
 	expansions: ExpansionName[];
 	spirits: SpiritName[];
-	adversaries: AdversaryLevelId[];
+	adversaries: (AdversaryName | AdversaryLevelId)[];
 	scenarios: ScenarioName[];
 }

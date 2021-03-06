@@ -10,7 +10,7 @@
 	import type { MapName } from "@models/game/maps";
 	import type { ExpansionName } from "@models/game/expansions";
 	import type { SpiritName } from "@models/game/spirits";
-	import type { AdversaryLevelId, AdversaryName } from "@models/game/adversaries";
+	import type { AdversaryName, AdversaryLevelId } from "@models/game/adversaries";
 	import type { ScenarioName } from "@models/game/scenarios";
 	import { SPIRITS } from "@models/game/spirits";
 	import { EXPANSIONS } from "@models/game/expansions";
@@ -25,7 +25,7 @@
 	export let difficulty: Difficulty;
 	export let expansions: ExpansionName[];
 	export let spirits: SpiritName[];
-	export let adversaries: AdversaryLevelId[];
+	export let adversaries: (AdversaryName | AdversaryLevelId)[];
 	export let scenarios: ScenarioName[];
 	export let maps: MapName[];
 	const dispatcher = createEventDispatcher<{
@@ -55,7 +55,7 @@
 
 	<FormField name="difficulty"
 		error={difficultyError}
-		errorMessage="Combination of selected options cannot generate a game with level {difficulty} difficulty"
+		errorMessage="Combination of selected maps, adversaries, and scenarios cannot make a game with level {difficulty} difficulty"
 	>
 		<Select label="Level of difficulty"
 			options={createArray(10, 0)}
