@@ -8,7 +8,7 @@ export function filterExpansions<T extends IExpansionOption>(
 		if (option.expansion) {
 			return expansions.includes(option.expansion);
 		} else {
-			return option;
+			return true;
 		}
 	});
 }

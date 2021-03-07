@@ -35,7 +35,8 @@
 		selection: ISelection;
 	}>();
 
-	$: validCombinations = getValidCombos(difficulty, maps, adversaries, scenarios);
+	$: gameConfig = { players, expansions, difficulty };
+	$: validCombinations = getValidCombos(gameConfig, maps, adversaries, scenarios);
 	$: spiritsError = players > spirits.length;
 	$: mapsError = !maps.length;
 	$: scenariosError = !scenarios.length;
@@ -97,12 +98,12 @@
 		errorMessage="At least 1 option must be selected"
 	>
 		<CheckboxesField title="Maps"
-			items={MAPS}
+			items={filterExpansions(MAPS, expansions)}
 			getId={(map) => map.name}
 			let:item={map}
 			bind:model={maps}
 		>
-			{map.name} <DifficultyEmblem value={map.difficulty} />
+			{map.name} <DifficultyEmblem value={typeof map.difficulty === "function" ? map.difficulty(gameConfig) : map.difficulty} />
 		</CheckboxesField>
 	</FormField>
 
