@@ -9,21 +9,28 @@
 	import type { ScenarioName } from "@models/game/scenarios";
 	import type { SpiritName } from "@models/game/spirits";
 	import { pluralize } from "@functions/pluralize";
+	import { getAdversaryById } from "@functions/get-adversary-by-id";
 
 	const dispatcher = createEventDispatcher<{
 		reset: void;
+		generate: void;
 	}>();
 	export let players: Players;
 	export let difficulty: Difficulty;
 	export let spirits: SpiritName[];
 	export let expansions: ExpansionName[];
 	export let map: MapName;
-	export let adversary: IAdversaryLevel | undefined = undefined;
+	export let adversary: IAdversaryLevel;
 	export let scenario: ScenarioName | undefined = undefined;
+
+	$: adversaryName = getAdversaryById(adversary.id);
 </script>
 
 <Button on:clicked={() => dispatcher("reset")}>
 	Reset
+</Button>
+<Button on:clicked={() => dispatcher("generate")}>
+	Generate
 </Button>
 <table>
 	<thead>
@@ -71,11 +78,9 @@
 				Adversary
 			</td>
 			<td>
-				{#if adversary}
-					{adversary.id}<br>
+				{adversaryName}
+				{#if adversaryName !== "No Adversary"}
 					{adversary.level}
-				{:else}
-					None
 				{/if}
 			</td>
 		</tr>

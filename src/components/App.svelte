@@ -30,11 +30,12 @@
 				page = "Results";
 				selection = e.detail;
 				instructions = createInstructions(selection);
-			}
-		} />
+			}}
+		/>
 	{:else if page === "Results" && instructions}
 		<Results {...instructions}
 			on:reset={() => page = "Selection" }
+			on:generate={() => instructions = createInstructions(selection) }
 		/>
 	{/if}
 </main>

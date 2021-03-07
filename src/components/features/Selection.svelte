@@ -17,7 +17,7 @@
 	import { MAPS } from "@models/game/maps";
 	import { ADVERSARIES } from "@models/game/adversaries";
 	import { SCENARIOS } from "@models/game/scenarios";
-	import { getDifficultyError } from "@functions/calculations";
+	import { getValidCombos } from "@functions/get-valid-combos";
 	import { pluralize } from "@functions/pluralize";
 	import { createArray } from "@functions/create-array";
 
@@ -32,16 +32,17 @@
 		selection: ISelection;
 	}>();
 
+	$: validCombinations = getValidCombos(difficulty, maps, adversaries, scenarios);
 	$: spiritsError = players > spirits.length;
 	$: mapsError = !maps.length;
 	$: scenariosError = !scenarios.length;
 	$: adversariesError = !adversaries.length;
-	$: difficultyError = getDifficultyError(difficulty, maps, adversaries, scenarios);
+	$: difficultyError = !validCombinations.length;
 	$: formDisabled = spiritsError || mapsError || scenariosError || adversariesError || difficultyError;
 
 	function onSubmit(): void {
 		const selection: ISelection = {
-			players, difficulty, maps, expansions, spirits, adversaries, scenarios,
+			players, expansions, spirits, difficulty, maps, adversaries, scenarios,
 		};
 		dispatcher("selection", selection);
 	}
@@ -53,31 +54,6 @@
 			options={createArray(4)}
 			bind:value={players}
 		/>
-	</FormField>
-
-	<FormField name="difficulty"
-		error={difficultyError}
-		errorMessage="Combination of selected maps, adversaries, and scenarios cannot make a game with level {difficulty} difficulty"
-	>
-		<Select label="Level of difficulty"
-			options={createArray(10, 0)}
-			bind:value={difficulty}
-		/>
-	</FormField>
-
-	<FormField name="maps"
-		error={mapsError}
-		errorMessage="At least 1 option must be selected"
-	>
-		<CheckboxesField title="Maps"
-			items={MAPS}
-			getId={(map) => map.name}
-			getDisabled={(map) => difficulty < map.difficulty}
-			let:item={map}
-			bind:model={maps}
-		>
-			{map.name} (+{map.difficulty})
-		</CheckboxesField>
 	</FormField>
 
 	<FormField name="expansions">
@@ -104,6 +80,30 @@
 		</CheckboxesField>
 	</FormField>
 
+	<FormField name="difficulty"
+		error={difficultyError}
+		errorMessage="Combination of selected maps, adversaries, and scenarios cannot make a game with level {difficulty} difficulty"
+	>
+		<Select label="Level of difficulty"
+			options={createArray(10, 0)}
+			bind:value={difficulty}
+		/>
+	</FormField>
+
+	<FormField name="maps"
+		error={mapsError}
+		errorMessage="At least 1 option must be selected"
+	>
+		<CheckboxesField title="Maps"
+			items={MAPS}
+			getId={(map) => map.name}
+			let:item={map}
+			bind:model={maps}
+		>
+			{map.name} (+{map.difficulty})
+		</CheckboxesField>
+	</FormField>
+
 	<FormField name="adversaries"
 		error={adversariesError}
 		errorMessage="At least 1 option must be selected"
@@ -111,10 +111,6 @@
 		<CheckboxesField title="Adversaries"
 			items={ADVERSARIES}
 			getId={(entity => entity.name || entity.id)}
-			getDisabled={(entity) => {
-				return entity.name !== "No Adversary" && 
-				(difficulty < 1 || (entity.difficulty !== undefined && difficulty < entity.difficulty));
-			}}
 			getChildren={(entity) => entity.levels}
 			bind:model={adversaries}
 			let:item={entity}
@@ -134,7 +130,6 @@
 		<CheckboxesField title="Scenarios"
 			items={SCENARIOS}
 			getId={(scenario) => scenario.name}
-			getDisabled={(scenario) => difficulty < scenario.difficulty}
 			let:item={scenario}
 			bind:model={scenarios}
 		>

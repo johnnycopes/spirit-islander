@@ -1,28 +1,23 @@
-import type { AdversaryLevelValue } from "@models/game/adversaries";
+import type { IScenario, ScenarioName } from "@models/game/scenarios";
+import type { AdversaryLevelValue, IAdversaryLevel } from "@models/game/adversaries";
 import type { IInstructions } from "@models/instructions.interface";
 import type { ISelection } from "@models/selection.interface";
 import { selectRandom } from "@functions/select-random";
+import { getValidCombos } from "./get-valid-combos";
 
 export function createInstructions(selection: ISelection): IInstructions {
-	const { players, difficulty, expansions, spirits, adversaries, scenarios, maps }: ISelection = selection;
-	const map = selectRandom(maps)[0];
-	const adversary = adversaries.length ?
-		{
-			name: selectRandom(adversaries)[0],
-			level: 0 as AdversaryLevelValue,
-		}
-		: undefined;
-	const scenario = scenarios.length ?
-		selectRandom(scenarios)[0]
-		: undefined;
+	const { players, expansions, spirits, difficulty, maps, adversaries, scenarios }: ISelection = selection;
+	const validCombos = getValidCombos(difficulty, maps, adversaries, scenarios);
+	const selectedSpirits = selectRandom(spirits, players);
+	const [selectedMap, selectedAdversary, selectedScenario] = selectRandom(validCombos)[0];
 
 	return {
 		players,
 		difficulty,
 		expansions,
-		spirits: selectRandom(spirits, players),
-		adversary,
-		scenario,
-		map,
+		spirits: selectedSpirits,
+		adversary: selectedAdversary,
+		scenario: (selectedScenario as any)?.name,
+		map: (selectedMap as any).name,
 	}
 }
