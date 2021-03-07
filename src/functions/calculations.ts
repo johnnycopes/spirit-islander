@@ -1,71 +1,33 @@
 import type { Difficulty } from "@models/game/difficulty";
-import { ADVERSARIES, AdversaryName, AdversaryLevelId } from "@models/game/adversaries";
+import { ADVERSARIES, AdversaryName, AdversaryLevelId, IAdversaryLevel } from "@models/game/adversaries";
 import { MAPS, MapName } from "@models/game/maps";
 import { SCENARIOS, ScenarioName } from "@models/game/scenarios";
-import { cleanArray } from "@functions/clean-array";
+import { getPossibleCombos } from "./get-possible-combos";
 
 export function getDifficultyError(
 	target: Difficulty,
-	maps: MapName[],
-	adversaries: (AdversaryName | AdversaryLevelId)[],
-	scenarios: ScenarioName[]
+	mapsModel: MapName[],
+	adversariesModel: (AdversaryName | AdversaryLevelId)[],
+	scenariosModel: ScenarioName[]
 ): boolean {
-	if (target === 0) {
-		return false;
+	const maps = MAPS.filter(map => mapsModel.includes(map.name));
+	const scenarios = SCENARIOS.filter(scenario => scenariosModel.includes(scenario.name));
+	const adversaries: IAdversaryLevel[] = [];
+
+	if (adversariesModel.includes("No Adversary")) {
+		adversaries.push({ id: "none", level: 0, difficulty: 0 });
 	}
-
-	const mapsDifficulties = MAPS
-		.filter(map => maps.includes(map.name))
-		.map(map => map.difficulty);
-
-	const scenariosDifficulties = SCENARIOS
-		.filter(scenario => scenarios.includes(scenario.name) && scenario.difficulty > 0)
-		.map(scenario => scenario.difficulty);
-
-	let adversariesDifficulties: Difficulty[] = [];
 	ADVERSARIES.forEach(adversary => {
 		const adversaryDifficulties = adversary.levels
-			.filter(level => adversaries.includes(level.id))
-			.map(level => level.difficulty);
-		adversariesDifficulties.push(...adversaryDifficulties);
+			.filter(level => adversariesModel.includes(level.id))
+		adversaries.push(...adversaryDifficulties);
 	});
-	adversariesDifficulties = cleanArray(adversariesDifficulties).sort();
 
-	if (mapsDifficulties.includes(target) ||
-		scenariosDifficulties.includes(target) ||
-		adversariesDifficulties.includes(target)) {
-		return false;
-	}
-
-	console.log("maps", mapsDifficulties);
-	console.log("scenarios", scenariosDifficulties);
-	console.log("adversaries", adversariesDifficulties);
-
-	// if (scenariosDifficulties.length) {
-	// 	for (let i = 0; i < scenariosDifficulties.length; i++) {
-	// 		const scenario = scenariosDifficulties[i];
-	// 		for (let j = 0; j < adversariesDifficulties.length; j++) {
-	// 			const adversary = adversariesDifficulties[j];
-	// 			if ( scenario + adversary === target ||
-	// 				scenario + adversary + map === target) {
-
-	// 				}
-	// 		}
-	// 	}
-	// }
-	// } else if (adversariesDifficulties.length) {
-
-	// }
-	// for (let i = 0; i < scenariosDifficulties.length; i++) {
-	// 	const map = mapsDifficulties[i];
-	// 	for (let j = 0; j < scenariosDifficulties.length; j++) {
-	// 		const adversary = adversariesDifficulties[j];
-	// 		for (let k = 0; k < )
-	// 		if (map + adversary === target) {
-	// 			return false;
-	// 		}
-	// 	}
-	// }
-
-	return true;
+	const options = [maps, adversaries, scenarios];
+	const combos = getPossibleCombos(
+		options,
+		options => options.reduce((difficulty, option) => difficulty + option.difficulty, 0) === target
+	);
+	console.log(combos);
+	return !combos.length;
 }

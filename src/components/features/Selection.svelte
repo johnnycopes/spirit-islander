@@ -33,9 +33,11 @@
 	}>();
 
 	$: spiritsError = players > spirits.length;
-	$: difficultyError = getDifficultyError(difficulty, maps, adversaries, scenarios);
 	$: mapsError = !maps.length;
-	$: formDisabled = spiritsError || difficultyError || mapsError;
+	$: scenariosError = !scenarios.length;
+	$: adversariesError = !adversaries.length;
+	$: difficultyError = getDifficultyError(difficulty, maps, adversaries, scenarios);
+	$: formDisabled = spiritsError || mapsError || scenariosError || adversariesError || difficultyError;
 
 	function onSubmit(): void {
 		const selection: ISelection = {
@@ -65,7 +67,7 @@
 
 	<FormField name="maps"
 		error={mapsError}
-		errorMessage="At least 1 map must be selected"
+		errorMessage="At least 1 option must be selected"
 	>
 		<CheckboxesField title="Maps"
 			items={MAPS}
@@ -102,11 +104,17 @@
 		</CheckboxesField>
 	</FormField>
 
-	<FormField name="adversaries">
+	<FormField name="adversaries"
+		error={adversariesError}
+		errorMessage="At least 1 option must be selected"
+	>
 		<CheckboxesField title="Adversaries"
 			items={ADVERSARIES}
 			getId={(entity => entity.name || entity.id)}
-			getDisabled={(entity) => difficulty < 1 || (entity.difficulty !== undefined && difficulty < entity.difficulty)}
+			getDisabled={(entity) => {
+				return entity.name !== "No Adversary" && 
+				(difficulty < 1 || (entity.difficulty !== undefined && difficulty < entity.difficulty));
+			}}
 			getChildren={(entity) => entity.levels}
 			bind:model={adversaries}
 			let:item={entity}
@@ -119,7 +127,10 @@
 		</CheckboxesField>
 	</FormField>
 
-	<FormField name="scenarios">
+	<FormField name="scenarios"
+		error={scenariosError}
+		errorMessage="At least 1 option must be selected"
+	>
 		<CheckboxesField title="Scenarios"
 			items={SCENARIOS}
 			getId={(scenario) => scenario.name}

@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { createEventDispatcher } from "svelte";
 	import Button from "@shared/Button.svelte";
-	import type { AdversaryLevel, AdversaryName } from "@models/game/adversaries";
+	import type { IAdversaryLevel } from "@models/game/adversaries";
 	import type { Players } from "@models/game/players";
 	import type { Difficulty } from "@models/game/difficulty";
 	import type { MapName } from "@models/game/maps";
@@ -18,10 +18,7 @@
 	export let spirits: SpiritName[];
 	export let expansions: ExpansionName[];
 	export let map: MapName;
-	export let adversary: {
-		name: AdversaryName,
-		level: AdversaryLevel,
-	} | undefined = undefined;
+	export let adversary: IAdversaryLevel | undefined = undefined;
 	export let scenario: ScenarioName | undefined = undefined;
 </script>
 
@@ -75,7 +72,7 @@
 			</td>
 			<td>
 				{#if adversary}
-					{adversary.name}<br>
+					{adversary.id}<br>
 					{adversary.level}
 				{:else}
 					None

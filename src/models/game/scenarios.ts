@@ -1,17 +1,22 @@
-import type { Difficulty } from "./difficulty";
+import type { Difficulty, IDifficultyOption } from "./difficulty";
 
 export type ScenarioName =
+	"No Scenario" |
 	"Blitz" |
 	"Dahan Insurrection" |
 	"Guard the Isle's Heart" |
 	"Rituals of Terror";
 
-export interface IScenario {
+export interface IScenario extends IDifficultyOption {
 	name: ScenarioName;
 	difficulty: Difficulty;
 }
 
 export const SCENARIOS: IScenario[] = [
+	{
+		name: "No Scenario",
+		difficulty: 0,
+	},
 	{
 		name: "Blitz",
 		difficulty: 0,

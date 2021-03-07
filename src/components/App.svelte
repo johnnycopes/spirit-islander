@@ -13,8 +13,8 @@
 		maps: ["Balanced"],
 		expansions: [],
 		spirits: SPIRITS.map(spirit => spirit.name),
-		adversaries: [],
-		scenarios: [],
+		adversaries: ["No Adversary"],
+		scenarios: ["No Scenario"],
 	};
 	let instructions: IInstructions | undefined;
 </script>
