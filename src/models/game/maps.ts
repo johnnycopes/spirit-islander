@@ -1,10 +1,9 @@
-import type { Difficulty, IDifficultyOption } from "./difficulty";
+import type { IDifficultyOption } from "./difficulty";
 
 export type MapName = "Balanced" | "Thematic";
 
 export interface IMap extends IDifficultyOption {
 	name: MapName;
-	difficulty: Difficulty;
 }
 
 export const MAPS: IMap[] = [

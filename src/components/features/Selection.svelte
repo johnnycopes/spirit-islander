@@ -3,6 +3,7 @@
 	import Button from "@shared/Button.svelte";
 	import CheckboxesField from "@shared/CheckboxesField.svelte";
 	import DifficultyEmblem from "@shared/DifficultyEmblem.svelte";
+	import ExpansionEmblem from "@shared/ExpansionEmblem.svelte";
 	import FormField from "@shared/FormField.svelte";
 	import Select from "@shared/Select.svelte";
 	import type { ISelection } from "@models/selection.interface";
@@ -18,9 +19,10 @@
 	import { MAPS } from "@models/game/maps";
 	import { ADVERSARIES } from "@models/game/adversaries";
 	import { SCENARIOS } from "@models/game/scenarios";
+	import { createArray } from "@functions/create-array";
+	import { filterExpansions } from "@functions/filter-expansions";
 	import { getValidCombos } from "@functions/get-valid-combos";
 	import { pluralize } from "@functions/pluralize";
-	import { createArray } from "@functions/create-array";
 
 	export let players: Players;
 	export let difficulty: Difficulty;
@@ -66,18 +68,17 @@
 			{expansion}
 		</CheckboxesField>
 	</FormField>
-
 	<FormField name="spirits"
 		error={spiritsError}
 		errorMessage={`At least ${players} ${pluralize(players, "spirit")} must be selected`}
 	>
 		<CheckboxesField title="Spirits"
-			items={SPIRITS}
+			items={filterExpansions(SPIRITS, expansions)}
 			getId={(spirit) => spirit.name}
 			bind:model={spirits}
 			let:item={spirit}
 		>
-			{spirit.name}
+			{spirit.name} <ExpansionEmblem value={spirit.expansion} />
 		</CheckboxesField>
 	</FormField>
 
@@ -110,14 +111,14 @@
 		errorMessage="At least 1 option must be selected"
 	>
 		<CheckboxesField title="Adversaries"
-			items={ADVERSARIES}
+			items={filterExpansions(ADVERSARIES, expansions)}
 			getId={(entity => entity.name || entity.id)}
 			getChildren={(entity) => entity.levels}
 			bind:model={adversaries}
 			let:item={entity}
 		>
 			{#if entity.name}
-				{entity.name}
+				{entity.name} <ExpansionEmblem value={entity.expansion} />
 			{:else}
 				Level {entity.level} <DifficultyEmblem value={entity.difficulty} />
 			{/if}
@@ -129,12 +130,14 @@
 		errorMessage="At least 1 option must be selected"
 	>
 		<CheckboxesField title="Scenarios"
-			items={SCENARIOS}
+			items={filterExpansions(SCENARIOS, expansions)}
 			getId={(scenario) => scenario.name}
 			let:item={scenario}
 			bind:model={scenarios}
 		>
-			{scenario.name} <DifficultyEmblem value={scenario.difficulty} />
+			{scenario.name}
+			<DifficultyEmblem value={scenario.difficulty} />
+			<ExpansionEmblem value={scenario.expansion} />
 		</CheckboxesField>
 	</FormField>
 

@@ -23,9 +23,8 @@ export function getValidCombos(
 		adversaries.push(...adversaryDifficulties);
 	});
 
-	const options = [maps, adversaries, scenarios];
 	return getPossibleCombos(
-		options,
+		[maps, adversaries, scenarios],
 		options => options.reduce((difficulty, option) => difficulty + option.difficulty, 0) === target
 	);
 }

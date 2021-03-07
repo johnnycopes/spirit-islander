@@ -1,25 +1,29 @@
 <script lang="ts">
 	import type { ExpansionName } from "@models/game/expansions";
 
-	export let value: ExpansionName;
+	export let value: ExpansionName | undefined;
 	$: abbrevation = getAbbreviation(value);
 
-	function getAbbreviation(name: ExpansionName): string {
+	function getAbbreviation(name: ExpansionName | undefined): string | undefined {
 		switch (name) {
 			case "Branch & Claw":
 				return "BC";
 			case "Jagged Earth":
 				return "JE";
+			default:
+				return undefined;
 		}
 	}
 </script>
 
-<div class="complexity-emblem">
-	{abbrevation}
-</div>
+{#if value}
+	<div class="expansion-emblem">
+		{abbrevation}
+	</div>
+{/if}
 
 <style>
-	:global(.complexity-emblem) {
+	:global(.expansion-emblem) {
 		padding: 2px 8px;
 		font-size: 14px;
 		background: #767676;
