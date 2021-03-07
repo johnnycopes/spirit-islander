@@ -22,15 +22,15 @@ export const SCENARIOS: IScenario[] = [
 		difficulty: 0,
 	},
 	{
-		name: "Dahan Insurrection",
-		difficulty: 4,
-	},
-	{
 		name: "Guard the Isle's Heart",
 		difficulty: 0,
 	},
 	{
 		name: "Rituals of Terror",
 		difficulty: 3
+	},
+	{
+		name: "Dahan Insurrection",
+		difficulty: 4,
 	},
 ];

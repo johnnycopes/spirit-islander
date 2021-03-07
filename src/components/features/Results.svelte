@@ -80,7 +80,7 @@
 			<td>
 				{adversaryName}
 				{#if adversaryName !== "No Adversary"}
-					{adversary.level}
+					Level {adversary.level}
 				{/if}
 			</td>
 		</tr>

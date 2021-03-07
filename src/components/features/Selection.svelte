@@ -2,6 +2,7 @@
 	import { createEventDispatcher } from "svelte";
 	import Button from "@shared/Button.svelte";
 	import CheckboxesField from "@shared/CheckboxesField.svelte";
+	import DifficultyEmblem from "@shared/DifficultyEmblem.svelte";
 	import FormField from "@shared/FormField.svelte";
 	import Select from "@shared/Select.svelte";
 	import type { ISelection } from "@models/selection.interface";
@@ -100,7 +101,7 @@
 			let:item={map}
 			bind:model={maps}
 		>
-			{map.name} (+{map.difficulty})
+			{map.name} <DifficultyEmblem value={map.difficulty} />
 		</CheckboxesField>
 	</FormField>
 
@@ -118,7 +119,7 @@
 			{#if entity.name}
 				{entity.name}
 			{:else}
-				Level {entity.level} (+{entity.difficulty})
+				Level {entity.level} <DifficultyEmblem value={entity.difficulty} />
 			{/if}
 		</CheckboxesField>
 	</FormField>
@@ -133,7 +134,7 @@
 			let:item={scenario}
 			bind:model={scenarios}
 		>
-			{scenario.name} (+{scenario.difficulty})
+			{scenario.name} <DifficultyEmblem value={scenario.difficulty} />
 		</CheckboxesField>
 	</FormField>
 
@@ -166,11 +167,21 @@
 		margin-top: 48px;
 	}
 
+	.form :global(.checkbox-label) {
+		display: inline-flex;
+		align-items: center;
+	}
+
+	.form :global(.checkbox-item-level-1) {
+		flex: 1 0 auto;
+	}
+
 	.form :global(.adversaries) :global(.checkboxes-level-1) {
 		display: flex;
 	}
 
-	.form :global(.checkbox-item-level-1) {
-		flex: 1;
+	.form :global(.difficulty-emblem),
+	.form :global(.expansion-emblem) {
+		margin-left: 8px;
 	}
 </style>
