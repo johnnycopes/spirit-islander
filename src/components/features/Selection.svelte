@@ -21,6 +21,7 @@
 	import { SCENARIOS } from "@models/game/scenarios";
 	import { createArray } from "@functions/create-array";
 	import { filterExpansions } from "@functions/filter-expansions";
+	import { getDifficulty } from "@functions/get-difficulty";
 	import { getValidCombos } from "@functions/get-valid-combos";
 	import { pluralize } from "@functions/pluralize";
 
@@ -58,6 +59,7 @@
 			options={createArray(4)}
 			bind:value={players}
 		/>
+		{validCombinations.length}
 	</FormField>
 
 	<FormField name="expansions">
@@ -103,7 +105,7 @@
 			let:item={map}
 			bind:model={maps}
 		>
-			{map.name} <DifficultyEmblem value={typeof map.difficulty === "function" ? map.difficulty(gameConfig) : map.difficulty} />
+			{map.name} <DifficultyEmblem value={getDifficulty(map.difficulty, gameConfig)} />
 		</CheckboxesField>
 	</FormField>
 
@@ -121,7 +123,7 @@
 			{#if entity.name}
 				{entity.name} <ExpansionEmblem value={entity.expansion} />
 			{:else}
-				Level {entity.level} <DifficultyEmblem value={entity.difficulty} />
+				Level {entity.level} <DifficultyEmblem value={getDifficulty(entity.difficulty, gameConfig)} />
 			{/if}
 		</CheckboxesField>
 	</FormField>

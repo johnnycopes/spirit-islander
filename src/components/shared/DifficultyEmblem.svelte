@@ -1,7 +1,7 @@
 <script lang="ts">
-	export let value: string;
+	export let value: string | number;
 
-	$: valueAsNumber = parseInt(value, 10);
+	$: valueAsNumber = typeof value === "number" ? value : parseInt(value, 10);
 </script>
 
 {#if valueAsNumber > 0}
