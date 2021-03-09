@@ -1,8 +1,8 @@
 import type { IDifficultyOption } from "@models/game/difficulty";
 import type { IGameConfig } from "@models/game/game-config";
 import { ADVERSARIES, AdversaryName, AdversaryLevelId, IAdversaryLevel } from "@models/game/adversaries";
-import { MAPS, MapName } from "@models/game/maps";
-import { SCENARIOS, ScenarioName } from "@models/game/scenarios";
+import { MAPS, MapName, IMap } from "@models/game/maps";
+import { SCENARIOS, IScenario, ScenarioName } from "@models/game/scenarios";
 import { getDifficulty } from "./get-difficulty";
 import { ComboAnalyzer } from "./combo-analyzer";
 
@@ -13,7 +13,7 @@ export function getValidCombos(
 	mapsModel: MapName[],
 	adversariesModel: (AdversaryName | AdversaryLevelId)[],
 	scenariosModel: ScenarioName[]
-): IDifficultyOption[][] {
+): [IMap, IAdversaryLevel, IScenario][] {
 	const maps = MAPS.filter(map => mapsModel.includes(map.name));
 	const scenarios = SCENARIOS.filter(scenario => scenariosModel.includes(scenario.name));
 	const adversaries: IAdversaryLevel[] = [];
@@ -27,7 +27,7 @@ export function getValidCombos(
 		adversaries.push(...adversaryDifficulties);
 	});
 
-	return comboAnalyzer.getPossibleCombos(
+	return comboAnalyzer.getPossibleCombos<IMap, IAdversaryLevel, IScenario>(
 		[maps, adversaries, scenarios],
 		options => options.reduce((difficulty, option) =>
 			difficulty + getDifficulty(option.difficulty, gameConfig),

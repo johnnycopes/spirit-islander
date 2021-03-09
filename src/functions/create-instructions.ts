@@ -15,7 +15,7 @@ export function createInstructions(selection: ISelection): IInstructions {
 		expansions,
 		spirits: selectedSpirits,
 		adversary: selectedAdversary,
-		scenario: (selectedScenario as any)?.name,
-		map: (selectedMap as any).name,
+		scenario: selectedScenario.name,
+		map: selectedMap.name,
 	}
 }
