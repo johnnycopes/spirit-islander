@@ -59,7 +59,6 @@
 			options={createArray(4)}
 			bind:value={players}
 		/>
-		{validCombinations.length}
 	</FormField>
 
 	<FormField name="expansions">

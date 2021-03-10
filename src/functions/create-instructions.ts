@@ -1,7 +1,7 @@
 import type { IInstructions } from "@models/instructions.interface";
 import type { ISelection } from "@models/selection.interface";
 import { selectRandom } from "@functions/select-random";
-import { getValidCombos } from "./get-valid-combos";
+import { getValidCombos } from "@functions/get-valid-combos";
 
 export function createInstructions(selection: ISelection): IInstructions {
 	const { players, expansions, spirits, difficulty, maps, adversaries, scenarios }: ISelection = selection;

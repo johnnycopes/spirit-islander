@@ -27,7 +27,7 @@ export function getValidCombos(
 		adversaries.push(...adversaryDifficulties);
 	});
 
-	return comboAnalyzer.getPossibleCombos<IMap, IAdversaryLevel, IScenario>(
+	return comboAnalyzer.getPossibleCombos(
 		[maps, adversaries, scenarios],
 		options => options.reduce((difficulty, option) =>
 			difficulty + getDifficulty(option.difficulty, gameConfig),

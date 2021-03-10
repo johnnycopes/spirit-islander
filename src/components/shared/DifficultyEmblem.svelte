@@ -1,10 +1,8 @@
 <script lang="ts">
-	export let value: string | number;
-
-	$: valueAsNumber = typeof value === "number" ? value : parseInt(value, 10);
+	export let value: number;
 </script>
 
-{#if valueAsNumber > 0}
+{#if value > 0}
 	<div class="difficulty-emblem">
 		+<span class="value">{value}</span>
 	</div>
