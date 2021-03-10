@@ -10,6 +10,10 @@
 				return "BC";
 			case "Jagged Earth":
 				return "JE";
+			case "Promo Pack 1":
+				return "P1";
+			case "Promo Pack 2":
+				return "P2";
 			default:
 				return undefined;
 		}

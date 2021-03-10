@@ -6,6 +6,9 @@ export type AdversaryName =
 	"Brandenburg-Prussia" |
 	"France" |
 	"England" |
+	"Habsburg Monarchy" |
+	"Russia" |
+	"Scotland" |
 	"Sweden";
 
 export interface IAdversaryLevel extends IDifficultyOption {
@@ -17,9 +20,12 @@ export type AdversaryLevelValue = 0 | 1 | 2 | 3 | 4 | 5 | 6;
 
 export type AdversaryLevelId = "none" |
 	"bp-0" | "bp-1" | "bp-2" | "bp-3" | "bp-4" | "bp-5" | "bp-6" |
-	"f-0" | "f-1" | "f-2" | "f-3" | "f-4" | "f-5" | "f-6" |
-	"e-0" | "e-1" | "e-2" | "e-3" | "e-4" | "e-5" | "e-6" |
-	"s-0" | "s-1" | "s-2" | "s-3" | "s-4" | "s-5" | "s-6";
+	"en-0" | "en-1" | "en-2" | "en-3" | "en-4" | "en-5" | "en-6" |
+	"fr-0" | "fr-1" | "fr-2" | "fr-3" | "fr-4" | "fr-5" | "fr-6" |
+	"hm-0" | "hm-1" | "hm-2" | "hm-3" | "hm-4" | "hm-5" | "hm-6" |
+	"ru-0" | "ru-1" | "ru-2" | "ru-3" | "ru-4" | "ru-5" | "ru-6" |
+	"sc-0" | "sc-1" | "sc-2" | "sc-3" | "sc-4" | "sc-5" | "sc-6" |
+	"sw-0" | "sw-1" | "sw-2" | "sw-3" | "sw-4" | "sw-5" | "sw-6";
 
 export interface IAdversary extends IExpansionOption {
 	name: AdversaryName,
@@ -44,40 +50,79 @@ export const ADVERSARIES: IAdversary[] = [
 		],
 	},
 	{
-		name: "France",
-		expansion: "Branch & Claw",
+		name: "England",
 		levels: [
-			{ id: "f-0", level: 0, difficulty: 2 },
-			{ id: "f-1", level: 1, difficulty: 3 },
-			{ id: "f-2", level: 2, difficulty: 5 },
-			{ id: "f-3", level: 3, difficulty: 7 },
-			{ id: "f-4", level: 4, difficulty: 8 },
-			{ id: "f-5", level: 5, difficulty: 9 },
-			{ id: "f-6", level: 6, difficulty: 10 },
+			{ id: "en-0", level: 0, difficulty: 1 },
+			{ id: "en-1", level: 1, difficulty: 3 },
+			{ id: "en-2", level: 2, difficulty: 4 },
+			{ id: "en-3", level: 3, difficulty: 6 },
+			{ id: "en-4", level: 4, difficulty: 7 },
+			{ id: "en-5", level: 5, difficulty: 9 },
+			{ id: "en-6", level: 6, difficulty: 11 },
 		],
 	},
 	{
-		name: "England",
+		name: "France",
+		expansion: "Branch & Claw",
 		levels: [
-			{ id: "e-0", level: 0, difficulty: 1 },
-			{ id: "e-1", level: 1, difficulty: 3 },
-			{ id: "e-2", level: 2, difficulty: 4 },
-			{ id: "e-3", level: 3, difficulty: 6 },
-			{ id: "e-4", level: 4, difficulty: 7 },
-			{ id: "e-5", level: 5, difficulty: 9 },
-			{ id: "e-6", level: 6, difficulty: 10 },
+			{ id: "fr-0", level: 0, difficulty: 2 },
+			{ id: "fr-1", level: 1, difficulty: 3 },
+			{ id: "fr-2", level: 2, difficulty: 5 },
+			{ id: "fr-3", level: 3, difficulty: 7 },
+			{ id: "fr-4", level: 4, difficulty: 8 },
+			{ id: "fr-5", level: 5, difficulty: 9 },
+			{ id: "fr-6", level: 6, difficulty: 10 },
+		],
+	},
+	{
+		name: "Habsburg Monarchy",
+		expansion: "Jagged Earth",
+		levels: [
+			{ id: "hm-0", level: 0, difficulty: 2 },
+			{ id: "hm-1", level: 1, difficulty: 3 },
+			{ id: "hm-2", level: 2, difficulty: 5 },
+			{ id: "hm-3", level: 3, difficulty: 6 },
+			{ id: "hm-4", level: 4, difficulty: 8 },
+			{ id: "hm-5", level: 5, difficulty: 9 },
+			{ id: "hm-6", level: 6, difficulty: 10 },
+		],
+	},
+	{
+		name: "Russia",
+		expansion: "Jagged Earth",
+		levels: [
+			{ id: "ru-0", level: 0, difficulty: 1 },
+			{ id: "ru-1", level: 1, difficulty: 3 },
+			{ id: "ru-2", level: 2, difficulty: 4 },
+			{ id: "ru-3", level: 3, difficulty: 6 },
+			{ id: "ru-4", level: 4, difficulty: 7 },
+			{ id: "ru-5", level: 5, difficulty: 9 },
+			{ id: "ru-6", level: 6, difficulty: 11 },
+		],
+	},
+	{
+		name: "Scotland",
+		expansion: "Jagged Earth",
+		levels: [
+			{ id: "sc-0", level: 0, difficulty: 1 },
+			{ id: "sc-1", level: 1, difficulty: 3 },
+			{ id: "sc-2", level: 2, difficulty: 4 },
+			{ id: "sc-3", level: 3, difficulty: 6 },
+			{ id: "sc-4", level: 4, difficulty: 7 },
+			{ id: "sc-5", level: 5, difficulty: 8 },
+			{ id: "sc-6", level: 6, difficulty: 10 },
 		],
 	},
 	{
 		name: "Sweden",
 		levels: [
-			{ id: "s-0", level: 0, difficulty: 1 },
-			{ id: "s-1", level: 1, difficulty: 2 },
-			{ id: "s-2", level: 2, difficulty: 3 },
-			{ id: "s-3", level: 3, difficulty: 5 },
-			{ id: "s-4", level: 4, difficulty: 6 },
-			{ id: "s-5", level: 5, difficulty: 7 },
-			{ id: "s-6", level: 6, difficulty: 8 },
+			{ id: "sw-0", level: 0, difficulty: 1 },
+			{ id: "sw-1", level: 1, difficulty: 2 },
+			{ id: "sw-2", level: 2, difficulty: 3 },
+			{ id: "sw-3", level: 3, difficulty: 5 },
+			{ id: "sw-4", level: 4, difficulty: 6 },
+			{ id: "sw-5", level: 5, difficulty: 7 },
+			{ id: "sw-6", level: 6, difficulty: 8 },
 		],
 	},
 ];

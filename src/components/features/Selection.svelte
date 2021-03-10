@@ -177,12 +177,18 @@
 		align-items: center;
 	}
 
-	.form :global(.checkbox-item-level-1) {
-		flex: 1 0 auto;
-	}
-
+	.form :global(.spirits) :global(.checkboxes-level-1),
 	.form :global(.adversaries) :global(.checkboxes-level-1) {
 		display: flex;
+		flex-wrap: wrap;
+	}
+
+	.form :global(.spirits) :global(.checkbox-item-level-1) {
+		flex: 1 0 50%;
+	}
+
+	.form :global(.adversaries) :global(.checkbox-item-level-1) {
+		flex: 1 0 auto;
 	}
 
 	.form :global(.difficulty-emblem),

@@ -1,15 +1,18 @@
-import type { Difficulty, IDifficultyOption } from "./difficulty";
-import type { ExpansionName, IExpansionOption } from "./expansions";
+import type { IDifficultyOption } from "./difficulty";
+import type { IExpansionOption } from "./expansions";
 
 export type ScenarioName =
 	"No Scenario" |
 	"Blitz" |
 	"Dahan Insurrection" |
+	"Despicable Thief" |
+	"Elemental Invocation" |
 	"Guard the Isle's Heart" |
 	"Powers Long Forgotten" |
 	"Rituals of Destroying Flame" |
 	"Rituals of Terror" |
 	"Second Wave" |
+	"The Great River" |
 	"Ward the Shores";
 
 export interface IScenario extends IDifficultyOption, IExpansionOption {
@@ -35,9 +38,19 @@ export const SCENARIOS: IScenario[] = [
 		expansion: "Branch & Claw",
 	},
 	{
+		name: "Elemental Invocation",
+		difficulty: 0,
+		expansion: "Jagged Earth",
+	},
+	{
 		name: "Powers Long Forgotten",
 		difficulty: 1,
 		expansion: "Branch & Claw",
+	},
+	{
+		name: "Despicable Thief",
+		difficulty: 2,
+		expansion: "Jagged Earth",
 	},
 	{
 		name: "Ward the Shores",
@@ -52,6 +65,11 @@ export const SCENARIOS: IScenario[] = [
 	{
 		name: "Rituals of Terror",
 		difficulty: 3
+	},
+	{
+		name: "The Great River",
+		difficulty: 3,
+		expansion: "Jagged Earth",
 	},
 	{
 		name: "Dahan Insurrection",
