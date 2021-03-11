@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { createEventDispatcher } from "svelte";
-	import { snakeCase } from "@functions/snake-case";
+	import { snakeCase } from "@functions/utility/snake-case";
 
 	export let id: string;
 	export let checked: boolean = false;

@@ -1,5 +1,5 @@
 <script type="ts">
-	import { snakeCase } from "@functions/snake-case";
+	import { snakeCase } from "@functions/utility/snake-case";
 
 	export let label: string;
 	export let options: unknown[];

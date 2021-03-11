@@ -19,11 +19,11 @@
 	import { MAPS } from "@models/game/maps";
 	import { ADVERSARIES } from "@models/game/adversaries";
 	import { SCENARIOS } from "@models/game/scenarios";
-	import { createArray } from "@functions/create-array";
+	import { createArray } from "@functions/utility/create-array";
 	import { filterExpansions } from "@functions/filter-expansions";
 	import { getDifficulty } from "@functions/get-difficulty";
 	import { getValidCombos } from "@functions/get-valid-combos";
-	import { pluralize } from "@functions/pluralize";
+	import { pluralize } from "@functions/utility/pluralize";
 
 	export let players: Players;
 	export let difficulty: Difficulty;

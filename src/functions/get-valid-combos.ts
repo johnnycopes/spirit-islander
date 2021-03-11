@@ -4,7 +4,7 @@ import { ADVERSARIES, AdversaryName, AdversaryLevelId, IAdversaryLevel } from "@
 import { MAPS, MapName, IMap } from "@models/game/maps";
 import { SCENARIOS, IScenario, ScenarioName } from "@models/game/scenarios";
 import { getDifficulty } from "./get-difficulty";
-import { ComboAnalyzer } from "./combo-analyzer";
+import { ComboAnalyzer } from "./utility/combo-analyzer";
 
 const comboAnalyzer = new ComboAnalyzer<IDifficultyOption>();
 

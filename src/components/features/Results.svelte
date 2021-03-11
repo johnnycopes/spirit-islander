@@ -8,7 +8,7 @@
 	import type { ExpansionName } from "@models/game/expansions";
 	import type { ScenarioName } from "@models/game/scenarios";
 	import type { SpiritName } from "@models/game/spirits";
-	import { pluralize } from "@functions/pluralize";
+	import { pluralize } from "@functions/utility/pluralize";
 	import { getAdversaryById } from "@functions/get-adversary-by-id";
 
 	const dispatcher = createEventDispatcher<{

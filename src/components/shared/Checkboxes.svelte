@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { createEventDispatcher } from "svelte";
 	import Checkbox from "./Checkbox.svelte";
-	import { cleanArray } from "@functions/clean-array";
-	import { getItemsRecursively } from "@functions/get-values-recursively";
+	import { cleanArray } from "@functions/utility/clean-array";
+	import { getItemsRecursively } from "@functions/utility/get-values-recursively";
 
 	export let items: any[];
 	export let model: string[];
