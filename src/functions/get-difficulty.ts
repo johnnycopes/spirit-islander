@@ -1,10 +1,10 @@
 import type { Difficulty } from "@models/game/difficulty";
-import type { ISelection } from "@models/selection.interface";
+import type { IConfig } from "@models/config.interface";
 import { getDynamicValue } from "@functions/utility/get-dynamic-value";
 
 export function getDifficulty(
-	difficulty: Difficulty | ((selection: ISelection) => Difficulty),
-	selection: ISelection
+	difficulty: Difficulty | ((config: IConfig) => Difficulty),
+	config: IConfig
 ): Difficulty {
-	return getDynamicValue(difficulty, selection);
+	return getDynamicValue(difficulty, config);
 }

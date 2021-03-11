@@ -6,7 +6,7 @@
 	import ExpansionEmblem from "@shared/ExpansionEmblem.svelte";
 	import FormField from "@shared/FormField.svelte";
 	import Select from "@shared/Select.svelte";
-	import type { ISelection } from "@models/selection.interface";
+	import type { IConfig } from "@models/config.interface";
 	import type { Players } from "@models/game/players";
 	import type { Difficulty } from "@models/game/difficulty";
 	import type { MapName } from "@models/game/maps";
@@ -33,12 +33,12 @@
 	export let scenarios: ScenarioName[];
 	export let maps: MapName[];
 	const dispatcher = createEventDispatcher<{
-		selection: ISelection;
+		submit: IConfig;
 	}>();
 
-	let selection: ISelection;
-	$: { selection = { players, expansions, difficulty, maps, spirits, adversaries, scenarios }};
-	$: validCombinations = getValidCombos(selection);
+	let config: IConfig;
+	$: { config = { players, expansions, difficulty, maps, spirits, adversaries, scenarios }};
+	$: validCombinations = getValidCombos(config);
 	$: spiritsError = players > spirits.length;
 	$: mapsError = !maps.length;
 	$: scenariosError = !scenarios.length;
@@ -47,7 +47,7 @@
 	$: formDisabled = spiritsError || mapsError || scenariosError || adversariesError || difficultyError;
 
 	function onSubmit(): void {
-		dispatcher("selection", selection);
+		dispatcher("submit", config);
 	}
 </script>
 
@@ -102,7 +102,7 @@
 			let:item={map}
 			bind:model={maps}
 		>
-			{map.name} <DifficultyEmblem value={getDifficulty(map.difficulty, selection)} />
+			{map.name} <DifficultyEmblem value={getDifficulty(map.difficulty, config)} />
 		</CheckboxesField>
 	</FormField>
 
@@ -120,7 +120,7 @@
 			{#if entity.name}
 				{entity.name} <ExpansionEmblem value={entity.expansion} />
 			{:else}
-				Level {entity.level} <DifficultyEmblem value={getDifficulty(entity.difficulty, selection)} />
+				Level {entity.level} <DifficultyEmblem value={getDifficulty(entity.difficulty, config)} />
 			{/if}
 		</CheckboxesField>
 	</FormField>

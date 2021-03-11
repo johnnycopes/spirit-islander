@@ -6,7 +6,7 @@ import type { SpiritName } from "./game/spirits";
 import type { AdversaryName, AdversaryLevelId } from "./game/adversaries";
 import type { ScenarioName } from "./game/scenarios";
 
-export interface ISelection {
+export interface IConfig {
 	players: Players;
 	difficulty: Difficulty;
 	maps: MapName[];

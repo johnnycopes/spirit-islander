@@ -1,13 +1,13 @@
 <script lang="ts">
 	import { SPIRITS } from "@models/game/spirits";
-	import Selection from "@features/Selection.svelte";
+	import Config from "@features/Config.svelte";
 	import Results from "@features/Results.svelte";
-	import type { ISelection } from "@models/selection.interface";
+	import type { IConfig } from "@models/config.interface";
 	import type { IInstructions } from "@models/instructions.interface";
 	import { createInstructions } from "@functions/create-instructions";
 
-	let page: "Selection" | "Results" = "Selection";
-	let selection: ISelection = {
+	let page: "Config" | "Results" = "Config";
+	let config: IConfig = {
 		players: 1,
 		difficulty: 0,
 		maps: ["Balanced"],
@@ -24,18 +24,18 @@
 		<h1>Spirit Islander</h1>
 		<p>A setup generator for the board game Spirit Island</p>
 	</div>
-	{#if page === "Selection"}
-		<Selection {...selection}
-			on:selection={(e) => {
+	{#if page === "Config"}
+		<Config {...config}
+			on:submit={(e) => {
 				page = "Results";
-				selection = e.detail;
-				instructions = createInstructions(selection);
+				config = e.detail;
+				instructions = createInstructions(config);
 			}}
 		/>
 	{:else if page === "Results" && instructions}
 		<Results {...instructions}
-			on:reset={() => page = "Selection" }
-			on:generate={() => instructions = createInstructions(selection) }
+			on:reset={() => page = "Config" }
+			on:generate={() => instructions = createInstructions(config) }
 		/>
 	{/if}
 </main>

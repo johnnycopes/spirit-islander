@@ -14,6 +14,6 @@ export const MAPS: IMap[] = [
 	},
 	{
 		name: "Thematic",
-		difficulty: (selection) => selection.expansions.includes("Branch & Claw") ? 1 : 3,
+		difficulty: (config) => config.expansions.includes("Branch & Claw") ? 1 : 3,
 	},
 ];
