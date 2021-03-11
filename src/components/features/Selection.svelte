@@ -36,8 +36,9 @@
 		selection: ISelection;
 	}>();
 
-	$: gameConfig = { players, expansions, difficulty };
-	$: validCombinations = getValidCombos(gameConfig, maps, adversaries, scenarios);
+	let selection: ISelection;
+	$: { selection = { players, expansions, difficulty, maps, spirits, adversaries, scenarios }};
+	$: validCombinations = getValidCombos(selection);
 	$: spiritsError = players > spirits.length;
 	$: mapsError = !maps.length;
 	$: scenariosError = !scenarios.length;
@@ -46,9 +47,6 @@
 	$: formDisabled = spiritsError || mapsError || scenariosError || adversariesError || difficultyError;
 
 	function onSubmit(): void {
-		const selection: ISelection = {
-			players, expansions, spirits, difficulty, maps, adversaries, scenarios,
-		};
 		dispatcher("selection", selection);
 	}
 </script>
@@ -104,7 +102,7 @@
 			let:item={map}
 			bind:model={maps}
 		>
-			{map.name} <DifficultyEmblem value={getDifficulty(map.difficulty, gameConfig)} />
+			{map.name} <DifficultyEmblem value={getDifficulty(map.difficulty, selection)} />
 		</CheckboxesField>
 	</FormField>
 
@@ -122,7 +120,7 @@
 			{#if entity.name}
 				{entity.name} <ExpansionEmblem value={entity.expansion} />
 			{:else}
-				Level {entity.level} <DifficultyEmblem value={getDifficulty(entity.difficulty, gameConfig)} />
+				Level {entity.level} <DifficultyEmblem value={getDifficulty(entity.difficulty, selection)} />
 			{/if}
 		</CheckboxesField>
 	</FormField>
