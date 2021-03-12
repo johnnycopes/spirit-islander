@@ -3,6 +3,7 @@
 	import Config from "@features/Config.svelte";
 	import Results from "@features/Results.svelte";
 	import type { IConfig } from "@models/config.interface";
+	import type { ICombo } from "@models/combo.interface";
 	import type { IInstructions } from "@models/instructions.interface";
 	import { createInstructions } from "@functions/create-instructions";
 
@@ -16,6 +17,7 @@
 		adversaries: ["No Adversary"],
 		scenarios: ["No Scenario"],
 	};
+	let validCombos: ICombo[] = [];
 	let instructions: IInstructions | undefined;
 </script>
 
@@ -28,14 +30,15 @@
 		<Config {...config}
 			on:submit={(e) => {
 				page = "Results";
-				config = e.detail;
-				instructions = createInstructions(config);
+				config = e.detail.config;
+				validCombos = e.detail.validCombos;
+				instructions = createInstructions(config, validCombos);
 			}}
 		/>
 	{:else if page === "Results" && instructions}
 		<Results {...instructions}
 			on:reset={() => page = "Config" }
-			on:generate={() => instructions = createInstructions(config) }
+			on:generate={() => instructions = createInstructions(config, validCombos) }
 		/>
 	{/if}
 </main>

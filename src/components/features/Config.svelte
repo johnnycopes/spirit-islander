@@ -7,6 +7,7 @@
 	import FormField from "@shared/FormField.svelte";
 	import Select from "@shared/Select.svelte";
 	import type { IConfig } from "@models/config.interface";
+	import type { ICombo } from "@models/combo.interface";
 	import type { Players } from "@models/game/players";
 	import type { Difficulty } from "@models/game/difficulty";
 	import type { MapName } from "@models/game/maps";
@@ -33,21 +34,25 @@
 	export let scenarios: ScenarioName[];
 	export let maps: MapName[];
 	const dispatcher = createEventDispatcher<{
-		submit: IConfig;
+		submit: {
+			config: IConfig,
+			validCombos: ICombo[],
+		}
 	}>();
 
 	let config: IConfig;
+	let validCombos: ICombo[];
 	$: { config = { players, expansions, difficulty, maps, spirits, adversaries, scenarios }};
-	$: validCombinations = getValidCombos(config);
+	$: { validCombos = getValidCombos(config) };
 	$: spiritsError = players > spirits.length;
 	$: mapsError = !maps.length;
 	$: scenariosError = !scenarios.length;
 	$: adversariesError = !adversaries.length;
-	$: difficultyError = !validCombinations.length;
+	$: difficultyError = !validCombos.length;
 	$: formDisabled = spiritsError || mapsError || scenariosError || adversariesError || difficultyError;
 
 	function onSubmit(): void {
-		dispatcher("submit", config);
+		dispatcher("submit", { config, validCombos });
 	}
 </script>
 
