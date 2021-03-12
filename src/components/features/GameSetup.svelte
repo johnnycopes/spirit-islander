@@ -21,7 +21,7 @@
 	export let expansions: ExpansionName[];
 	export let map: MapName;
 	export let adversary: IAdversaryLevel;
-	export let scenario: ScenarioName | undefined = undefined;
+	export let scenario: ScenarioName;
 
 	$: adversaryName = getAdversaryById(adversary.id);
 </script>
@@ -43,14 +43,18 @@
 	<tbody>
 		<tr>
 			<td>
-				Expansion
+				Expansions
 			</td>
 			<td>
-				<ul>
-					{#each expansions as expansion}
-						<li>{expansion}</li>
-					{/each}
-				</ul>
+				{#if !expansions.length}
+					No Expansions
+				{:else}
+					<ul>
+						{#each expansions as expansion}
+							<li>{expansion}</li>
+						{/each}
+					</ul>
+				{/if}
 			</td>
 		</tr>
 		<tr>
@@ -89,7 +93,7 @@
 				Scenario
 			</td>
 			<td>
-				{scenario || "None"}
+				{scenario}
 			</td>
 		</tr>
 	</tbody>

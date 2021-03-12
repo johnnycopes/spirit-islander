@@ -1,13 +1,14 @@
 <script lang="ts">
 	import { SPIRITS } from "@models/game/spirits";
 	import Config from "@features/Config.svelte";
-	import Results from "@features/Results.svelte";
+	import GameSetup from "@features/GameSetup.svelte";
 	import type { IConfig } from "@models/config.interface";
 	import type { ICombo } from "@models/combo.interface";
-	import type { IInstructions } from "@models/instructions.interface";
-	import { createInstructions } from "@functions/create-instructions";
+	import type { IGameSetup } from "@models/game-setup.interface";
+	import { EPage } from "@models/page.enum";
+	import { createGameSetup } from "@functions/create-game-setup";
 
-	let page: "Config" | "Results" = "Config";
+	let page: EPage = EPage.Config;
 	let config: IConfig = {
 		players: 1,
 		difficulty: 0,
@@ -17,8 +18,8 @@
 		adversaries: ["No Adversary"],
 		scenarios: ["No Scenario"],
 	};
-	let validCombos: ICombo[] = [];
-	let instructions: IInstructions | undefined;
+	let validCombos: ICombo[] | undefined;
+	let gameSetup: IGameSetup | undefined;
 </script>
 
 <main class="container">
@@ -26,19 +27,23 @@
 		<h1>Spirit Islander</h1>
 		<p>A setup generator for the board game Spirit Island</p>
 	</div>
-	{#if page === "Config"}
+	{#if page === EPage.Config}
 		<Config {...config}
 			on:submit={(e) => {
-				page = "Results";
+				page = EPage.GameSetup;
 				config = e.detail.config;
 				validCombos = e.detail.validCombos;
-				instructions = createInstructions(config, validCombos);
+				gameSetup = createGameSetup(config, validCombos);
 			}}
 		/>
-	{:else if page === "Results" && instructions}
-		<Results {...instructions}
-			on:reset={() => page = "Config" }
-			on:generate={() => instructions = createInstructions(config, validCombos) }
+	{:else if page === EPage.GameSetup && gameSetup && validCombos}
+		<GameSetup {...gameSetup}
+			on:reset={() => page = EPage.Config}
+			on:generate={() => {
+				if (validCombos) {
+					gameSetup = createGameSetup(config, validCombos);
+				}
+			}}
 		/>
 	{/if}
 </main>
