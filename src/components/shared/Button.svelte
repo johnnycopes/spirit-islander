@@ -20,7 +20,7 @@
 		border: 1px solid var(--gray);
 		border-radius: 4px;
 		background: var(--white);
-		color: var(--black);
+		color: var(--black-100);
 		font-family: var(--font);
 		outline: none;
 		font-size: 20px;
@@ -29,8 +29,8 @@
 		transition: 75ms background ease-in-out;
 	}
 	:global(.button:hover) {
-		background: var(--gold);
-		border-color: var(--dark-gold);
+		background: var(--gold-200);
+		border-color: var(--gold-100);
 	}
 	:global(.button:disabled) {
 		background: lightgray;

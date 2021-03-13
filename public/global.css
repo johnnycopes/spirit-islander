@@ -1,12 +1,11 @@
 :root {
-	--font: monospace;
-	--green: #09541f;
-	--gold: #f9ce2c;
-	--dark-gold: #b79106;
+	--font:  'Inconsolata', monospace;
 	--white: #fff;
-	--gray: #ccc;
-	--black: #292b2b;
-	--card-width: 160px;
+	--black-100: #292b2b;
+	--black-200: #343c3c;
+	--black-300: #767676;
+	--gold-100: #b79106;
+	--gold-200: #f9ce2c;
 }
 
 *, *::before, *::after {
@@ -19,10 +18,10 @@ html, body {
 }
 
 body {
-	background-color: var(--black);
+	background-color: var(--black-100);
 	color: var(--white);
 	font-family: var(--font);
-	font-weight: 500;
+	font-weight: 400;
 	font-size: 20px;
 	user-select: none;
 }

@@ -4,6 +4,7 @@
 	import CheckboxesField from "@shared/CheckboxesField.svelte";
 	import DifficultyEmblem from "@shared/DifficultyEmblem.svelte";
 	import ExpansionEmblem from "@shared/ExpansionEmblem.svelte";
+	import FormFieldset from "@shared/FormFieldset.svelte";
 	import FormField from "@shared/FormField.svelte";
 	import Select from "@shared/Select.svelte";
 	import type { IConfig } from "@models/config.interface";
@@ -57,122 +58,134 @@
 </script>
 
 <form class="form">
-	<FormField name="players">
-		<Select label="Number of players"
-			options={createArray(4)}
-			bind:value={players}
-		/>
-	</FormField>
-
-	<FormField name="expansions">
-		<CheckboxesField title="Expansions"
-			items={EXPANSIONS}
-			let:item={expansion}
-			bind:model={expansions}
-		>
-			{expansion}
-		</CheckboxesField>
-	</FormField>
-	<FormField name="spirits"
-		error={spiritsError}
-		errorMessage={`At least ${players} ${pluralize(players, "spirit")} must be selected`}
+	<FormFieldset name="Constants"
+		description="What are you playing with?"
 	>
-		<CheckboxesField title="Spirits"
-			items={filterExpansions(SPIRITS, expansions)}
-			getId={(spirit) => spirit.name}
-			bind:model={spirits}
-			let:item={spirit}
-		>
-			{spirit.name} <ExpansionEmblem value={spirit.expansion} />
-		</CheckboxesField>
-	</FormField>
+		<FormField name="players">
+			<Select label="Number of players"
+				options={createArray(4)}
+				bind:value={players}
+			/>
+		</FormField>
 
-	<FormField name="difficulty"
-		error={difficultyError}
-		errorMessage="Combination of selected maps, adversaries, and scenarios cannot make a game with level {difficulty} difficulty"
-	>
-		<Select label="Level of difficulty"
-			options={createArray(10, 0)}
-			bind:value={difficulty}
-		/>
-	</FormField>
-
-	<FormField name="maps"
-		error={mapsError}
-		errorMessage="At least 1 option must be selected"
-	>
-		<CheckboxesField title="Maps"
-			items={filterExpansions(MAPS, expansions)}
-			getId={(map) => map.name}
-			let:item={map}
-			bind:model={maps}
+		<FormField name="difficulty"
+			error={difficultyError}
+			errorMessage="Combination of selected maps, adversaries, and scenarios cannot make a game with level {difficulty} difficulty"
 		>
-			{map.name} <DifficultyEmblem value={getDifficulty(map.difficulty, config)} />
-		</CheckboxesField>
-	</FormField>
+			<Select label="Desired level of difficulty"
+				options={createArray(10, 0)}
+				bind:value={difficulty}
+			/>
+		</FormField>
+		
+		<FormField name="expansions">
+			<CheckboxesField title="Expansions"
+				items={EXPANSIONS}
+				let:item={expansion}
+				bind:model={expansions}
+			>
+				{expansion}
+			</CheckboxesField>
+		</FormField>
+	</FormFieldset>
 
-	<FormField name="adversaries"
-		error={adversariesError}
-		errorMessage="At least 1 option must be selected"
+	<FormFieldset name="Variables"
+		description="What are you open to playing with?"
 	>
-		<CheckboxesField title="Adversaries"
-			items={filterExpansions(ADVERSARIES, expansions)}
-			getId={(entity => entity.name || entity.id)}
-			getChildren={(entity) => entity.levels}
-			bind:model={adversaries}
-			let:item={entity}
+		<FormField name="spirits"
+			error={spiritsError}
+			errorMessage={`At least ${players} ${pluralize(players, "spirit")} must be selected`}
 		>
-			{#if entity.name}
-				{entity.name} <ExpansionEmblem value={entity.expansion} />
-			{:else}
-				Level {entity.level} <DifficultyEmblem value={getDifficulty(entity.difficulty, config)} />
-			{/if}
-		</CheckboxesField>
-	</FormField>
+			<CheckboxesField title="Spirits"
+				items={filterExpansions(SPIRITS, expansions)}
+				getId={(spirit) => spirit.name}
+				bind:model={spirits}
+				let:item={spirit}
+			>
+				{spirit.name} <ExpansionEmblem value={spirit.expansion} />
+			</CheckboxesField>
+		</FormField>
 
-	<FormField name="scenarios"
-		error={scenariosError}
-		errorMessage="At least 1 option must be selected"
-	>
-		<CheckboxesField title="Scenarios"
-			items={filterExpansions(SCENARIOS, expansions)}
-			getId={(scenario) => scenario.name}
-			let:item={scenario}
-			bind:model={scenarios}
+		<FormField name="maps"
+			error={mapsError}
+			errorMessage="At least 1 option must be selected"
 		>
-			{scenario.name}
-			<DifficultyEmblem value={scenario.difficulty} />
-			<ExpansionEmblem value={scenario.expansion} />
-		</CheckboxesField>
-	</FormField>
+			<CheckboxesField title="Maps"
+				items={filterExpansions(MAPS, expansions)}
+				getId={(map) => map.name}
+				let:item={map}
+				bind:model={maps}
+			>
+				{map.name} <DifficultyEmblem value={getDifficulty(map.difficulty, config)} />
+			</CheckboxesField>
+		</FormField>
+
+		<FormField name="adversaries"
+			error={adversariesError}
+			errorMessage="At least 1 option must be selected"
+		>
+			<CheckboxesField title="Adversaries"
+				items={filterExpansions(ADVERSARIES, expansions)}
+				getId={(entity => entity.name || entity.id)}
+				getChildren={(entity) => entity.levels}
+				bind:model={adversaries}
+				let:item={entity}
+			>
+				{#if entity.name}
+					{entity.name} <ExpansionEmblem value={entity.expansion} />
+				{:else}
+					Level {entity.level} <DifficultyEmblem value={getDifficulty(entity.difficulty, config)} />
+				{/if}
+			</CheckboxesField>
+		</FormField>
+	
+		<FormField name="scenarios"
+			error={scenariosError}
+			errorMessage="At least 1 option must be selected"
+		>
+			<CheckboxesField title="Scenarios"
+				items={filterExpansions(SCENARIOS, expansions)}
+				getId={(scenario) => scenario.name}
+				let:item={scenario}
+				bind:model={scenarios}
+			>
+				{scenario.name}
+				<DifficultyEmblem value={scenario.difficulty} />
+				<ExpansionEmblem value={scenario.expansion} />
+			</CheckboxesField>
+		</FormField>
+	</FormFieldset>
 
 	<Button on:clicked={onSubmit}
 		disabled={formDisabled}
 	>
-		Submit
+		Generate!
 	</Button>
 </form>
 
 
 <style>
 	.form {
-		display: grid;
-		grid-template-columns: 1fr 1fr;
-		grid-template-rows: auto;
+		display: flex;
+		flex-direction: column;
+	}
+
+	.form :global(.constants) {
 		grid-template-areas:
 			"players expansions"
+			"difficulty expansions"
+	}
+
+	.form :global(.variables) {
+		grid-template-areas:
 			"spirits spirits"
-			"difficulty maps"
+			"maps scenarios"
 			"adversaries adversaries"
-			"scenarios scenarios";
-		gap: 8px;
 	}
 
 	.form :global(.button) {
-		grid-column: 1 / -1;
-		justify-self: center;
+		margin: 0 auto;
 		width: 256px;
-		margin-top: 48px;
 	}
 
 	.form :global(.checkbox-label) {

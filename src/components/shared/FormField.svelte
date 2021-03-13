@@ -19,7 +19,7 @@
 <style>
 	:global(.form-field) {
 		padding: 16px;;
-		background: #343c3c;
+		background: var(--black-200);
 	}
 
 	:global(.form-field__header) {

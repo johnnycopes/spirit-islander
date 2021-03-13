@@ -12,8 +12,9 @@
 	:global(.difficulty-emblem) {
 		padding: 2px 8px;
 		font-size: 14px;
-		background: #767676;
+		background: var(--black-300);
 		border-radius: 4px;
+		font-weight: 700;
 	}
 
 	.value {
