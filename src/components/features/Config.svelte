@@ -4,8 +4,8 @@
 	import CheckboxesField from "@shared/CheckboxesField.svelte";
 	import DifficultyEmblem from "@shared/DifficultyEmblem.svelte";
 	import ExpansionEmblem from "@shared/ExpansionEmblem.svelte";
-	import FormFieldset from "@shared/FormFieldset.svelte";
-	import FormField from "@shared/FormField.svelte";
+	import Fieldset from "@shared/Fieldset.svelte";
+	import Field from "@shared/Field.svelte";
 	import Select from "@shared/Select.svelte";
 	import type { IConfig } from "@models/config.interface";
 	import type { ICombo } from "@models/combo.interface";
@@ -58,17 +58,17 @@
 </script>
 
 <form class="form">
-	<FormFieldset name="Constants"
+	<Fieldset name="Constants"
 		description="What are you playing with?"
 	>
-		<FormField name="players">
+		<Field name="players">
 			<Select label="Number of players"
 				options={createArray(4)}
 				bind:value={players}
 			/>
-		</FormField>
+		</Field>
 
-		<FormField name="difficulty"
+		<Field name="difficulty"
 			error={difficultyError}
 			errorMessage="Combination of selected maps, adversaries, and scenarios cannot make a game with level {difficulty} difficulty"
 		>
@@ -76,9 +76,9 @@
 				options={createArray(10, 0)}
 				bind:value={difficulty}
 			/>
-		</FormField>
+		</Field>
 		
-		<FormField name="expansions">
+		<Field name="expansions">
 			<CheckboxesField title="Expansions"
 				items={EXPANSIONS}
 				let:item={expansion}
@@ -86,13 +86,13 @@
 			>
 				{expansion}
 			</CheckboxesField>
-		</FormField>
-	</FormFieldset>
+		</Field>
+	</Fieldset>
 
-	<FormFieldset name="Variables"
+	<Fieldset name="Variables"
 		description="What are you open to playing with?"
 	>
-		<FormField name="spirits"
+		<Field name="spirits"
 			error={spiritsError}
 			errorMessage={`At least ${players} ${pluralize(players, "spirit")} must be selected`}
 		>
@@ -104,9 +104,9 @@
 			>
 				{spirit.name} <ExpansionEmblem value={spirit.expansion} />
 			</CheckboxesField>
-		</FormField>
+		</Field>
 
-		<FormField name="maps"
+		<Field name="maps"
 			error={mapsError}
 			errorMessage="At least 1 option must be selected"
 		>
@@ -118,9 +118,9 @@
 			>
 				{map.name} <DifficultyEmblem value={getDifficulty(map.difficulty, config)} />
 			</CheckboxesField>
-		</FormField>
+		</Field>
 
-		<FormField name="adversaries"
+		<Field name="adversaries"
 			error={adversariesError}
 			errorMessage="At least 1 option must be selected"
 		>
@@ -137,9 +137,9 @@
 					Level {entity.level} <DifficultyEmblem value={getDifficulty(entity.difficulty, config)} />
 				{/if}
 			</CheckboxesField>
-		</FormField>
+		</Field>
 	
-		<FormField name="scenarios"
+		<Field name="scenarios"
 			error={scenariosError}
 			errorMessage="At least 1 option must be selected"
 		>
@@ -153,8 +153,8 @@
 				<DifficultyEmblem value={scenario.difficulty} />
 				<ExpansionEmblem value={scenario.expansion} />
 			</CheckboxesField>
-		</FormField>
-	</FormFieldset>
+		</Field>
+	</Fieldset>
 
 	<Button on:clicked={onSubmit}
 		disabled={formDisabled}
