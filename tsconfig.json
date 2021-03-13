@@ -9,6 +9,7 @@
 		"strictNullChecks": true,
 		"baseUrl": ".",
 		"paths": {
+			"@data/*": ["src/data/*"],
 			"@models/*": ["src/models/*"],
 			"@functions/*": ["src/functions/*"],
 			"@features/*": ["src/components/features/*"],

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { SPIRITS } from "@models/game/spirits";
+	import { SPIRITS } from "@data/spirits";
 	import Config from "@features/Config.svelte";
 	import GameSetup from "@features/GameSetup.svelte";
 	import type { IConfig } from "@models/config.interface";

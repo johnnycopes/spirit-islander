@@ -6,6 +6,10 @@ import type { IAdversaryLevel } from "./game/adversaries";
 import type { ScenarioName } from "./game/scenarios";
 import type { MapName } from "./game/maps";
 
+/**
+ * Collection of options chosen before play that determine the
+ * necessary components when setting up a game of Spirit Island
+ */
 export interface IGameSetup {
 	players: Players;
 	difficulty: Difficulty;

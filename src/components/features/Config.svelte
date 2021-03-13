@@ -16,11 +16,11 @@
 	import type { SpiritName } from "@models/game/spirits";
 	import type { AdversaryName, AdversaryLevelId } from "@models/game/adversaries";
 	import type { ScenarioName } from "@models/game/scenarios";
-	import { SPIRITS } from "@models/game/spirits";
-	import { EXPANSIONS } from "@models/game/expansions";
-	import { MAPS } from "@models/game/maps";
-	import { ADVERSARIES } from "@models/game/adversaries";
-	import { SCENARIOS } from "@models/game/scenarios";
+	import { SPIRITS } from "@data/spirits";
+	import { EXPANSIONS } from "@data/expansions";
+	import { MAPS } from "@data/maps";
+	import { ADVERSARIES } from "@data/adversaries";
+	import { SCENARIOS } from "@data/scenarios";
 	import { createArray } from "@functions/utility/create-array";
 	import { filterExpansions } from "@functions/filter-expansions";
 	import { getDifficulty } from "@functions/get-difficulty";
@@ -58,7 +58,7 @@
 </script>
 
 <form class="form">
-	<Fieldset name="Constants"
+	<Fieldset name="You"
 		description="What are you playing with?"
 	>
 		<Field name="players">
@@ -89,7 +89,7 @@
 		</Field>
 	</Fieldset>
 
-	<Fieldset name="Variables"
+	<Fieldset name="The Game"
 		description="What are you open to playing with?"
 	>
 		<Field name="spirits"
@@ -170,13 +170,13 @@
 		flex-direction: column;
 	}
 
-	.form :global(.constants) {
+	.form :global(.you) {
 		grid-template-areas:
 			"players expansions"
 			"difficulty expansions"
 	}
 
-	.form :global(.variables) {
+	.form :global(.the-game) {
 		grid-template-areas:
 			"spirits spirits"
 			"maps scenarios"

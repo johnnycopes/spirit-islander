@@ -1,8 +1,11 @@
 import type { IDifficultyOption } from "@models/game/difficulty";
 import type { IConfig } from "@models/config.interface";
-import { ADVERSARIES, IAdversaryLevel } from "@models/game/adversaries";
-import { MAPS, IMap } from "@models/game/maps";
-import { SCENARIOS, IScenario } from "@models/game/scenarios";
+import type { IAdversaryLevel } from "@models/game/adversaries";
+import type { IMap } from "@models/game/maps";
+import type { IScenario } from "@models/game/scenarios";
+import { ADVERSARIES } from "@data/adversaries";
+import { MAPS } from "@data/maps";
+import { SCENARIOS } from "@data/scenarios";
 import { getDifficulty } from "./get-difficulty";
 import { ComboAnalyzer } from "./utility/combo-analyzer";
 

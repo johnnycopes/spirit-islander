@@ -1,8 +1,10 @@
 <script lang="ts">
+	import { snakeCase } from "@functions/utility/snake-case";
+
 	export let name: string = "";
 	export let description: string = "";
 
-	$: className = name.toLowerCase();
+	$: className = snakeCase(name);
 </script>
 
 <div class="legend">
@@ -30,5 +32,6 @@
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
+		margin-bottom: 16px;
 	}
 </style>

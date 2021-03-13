@@ -8,10 +8,3 @@ export type ExpansionName =
 export interface IExpansionOption {
 	expansion?: ExpansionName;
 }
-
-export const EXPANSIONS: ExpansionName[] = [
-	"Branch & Claw",
-	"Jagged Earth",
-	"Promo Pack 1",
-	"Promo Pack 2"
-];
