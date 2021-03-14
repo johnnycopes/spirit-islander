@@ -25,7 +25,7 @@
 	<slot></slot>
 </label>
 
-<style>
+<style style="scss">
 	:global(.checkbox-label--disabled) {
 		font-style: italic;
 		color: darkgray;

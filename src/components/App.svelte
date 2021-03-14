@@ -53,7 +53,7 @@
 	{/if}
 </main>
 
-<style>
+<style lang="scss">
 	.container {
 		margin: 0 auto;
 		padding: 32px 0;

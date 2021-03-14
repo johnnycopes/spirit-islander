@@ -21,7 +21,7 @@
 	{/each}
 </select>
 
-<style>
+<style lang="scss">
 	select {
 		font-family: var(--font);
 		width: 64px;

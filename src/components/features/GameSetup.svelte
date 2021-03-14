@@ -99,7 +99,7 @@
 	</tbody>
 </table>
 
-<style>
+<style lang="scss">
 	table {
 		width: 100%;
 		border-collapse: collapse;

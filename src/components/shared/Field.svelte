@@ -16,22 +16,18 @@
 	{/if}
 </div>
 
-<style>
+<style lang="scss">
 	:global(.form-field) {
 		padding: 16px;;
 		background: var(--black-200);
-	}
-
-	:global(.form-field__header) {
-		margin-bottom: 8px;
 	}
 
 	.error {
 		display: inline-block;
 		margin-top: 8px;
 		padding: 8px 16px;
-		background: hsl(3deg 90% 82%);
-		color: hsl(3deg 90% 37%);
+		background: var(--red-200);
+		color: var(--red-100);
 		font-weight: bold;
 		font-size: 16px;
 	}

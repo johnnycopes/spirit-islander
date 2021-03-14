@@ -123,7 +123,6 @@
 			>
 				{spirit.name} <ExpansionEmblem value={spirit.expansion} />
 			</CheckboxesField>
-			{spirits}
 		</Field>
 
 		<Field name="maps"
@@ -183,51 +182,51 @@
 	</Button>
 </form>
 
-<style>
+<style lang="scss">
 	.form {
 		display: flex;
 		flex-direction: column;
-	}
 
-	.form :global(.you) {
-		grid-template-areas:
-			"players expansions"
-			"difficulty expansions"
-	}
+		& :global(.you) {
+			grid-template-areas:
+				"players expansions"
+				"difficulty expansions"
+		}
 
-	.form :global(.the-game) {
-		grid-template-areas:
-			"spirits spirits"
-			"maps scenarios"
-			"adversaries adversaries"
-	}
+		& :global(.the-game) {
+			grid-template-areas:
+				"spirits spirits"
+				"maps scenarios"
+				"adversaries adversaries"
+		}
 
-	.form :global(.button) {
-		margin: 0 auto;
-		width: 256px;
-	}
+		& :global(.button) {
+			margin: 0 auto;
+			width: 256px;
+		}
 
-	.form :global(.checkbox-label) {
-		display: inline-flex;
-		align-items: center;
-	}
+		& :global(.checkbox-label) {
+			display: inline-flex;
+			align-items: center;
+		}
 
-	.form :global(.spirits) :global(.checkboxes-level-1),
-	.form :global(.adversaries) :global(.checkboxes-level-1) {
-		display: flex;
-		flex-wrap: wrap;
-	}
+		& :global(.spirits) :global(.checkboxes-level-1),
+		& :global(.adversaries) :global(.checkboxes-level-1) {
+			display: flex;
+			flex-wrap: wrap;
+		}
 
-	.form :global(.spirits) :global(.checkbox-item-level-1) {
-		flex: 1 0 50%;
-	}
+		& :global(.spirits) :global(.checkbox-item-level-1) {
+			flex: 1 0 50%;
+		}
 
-	.form :global(.adversaries) :global(.checkbox-item-level-1) {
-		flex: 1 0 auto;
-	}
+		& :global(.adversaries) :global(.checkbox-item-level-1) {
+			flex: 1 0 auto;
+		}
 
-	.form :global(.difficulty-emblem),
-	.form :global(.expansion-emblem) {
-		margin-left: 8px;
+		& :global(.difficulty-emblem),
+		& :global(.expansion-emblem) {
+			margin-left: 8px;
+		}
 	}
 </style>

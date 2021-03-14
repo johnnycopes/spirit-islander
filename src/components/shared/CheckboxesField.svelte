@@ -56,14 +56,14 @@
 	<slot {item}></slot>
 </Checkboxes>
 
-<style>
+<style lang="scss">
 	.header {
 		margin-bottom: 8px;
 		padding-bottom: 4px;
 		border-bottom: 1px solid darkgray;
-	}
 
-	.header :global(.checkbox-label) {
-		font-weight: 700;
+		& :global(.checkbox-label) {
+			font-weight: 700;
+		}
 	}
 </style>

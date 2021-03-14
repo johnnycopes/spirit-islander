@@ -94,12 +94,12 @@
 	{/each}
 </ul>
 
-<style>
-	ul {
+<style style="scss">
+	.checkboxes {
 		margin-top: 4px;
 	}
 	
-	li {
+	.checkboxes-item {
 		margin-bottom: 4px;
 	}
 </style>

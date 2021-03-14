@@ -26,7 +26,7 @@
 	</div>
 {/if}
 
-<style>
+<style style="scss">
 	:global(.expansion-emblem) {
 		padding: 2px 8px;
 		font-size: 14px;

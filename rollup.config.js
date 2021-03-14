@@ -3,11 +3,12 @@ import commonjs from '@rollup/plugin-commonjs';
 import resolve from '@rollup/plugin-node-resolve';
 import livereload from 'rollup-plugin-livereload';
 import { terser } from 'rollup-plugin-terser';
-import sveltePreprocess from 'svelte-preprocess';
+import preprocess from 'svelte-preprocess';
 import typescript from '@rollup/plugin-typescript';
 import css from 'rollup-plugin-css-only';
 import alias from '@rollup/plugin-alias';
 import path from 'path'
+// import preprocess from 'svelte/types/compiler/preprocess';
 
 const production = !process.env.ROLLUP_WATCH;
 const projectRootDir = path.resolve(__dirname);
@@ -43,7 +44,12 @@ export default {
 	},
 	plugins: [
 		svelte({
-			preprocess: sveltePreprocess({ sourceMap: !production }),
+			preprocess: preprocess({
+				sourceMap: !production,
+				scss: {
+					includePaths: ['src']
+				},
+			}),
 			compilerOptions: {
 				// enable run-time checks when not in production
 				dev: !production

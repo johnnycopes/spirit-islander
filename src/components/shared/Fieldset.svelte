@@ -19,7 +19,7 @@
 	<slot></slot>
 </div>
 
-<style>
+<style style="scss">
 	:global(.form-fieldset) {
 		display: grid;
 		grid-template-columns: 1fr 1fr;
