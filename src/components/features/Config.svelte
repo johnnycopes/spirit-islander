@@ -22,10 +22,16 @@
 	import { ADVERSARIES } from "@data/adversaries";
 	import { SCENARIOS } from "@data/scenarios";
 	import { createArray } from "@functions/utility/create-array";
-	import { filterExpansions } from "@functions/filter-expansions";
+	import { getItems } from "@functions/get-items";
 	import { getDifficulty } from "@functions/get-difficulty";
 	import { getValidCombos } from "@functions/get-valid-combos";
 	import { pluralize } from "@functions/utility/pluralize";
+	import {
+		createAdversariesModel,
+		createMapsModel,
+		createScenariosModel,
+		createSpiritsModel
+	} from "@functions/create-model";
 
 	export let players: Players;
 	export let difficulty: Difficulty;
@@ -52,8 +58,47 @@
 	$: difficultyError = !validCombos.length;
 	$: formDisabled = spiritsError || mapsError || scenariosError || adversariesError || difficultyError;
 
+	// When expansions are selected, update models to include items from selected expansions
+	$: {
+		updateModels(expansions);
+	}
+
 	function onSubmit(): void {
 		dispatcher("submit", { config, validCombos });
+	}
+
+	function updateModels(expansions: ExpansionName[]): void {
+		const baseSpirits = createSpiritsModel();
+		const expansionSpirits = createSpiritsModel(expansions)
+			.filter(spirit => !baseSpirits.includes(spirit));
+		spirits = [
+			...spirits.filter(spirit => baseSpirits.includes(spirit)),
+			...expansionSpirits
+		];
+
+		const baseMaps = createMapsModel();
+		const expansionMaps = createMapsModel(expansions)
+			.filter(map => !baseMaps.includes(map));
+		maps = [
+			...maps.filter(map => baseMaps.includes(map)),
+			...expansionMaps
+		];
+
+		const baseScenarios = createScenariosModel();
+		const expansionScenarios = createScenariosModel(expansions)
+			.filter(scenario => !baseScenarios.includes(scenario));
+		scenarios = [
+			...scenarios.filter(scenario => baseScenarios.includes(scenario)),
+			...expansionScenarios
+		];
+
+		const baseAdversaries = createAdversariesModel();
+		const expansionAdversaries = createAdversariesModel(expansions)
+			.filter(adversary => !baseAdversaries.includes(adversary));
+		adversaries = [
+			...adversaries.filter(adversary => baseAdversaries.includes(adversary)),
+			...expansionAdversaries
+		];
 	}
 </script>
 
@@ -73,7 +118,7 @@
 			errorMessage="Combination of selected maps, adversaries, and scenarios cannot make a game with level {difficulty} difficulty"
 		>
 			<Select label="Desired level of difficulty"
-				options={createArray(10, 0)}
+				options={createArray(11, 0)}
 				bind:value={difficulty}
 			/>
 		</Field>
@@ -97,13 +142,14 @@
 			errorMessage={`At least ${players} ${pluralize(players, "spirit")} must be selected`}
 		>
 			<CheckboxesField title="Spirits"
-				items={filterExpansions(SPIRITS, expansions)}
+				items={getItems(SPIRITS, expansions)}
 				getId={(spirit) => spirit.name}
 				bind:model={spirits}
 				let:item={spirit}
 			>
 				{spirit.name} <ExpansionEmblem value={spirit.expansion} />
 			</CheckboxesField>
+			{spirits}
 		</Field>
 
 		<Field name="maps"
@@ -111,7 +157,7 @@
 			errorMessage="At least 1 option must be selected"
 		>
 			<CheckboxesField title="Maps"
-				items={filterExpansions(MAPS, expansions)}
+				items={getItems(MAPS, expansions)}
 				getId={(map) => map.name}
 				let:item={map}
 				bind:model={maps}
@@ -125,7 +171,7 @@
 			errorMessage="At least 1 option must be selected"
 		>
 			<CheckboxesField title="Adversaries"
-				items={filterExpansions(ADVERSARIES, expansions)}
+				items={getItems(ADVERSARIES, expansions)}
 				getId={(entity => entity.name || entity.id)}
 				getChildren={(entity) => entity.levels}
 				bind:model={adversaries}
@@ -144,7 +190,7 @@
 			errorMessage="At least 1 option must be selected"
 		>
 			<CheckboxesField title="Scenarios"
-				items={filterExpansions(SCENARIOS, expansions)}
+				items={getItems(SCENARIOS, expansions)}
 				getId={(scenario) => scenario.name}
 				let:item={scenario}
 				bind:model={scenarios}
