@@ -31,6 +31,20 @@ export function createAdversariesModel(expansions: ExpansionName[] = []): (Adver
 	}, [] as (AdversaryName | AdversaryLevelId)[])
 }
 
+export function createUpdatedModel<T>(
+	createModel: (expansions?: ExpansionName[]) => T[],
+	existingModel: T[],
+	expansions: ExpansionName[],
+): T[] {
+	const baseItems = createModel();
+	const expansionItems = createModel(expansions)
+		.filter(item => !baseItems.includes(item));
+	return [
+		...existingModel.filter(item => baseItems.includes(item)),
+		...expansionItems
+	];
+}
+
 interface INameOption<T> {
 	name: T;
 }

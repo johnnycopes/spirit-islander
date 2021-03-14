@@ -30,7 +30,8 @@
 		createAdversariesModel,
 		createMapsModel,
 		createScenariosModel,
-		createSpiritsModel
+		createSpiritsModel,
+		createUpdatedModel,
 	} from "@functions/create-model";
 
 	export let players: Players;
@@ -68,37 +69,10 @@
 	}
 
 	function updateModels(expansions: ExpansionName[]): void {
-		const baseSpirits = createSpiritsModel();
-		const expansionSpirits = createSpiritsModel(expansions)
-			.filter(spirit => !baseSpirits.includes(spirit));
-		spirits = [
-			...spirits.filter(spirit => baseSpirits.includes(spirit)),
-			...expansionSpirits
-		];
-
-		const baseMaps = createMapsModel();
-		const expansionMaps = createMapsModel(expansions)
-			.filter(map => !baseMaps.includes(map));
-		maps = [
-			...maps.filter(map => baseMaps.includes(map)),
-			...expansionMaps
-		];
-
-		const baseScenarios = createScenariosModel();
-		const expansionScenarios = createScenariosModel(expansions)
-			.filter(scenario => !baseScenarios.includes(scenario));
-		scenarios = [
-			...scenarios.filter(scenario => baseScenarios.includes(scenario)),
-			...expansionScenarios
-		];
-
-		const baseAdversaries = createAdversariesModel();
-		const expansionAdversaries = createAdversariesModel(expansions)
-			.filter(adversary => !baseAdversaries.includes(adversary));
-		adversaries = [
-			...adversaries.filter(adversary => baseAdversaries.includes(adversary)),
-			...expansionAdversaries
-		];
+		spirits = createUpdatedModel(createSpiritsModel, spirits, expansions);
+		maps = createUpdatedModel(createMapsModel, maps, expansions);
+		scenarios = createUpdatedModel(createScenariosModel, scenarios, expansions);
+		adversaries = createUpdatedModel(createAdversariesModel, adversaries, expansions);
 	}
 </script>
 
@@ -208,7 +182,6 @@
 		Generate!
 	</Button>
 </form>
-
 
 <style>
 	.form {
