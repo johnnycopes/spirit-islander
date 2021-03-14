@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { SPIRITS } from "@data/spirits";
 	import Config from "@features/Config.svelte";
 	import GameSetup from "@features/GameSetup.svelte";
 	import type { IConfig } from "@models/config.interface";
@@ -7,16 +6,22 @@
 	import type { IGameSetup } from "@models/game-setup.interface";
 	import { EPage } from "@models/page.enum";
 	import { createGameSetup } from "@functions/create-game-setup";
+	import { 
+		createMapsModel,
+		createScenariosModel,
+		createSpiritsModel,
+		createAdversariesModel
+	} from "@functions/create-model";
 
 	let page: EPage = EPage.Config;
 	let config: IConfig = {
 		players: 1,
 		difficulty: 0,
-		maps: ["Balanced"],
 		expansions: [],
-		spirits: SPIRITS.map(spirit => spirit.name),
-		adversaries: ["No Adversary"],
-		scenarios: ["No Scenario"],
+		maps: createMapsModel(),
+		spirits: createSpiritsModel(),
+		adversaries: createAdversariesModel(),
+		scenarios: createScenariosModel(),
 	};
 	let validCombos: ICombo[] | undefined;
 	let gameSetup: IGameSetup | undefined;
