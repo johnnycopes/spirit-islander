@@ -34,7 +34,7 @@
 	</div>
 	{#if page === EPage.Config}
 		<Config {...config}
-			on:submit={(e) => {
+			on:generate={(e) => {
 				page = EPage.GameSetup;
 				config = e.detail.config;
 				validCombos = e.detail.validCombos;

@@ -77,6 +77,7 @@ export default {
 			resolve: ['.ts', '.svelte'],
 			entries: [
 				{ find: '@data', replacement: path.resolve(projectRootDir, 'src/data') },
+				{ find: '@debugging', replacement: path.resolve(projectRootDir, 'src/debugging') },
 				{ find: '@models', replacement: path.resolve(projectRootDir, 'src/models') },
 				{ find: '@functions', replacement: path.resolve(projectRootDir, 'src/functions')},
 				{ find: '@features', replacement: path.resolve(projectRootDir, 'src/components/features') },

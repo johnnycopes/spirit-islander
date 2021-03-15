@@ -10,6 +10,7 @@
 		"baseUrl": ".",
 		"paths": {
 			"@data/*": ["src/data/*"],
+			"@debugging/*": ["src/debugging/*"],
 			"@models/*": ["src/models/*"],
 			"@functions/*": ["src/functions/*"],
 			"@features/*": ["src/components/features/*"],

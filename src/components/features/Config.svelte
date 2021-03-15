@@ -42,7 +42,7 @@
 	export let scenarios: ScenarioName[];
 	export let maps: MapName[];
 	const dispatcher = createEventDispatcher<{
-		submit: {
+		generate: {
 			config: IConfig,
 			validCombos: ICombo[],
 		}
@@ -65,7 +65,7 @@
 	}
 
 	function onSubmit(): void {
-		dispatcher("submit", { config, validCombos });
+		dispatcher("generate", { config, validCombos });
 	}
 
 	function updateModels(expansions: ExpansionName[]): void {
