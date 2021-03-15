@@ -7,7 +7,7 @@ import type { ExpansionName, IExpansionOption } from "@models/game/expansions";
 import type { MapName } from "@models/game/maps";
 import type { ScenarioName } from "@models/game/scenarios";
 import type { SpiritName } from "@models/game/spirits";
-import { getItems } from "./get-items";
+import { getOptions } from "./get-options";
 
 export function createSpiritsModel(expansions: ExpansionName[] = []): SpiritName[] {
 	return createModel(SPIRITS, expansions);
@@ -22,7 +22,7 @@ export function createScenariosModel(expansions: ExpansionName[] = []): Scenario
 }
 
 export function createAdversariesModel(expansions: ExpansionName[] = []): (AdversaryName | AdversaryLevelId)[] {
-	return getItems(ADVERSARIES, expansions).reduce((adversaries, adversary) => {
+	return getOptions(ADVERSARIES, expansions).reduce((adversaries, adversary) => {
 		adversaries.push(adversary.name);
 		adversary.levels.forEach(level => {
 			adversaries.push(level.id);
@@ -52,5 +52,5 @@ interface INameOption<T> {
 interface IOption<TName> extends INameOption<TName>, IExpansionOption { }
 
 function createModel<TName>(options: IOption<TName>[], expansions: ExpansionName[]): TName[] {
-	return getItems(options, expansions).map(option => option.name);
+	return getOptions(options, expansions).map(option => option.name);
 }

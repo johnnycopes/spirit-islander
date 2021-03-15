@@ -1,7 +1,7 @@
 <script type="ts">
 	import Checkbox from "./Checkbox.svelte"
 	import Checkboxes from "./Checkboxes.svelte";
-	import { getItemsRecursively } from "@functions/utility/get-values-recursively";
+	import { getItemsRecursively } from "@functions/utility/get-items-recursively";
 
 	export let title: string;
 	export let items: any[];

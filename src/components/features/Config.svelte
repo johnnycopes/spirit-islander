@@ -22,7 +22,7 @@
 	import { ADVERSARIES } from "@data/adversaries";
 	import { SCENARIOS } from "@data/scenarios";
 	import { createArray } from "@functions/utility/create-array";
-	import { getItems } from "@functions/get-items";
+	import { getOptions } from "@functions/get-options";
 	import { getDifficulty } from "@functions/get-difficulty";
 	import { getValidCombos } from "@functions/get-valid-combos";
 	import { pluralize } from "@functions/utility/pluralize";
@@ -116,7 +116,7 @@
 			errorMessage={`At least ${players} ${pluralize(players, "spirit")} must be selected`}
 		>
 			<CheckboxesField title="Spirits"
-				items={getItems(SPIRITS, expansions)}
+				items={getOptions(SPIRITS, expansions)}
 				getId={(spirit) => spirit.name}
 				bind:model={spirits}
 				let:item={spirit}
@@ -130,7 +130,7 @@
 			errorMessage="At least 1 option must be selected"
 		>
 			<CheckboxesField title="Maps"
-				items={getItems(MAPS, expansions)}
+				items={getOptions(MAPS, expansions)}
 				getId={(map) => map.name}
 				let:item={map}
 				bind:model={maps}
@@ -144,7 +144,7 @@
 			errorMessage="At least 1 option must be selected"
 		>
 			<CheckboxesField title="Adversaries"
-				items={getItems(ADVERSARIES, expansions)}
+				items={getOptions(ADVERSARIES, expansions)}
 				getId={(entity => entity.name || entity.id)}
 				getChildren={(entity) => entity.levels}
 				bind:model={adversaries}
@@ -163,7 +163,7 @@
 			errorMessage="At least 1 option must be selected"
 		>
 			<CheckboxesField title="Scenarios"
-				items={getItems(SCENARIOS, expansions)}
+				items={getOptions(SCENARIOS, expansions)}
 				getId={(scenario) => scenario.name}
 				let:item={scenario}
 				bind:model={scenarios}
