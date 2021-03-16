@@ -6,7 +6,7 @@
 	import ExpansionEmblem from "@shared/ExpansionEmblem.svelte";
 	import Fieldset from "@shared/Fieldset.svelte";
 	import Field from "@shared/Field.svelte";
-	import Select from "@shared/Select.svelte";
+	import SelectField from "@shared/SelectField.svelte";
 	import type { IConfig } from "@models/config.interface";
 	import type { ICombo } from "@models/combo.interface";
 	import type { Players } from "@models/game/players";
@@ -81,7 +81,7 @@
 		description="What are you playing with?"
 	>
 		<Field name="players">
-			<Select label="Players"
+			<SelectField label="Players"
 				options={createArray(4)}
 				bind:value={players}
 			/>
@@ -91,7 +91,7 @@
 			error={difficultyError}
 			errorMessage="Combination of selected maps, adversaries, and scenarios cannot make a game with level {difficulty} difficulty"
 		>
-			<Select label="Difficulty"
+			<SelectField label="Difficulty"
 				options={createArray(11, 0)}
 				bind:value={difficulty}
 			/>
@@ -187,46 +187,41 @@
 		display: flex;
 		flex-direction: column;
 
-		& :global(.you) {
+		:global(.you) {
 			grid-template-areas:
 				"players difficulty expansions expansions";
 		}
 
-		& :global(.the-game) {
+		:global(.the-game) {
 			grid-template-areas:
 				"spirits spirits spirits spirits"
 				"maps maps scenarios scenarios"
 				"adversaries adversaries adversaries adversaries"
 		}
 
-		& :global(.button) {
+		:global(.button) {
 			margin: 0 auto;
 			width: 256px;
 		}
 
-		& :global(.checkbox-label) {
-			display: inline-flex;
-			align-items: center;
-		}
-
-		& :global(.expansions) :global(.checkboxes-level-1),
-		& :global(.spirits) :global(.checkboxes-level-1),
-		& :global(.adversaries) :global(.checkboxes-level-1) {
+		:global(.expansions) :global(.checkboxes-level-1),
+		:global(.spirits) :global(.checkboxes-level-1),
+		:global(.adversaries) :global(.checkboxes-level-1) {
 			display: flex;
 			flex-wrap: wrap;
 		}
 
-		& :global(.expansions) :global(.checkbox-item-level-1),
-		& :global(.spirits) :global(.checkbox-item-level-1) {
+		:global(.expansions) :global(.checkbox-item-level-1),
+		:global(.spirits) :global(.checkbox-item-level-1) {
 			flex: 1 0 50%;
 		}
 
-		& :global(.adversaries) :global(.checkbox-item-level-1) {
+		:global(.adversaries) :global(.checkbox-item-level-1) {
 			flex: 1 0 auto;
 		}
 
-		& :global(.difficulty-emblem),
-		& :global(.expansion-emblem) {
+		:global(.difficulty-emblem),
+		:global(.expansion-emblem) {
 			margin-left: 8px;
 		}
 	}

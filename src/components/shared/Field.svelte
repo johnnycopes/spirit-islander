@@ -10,7 +10,7 @@
 	<slot></slot>
 
 	{#if error}
-		<p class="error">
+		<p class="field-error">
 			{errorMessage}
 		</p>
 	{/if}
@@ -23,7 +23,13 @@
 		background: var(--gray-200);
 	}
 
-	.error {
+	:global(.field-header) {
+		padding: 8px 16px;
+		background: var(--gray-300);
+		font-weight: 700;
+	}
+
+	:global(.field-error) {
 		display: inline-block;
 		align-self: flex-start;
 		margin: 4px 16px 16px;

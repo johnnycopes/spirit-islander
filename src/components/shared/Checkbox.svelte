@@ -32,6 +32,8 @@
 <style lang="scss">
 
 	:global(.checkbox-label) {
+		display: inline-flex;
+		align-items: center;
 		padding-left: 30px;
 	}
 	

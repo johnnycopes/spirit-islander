@@ -99,10 +99,6 @@
 	.checkboxes {
 		margin-top: 4px;
 	}
-
-	:global(.checkboxes-level-1) {
-		padding: 8px 16px;
-	}
 	
 	.checkboxes-item {
 		margin-bottom: 4px;

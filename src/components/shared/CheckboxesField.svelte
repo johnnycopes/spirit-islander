@@ -32,7 +32,7 @@
 	}
 </script>
 
-<p class="header">
+<div class="field-header">
 	<Checkbox
 		id={title}
 		checked={headerChecked}
@@ -42,7 +42,7 @@
 	>
 		{title}
 	</Checkbox>
-</p>
+</div>
 
 <Checkboxes
 	{items}
@@ -57,12 +57,7 @@
 </Checkboxes>
 
 <style lang="scss">
-	.header {
+	:global(.checkboxes-level-1) {
 		padding: 8px 16px;
-		background: var(--gray-300);
-
-		& :global(.checkbox-label) {
-			font-weight: 700;
-		}
 	}
 </style>

@@ -7,9 +7,12 @@
 	$: id = snakeCase(label);
 </script>
 
-<label for={id}>
-	{label}
-</label>
+<div class="field-header">
+	<label for={id}>
+		{label}
+	</label>
+</div>
+
 <select {id}
 	name="players"
 	bind:value={value}
@@ -22,12 +25,6 @@
 </select>
 
 <style lang="scss">
-	label {
-		padding: 8px 16px;
-		background: var(--gray-300);
-		font-weight: 700;
-	}
-
 	select {
 		width: 64px;
 		margin: 16px;
