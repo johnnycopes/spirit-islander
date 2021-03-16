@@ -22,7 +22,7 @@
 <style style="scss">
 	:global(.form-fieldset) {
 		display: grid;
-		grid-template-columns: 1fr 1fr;
+		grid-template-columns: repeat(4, 1fr);
 		grid-template-rows: auto;
 		gap: 8px;
 		margin-bottom: 48px;

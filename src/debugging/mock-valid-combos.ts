@@ -1,4 +1,6 @@
-export const MOCK_VALID_COMBOS = [
+import type { ICombo } from "@models/combo.interface";
+
+export const MOCK_VALID_COMBOS: ICombo[] = [
 	[
 		{
 			"name": "Balanced",
@@ -106,7 +108,8 @@ export const MOCK_VALID_COMBOS = [
 	],
 	[
 		{
-			"name": "Thematic"
+			"name": "Thematic",
+			"difficulty": 3,
 		},
 		{
 			"id": "none",
@@ -120,7 +123,8 @@ export const MOCK_VALID_COMBOS = [
 	],
 	[
 		{
-			"name": "Thematic"
+			"name": "Thematic",
+			"difficulty": 3,
 		},
 		{
 			"id": "none",
@@ -134,7 +138,8 @@ export const MOCK_VALID_COMBOS = [
 	],
 	[
 		{
-			"name": "Thematic"
+			"name": "Thematic",
+			"difficulty": 3,
 		},
 		{
 			"id": "none",

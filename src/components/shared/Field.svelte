@@ -4,7 +4,7 @@
 	export let errorMessage: string = "";
 </script>
 
-<div class="form-field {name}"
+<div class="field {name}"
 	style="grid-area: {name}"
 >
 	<slot></slot>
@@ -17,14 +17,16 @@
 </div>
 
 <style lang="scss">
-	:global(.form-field) {
-		padding: 16px;;
-		background: var(--black-200);
+	:global(.field) {
+		display: flex;
+		flex-direction: column;
+		background: var(--gray-200);
 	}
 
 	.error {
 		display: inline-block;
-		margin-top: 8px;
+		align-self: flex-start;
+		margin: 4px 16px 16px;
 		padding: 8px 16px;
 		background: var(--red-200);
 		color: var(--red-100);

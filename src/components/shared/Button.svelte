@@ -20,7 +20,7 @@
 		border: 1px solid var(--gray);
 		border-radius: 4px;
 		background: var(--white);
-		color: var(--black-100);
+		color: var(--gray-100);
 		font-family: var(--font);
 		outline: none;
 		font-size: 20px;

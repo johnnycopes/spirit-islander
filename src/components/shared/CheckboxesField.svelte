@@ -58,9 +58,8 @@
 
 <style lang="scss">
 	.header {
-		margin-bottom: 8px;
-		padding-bottom: 4px;
-		border-bottom: 1px solid darkgray;
+		padding: 8px 16px;
+		background: var(--gray-300);
 
 		& :global(.checkbox-label) {
 			font-weight: 700;

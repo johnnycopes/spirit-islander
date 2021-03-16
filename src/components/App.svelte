@@ -12,6 +12,14 @@
 		createSpiritsModel,
 		createAdversariesModel
 	} from "@functions/create-model";
+	// import { MOCK_CONFIG } from "@debugging/mock-config";
+	// import { MOCK_VALID_COMBOS } from "@debugging/mock-valid-combos";
+	// import { MOCK_GAME_SETUP } from "@debugging/mock-game-setup";
+
+	// 	let page: EPage = EPage.GameSetup;
+	// 	let config: IConfig = MOCK_CONFIG;
+	// 	let validCombos: ICombo[] | undefined = MOCK_VALID_COMBOS;
+	// 	let gameSetup: IGameSetup | undefined = MOCK_GAME_SETUP;
 
 	let page: EPage = EPage.Config;
 	let config: IConfig = {

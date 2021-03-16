@@ -30,7 +30,7 @@
 	:global(.expansion-emblem) {
 		padding: 2px 8px;
 		font-size: 14px;
-		background: var(--black-300);
+		background: var(--gray-400);
 		text-transform: uppercase;
 		border-radius: 4px;
 		font-weight: 700;

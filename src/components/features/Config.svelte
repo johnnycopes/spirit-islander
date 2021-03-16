@@ -81,7 +81,7 @@
 		description="What are you playing with?"
 	>
 		<Field name="players">
-			<Select label="Number of players"
+			<Select label="Players"
 				options={createArray(4)}
 				bind:value={players}
 			/>
@@ -91,7 +91,7 @@
 			error={difficultyError}
 			errorMessage="Combination of selected maps, adversaries, and scenarios cannot make a game with level {difficulty} difficulty"
 		>
-			<Select label="Desired level of difficulty"
+			<Select label="Difficulty"
 				options={createArray(11, 0)}
 				bind:value={difficulty}
 			/>
@@ -189,15 +189,14 @@
 
 		& :global(.you) {
 			grid-template-areas:
-				"players expansions"
-				"difficulty expansions"
+				"players difficulty expansions expansions";
 		}
 
 		& :global(.the-game) {
 			grid-template-areas:
-				"spirits spirits"
-				"maps scenarios"
-				"adversaries adversaries"
+				"spirits spirits spirits spirits"
+				"maps maps scenarios scenarios"
+				"adversaries adversaries adversaries adversaries"
 		}
 
 		& :global(.button) {
@@ -210,12 +209,14 @@
 			align-items: center;
 		}
 
+		& :global(.expansions) :global(.checkboxes-level-1),
 		& :global(.spirits) :global(.checkboxes-level-1),
 		& :global(.adversaries) :global(.checkboxes-level-1) {
 			display: flex;
 			flex-wrap: wrap;
 		}
 
+		& :global(.expansions) :global(.checkbox-item-level-1),
 		& :global(.spirits) :global(.checkbox-item-level-1) {
 			flex: 1 0 50%;
 		}
