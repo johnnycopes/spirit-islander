@@ -11,23 +11,88 @@
 	}>();
 </script>
 
-<input id={snakeCase(id)}
-	type="checkbox"
-	bind:checked={checked}
-	{indeterminate}
-	{disabled}
-	on:change={_ => dispatcher("change", checked)}
-/>
-<label for={snakeCase(id)}
-	class="checkbox-label"
-	class:checkbox-label--disabled={disabled}
+<label class="container"
+	for={snakeCase(id)}
 >
-	<slot></slot>
+	<input id={snakeCase(id)}
+		type="checkbox"
+		bind:checked={checked}
+		{indeterminate}
+		{disabled}
+		on:change={_ => dispatcher("change", checked)}
+	/>
+	<div class="checkbox"></div>
+	<div class="checkbox-label"
+		class:checkbox-label--disabled={disabled}
+	>
+		<slot></slot>
+	</div>
 </label>
 
-<style style="scss">
+<style lang="scss">
+
+	:global(.checkbox-label) {
+		padding-left: 30px;
+	}
+	
 	:global(.checkbox-label--disabled) {
 		font-style: italic;
 		color: darkgray;
+	}
+
+	.container {
+		display: inline-block;
+		position: relative;
+	}
+
+	.checkbox {
+		position: absolute;
+		top: 50%;
+		transform: translateY(-50%);
+		left: 0;
+		height: 14px;
+		width: 14px;
+		background: var(--gray-400);
+
+		// custom checkmark
+		&::after {
+			content: "";
+			position: absolute;
+			display: none;
+		}
+	}
+
+	// hide the default checkbox input
+	input {
+		display: none;
+		position: absolute;
+		left: -100vh;
+		opacity: 0;
+	}
+
+	// Indeterminate checkmark
+	input:indeterminate ~ .checkbox::after {
+		display: block;
+		left: 50%;
+		top: 50%;
+		width: 8px;
+		transform: translate(-50%, -50%);
+		border-top: 2px solid var(--white)
+	}
+
+	// Checked checkmark
+	input:checked ~ .checkbox::after {
+		display: block;
+    top: 1px;
+    left: 4px;
+    width: 6px;
+    height: 10px;
+    border: solid var(--white);
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+	}
+
+	input:focus ~ .checkbox {
+		border: 1px solid var(--white);
 	}
 </style>

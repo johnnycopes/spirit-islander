@@ -63,7 +63,7 @@
 </script>
 
 <ul class="checkboxes checkboxes-level-{level}"
-	style="margin-left: {(level -1) * 8}px"
+	style="margin-left: {(level -1) * 16}px"
 >
 	{#each items as item}
 		<li class="checkboxes-item checkbox-item-level-{level}">
@@ -95,7 +95,12 @@
 </ul>
 
 <style lang="scss">
+
 	.checkboxes {
+		margin-top: 4px;
+	}
+
+	:global(.checkboxes-level-1) {
 		padding: 8px 16px;
 	}
 	

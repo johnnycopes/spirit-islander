@@ -34,5 +34,6 @@
 		padding: 8px;
 		font-family: var(--font);
 		font-size: 20px;
+		border: 0;
 	}	
 </style>
