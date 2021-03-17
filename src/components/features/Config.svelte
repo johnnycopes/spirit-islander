@@ -76,7 +76,7 @@
 	}
 </script>
 
-<form class="form">
+<form class="config">
 	<Fieldset name="You"
 		description="What are you playing with?"
 	>
@@ -183,7 +183,7 @@
 </form>
 
 <style lang="scss">
-	.form {
+	.config {
 		display: flex;
 		flex-direction: column;
 
@@ -204,6 +204,15 @@
 			width: 256px;
 		}
 
+		:global(.difficulty) {
+			position: relative;
+
+			:global(.field-error) {
+				position: absolute;
+				top: calc(100% - 8px);
+			}
+		}
+
 		:global(.expansions) :global(.checkboxes-level-1),
 		:global(.spirits) :global(.checkboxes-level-1),
 		:global(.adversaries) :global(.checkboxes-level-1) {
@@ -220,8 +229,7 @@
 			flex: 1 0 auto;
 		}
 
-		:global(.difficulty-emblem),
-		:global(.expansion-emblem) {
+		:global(.emblem) {
 			margin-left: 8px;
 		}
 	}

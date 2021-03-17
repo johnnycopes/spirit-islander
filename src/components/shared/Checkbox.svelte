@@ -55,6 +55,7 @@
 		height: 14px;
 		width: 14px;
 		background: var(--gray-400);
+		border-radius: var(--border-radius);
 
 		// custom checkmark
 		&::after {

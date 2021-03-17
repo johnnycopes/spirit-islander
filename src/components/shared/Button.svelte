@@ -17,14 +17,14 @@
 		position: relative;
 		height: 64px;
 		padding: 0 24px;
-		border: 1px solid var(--gray);
-		border-radius: 4px;
 		background: var(--white);
 		color: var(--gray-100);
+		border: 1px solid var(--gray);
+		border-radius: var(--border-radius);
 		font-family: var(--font);
-		outline: none;
 		font-size: 20px;
 		font-weight: 500;
+		outline: none;
 		cursor: pointer;
 		transition: 75ms background ease-in-out;
 

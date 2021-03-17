@@ -21,11 +21,13 @@
 		display: flex;
 		flex-direction: column;
 		background: var(--gray-200);
+		border-radius: var(--border-radius);
 	}
 
 	:global(.field-header) {
 		padding: 8px 16px;
 		background: var(--gray-300);
+		border-radius: var(--border-radius) var(--border-radius) 0 0;
 		font-weight: 700;
 	}
 

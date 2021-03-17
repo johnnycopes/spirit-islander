@@ -1,4 +1,5 @@
 <script lang="ts">
+	import Emblem from "./Emblem.svelte";
 	import type { ExpansionName } from "@models/game/expansions";
 
 	export let value: ExpansionName | undefined;
@@ -20,19 +21,26 @@
 	}
 </script>
 
-{#if value}
-	<div class="expansion-emblem">
+{#if value && abbrevation}
+	<Emblem name={abbrevation}>
 		{abbrevation}
-	</div>
+	</Emblem>
 {/if}
 
-<style style="scss">
-	:global(.expansion-emblem) {
-		padding: 2px 8px;
-		font-size: 14px;
-		background: var(--gray-400);
-		text-transform: uppercase;
-		border-radius: 4px;
-		font-weight: 700;
+<style lang="scss">
+	:global(.BC-emblem.emblem) {
+		background: var(--yellow-100);
+		color: var(--gray-100);
+	}
+
+	:global(.JE-emblem.emblem) {
+		background: var(--green-100);
+		color: var(--gray-100);
+	}
+
+	:global(.P1-emblem.emblem),
+	:global(.P2-emblem.emblem) {
+		background: var(--white);
+		color: var(--gray-100);
 	}
 </style>

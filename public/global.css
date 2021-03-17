@@ -1,14 +1,17 @@
 :root {
 	--font:  'Inconsolata', monospace;
+	--border-radius: 2px;
 	--white: #fff;
 	--gray-100: #292b2b;
 	--gray-200: #343c3c;
 	--gray-300: #475656;
 	--gray-400: #767676;
-	--gold-100: #b79106;
-	--gold-200: #f9ce2c;
 	--red-100: #b31209;
 	--red-200: #faaca8;
+	--gold-100: #b79106;
+	--gold-200: #f9ce2c;
+	--yellow-100: #f9f19a;
+	--green-100: #8fb757;
 }
 
 *, *::before, *::after {
