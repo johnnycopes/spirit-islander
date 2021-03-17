@@ -57,7 +57,7 @@
 		background: var(--gray-400);
 		border-radius: var(--border-radius);
 
-		// custom checkmark
+		// Default checkmark (unchecked)
 		&::after {
 			content: "";
 			position: absolute;
@@ -65,7 +65,7 @@
 		}
 	}
 
-	// hide the default checkbox input
+	// Hide the default checkbox input
 	input {
 		display: none;
 		position: absolute;
@@ -73,7 +73,7 @@
 		opacity: 0;
 	}
 
-	// Indeterminate checkmark
+	// Checkmark (indeterminate)
 	input:indeterminate ~ .checkbox::after {
 		display: block;
 		left: 50%;
@@ -83,7 +83,7 @@
 		border-top: 2px solid var(--white)
 	}
 
-	// Checked checkmark
+	// Checkmark (checked)
 	input:checked ~ .checkbox::after {
 		display: block;
     top: 1px;

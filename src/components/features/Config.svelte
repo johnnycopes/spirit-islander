@@ -209,7 +209,7 @@
 
 			:global(.field-error) {
 				position: absolute;
-				top: calc(100% - 8px);
+				top: calc(100% - 14px);
 			}
 		}
 
