@@ -1,8 +1,8 @@
-import type { IGameSetup } from "@models/game-setup.interface";
-import type { IConfig } from "@models/config.interface";
 import type { ICombo } from "@models/combo.interface";
-import { getSpiritsByName } from "@functions/get-spirits-by-name";
-import { selectRandom } from "@functions/utility/select-random";
+import type { IConfig } from "@models/config.interface";
+import type { IGameSetup } from "@models/game-setup.interface";
+import { getSpiritsByName } from "./get-spirits-by-name";
+import { selectRandom } from "./utility/select-random";
 
 export function createGameSetup(config: IConfig, validCombos: ICombo[]): IGameSetup {
 	const randomSpiritNames = selectRandom(config.spiritNames, config.players);

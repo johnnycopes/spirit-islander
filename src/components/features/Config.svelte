@@ -1,32 +1,32 @@
 <script lang="ts">
 	import { createEventDispatcher } from "svelte";
-	import Button from "@shared/Button.svelte";
-	import Card from "@shared/Card.svelte";
-	import CheckboxesGroup from "@shared/CheckboxesGroup.svelte";
-	import DifficultyEmblem from "@shared/DifficultyEmblem.svelte";
-	import ExpansionEmblem from "@shared/ExpansionEmblem.svelte";
-	import CardGroup from "@shared/CardGroup.svelte";
-	import Page from "@shared/Page.svelte";
-	import Select from "@shared/Select.svelte";
-	import type { IConfig } from "@models/config.interface";
-	import type { ICombo } from "@models/combo.interface";
-	import type { Players } from "@models/game/players";
-	import type { Difficulty } from "@models/game/difficulty";
-	import type { MapName } from "@models/game/maps";
-	import type { ExpansionName } from "@models/game/expansions";
-	import type { SpiritName } from "@models/game/spirits";
-	import type { AdversaryName, AdversaryLevelId } from "@models/game/adversaries";
-	import type { ScenarioName } from "@models/game/scenarios";
-	import { SPIRITS } from "@data/spirits";
+	import Button from "@components/shared/Button.svelte";
+	import Card from "@components/shared/Card.svelte";
+	import CardGroup from "@components/shared/CardGroup.svelte";
+	import CheckboxesGroup from "@components/shared/CheckboxesGroup.svelte";
+	import DifficultyEmblem from "@components/shared/DifficultyEmblem.svelte";
+	import ExpansionEmblem from "@components/shared/ExpansionEmblem.svelte";
+	import Page from "@components/shared/Page.svelte";
+	import Select from "@components/shared/Select.svelte";
+	import { ADVERSARIES } from "@data/adversaries";
 	import { EXPANSIONS } from "@data/expansions";
 	import { MAPS } from "@data/maps";
-	import { ADVERSARIES } from "@data/adversaries";
 	import { SCENARIOS } from "@data/scenarios";
+	import { SPIRITS } from "@data/spirits";
 	import { createArray } from "@functions/utility/create-array";
-	import { getOptions } from "@functions/get-options";
 	import { getDifficulty } from "@functions/get-difficulty";
+	import { getOptions } from "@functions/get-options";
 	import { getValidCombos } from "@functions/get-valid-combos";
 	import { pluralize } from "@functions/utility/pluralize";
+	import type { AdversaryName, AdversaryLevelId } from "@models/game/adversaries";
+	import type { Difficulty } from "@models/game/difficulty";
+	import type { ExpansionName } from "@models/game/expansions";
+	import type { ICombo } from "@models/combo.interface";
+	import type { IConfig } from "@models/config.interface";
+	import type { MapName } from "@models/game/maps";
+	import type { Players } from "@models/game/players";
+	import type { ScenarioName } from "@models/game/scenarios";
+	import type { SpiritName } from "@models/game/spirits";
 	import {
 		createAdversariesModel,
 		createMapsModel,

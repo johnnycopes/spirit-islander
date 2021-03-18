@@ -1,10 +1,14 @@
 <script lang="ts">
 	import { createEventDispatcher } from "svelte";
-	import Button from "@shared/Button.svelte";
-	import Card from "@shared/Card.svelte";
-	import CardGroup from "@shared/CardGroup.svelte";
-	import Page from "@shared/Page.svelte";
-	import DifficultyEmblem from "@shared/DifficultyEmblem.svelte";
+	import Button from "@components/shared/Button.svelte";
+	import Card from "@components/shared/Card.svelte";
+	import CardGroup from "@components/shared/CardGroup.svelte";
+	import DifficultyEmblem from "@components/shared/DifficultyEmblem.svelte";
+	import ExpansionEmblem from "@components/shared/ExpansionEmblem.svelte";
+	import Page from "@components/shared/Page.svelte";
+	import { getAdversaryById } from "@functions/get-adversary-by-id";
+	import { getDifficulty } from "@functions/get-difficulty";
+	import { pluralize } from "@functions/utility/pluralize";
 	import type { IAdversaryLevel } from "@models/game/adversaries";
 	import type { Players } from "@models/game/players";
 	import type { Difficulty } from "@models/game/difficulty";
@@ -12,10 +16,6 @@
 	import type { ExpansionName } from "@models/game/expansions";
 	import type { IScenario } from "@models/game/scenarios";
 	import type { ISpirit } from "@models/game/spirits";
-	import { pluralize } from "@functions/utility/pluralize";
-	import { getAdversaryById } from "@functions/get-adversary-by-id";
-	import { getDifficulty } from "@functions/get-difficulty";
-import ExpansionEmblem from "@shared/ExpansionEmblem.svelte";
 
 	const dispatcher = createEventDispatcher<{
 		reset: void;

@@ -1,43 +1,41 @@
 <script lang="ts">
-	import Config from "@features/Config.svelte";
-	import GameSetup from "@features/GameSetup.svelte";
-	import type { IConfig } from "@models/config.interface";
-	import type { ICombo } from "@models/combo.interface";
-	import type { IGameSetup } from "@models/game-setup.interface";
-	import { EPage } from "@models/page.enum";
-	import { createGameSetup } from "@functions/create-game-setup";
+	import Config from "@components/features/Config.svelte";
+	import GameSetup from "@components/features/GameSetup.svelte";
+	import Header from "@components/core/Header.svelte";
 	import { 
+		createAdversariesModel,
 		createMapsModel,
 		createScenariosModel,
 		createSpiritsModel,
-		createAdversariesModel
 	} from "@functions/create-model";
-	import { MOCK_CONFIG, MOCK_VALID_COMBOS, MOCK_GAME_SETUP } from "@debugging/mock-data";
+	import { createGameSetup } from "@functions/create-game-setup";
+	import { EPage } from "@models/page.enum";
+	import type { ICombo } from "@models/combo.interface";
+	import type { IConfig } from "@models/config.interface";
+	import type { IGameSetup } from "@models/game-setup.interface";
 
-		let page: EPage = EPage.GameSetup;
-		let config: IConfig = MOCK_CONFIG;
-		let validCombos: ICombo[] | undefined = MOCK_VALID_COMBOS;
-		let gameSetup: IGameSetup | undefined = MOCK_GAME_SETUP;
+	// import { MOCK_CONFIG, MOCK_VALID_COMBOS, MOCK_GAME_SETUP } from "@debugging/mock-data";
+	// 	let page: EPage = EPage.GameSetup;
+	// 	let config: IConfig = MOCK_CONFIG;
+	// 	let validCombos: ICombo[] | undefined = MOCK_VALID_COMBOS;
+	// 	let gameSetup: IGameSetup | undefined = MOCK_GAME_SETUP;
 
-	// let page: EPage = EPage.Config;
-	// let config: IConfig = {
-	// 	players: 1,
-	// 	difficulty: 0,
-	// 	expansions: [],
-	// 	maps: createMapsModel(),
-	// 	spirits: createSpiritsModel(),
-	// 	adversaries: createAdversariesModel(),
-	// 	scenarios: createScenariosModel(),
-	// };
-	// let validCombos: ICombo[] | undefined;
-	// let gameSetup: IGameSetup | undefined;
+	let page: EPage = EPage.Config;
+	let config: IConfig = {
+		players: 1,
+		difficulty: 0,
+		expansions: [],
+		spiritNames: createSpiritsModel(),
+		mapNames: createMapsModel(),
+		scenarioNames: createScenariosModel(),
+		adversaryNamesAndIds: createAdversariesModel(),
+	};
+	let validCombos: ICombo[] | undefined;
+	let gameSetup: IGameSetup | undefined;
 </script>
 
-<main class="container">
-	<div class="title">
-		<h1>Spirit Islander</h1>
-		<p>A setup generator for the board game Spirit Island</p>
-	</div>
+<Header />
+<main>
 	{#if page === EPage.Config}
 		<Config {...config}
 			on:generate={(e) => {
@@ -60,18 +58,9 @@
 </main>
 
 <style lang="scss">
-	.container {
+	main {
 		margin: 0 auto;
-		padding: 32px 0;
+		padding-bottom: 48px;
 		max-width: 1024px;
-	}
-
-	.title {
-		text-align: center;
-		margin-bottom: 48px;
-
-		h1 {
-			margin-bottom: 8px;
-		}
 	}
 </style>

@@ -9,12 +9,11 @@
 		"strictNullChecks": true,
 		"baseUrl": ".",
 		"paths": {
+			"@components/*": ["src/components/*"],
 			"@data/*": ["src/data/*"],
 			"@debugging/*": ["src/debugging/*"],
 			"@models/*": ["src/models/*"],
 			"@functions/*": ["src/functions/*"],
-			"@features/*": ["src/components/features/*"],
-			"@shared/*": ["src/components/shared/*"],
 		},
 		"lib": [
 			"esnext",
