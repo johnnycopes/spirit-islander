@@ -1,4 +1,4 @@
-import type { IDifficultyOption } from "./difficulty";
+import type { Difficulty, IDifficultyOption } from "./difficulty";
 import type { IExpansionOption } from "./expansions";
 
 export type AdversaryName =
@@ -14,6 +14,7 @@ export type AdversaryName =
 export interface IAdversaryLevel extends IDifficultyOption {
 	id: AdversaryLevelId;
 	level: AdversaryLevelValue;
+	difficulty: Difficulty;
 };
 
 export type AdversaryLevelValue = 0 | 1 | 2 | 3 | 4 | 5 | 6;

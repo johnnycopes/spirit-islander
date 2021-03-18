@@ -31,7 +31,7 @@ export function getValidCombos(config: IConfig): [IMap, IAdversaryLevel, IScenar
 	return comboAnalyzer.getPossibleCombos(
 		[maps, adversaries, scenarios],
 		options => options.reduce((difficulty, option) =>
-			difficulty + getDifficulty(option.difficulty, config),
+			difficulty + getDifficulty(option.difficulty, config.expansions),
 		0) === config.difficulty
 	);
 }

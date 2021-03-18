@@ -12,9 +12,7 @@
 		createSpiritsModel,
 		createAdversariesModel
 	} from "@functions/create-model";
-	import { MOCK_CONFIG } from "@debugging/mock-config";
-	import { MOCK_VALID_COMBOS } from "@debugging/mock-valid-combos";
-	import { MOCK_GAME_SETUP } from "@debugging/mock-game-setup";
+	import { MOCK_CONFIG, MOCK_VALID_COMBOS, MOCK_GAME_SETUP } from "@debugging/mock-data";
 
 		let page: EPage = EPage.GameSetup;
 		let config: IConfig = MOCK_CONFIG;

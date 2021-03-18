@@ -135,7 +135,7 @@
 				let:item={map}
 				bind:model={maps}
 			>
-				{map.name} <DifficultyEmblem value={getDifficulty(map.difficulty, config)} />
+				{map.name} <DifficultyEmblem value={getDifficulty(map.difficulty, expansions)} />
 			</CheckboxesField>
 		</Field>
 
@@ -153,7 +153,7 @@
 				{#if entity.name}
 					{entity.name} <ExpansionEmblem value={entity.expansion} />
 				{:else}
-					Level {entity.level} <DifficultyEmblem value={getDifficulty(entity.difficulty, config)} />
+					Level {entity.level} <DifficultyEmblem value={getDifficulty(entity.difficulty, expansions)} />
 				{/if}
 			</CheckboxesField>
 		</Field>

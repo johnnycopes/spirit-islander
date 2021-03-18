@@ -1,10 +1,10 @@
 import type { Players } from "./game/players";
 import type { Difficulty } from "./game/difficulty";
-import type { SpiritName } from "./game/spirits";
+import type { ISpirit } from "./game/spirits";
 import type { ExpansionName } from "./game/expansions";
 import type { IAdversaryLevel } from "./game/adversaries";
-import type { ScenarioName } from "./game/scenarios";
-import type { MapName } from "./game/maps";
+import type { IScenario } from "./game/scenarios";
+import type { IMap } from "./game/maps";
 
 /**
  * Collection of options chosen before play that determine the
@@ -14,8 +14,8 @@ export interface IGameSetup {
 	players: Players;
 	difficulty: Difficulty;
 	expansions: ExpansionName[];
-	spirits: SpiritName[];
+	spirits: ISpirit[];
 	adversary: IAdversaryLevel;
-	scenario: ScenarioName;
-	map: MapName;
+	scenario: IScenario;
+	map: IMap;
 }

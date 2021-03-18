@@ -1,6 +1,8 @@
 <script lang="ts">
 	import Emblem from "./Emblem.svelte";
-	export let value: number;
+	import type { Difficulty } from "@models/game/difficulty";
+
+	export let value: Difficulty;
 </script>
 
 {#if value > 0}

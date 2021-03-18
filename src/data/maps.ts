@@ -7,8 +7,8 @@ export const MAPS: IMap[] = [
 	},
 	{
 		name: "Thematic",
-		difficulty: (config) => {
-			return config.expansions.some(expansion => 
+		difficulty: (expansions) => {
+			return expansions.some(expansion => 
 				expansion === "Branch & Claw" || 
 				expansion === "Jagged Earth")
 			? 1

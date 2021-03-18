@@ -22,4 +22,8 @@
 		border-radius: var(--border-radius) var(--border-radius) 0 0;
 		font-weight: 700;
 	}
+
+	:global(.emblem) {
+		margin-left: 8px;
+	}
 </style>
