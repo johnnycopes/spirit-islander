@@ -1,7 +1,8 @@
 <script lang="ts">
+	import Header from "@components/core/Header.svelte";
+	import Footer from "@components/core/Footer.svelte";
 	import Config from "@components/features/Config.svelte";
 	import GameSetup from "@components/features/GameSetup.svelte";
-	import Header from "@components/core/Header.svelte";
 	import { 
 		createAdversariesModel,
 		createMapsModel,
@@ -56,6 +57,7 @@
 		/>
 	{/if}
 </main>
+<Footer />
 
 <style lang="scss">
 	main {

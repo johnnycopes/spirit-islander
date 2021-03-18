@@ -2,7 +2,8 @@
 	export let href: string;
 </script>
 
-<a href={href}
+<a class="link"
+	href={href}
 	target="_blank"
 	rel="noopener noreferrer"
 >
