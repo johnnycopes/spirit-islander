@@ -17,20 +17,19 @@
 		position: relative;
 		height: 64px;
 		padding: 0 24px;
-		background: var(--white);
-		color: var(--gray-100);
-		border: 1px solid var(--gray);
+		background: var(--blue-200);
+		color: var(--white);
+		border: 0;
 		border-radius: var(--border-radius);
 		font-family: var(--font);
 		font-size: 20px;
-		font-weight: 500;
+		font-weight: 700;
 		outline: none;
 		cursor: pointer;
 		transition: 75ms background ease-in-out;
 
 		&:hover {
-			background: var(--gold-200);
-			border-color: var(--gold-100);
+			background: var(--blue-100);
 		}
 
 		&:disabled {

@@ -2,6 +2,7 @@
 	import { createEventDispatcher } from "svelte";
 	import Button from "@shared/Button.svelte";
 	import Card from "@shared/Card.svelte";
+	import Page from "@shared/Page.svelte";
 	import DifficultyEmblem from "@shared/DifficultyEmblem.svelte";
 	import Fieldset from "@shared/Fieldset.svelte";
 	import type { IAdversaryLevel } from "@models/game/adversaries";
@@ -29,74 +30,114 @@ import ExpansionEmblem from "@shared/ExpansionEmblem.svelte";
 	export let scenario: IScenario;
 
 	$: adversaryName = getAdversaryById(adversary.id);
-	$: description = `${players} ${pluralize(players, "Player")} | Level ${difficulty} Difficulty`;
 </script>
 
-<div class="game-setup">
-	<Fieldset name="Setup"
-		description={description}
-	>
-		<Card name="spirits">
-			<h4 class="card-header">
-				{pluralize(players, "Spirit")}
-			</h4>
-			<ul class="content">
-				{#each spirits as spirit}
-					<li class="datum">
-						{spirit.name}
-						<ExpansionEmblem value={spirit.expansion} />
-					</li>
-				{/each}
-			</ul>
-		</Card>
-		
-		<Card name="map">
-			<h4 class="card-header">
-				Map
-			</h4>
-			<p class="content datum">
-				{map.name} <DifficultyEmblem value={getDifficulty(map.difficulty, expansions)} />
-			</p>
-		</Card>
-		
-		<Card name="scenario">
-			<h4 class="card-header">
-				Scenario
-			</h4>
-			<p class="content datum">
-				{scenario.name}
-				<DifficultyEmblem value={getDifficulty(scenario.difficulty, expansions)} />
-				<ExpansionEmblem value={scenario.expansion} />
-			</p>
-		</Card>
-		
-		<Card name="adversary">
-			<h4 class="card-header">
-				Adversary
-			</h4>
-			<p class="content datum">
-				{adversaryName}
-				{#if adversaryName !== "No Adversary"}
-					Level {adversary.level}
-					<DifficultyEmblem value={getDifficulty(adversary.difficulty, expansions)} />
-				{/if}
-			</p>
-		</Card>
-	</Fieldset>
+<Page>
+	<div class="game-setup page-content">
+		<Fieldset name="Setup"
+			description="Details of your generated game"
+		>
+			<Card name="players">
+				<h4 class="card-header">
+					Players
+				</h4>
+				<p class="content datum">
+					{players}
+				</p>
+			</Card>
+			<Card name="difficulty">
+				<h4 class="card-header">
+					Difficulty
+				</h4>
+				<p class="content datum">
+					{difficulty}
+				</p>
+			</Card>
+			<Card name="expansions">
+				<h4 class="card-header">
+					{pluralize(expansions.length, "Expansion")}
+				</h4>
+				<ul class="content">
+					{#if expansions.length}
+						{#each expansions as expansion}
+							<li class="datum">
+								{expansion}
+							</li>
+						{/each}
+					{:else}
+						<li>No Expansions</li>
+					{/if}
+				</ul>
+			</Card>
+			<Card name="spirits">
+				<h4 class="card-header">
+					{pluralize(players, "Spirit")}
+				</h4>
+				<ul class="content">
+					{#each spirits as spirit}
+						<li class="datum">
+							{spirit.name}
+							<ExpansionEmblem value={spirit.expansion} />
+						</li>
+					{/each}
+				</ul>
+			</Card>
+			
+			<Card name="map">
+				<h4 class="card-header">
+					Map
+				</h4>
+				<p class="content datum">
+					{map.name} <DifficultyEmblem value={getDifficulty(map.difficulty, expansions)} />
+				</p>
+			</Card>
+			
+			<Card name="scenario">
+				<h4 class="card-header">
+					Scenario
+				</h4>
+				<p class="content datum">
+					{scenario.name}
+					<DifficultyEmblem value={getDifficulty(scenario.difficulty, expansions)} />
+					<ExpansionEmblem value={scenario.expansion} />
+				</p>
+			</Card>
+			
+			<Card name="adversary">
+				<h4 class="card-header">
+					Adversary
+				</h4>
+				<p class="content datum">
+					{adversaryName}
+					{#if adversaryName !== "No Adversary"}
+						Level {adversary.level}
+						<DifficultyEmblem value={getDifficulty(adversary.difficulty, expansions)} />
+					{/if}
+				</p>
+			</Card>
+		</Fieldset>
+	</div>
 
-	<Button on:clicked={() => dispatcher("reset")}>
-		Reset
-	</Button>
-	<Button on:clicked={() => dispatcher("generate")}>
-		Generate
-	</Button>
-</div>
+	<div class="page-buttons">
+		<Button on:clicked={() => dispatcher("reset")}>
+			Edit
+		</Button>
+		<Button on:clicked={() => dispatcher("generate")}>
+			Generate
+		</Button>
+	</div>
+</Page>
 
 <style lang="scss">
-	:global(.setup) {
-		grid-template-areas:
-			"spirits spirits map map"
-			"adversary adversary scenario scenario";
+
+	.game-setup  {
+
+		:global(.setup) {
+			grid-template-areas:
+				"players difficulty expansions expansions"
+				"spirits spirits map map"
+				"scenario scenario adversary adversary";
+		}
 	}
 
 	.card-header {

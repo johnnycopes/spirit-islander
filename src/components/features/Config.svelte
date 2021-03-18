@@ -6,6 +6,7 @@
 	import ExpansionEmblem from "@shared/ExpansionEmblem.svelte";
 	import Fieldset from "@shared/Fieldset.svelte";
 	import Field from "@shared/Field.svelte";
+	import Page from "@shared/Page.svelte";
 	import SelectField from "@shared/SelectField.svelte";
 	import type { IConfig } from "@models/config.interface";
 	import type { ICombo } from "@models/combo.interface";
@@ -76,116 +77,118 @@
 	}
 </script>
 
-<form class="config">
-	<Fieldset name="You"
-		description="What are you playing with?"
-	>
-		<Field name="players">
-			<SelectField label="Players"
-				options={createArray(4)}
-				bind:value={players}
-			/>
-		</Field>
-
-		<Field name="difficulty"
-			error={difficultyError}
-			errorMessage="Combination of selected maps, adversaries, and scenarios cannot make a game with level {difficulty} difficulty"
+<Page>
+	<form class="config page-content">
+		<Fieldset name="You"
+			description="What are you playing with?"
 		>
-			<SelectField label="Difficulty"
-				options={createArray(11, 0)}
-				bind:value={difficulty}
-			/>
-		</Field>
-		
-		<Field name="expansions">
-			<CheckboxesField title="Expansions"
-				items={EXPANSIONS}
-				let:item={expansion}
-				bind:model={expansions}
-			>
-				{expansion}
-			</CheckboxesField>
-		</Field>
-	</Fieldset>
-
-	<Fieldset name="The Game"
-		description="What are you open to playing with?"
-	>
-		<Field name="spirits"
-			error={spiritsError}
-			errorMessage={`At least ${players} ${pluralize(players, "spirit")} must be selected`}
-		>
-			<CheckboxesField title="Spirits"
-				items={getOptions(SPIRITS, expansions)}
-				getId={(spirit) => spirit.name}
-				bind:model={spiritNames}
-				let:item={spirit}
-			>
-				{spirit.name} <ExpansionEmblem value={spirit.expansion} />
-			</CheckboxesField>
-		</Field>
-
-		<Field name="maps"
-			error={mapsError}
-			errorMessage="At least 1 option must be selected"
-		>
-			<CheckboxesField title="Maps"
-				items={getOptions(MAPS, expansions)}
-				getId={(map) => map.name}
-				let:item={map}
-				bind:model={mapNames}
-			>
-				{map.name} <DifficultyEmblem value={getDifficulty(map.difficulty, expansions)} />
-			</CheckboxesField>
-		</Field>
-
-		<Field name="adversaries"
-			error={adversariesError}
-			errorMessage="At least 1 option must be selected"
-		>
-			<CheckboxesField title="Adversaries"
-				items={getOptions(ADVERSARIES, expansions)}
-				getId={(entity => entity.name || entity.id)}
-				getChildren={(entity) => entity.levels}
-				bind:model={adversaryNamesAndIds}
-				let:item={entity}
-			>
-				{#if entity.name}
-					{entity.name} <ExpansionEmblem value={entity.expansion} />
-				{:else}
-					Level {entity.level} <DifficultyEmblem value={getDifficulty(entity.difficulty, expansions)} />
-				{/if}
-			</CheckboxesField>
-		</Field>
+			<Field name="players">
+				<SelectField label="Players"
+					options={createArray(4)}
+					bind:value={players}
+				/>
+			</Field>
 	
-		<Field name="scenarios"
-			error={scenariosError}
-			errorMessage="At least 1 option must be selected"
-		>
-			<CheckboxesField title="Scenarios"
-				items={getOptions(SCENARIOS, expansions)}
-				getId={(scenario) => scenario.name}
-				let:item={scenario}
-				bind:model={scenarioNames}
+			<Field name="difficulty"
+				error={difficultyError}
+				errorMessage="Combination of selected maps, adversaries, and scenarios cannot make a game with level {difficulty} difficulty"
 			>
-				{scenario.name}
-				<DifficultyEmblem value={scenario.difficulty} />
-				<ExpansionEmblem value={scenario.expansion} />
-			</CheckboxesField>
-		</Field>
-	</Fieldset>
+				<SelectField label="Difficulty"
+					options={createArray(11, 0)}
+					bind:value={difficulty}
+				/>
+			</Field>
+			
+			<Field name="expansions">
+				<CheckboxesField title="Expansions"
+					items={EXPANSIONS}
+					let:item={expansion}
+					bind:model={expansions}
+				>
+					{expansion}
+				</CheckboxesField>
+			</Field>
+		</Fieldset>
+	
+		<Fieldset name="The Game"
+			description="What are you open to playing with?"
+		>
+			<Field name="spirits"
+				error={spiritsError}
+				errorMessage={`At least ${players} ${pluralize(players, "spirit")} must be selected`}
+			>
+				<CheckboxesField title="Spirits"
+					items={getOptions(SPIRITS, expansions)}
+					getId={(spirit) => spirit.name}
+					bind:model={spiritNames}
+					let:item={spirit}
+				>
+					{spirit.name} <ExpansionEmblem value={spirit.expansion} />
+				</CheckboxesField>
+			</Field>
+	
+			<Field name="maps"
+				error={mapsError}
+				errorMessage="At least 1 option must be selected"
+			>
+				<CheckboxesField title="Maps"
+					items={getOptions(MAPS, expansions)}
+					getId={(map) => map.name}
+					let:item={map}
+					bind:model={mapNames}
+				>
+					{map.name} <DifficultyEmblem value={getDifficulty(map.difficulty, expansions)} />
+				</CheckboxesField>
+			</Field>
+	
+			<Field name="adversaries"
+				error={adversariesError}
+				errorMessage="At least 1 option must be selected"
+			>
+				<CheckboxesField title="Adversaries"
+					items={getOptions(ADVERSARIES, expansions)}
+					getId={(entity => entity.name || entity.id)}
+					getChildren={(entity) => entity.levels}
+					bind:model={adversaryNamesAndIds}
+					let:item={entity}
+				>
+					{#if entity.name}
+						{entity.name} <ExpansionEmblem value={entity.expansion} />
+					{:else}
+						Level {entity.level} <DifficultyEmblem value={getDifficulty(entity.difficulty, expansions)} />
+					{/if}
+				</CheckboxesField>
+			</Field>
+		
+			<Field name="scenarios"
+				error={scenariosError}
+				errorMessage="At least 1 option must be selected"
+			>
+				<CheckboxesField title="Scenarios"
+					items={getOptions(SCENARIOS, expansions)}
+					getId={(scenario) => scenario.name}
+					let:item={scenario}
+					bind:model={scenarioNames}
+				>
+					{scenario.name}
+					<DifficultyEmblem value={scenario.difficulty} />
+					<ExpansionEmblem value={scenario.expansion} />
+				</CheckboxesField>
+			</Field>
+		</Fieldset>
+	</form>
 
-	<Button on:clicked={onSubmit}
-		disabled={formDisabled}
-	>
-		Generate!
-	</Button>
-</form>
+	<div class="page-buttons">
+		<Button on:clicked={onSubmit}
+			disabled={formDisabled}
+		>
+			Generate
+		</Button>
+	</div>
+</Page>
 
 <style lang="scss">
 	.config {
-		display: flex;
-		flex-direction: column;
 
 		:global(.you) {
 			grid-template-areas:

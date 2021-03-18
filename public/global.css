@@ -8,10 +8,11 @@
 	--gray-400: #767676;
 	--red-100: #b31209;
 	--red-200: #faaca8;
-	--gold-100: #b79106;
-	--gold-200: #f9ce2c;
+	--blue-100: #1b7f98;
+	--blue-200: #1f94b2;
 	--yellow-100: #f9f19a;
 	--green-100: #8fb757;
+	--fake: hsl(120,100%,50%);
 }
 
 *, *::before, *::after {
@@ -25,6 +26,7 @@ html, body {
 
 body {
 	background-color: var(--gray-100);
+	background-color: var(--fake);
 	color: var(--white);
 	font-family: var(--font);
 	font-weight: 400;
