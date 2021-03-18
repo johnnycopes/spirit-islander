@@ -58,6 +58,7 @@
 
 <style lang="scss">
 	:global(.checkboxes-level-1) {
-		padding: 8px 16px 12px;
+		padding: 8px 16px;
 	}
+	
 </style>

@@ -95,8 +95,11 @@
 </ul>
 
 <style lang="scss">
-
 	.checkboxes {
 		margin-top: 4px;
+	}
+
+	:global(.checkboxes-item) {
+		margin-bottom: 4px;
 	}
 </style>

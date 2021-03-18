@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { snakeCase } from "@functions/utility/snake-case";
 
-	export let name: string = "";
-	export let description: string = "";
+	export let name: string;
+	export let description: string;
 
 	$: className = snakeCase(name);
 </script>
