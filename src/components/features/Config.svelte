@@ -37,10 +37,10 @@
 	export let players: Players;
 	export let difficulty: Difficulty;
 	export let expansions: ExpansionName[];
-	export let spirits: SpiritName[];
-	export let adversaries: (AdversaryName | AdversaryLevelId)[];
-	export let scenarios: ScenarioName[];
-	export let maps: MapName[];
+	export let spiritNames: SpiritName[];
+	export let mapNames: MapName[];
+	export let scenarioNames: ScenarioName[];
+	export let adversaryNamesAndIds: (AdversaryName | AdversaryLevelId)[];
 	const dispatcher = createEventDispatcher<{
 		generate: {
 			config: IConfig,
@@ -50,12 +50,12 @@
 
 	let config: IConfig;
 	let validCombos: ICombo[];
-	$: { config = { players, expansions, difficulty, maps, spirits, adversaries, scenarios }};
+	$: { config = { players, expansions, difficulty, mapNames, spiritNames, scenarioNames, adversaryNamesAndIds }};
 	$: { validCombos = getValidCombos(config) };
-	$: spiritsError = players > spirits.length;
-	$: mapsError = !maps.length;
-	$: scenariosError = !scenarios.length;
-	$: adversariesError = !adversaries.length;
+	$: spiritsError = players > spiritNames.length;
+	$: mapsError = !mapNames.length;
+	$: scenariosError = !scenarioNames.length;
+	$: adversariesError = !adversaryNamesAndIds.length;
 	$: difficultyError = !validCombos.length;
 	$: formDisabled = spiritsError || mapsError || scenariosError || adversariesError || difficultyError;
 
@@ -69,10 +69,10 @@
 	}
 
 	function updateModels(expansions: ExpansionName[]): void {
-		spirits = createUpdatedModel(createSpiritsModel, spirits, expansions);
-		maps = createUpdatedModel(createMapsModel, maps, expansions);
-		scenarios = createUpdatedModel(createScenariosModel, scenarios, expansions);
-		adversaries = createUpdatedModel(createAdversariesModel, adversaries, expansions);
+		spiritNames = createUpdatedModel(createSpiritsModel, spiritNames, expansions);
+		mapNames = createUpdatedModel(createMapsModel, mapNames, expansions);
+		scenarioNames = createUpdatedModel(createScenariosModel, scenarioNames, expansions);
+		adversaryNamesAndIds = createUpdatedModel(createAdversariesModel, adversaryNamesAndIds, expansions);
 	}
 </script>
 
@@ -118,7 +118,7 @@
 			<CheckboxesField title="Spirits"
 				items={getOptions(SPIRITS, expansions)}
 				getId={(spirit) => spirit.name}
-				bind:model={spirits}
+				bind:model={spiritNames}
 				let:item={spirit}
 			>
 				{spirit.name} <ExpansionEmblem value={spirit.expansion} />
@@ -133,7 +133,7 @@
 				items={getOptions(MAPS, expansions)}
 				getId={(map) => map.name}
 				let:item={map}
-				bind:model={maps}
+				bind:model={mapNames}
 			>
 				{map.name} <DifficultyEmblem value={getDifficulty(map.difficulty, expansions)} />
 			</CheckboxesField>
@@ -147,7 +147,7 @@
 				items={getOptions(ADVERSARIES, expansions)}
 				getId={(entity => entity.name || entity.id)}
 				getChildren={(entity) => entity.levels}
-				bind:model={adversaries}
+				bind:model={adversaryNamesAndIds}
 				let:item={entity}
 			>
 				{#if entity.name}
@@ -166,7 +166,7 @@
 				items={getOptions(SCENARIOS, expansions)}
 				getId={(scenario) => scenario.name}
 				let:item={scenario}
-				bind:model={scenarios}
+				bind:model={scenarioNames}
 			>
 				{scenario.name}
 				<DifficultyEmblem value={scenario.difficulty} />

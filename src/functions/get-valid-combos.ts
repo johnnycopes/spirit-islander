@@ -12,20 +12,18 @@ import { ComboAnalyzer } from "./utility/combo-analyzer";
 const comboAnalyzer = new ComboAnalyzer<IDifficultyOption>();
 
 export function getValidCombos(config: IConfig): [IMap, IAdversaryLevel, IScenario][] {
-	const mapsModel = config.maps;
-	const scenariosModel = config.scenarios;
-	const adversariesModel = config.adversaries;
-	const maps = MAPS.filter(map => mapsModel.includes(map.name));
-	const scenarios = SCENARIOS.filter(scenario => scenariosModel.includes(scenario.name));
+	const { mapNames, scenarioNames, adversaryNamesAndIds } = config;
+	const maps = MAPS.filter(map => mapNames.includes(map.name));
+	const scenarios = SCENARIOS.filter(scenario => scenarioNames.includes(scenario.name));
 	const adversaries: IAdversaryLevel[] = [];
 
-	if (adversariesModel.includes("No Adversary")) {
+	if (adversaryNamesAndIds.includes("No Adversary")) {
 		adversaries.push({ id: "none", level: 0, difficulty: 0 });
 	}
 	ADVERSARIES.forEach(adversary => {
-		const adversaryDifficulties = adversary.levels
-			.filter(level => adversariesModel.includes(level.id))
-		adversaries.push(...adversaryDifficulties);
+		const adversaryLevels = adversary.levels
+			.filter(level => adversaryNamesAndIds.includes(level.id))
+		adversaries.push(...adversaryLevels);
 	});
 
 	return comboAnalyzer.getPossibleCombos(

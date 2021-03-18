@@ -7,15 +7,15 @@ import type { IScenario } from "./game/scenarios";
 import type { IMap } from "./game/maps";
 
 /**
- * Collection of options chosen before play that determine the
- * necessary components when setting up a game of Spirit Island
+ * Collection of options chosen before play that
+ * influence how to set up a game of Spirit Island
  */
 export interface IGameSetup {
 	players: Players;
 	difficulty: Difficulty;
 	expansions: ExpansionName[];
 	spirits: ISpirit[];
-	adversary: IAdversaryLevel;
-	scenario: IScenario;
 	map: IMap;
+	scenario: IScenario;
+	adversary: IAdversaryLevel;
 }

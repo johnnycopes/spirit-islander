@@ -10,9 +10,10 @@ export const MOCK_CONFIG: IConfig = {
 	players: 4,
 	expansions: EXPANSIONS,
 	difficulty: 6,
-	maps: MAPS.map(map => map.name),
-	spirits: SPIRITS.map(spirit => spirit.name),
-	adversaries: [
+	spiritNames: SPIRITS.map(spirit => spirit.name),
+	mapNames: MAPS.map(map => map.name),
+	scenarioNames: SCENARIOS.map(scenario => scenario.name),
+	adversaryNamesAndIds: [
 		"No Adversary",
 		"Brandenburg-Prussia",
 		"bp-0",
@@ -39,7 +40,6 @@ export const MOCK_CONFIG: IConfig = {
 		"sw-5",
 		"sw-6"
 	],
-	scenarios: SCENARIOS.map(scenario => scenario.name)
 };
 
 export const MOCK_VALID_COMBOS = getValidCombos(MOCK_CONFIG);
