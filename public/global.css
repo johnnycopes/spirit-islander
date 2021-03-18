@@ -2,17 +2,18 @@
 	--font:  'Inconsolata', monospace;
 	--border-radius: 2px;
 	--white: #fff;
-	--gray-100: #292b2b;
-	--gray-200: #343c3c;
-	--gray-300: #475656;
-	--gray-400: #767676;
-	--red-100: #b31209;
-	--red-200: #faaca8;
-	--blue-100: #1b7f98;
-	--blue-200: #1f94b2;
-	--yellow-100: #f9f19a;
-	--green-100: #8fb757;
-	--fake: hsl(120,100%,50%);
+	--gray-100: hsl(192, 7%, 16%);
+	--gray-200: hsl(192, 7%, 22%);
+	--gray-300: hsl(192, 7%, 31%);
+	--gray-400: hsl(192, 7%, 44%);
+	--gray-500: hsl(192, 7%, 51%);
+	--gray-600: hsl(192, 7%, 81%);
+	--red-100: hsl(3, 60%, 37%);
+	--red-200: hsl(3, 60%, 82%);
+	--blue-100: hsl(192, 80%, 35%);
+	--blue-200: hsl(192, 80%, 41%);
+	--yellow-100: hsl(55, 89%, 79%);
+	--green-100: hsl(85, 40%, 53%);
 }
 
 *, *::before, *::after {
@@ -26,7 +27,6 @@ html, body {
 
 body {
 	background-color: var(--gray-100);
-	background-color: var(--fake);
 	color: var(--white);
 	font-family: var(--font);
 	font-weight: 400;

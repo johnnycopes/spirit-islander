@@ -45,6 +45,10 @@
 	.container {
 		display: inline-block;
 		position: relative;
+
+		&:hover .checkbox {
+			background: var(--gray-400);
+		}
 	}
 
 	.checkbox {
@@ -54,7 +58,7 @@
 		left: 0;
 		height: 14px;
 		width: 14px;
-		background: var(--gray-400);
+		background: var(--gray-500);
 		border-radius: var(--border-radius);
 
 		// Default checkmark (unchecked)

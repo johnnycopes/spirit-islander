@@ -33,9 +33,8 @@
 		}
 
 		&:disabled {
-			background: lightgray;
-			border-color: darkgray;
-			color: gray;
+			background: var(--gray-400);
+			color: var(--gray-600);
 			cursor: default;
 		}
 	}
