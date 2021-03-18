@@ -35,7 +35,7 @@
 <Page>
 	<div class="game-setup page-content">
 		<CardGroup name="Setup"
-			description="Details of your generated game"
+			description="Details of your generated game setup"
 		>
 			<Card name="players">
 				<h4 class="card-header">
@@ -123,7 +123,7 @@
 			Edit
 		</Button>
 		<Button on:clicked={() => dispatcher("generate")}>
-			Generate
+			Regenerate
 		</Button>
 	</div>
 </Page>
