@@ -15,12 +15,12 @@
 		{description}
 	</p>
 </div>
-<div class="fieldset {className}">
+<div class="card-group {className}">
 	<slot></slot>
 </div>
 
 <style style="scss">
-	:global(.fieldset) {
+	:global(.card-group) {
 		display: grid;
 		grid-template-columns: repeat(4, 1fr);
 		grid-template-rows: auto;

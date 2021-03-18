@@ -69,5 +69,9 @@
 	.title {
 		text-align: center;
 		margin-bottom: 48px;
+
+		h1 {
+			margin-bottom: 8px;
+		}
 	}
 </style>

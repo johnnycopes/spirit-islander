@@ -1,11 +1,11 @@
 <script lang="ts">
 	import { createEventDispatcher } from "svelte";
 	import Button from "@shared/Button.svelte";
+	import Card from "@shared/Card.svelte";
 	import CheckboxesField from "@shared/CheckboxesField.svelte";
 	import DifficultyEmblem from "@shared/DifficultyEmblem.svelte";
 	import ExpansionEmblem from "@shared/ExpansionEmblem.svelte";
-	import Fieldset from "@shared/Fieldset.svelte";
-	import Field from "@shared/Field.svelte";
+	import CardGroup from "@shared/CardGroup.svelte";
 	import Page from "@shared/Page.svelte";
 	import SelectField from "@shared/SelectField.svelte";
 	import type { IConfig } from "@models/config.interface";
@@ -79,17 +79,17 @@
 
 <Page>
 	<form class="config page-content">
-		<Fieldset name="You"
+		<CardGroup name="You"
 			description="What are you playing with?"
 		>
-			<Field name="players">
+			<Card name="players">
 				<SelectField label="Players"
 					options={createArray(4)}
 					bind:value={players}
 				/>
-			</Field>
+			</Card>
 	
-			<Field name="difficulty"
+			<Card name="difficulty"
 				error={difficultyError}
 				errorMessage="Combination of selected maps, adversaries, and scenarios cannot make a game with level {difficulty} difficulty"
 			>
@@ -97,9 +97,9 @@
 					options={createArray(11, 0)}
 					bind:value={difficulty}
 				/>
-			</Field>
+			</Card>
 			
-			<Field name="expansions">
+			<Card name="expansions">
 				<CheckboxesField title="Expansions"
 					items={EXPANSIONS}
 					let:item={expansion}
@@ -107,13 +107,13 @@
 				>
 					{expansion}
 				</CheckboxesField>
-			</Field>
-		</Fieldset>
+			</Card>
+		</CardGroup>
 	
-		<Fieldset name="The Game"
+		<CardGroup name="The Game"
 			description="What are you open to playing with?"
 		>
-			<Field name="spirits"
+			<Card name="spirits"
 				error={spiritsError}
 				errorMessage={`At least ${players} ${pluralize(players, "spirit")} must be selected`}
 			>
@@ -125,9 +125,9 @@
 				>
 					{spirit.name} <ExpansionEmblem value={spirit.expansion} />
 				</CheckboxesField>
-			</Field>
+			</Card>
 	
-			<Field name="maps"
+			<Card name="maps"
 				error={mapsError}
 				errorMessage="At least 1 option must be selected"
 			>
@@ -139,9 +139,9 @@
 				>
 					{map.name} <DifficultyEmblem value={getDifficulty(map.difficulty, expansions)} />
 				</CheckboxesField>
-			</Field>
+			</Card>
 	
-			<Field name="adversaries"
+			<Card name="adversaries"
 				error={adversariesError}
 				errorMessage="At least 1 option must be selected"
 			>
@@ -158,9 +158,9 @@
 						Level {entity.level} <DifficultyEmblem value={getDifficulty(entity.difficulty, expansions)} />
 					{/if}
 				</CheckboxesField>
-			</Field>
+			</Card>
 		
-			<Field name="scenarios"
+			<Card name="scenarios"
 				error={scenariosError}
 				errorMessage="At least 1 option must be selected"
 			>
@@ -174,8 +174,8 @@
 					<DifficultyEmblem value={scenario.difficulty} />
 					<ExpansionEmblem value={scenario.expansion} />
 				</CheckboxesField>
-			</Field>
-		</Fieldset>
+			</Card>
+		</CardGroup>
 	</form>
 
 	<div class="page-buttons">
@@ -190,12 +190,12 @@
 <style lang="scss">
 	.config {
 
-		:global(.you) {
+		:global(.card-group.you) {
 			grid-template-areas:
 				"players difficulty expansions expansions";
 		}
 
-		:global(.the-game) {
+		:global(.card-group.the-game) {
 			grid-template-areas:
 				"spirits spirits spirits spirits"
 				"maps maps scenarios scenarios"
@@ -210,7 +210,7 @@
 		:global(.difficulty) {
 			position: relative;
 
-			:global(.field-error) {
+			:global(.card-error) {
 				position: absolute;
 				top: calc(100% - 14px);
 			}
@@ -230,10 +230,6 @@
 
 		:global(.adversaries) :global(.checkbox-item-level-1) {
 			flex: 1 0 auto;
-		}
-
-		:global(.emblem) {
-			margin-left: 8px;
 		}
 	}
 </style>

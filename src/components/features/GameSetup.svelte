@@ -2,9 +2,9 @@
 	import { createEventDispatcher } from "svelte";
 	import Button from "@shared/Button.svelte";
 	import Card from "@shared/Card.svelte";
+	import CardGroup from "@shared/CardGroup.svelte";
 	import Page from "@shared/Page.svelte";
 	import DifficultyEmblem from "@shared/DifficultyEmblem.svelte";
-	import Fieldset from "@shared/Fieldset.svelte";
 	import type { IAdversaryLevel } from "@models/game/adversaries";
 	import type { Players } from "@models/game/players";
 	import type { Difficulty } from "@models/game/difficulty";
@@ -34,7 +34,7 @@ import ExpansionEmblem from "@shared/ExpansionEmblem.svelte";
 
 <Page>
 	<div class="game-setup page-content">
-		<Fieldset name="Setup"
+		<CardGroup name="Setup"
 			description="Details of your generated game"
 		>
 			<Card name="players">
@@ -115,7 +115,7 @@ import ExpansionEmblem from "@shared/ExpansionEmblem.svelte";
 					{/if}
 				</p>
 			</Card>
-		</Fieldset>
+		</CardGroup>
 	</div>
 
 	<div class="page-buttons">
@@ -129,10 +129,9 @@ import ExpansionEmblem from "@shared/ExpansionEmblem.svelte";
 </Page>
 
 <style lang="scss">
-
 	.game-setup  {
 
-		:global(.setup) {
+		:global(.card-group.setup) {
 			grid-template-areas:
 				"players difficulty expansions expansions"
 				"spirits spirits map map"
