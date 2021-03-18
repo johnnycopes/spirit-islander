@@ -99,8 +99,4 @@
 	.checkboxes {
 		margin-top: 4px;
 	}
-	
-	.checkboxes-item {
-		margin-bottom: 4px;
-	}
 </style>

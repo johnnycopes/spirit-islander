@@ -7,7 +7,7 @@
 	$: id = snakeCase(label);
 </script>
 
-<div class="field-header">
+<div class="card-header">
 	<label for={id}>
 		{label}
 	</label>
@@ -32,5 +32,6 @@
 		font-family: var(--font);
 		font-size: 20px;
 		border: 0;
+		border-radius: var(--border-radius);
 	}	
 </style>

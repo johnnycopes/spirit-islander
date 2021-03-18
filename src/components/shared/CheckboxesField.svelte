@@ -32,7 +32,7 @@
 	}
 </script>
 
-<div class="field-header">
+<div class="card-header">
 	<Checkbox
 		id={title}
 		checked={headerChecked}
@@ -58,6 +58,6 @@
 
 <style lang="scss">
 	:global(.checkboxes-level-1) {
-		padding: 8px 16px;
+		padding: 8px 16px 12px;
 	}
 </style>

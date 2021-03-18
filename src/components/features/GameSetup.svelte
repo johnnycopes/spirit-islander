@@ -1,6 +1,8 @@
 <script lang="ts">
 	import { createEventDispatcher } from "svelte";
 	import Button from "@shared/Button.svelte";
+	import Card from "@shared/Card.svelte";
+	import Fieldset from "@shared/Fieldset.svelte";
 	import type { IAdversaryLevel } from "@models/game/adversaries";
 	import type { Players } from "@models/game/players";
 	import type { Difficulty } from "@models/game/difficulty";
@@ -24,88 +26,75 @@
 	export let scenario: ScenarioName;
 
 	$: adversaryName = getAdversaryById(adversary.id);
+	$: description = `${players} ${pluralize(players, "Player")} | Level ${difficulty} Difficulty`;
 </script>
 
-<Button on:clicked={() => dispatcher("reset")}>
-	Reset
-</Button>
-<Button on:clicked={() => dispatcher("generate")}>
-	Generate
-</Button>
-<table>
-	<thead>
-		<tr>
-			<th colspan="2">
-				{players} {pluralize(players, "Player")} | Level {difficulty} Difficulty
-			</th>
-		</tr>
-	</thead>
-	<tbody>
-		<tr>
-			<td>
-				Expansions
-			</td>
-			<td>
-				{#if !expansions.length}
-					No Expansions
-				{:else}
-					<ul>
-						{#each expansions as expansion}
-							<li>{expansion}</li>
-						{/each}
-					</ul>
-				{/if}
-			</td>
-		</tr>
-		<tr>
-			<td>
-				Spirits
-			</td>
-			<td>
-				<ul>
-					{#each spirits as spirit}
-						<li>{spirit}</li>
-					{/each}
-				</ul>
-			</td>
-		</tr>
-		<tr>
-			<td>
+<div class="game-setup">
+	<Fieldset name="Setup"
+		description={description}
+	>
+		<Card name="spirits">
+			<h4 class="card-header">
+				{pluralize(players, "Spirit")}
+			</h4>
+			<ul class="content">
+				{#each spirits as spirit}
+					<li>{spirit}</li>
+				{/each}
+			</ul>
+		</Card>
+		
+		<Card name="map">
+			<h4 class="card-header">
 				Map
-			</td>
-			<td>
+			</h4>
+			<p class="content">
 				{map}
-			</td>
-		</tr>
-		<tr>
-			<td>
+			</p>
+		</Card>
+		
+		<Card name="scenario">
+			<h4 class="card-header">
+				Scenario
+			</h4>
+			<p class="content">
+				{scenario}
+			</p>
+		</Card>
+		
+		<Card name="adversary">
+			<h4 class="card-header">
 				Adversary
-			</td>
-			<td>
+			</h4>
+			<p class="content">
 				{adversaryName}
 				{#if adversaryName !== "No Adversary"}
 					Level {adversary.level}
 				{/if}
-			</td>
-		</tr>
-		<tr>
-			<td>
-				Scenario
-			</td>
-			<td>
-				{scenario}
-			</td>
-		</tr>
-	</tbody>
-</table>
+			</p>
+		</Card>
+	</Fieldset>
+
+	<Button on:clicked={() => dispatcher("reset")}>
+		Reset
+	</Button>
+	<Button on:clicked={() => dispatcher("generate")}>
+		Generate
+	</Button>
+</div>
 
 <style lang="scss">
-	table {
-		width: 100%;
-		border-collapse: collapse;
+	:global(.setup) {
+		grid-template-areas:
+			"spirits spirits map map"
+			"adversary adversary scenario scenario";
 	}
-	th, td {
-		padding: 24px 48px;
-		border-bottom: 1px solid white;
+
+	.card-header {
+		margin-bottom: 0;
+	}
+
+	.content {
+		padding: 16px;
 	}
 </style>

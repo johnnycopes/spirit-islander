@@ -15,12 +15,12 @@
 		{description}
 	</p>
 </div>
-<div class="form-fieldset {className}">
+<div class="fieldset {className}">
 	<slot></slot>
 </div>
 
 <style style="scss">
-	:global(.form-fieldset) {
+	:global(.fieldset) {
 		display: grid;
 		grid-template-columns: repeat(4, 1fr);
 		grid-template-rows: auto;

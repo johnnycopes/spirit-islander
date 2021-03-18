@@ -1,12 +1,12 @@
 <script type="ts">
-	export let name: string | undefined;
+	import Card from "./Card.svelte";
+
+	export let name: string;
 	export let error: boolean = false;
 	export let errorMessage: string = "";
 </script>
 
-<div class="field {name}"
-	style="grid-area: {name}"
->
+<Card name={name}>
 	<slot></slot>
 
 	{#if error}
@@ -14,23 +14,9 @@
 			{errorMessage}
 		</p>
 	{/if}
-</div>
+</Card>
 
 <style lang="scss">
-	:global(.field) {
-		display: flex;
-		flex-direction: column;
-		background: var(--gray-200);
-		border-radius: var(--border-radius);
-	}
-
-	:global(.field-header) {
-		padding: 8px 16px;
-		background: var(--gray-300);
-		border-radius: var(--border-radius) var(--border-radius) 0 0;
-		font-weight: 700;
-	}
-
 	:global(.field-error) {
 		display: inline-block;
 		align-self: flex-start;
