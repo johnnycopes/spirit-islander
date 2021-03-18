@@ -20,18 +20,18 @@
 </div>
 
 <style style="scss">
+	.legend {
+		display: flex;
+		justify-content: space-between;
+		align-items: flex-end;
+		margin-bottom: 16px;
+	}
+
 	:global(.card-group) {
 		display: grid;
 		grid-template-columns: repeat(4, 1fr);
 		grid-template-rows: auto;
 		gap: 8px;
 		margin-bottom: 48px;
-	}
-
-	.legend {
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
-		margin-bottom: 8px;
 	}
 </style>

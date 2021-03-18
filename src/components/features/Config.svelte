@@ -2,12 +2,12 @@
 	import { createEventDispatcher } from "svelte";
 	import Button from "@shared/Button.svelte";
 	import Card from "@shared/Card.svelte";
-	import CheckboxesField from "@shared/CheckboxesField.svelte";
+	import CheckboxesGroup from "@shared/CheckboxesGroup.svelte";
 	import DifficultyEmblem from "@shared/DifficultyEmblem.svelte";
 	import ExpansionEmblem from "@shared/ExpansionEmblem.svelte";
 	import CardGroup from "@shared/CardGroup.svelte";
 	import Page from "@shared/Page.svelte";
-	import SelectField from "@shared/SelectField.svelte";
+	import Select from "@shared/Select.svelte";
 	import type { IConfig } from "@models/config.interface";
 	import type { ICombo } from "@models/combo.interface";
 	import type { Players } from "@models/game/players";
@@ -83,7 +83,7 @@
 			description="What are you playing with?"
 		>
 			<Card name="players">
-				<SelectField label="Players"
+				<Select label="Players"
 					options={createArray(4)}
 					bind:value={players}
 				/>
@@ -93,20 +93,20 @@
 				error={difficultyError}
 				errorMessage="Combination of selected maps, adversaries, and scenarios cannot make a game with level {difficulty} difficulty"
 			>
-				<SelectField label="Difficulty"
+				<Select label="Difficulty"
 					options={createArray(11, 0)}
 					bind:value={difficulty}
 				/>
 			</Card>
 			
 			<Card name="expansions">
-				<CheckboxesField title="Expansions"
+				<CheckboxesGroup title="Expansions"
 					items={EXPANSIONS}
 					let:item={expansion}
 					bind:model={expansions}
 				>
 					{expansion}
-				</CheckboxesField>
+				</CheckboxesGroup>
 			</Card>
 		</CardGroup>
 	
@@ -117,35 +117,35 @@
 				error={spiritsError}
 				errorMessage={`At least ${players} ${pluralize(players, "spirit")} must be selected`}
 			>
-				<CheckboxesField title="Spirits"
+				<CheckboxesGroup title="Spirits"
 					items={getOptions(SPIRITS, expansions)}
 					getId={(spirit) => spirit.name}
 					bind:model={spiritNames}
 					let:item={spirit}
 				>
 					{spirit.name} <ExpansionEmblem value={spirit.expansion} />
-				</CheckboxesField>
+				</CheckboxesGroup>
 			</Card>
 	
 			<Card name="maps"
 				error={mapsError}
 				errorMessage="At least 1 option must be selected"
 			>
-				<CheckboxesField title="Maps"
+				<CheckboxesGroup title="Maps"
 					items={getOptions(MAPS, expansions)}
 					getId={(map) => map.name}
 					let:item={map}
 					bind:model={mapNames}
 				>
 					{map.name} <DifficultyEmblem value={getDifficulty(map.difficulty, expansions)} />
-				</CheckboxesField>
+				</CheckboxesGroup>
 			</Card>
 	
 			<Card name="adversaries"
 				error={adversariesError}
 				errorMessage="At least 1 option must be selected"
 			>
-				<CheckboxesField title="Adversaries"
+				<CheckboxesGroup title="Adversaries"
 					items={getOptions(ADVERSARIES, expansions)}
 					getId={(entity => entity.name || entity.id)}
 					getChildren={(entity) => entity.levels}
@@ -157,14 +157,14 @@
 					{:else}
 						Level {entity.level} <DifficultyEmblem value={getDifficulty(entity.difficulty, expansions)} />
 					{/if}
-				</CheckboxesField>
+				</CheckboxesGroup>
 			</Card>
 		
 			<Card name="scenarios"
 				error={scenariosError}
 				errorMessage="At least 1 option must be selected"
 			>
-				<CheckboxesField title="Scenarios"
+				<CheckboxesGroup title="Scenarios"
 					items={getOptions(SCENARIOS, expansions)}
 					getId={(scenario) => scenario.name}
 					let:item={scenario}
@@ -173,7 +173,7 @@
 					{scenario.name}
 					<DifficultyEmblem value={scenario.difficulty} />
 					<ExpansionEmblem value={scenario.expansion} />
-				</CheckboxesField>
+				</CheckboxesGroup>
 			</Card>
 		</CardGroup>
 	</form>
@@ -229,7 +229,7 @@
 		}
 
 		:global(.adversaries) :global(.checkbox-item-level-1) {
-			flex: 1 0 auto;
+			flex: 0 0 25%;
 		}
 	}
 </style>
