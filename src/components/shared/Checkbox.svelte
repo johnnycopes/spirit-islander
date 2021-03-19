@@ -74,6 +74,10 @@
 		opacity: 0;
 	}
 
+	input:focus ~ .checkbox {
+		background: var(--gray-400);
+	}
+
 	// Checkmark (indeterminate)
 	input:indeterminate ~ .checkbox::after {
 		display: block;
@@ -94,9 +98,5 @@
     border: solid var(--white);
     border-width: 0 2px 2px 0;
     transform: rotate(45deg);
-	}
-
-	input:focus ~ .checkbox {
-		background: var(--blue-300);
 	}
 </style>

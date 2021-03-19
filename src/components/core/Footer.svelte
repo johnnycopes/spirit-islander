@@ -20,7 +20,6 @@
 		justify-content: center;
 		align-items: center;
 		height: var(--footer-height);
-		margin-bottom: 36px;
 		background: var(--gray-50);
 		color: var(--gray-600);
 		font-size: 16px;

@@ -15,6 +15,7 @@
 		padding-bottom: 64px;
 		max-width: 1024px;
 		min-height: calc(100% - var(--header-height) - var(--footer-height));
+		user-select: none;
 	}
 
 	:global(.page-content) {

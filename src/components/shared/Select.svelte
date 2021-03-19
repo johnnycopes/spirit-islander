@@ -33,9 +33,5 @@
 		font-size: 20px;
 		border: 0;
 		border-radius: var(--border-radius);
-
-		&:focus {
-			outline: 4px solid var(--blue-300);
-		}
 	}	
 </style>
