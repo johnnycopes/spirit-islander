@@ -1,7 +1,9 @@
 :root {
 	--font:  'Inconsolata', monospace;
-	--edge-height: 64px;
+	--header-height: 64px;
+	--footer-height: 96px;
 	--border-radius: 2px;
+	--downward-box-shadow: 0px 1px 2px hsla(0, 0%, 0%, .2);
 	--white: #fff;
 	--gray-50: hsl(192, 10%, 12%);
 	--gray-100: hsl(192, 10%, 16%);
@@ -14,6 +16,7 @@
 	--red-200: hsl(3, 60%, 82%);
 	--blue-100: hsl(192, 70%, 35%);
 	--blue-200: hsl(192, 70%, 41%);
+	--blue-300: hsl(192, 70%, 46%);
 	--yellow-100: hsl(55, 89%, 79%);
 	--green-100: hsl(85, 40%, 53%);
 }

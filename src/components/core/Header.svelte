@@ -21,9 +21,9 @@
 	header {
 		display: flex;
 		justify-content: space-between;
-		height: var(--edge-height);
+		height: var(--header-height);
 		background: var(--gray-200);
-		border-bottom: 1px solid var(--gray-300);
+		box-shadow: 0px 1px 2px hsla(0, 0%, 0%, .2);
 	}
 	
 	.container {

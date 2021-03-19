@@ -22,6 +22,7 @@
 		flex-direction: column;
 		background: var(--gray-200);
 		border-radius: var(--border-radius);
+		box-shadow: var(--downward-box-shadow);
 
 		:global(.emblem) {
 			margin-left: 8px;
@@ -32,6 +33,7 @@
 		padding: 8px 16px;
 		background: var(--gray-300);
 		border-radius: var(--border-radius) var(--border-radius) 0 0;
+		box-shadow: var(--downward-box-shadow);
 		font-weight: 700;
 	}
 

@@ -28,9 +28,11 @@
 		outline: none;
 		cursor: pointer;
 		transition: 75ms background ease-in-out;
+		box-shadow: inset 0 1px 0 var(--blue-300), var(--downward-box-shadow);
 
 		&:hover {
 			background: var(--blue-100);
+			box-shadow: inset 0 1px 0 var(--blue-200), var(--downward-box-shadow);
 		}
 
 		&:disabled {
