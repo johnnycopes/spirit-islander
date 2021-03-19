@@ -22,13 +22,13 @@
 		color: var(--white);
 		border: 0;
 		border-radius: var(--border-radius);
+		box-shadow: inset 0 1px 0 var(--blue-300), var(--downward-box-shadow);
 		font-family: var(--font);
 		font-size: 20px;
 		font-weight: 700;
 		outline: none;
 		cursor: pointer;
 		transition: 75ms background ease-in-out;
-		box-shadow: inset 0 1px 0 var(--blue-300), var(--downward-box-shadow);
 
 		&:hover {
 			background: var(--blue-100);
@@ -38,6 +38,7 @@
 		&:disabled {
 			background: var(--gray-400);
 			color: var(--gray-600);
+			box-shadow: inset 0 1px 0 var(--gray-500), var(--downward-box-shadow);
 			cursor: default;
 		}
 	}
