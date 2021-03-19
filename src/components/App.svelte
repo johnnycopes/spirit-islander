@@ -56,13 +56,3 @@
 	/>
 {/if}
 <Footer />
-
-<style lang="scss">
-	main {
-		margin: 0 auto;
-		padding-top: 48px;
-		padding-bottom: 64px;
-		max-width: 1024px;
-		min-height: calc(100% - var(--header-height) - var(--footer-height));
-	}
-</style>

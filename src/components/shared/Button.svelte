@@ -30,7 +30,8 @@
 		cursor: pointer;
 		transition: 75ms background ease-in-out;
 
-		&:hover {
+		&:hover,
+		&:focus {
 			background: var(--blue-100);
 			box-shadow: inset 0 1px 0 var(--blue-200), var(--downward-box-shadow);
 		}

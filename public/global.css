@@ -36,7 +36,6 @@ body {
 	font-family: var(--font);
 	font-weight: 400;
 	font-size: 20px;
-	user-select: none;
 }
 
 html, body, h1, h2, h3, h4, h5, h6, ul, ol, li, p {

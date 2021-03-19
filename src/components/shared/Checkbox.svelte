@@ -62,7 +62,7 @@
 
 		// Default checkmark (unchecked)
 		&::after {
-			content: "";
+			content: "";	
 			position: absolute;
 			display: none;
 		}
@@ -70,9 +70,7 @@
 
 	// Hide the default checkbox input
 	input {
-		display: none;
 		position: absolute;
-		left: -100vh;
 		opacity: 0;
 	}
 
@@ -99,6 +97,6 @@
 	}
 
 	input:focus ~ .checkbox {
-		border: 1px solid var(--white);
+		background: var(--blue-300);
 	}
 </style>
