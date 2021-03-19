@@ -65,6 +65,6 @@
 		padding-top: 48px;
 		padding-bottom: 64px;
 		max-width: 1024px;
-		min-height: calc(100% - (var(--edge-height) * 2))
+		min-height: calc(100% - (var(--edge-height) * 2));
 	}
 </style>

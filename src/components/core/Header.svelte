@@ -23,6 +23,7 @@
 		justify-content: space-between;
 		height: var(--edge-height);
 		background: var(--gray-200);
+		border-bottom: 1px solid var(--gray-300);
 	}
 	
 	.container {
