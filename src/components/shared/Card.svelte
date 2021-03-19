@@ -33,7 +33,7 @@
 		padding: 8px 16px;
 		background: var(--gray-300);
 		border-radius: var(--border-radius) var(--border-radius) 0 0;
-		box-shadow: var(--downward-box-shadow);
+		box-shadow: inset 0 1px 0 hsl(192, 10%, 35%), var(--downward-box-shadow);
 		font-weight: 700;
 	}
 
