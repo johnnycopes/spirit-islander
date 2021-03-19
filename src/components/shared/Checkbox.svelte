@@ -39,11 +39,10 @@
 	
 	:global(.checkbox-label--disabled) {
 		font-style: italic;
-		color: darkgray;
+		color: var(--gray-600);
 	}
 
 	.container {
-		display: inline-block;
 		position: relative;
 
 		&:hover .checkbox {

@@ -1,5 +1,6 @@
 :root {
 	--font:  'Inconsolata', monospace;
+	--edge-height: 64px;
 	--border-radius: 2px;
 	--white: #fff;
 	--gray-50: hsl(192, 7%, 12%);

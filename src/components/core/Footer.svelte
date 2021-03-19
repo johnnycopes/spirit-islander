@@ -5,7 +5,7 @@
 <footer>
 	<p>
 		Made by <Link href="https://www.johnnycopes.com/">johnnycopes</Link>.
-		Fork or suggest edits on <Link href="https://github.com/johnnycopes/spirit-islander">GitHub</Link>.
+		Fork or suggest changes on <Link href="https://github.com/johnnycopes/spirit-islander">GitHub</Link>.
 	</p>
 	<p>
 		Spirit Island was created by R. Eric Reuss and is published by
@@ -17,8 +17,9 @@
 	footer {
 		display: flex;
 		flex-direction: column;
-		text-align: center;
-		padding: 16px;
+		justify-content: center;
+		align-items: center;
+		height: var(--edge-height);
 		margin-bottom: 36px;
 		background: var(--gray-50);
 		color: var(--gray-600);

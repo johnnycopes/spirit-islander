@@ -62,7 +62,9 @@
 <style lang="scss">
 	main {
 		margin: 0 auto;
-		padding-bottom: 48px;
+		padding-top: 48px;
+		padding-bottom: 64px;
 		max-width: 1024px;
+		min-height: calc(100% - (var(--edge-height) * 2))
 	}
 </style>

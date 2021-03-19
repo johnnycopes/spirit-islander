@@ -3,42 +3,50 @@
 </script>
 
 <header class="header">
-	<h1 class="name">
-		<span class="icon">
-			🏝️
-		</span>Spirit Islander
-	</h1>
-	<p class="description">A setup generator for the board game
-		<Link href="https://www.boardgamegeek.com/boardgame/162886/spirit-island">
-			Spirit Island
-		</Link>
-	</p>
+	<div class="container">
+		<h1 class="name">
+			<span class="icon">
+				🏝️
+			</span>Spirit Islander
+		</h1>
+		<p class="description">A setup generator for the board game
+			<Link href="https://www.boardgamegeek.com/boardgame/162886/spirit-island">
+				Spirit Island
+			</Link>
+		</p>
+	</div>
 </header>
 
 <style lang="scss">
 	header {
 		display: flex;
 		justify-content: space-between;
-		align-items: flex-end;
-		padding: 16px;
-		margin-bottom: 36px;
+		height: var(--edge-height);
 		background: var(--gray-200);
+	}
+	
+	.container {
+		width: 1024px;
+		margin: 0 auto;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
 	}
 
 	.name {
 		font-size: 30px;
-		line-height: 1;
 	}
 
 	.icon {
-    display: inline-block;
-    margin-right: 8px;
-    position: relative;
-		font-size: 21px;
-    bottom: 3px;
+		display: inline-block;
+		margin-right: 8px;
+		position: relative;
+		font-size: 24px;
+		bottom: 3px;
 	}
 
 	.description {
-		text-align: right;
+		position: relative;
+		top: 2px;
 	}
 </style>
