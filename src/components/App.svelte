@@ -36,27 +36,25 @@
 </script>
 
 <Header />
-<main>
-	{#if page === EPage.Config}
-		<Config {...config}
-			on:generate={(e) => {
-				page = EPage.GameSetup;
-				config = e.detail.config;
-				validCombos = e.detail.validCombos;
+{#if page === EPage.Config}
+	<Config {...config}
+		on:generate={(e) => {
+			page = EPage.GameSetup;
+			config = e.detail.config;
+			validCombos = e.detail.validCombos;
+			gameSetup = createGameSetup(config, validCombos);
+		}}
+	/>
+{:else if page === EPage.GameSetup && gameSetup && validCombos}
+	<GameSetup {...gameSetup}
+		on:reset={() => page = EPage.Config}
+		on:generate={() => {
+			if (validCombos) {
 				gameSetup = createGameSetup(config, validCombos);
-			}}
-		/>
-	{:else if page === EPage.GameSetup && gameSetup && validCombos}
-		<GameSetup {...gameSetup}
-			on:reset={() => page = EPage.Config}
-			on:generate={() => {
-				if (validCombos) {
-					gameSetup = createGameSetup(config, validCombos);
-				}
-			}}
-		/>
-	{/if}
-</main>
+			}
+		}}
+	/>
+{/if}
 <Footer />
 
 <style lang="scss">
