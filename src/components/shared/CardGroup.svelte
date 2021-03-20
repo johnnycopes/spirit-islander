@@ -9,15 +9,15 @@
 
 <div class="legend">
 	<h2 class="legend__header">
-		{name}
+	{name}
 	</h2>
 	<p class="legend__description">
 		{description}
 	</p>
 </div>
-<div class="card-group {className}">
+<section class="card-group {className}">
 	<slot></slot>
-</div>
+</section>
 
 <style lang="scss">
 	.legend {

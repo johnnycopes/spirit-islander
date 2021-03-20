@@ -246,6 +246,7 @@
 		}
 
 		:global(.adversaries) :global(.checkbox-item-level-1) {
+			padding-right: 8px;
 			flex: 0 0 50%;
 
 			@media screen and (min-width: 768px) {

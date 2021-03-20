@@ -68,3 +68,20 @@ html, body, h1, h2, h3, h4, ul, ol, li, p {
 		font-size: 20px;
 	}
 }
+
+/* Custom scrollbar */
+body::-webkit-scrollbar-track {
+	background-color: var(--gray-100);
+	border-radius: var(--border-radius);
+}
+
+body::-webkit-scrollbar {
+	width: 10px;
+	background-color: var(--gray-100);
+	border-radius: var(--border-radius);
+}
+
+body::-webkit-scrollbar-thumb {
+	background-color: var(--gray-400);
+	border-radius: var(--border-radius);
+}
