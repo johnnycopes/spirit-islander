@@ -35,17 +35,16 @@ body {
 	color: var(--white);
 	font-family: var(--font);
 	font-weight: 400;
-	font-size: 20px;
+	font-size: 16px;
 }
 
-html, body, h1, h2, h3, h4, h5, h6, ul, ol, li, p {
-	margin: 0;
-	padding: 0;
+h1, h2, h3, h4 {
+	font-weight: 400;
 }
 
-h1, h2, h3, h4, h5, h6 {
-	font-weight: normal;
-}
+h1 { font-size: 24px; }
+h2 { font-size: 20px; }
+h3 { font-size: 16px; }
 
 ul {
 	list-style: none;
@@ -53,4 +52,19 @@ ul {
 
 li:not(:last-child) {
 	margin-bottom: 4px;
+}
+
+html, body, h1, h2, h3, h4, ul, ol, li, p {
+	margin: 0;
+	padding: 0;
+}
+
+@media screen and (min-width: 768px) {
+	h1 { font-size: 30px; }
+	h2 { font-size: 24px; }
+	h3 { font-size: 20px; }
+	
+	body {
+		font-size: 20px;
+	}
 }

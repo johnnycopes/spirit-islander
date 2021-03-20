@@ -27,11 +27,16 @@
 <style lang="scss">
 	select {
 		width: 64px;
-		margin: 16px;
 		padding: 8px;
+		margin: 16px 8px;
+		font-size: 16px;
 		font-family: var(--font);
-		font-size: 20px;
 		border: 0;
 		border-radius: var(--border-radius);
-	}	
+
+		@media screen and (min-width: 768px) {
+			margin: 16px;
+			font-size: 20px;
+		}
+	}
 </style>

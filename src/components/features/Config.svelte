@@ -192,19 +192,28 @@
 
 		:global(.card-group.you) {
 			grid-template-areas:
-				"players difficulty expansions expansions";
+				"players players difficulty difficulty"
+				"expansions expansions expansions expansions";
+
+			@media screen and (min-width: 768px) {
+				grid-template-areas:
+					"players difficulty expansions expansions";
+			}
 		}
 
 		:global(.card-group.the-game) {
 			grid-template-areas:
 				"spirits spirits spirits spirits"
-				"maps maps scenarios scenarios"
-				"adversaries adversaries adversaries adversaries"
-		}
+				"maps maps maps maps"
+				"scenarios scenarios scenarios scenarios"
+				"adversaries adversaries adversaries adversaries";
 
-		:global(.button) {
-			margin: 0 auto;
-			width: 256px;
+			@media screen and (min-width: 768px) {
+				grid-template-areas:
+					"spirits spirits spirits spirits"
+					"maps maps scenarios scenarios"
+					"adversaries adversaries adversaries adversaries";
+			}
 		}
 
 		:global(.difficulty) {
@@ -216,11 +225,19 @@
 			}
 		}
 
-		:global(.expansions) :global(.checkboxes-level-1),
-		:global(.spirits) :global(.checkboxes-level-1),
-		:global(.adversaries) :global(.checkboxes-level-1) {
+		:global(.adversaries) :global(.checkboxes-level-1),
+		:global(.expansions) :global(.checkboxes-level-1) {
 			display: flex;
 			flex-wrap: wrap;
+		}
+
+
+		:global(.spirits) :global(.checkboxes-level-1),
+		:global(.adversaries) :global(.checkboxes-level-1) {
+			@media screen and (min-width: 768px) {
+				display: flex;
+				flex-wrap: wrap;
+			}
 		}
 
 		:global(.expansions) :global(.checkbox-item-level-1),
@@ -229,7 +246,11 @@
 		}
 
 		:global(.adversaries) :global(.checkbox-item-level-1) {
-			flex: 0 0 25%;
+			flex: 0 0 50%;
+
+			@media screen and (min-width: 768px) {
+				flex: 0 0 25%;
+			}
 		}
 	}
 </style>

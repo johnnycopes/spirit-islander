@@ -38,25 +38,25 @@
 			description="Details of your generated game setup"
 		>
 			<Card name="players">
-				<h4 class="card-header">
+				<h3 class="card-header">
 					Players
-				</h4>
+				</h3>
 				<p class="content datum">
 					{players}
 				</p>
 			</Card>
 			<Card name="difficulty">
-				<h4 class="card-header">
+				<h3 class="card-header">
 					Difficulty
-				</h4>
+				</h3>
 				<p class="content datum">
 					{difficulty}
 				</p>
 			</Card>
 			<Card name="expansions">
-				<h4 class="card-header">
+				<h3 class="card-header">
 					{pluralize(expansions.length, "Expansion")}
-				</h4>
+				</h3>
 				<ul class="content">
 					{#if expansions.length}
 						{#each expansions as expansion}
@@ -70,9 +70,9 @@
 				</ul>
 			</Card>
 			<Card name="spirits">
-				<h4 class="card-header">
+				<h3 class="card-header">
 					{pluralize(players, "Spirit")}
-				</h4>
+				</h3>
 				<ul class="content">
 					{#each spirits as spirit}
 						<li class="datum">
@@ -84,18 +84,18 @@
 			</Card>
 			
 			<Card name="map">
-				<h4 class="card-header">
+				<h3 class="card-header">
 					Map
-				</h4>
+				</h3>
 				<p class="content datum">
 					{map.name} <DifficultyEmblem value={getDifficulty(map.difficulty, expansions)} />
 				</p>
 			</Card>
 			
 			<Card name="scenario">
-				<h4 class="card-header">
+				<h3 class="card-header">
 					Scenario
-				</h4>
+				</h3>
 				<p class="content datum">
 					{scenario.name}
 					<DifficultyEmblem value={getDifficulty(scenario.difficulty, expansions)} />
@@ -104,9 +104,9 @@
 			</Card>
 			
 			<Card name="adversary">
-				<h4 class="card-header">
+				<h3 class="card-header">
 					Adversary
-				</h4>
+				</h3>
 				<p class="content datum">
 					{adversaryName}
 					{#if adversaryName !== "No Adversary"}
@@ -133,9 +133,19 @@
 
 		:global(.card-group.setup) {
 			grid-template-areas:
-				"players difficulty expansions expansions"
-				"spirits spirits map map"
-				"scenario scenario adversary adversary";
+				"players players difficulty difficulty"
+				"expansions expansions expansions expansions"
+				"spirits spirits spirits spirits"
+				"map map map map"
+				"scenario scenario scenario scenario"
+				"adversary adversary adversary adversary";
+
+			@media screen and (min-width: 768px) {
+				grid-template-areas:
+					"players difficulty expansions expansions"
+					"spirits spirits map map"
+					"scenario scenario adversary adversary";
+			}
 		}
 	}
 
@@ -144,8 +154,24 @@
 	}
 
 	.content {
-		padding: 16px;
+		padding: 16px 8px;
+
+		@media screen and (min-width: 768px) {
+			padding: 16px;
+		}
 	}
+
+	:global(.expansions) {
+		.content {
+			display: flex;
+			flex-wrap: wrap;
+		}
+
+		.datum {
+			flex: 0 0 50%;
+		}
+		
+	} 
 
 	.datum {
 		display: flex;

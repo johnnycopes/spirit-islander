@@ -1,5 +1,10 @@
 <script lang="ts">
+	import { onMount } from 'svelte';
 	import { fade } from 'svelte/transition';
+
+	onMount(() => {
+		window.scroll(0, 0);
+	})
 </script>
 
 <main class="page"
@@ -11,11 +16,25 @@
 <style lang="scss">
 	.page {
 		margin: 0 auto;
-		padding-top: 48px;
-		padding-bottom: 64px;
+		padding-top: 24px;
+		padding-bottom: 48px;
+		width: calc(100% - 16px);
 		max-width: 1024px;
 		min-height: calc(100% - var(--header-height) - var(--footer-height));
 		user-select: none;
+
+		@media screen and (min-width: 768px) {
+			padding-top: 48px;
+			padding-bottom: 64px;
+		}
+
+		:global(.card-group) {
+			margin-bottom: 36px;
+
+			@media screen and (min-width: 768px) {
+				margin-bottom: 48px;
+			}
+		}
 	}
 
 	:global(.page-content) {
@@ -27,7 +46,6 @@
 		justify-content: center;
 
 		:global(.button) {
-			width: 192px;
 
 			&:not(:last-of-type) {
 				margin-right: 8px;

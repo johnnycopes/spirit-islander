@@ -19,11 +19,18 @@
 		flex-direction: column;
 		justify-content: center;
 		align-items: center;
+		text-align: center;
 		height: var(--footer-height);
+		padding: 0 8px;
 		background: var(--gray-50);
 		color: var(--gray-600);
-		font-size: 16px;
+		font-size: 12px;
 		box-shadow: inset 0 2px 2px hsla(0, 0%, 0%, 0.1);
+		line-height: 1.3;
+		
+		@media screen and (min-width: 768px) {
+			font-size: 16px;
+		}
 
 		p:not(:last-of-type) {
 			margin-bottom: 8px;
