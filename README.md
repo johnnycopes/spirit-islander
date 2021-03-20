@@ -2,15 +2,15 @@
 
 ### Live site: [https://www.spiritislander.com](https://www.spiritislander.com)
 
-This is a setup generator for the board game [Spirit Island](https://www.boardgamegeek.com/boardgame/162886/spirit-island) by R. Eric Reuss. Spirit Island is a modular game with many different ways a player can configure the setup at the outset to add interesting variety and challenge. This tool removes the burden of having to calculate these game setups manually by instantaneously generating randomized setups that adhere to the player's prefences.
+This is a setup generator for the board game [Spirit Island](https://www.boardgamegeek.com/boardgame/162886/spirit-island) by R. Eric Reuss. Spirit Island is a modular game with many different configurations that add interesting variety and challenge. This tool removes the burden of having to calculate these configurations manually by instantaneously generating randomized game setups that adhere to the player's prefences.
 
 Spirit Islander is built with [Svelte](https://svelte.dev/) and [TypeScript](https://www.typescriptlang.org/).
 
 #### Future Improvements
 
-1. Save the user's preferences is their browser's local storage so that the form field choices will persist on a page refresh
+1. Save the user's preferences is their browser's local storage so that the configuration preferences will persist on page refresh
 1. Enable shift + click usage to select/deselect a range of checkboxes at once
-1. A "Play" feature accessible from the Game Setup screen that has a victory/defeat calculator so that the user can tally their final game score
+1. A "Play" feature accessible from the Game Setup screen that has a victory/defeat calculator so that the player can tally their final game score
 
 #### Goals of this project:
 
