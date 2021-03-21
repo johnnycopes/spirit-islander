@@ -1,19 +1,22 @@
 <script lang="ts">
 	import { createEventDispatcher } from "svelte";
+	import BoardEmblem from "@components/shared/BoardEmblem.svelte";
 	import Button from "@components/shared/Button.svelte";
 	import Card from "@components/shared/Card.svelte";
 	import CardGroup from "@components/shared/CardGroup.svelte";
 	import DifficultyEmblem from "@components/shared/DifficultyEmblem.svelte";
 	import ExpansionEmblem from "@components/shared/ExpansionEmblem.svelte";
 	import Page from "@components/shared/Page.svelte";
+	import Separator from "@components/shared/Separator.svelte";
 	import { getAdversaryById } from "@functions/get-adversary-by-id";
 	import { getDifficulty } from "@functions/get-difficulty";
 	import { pluralize } from "@functions/utility/pluralize";
-	import type { IAdversaryLevel } from "@models/game/adversaries";
+	import type { ExpansionName } from "@models/game/expansions";
 	import type { Players } from "@models/game/players";
 	import type { Difficulty } from "@models/game/difficulty";
+	import type { IAdversaryLevel } from "@models/game/adversaries";
+	import type { IBoard } from "@models/game/board";
 	import type { IMap } from "@models/game/maps";
-	import type { ExpansionName } from "@models/game/expansions";
 	import type { IScenario } from "@models/game/scenarios";
 	import type { ISpirit } from "@models/game/spirits";
 
@@ -21,11 +24,12 @@
 		reset: void;
 		generate: void;
 	}>();
+	export let expansions: ExpansionName[];
 	export let players: Players;
 	export let difficulty: Difficulty;
 	export let spirits: ISpirit[];
-	export let expansions: ExpansionName[];
 	export let map: IMap;
+	export let boards: IBoard[];
 	export let adversary: IAdversaryLevel;
 	export let scenario: IScenario;
 
@@ -71,11 +75,15 @@
 			</Card>
 			<Card name="spirits">
 				<h3 class="card-header">
+					{pluralize(players, "Board")}
+					<Separator />
 					{pluralize(players, "Spirit")}
 				</h3>
 				<ul class="content">
-					{#each spirits as spirit}
+					{#each spirits as spirit, index}
 						<li class="datum">
+							<BoardEmblem value={boards[index].name} />
+							<Separator />
 							{spirit.name}
 							<ExpansionEmblem value={spirit.expansion} />
 						</li>
@@ -158,6 +166,13 @@
 
 		@media screen and (min-width: 768px) {
 			padding: 16px;
+		}
+
+		:global(.separator) {
+			flex-shrink: 0;
+			margin-left: 12px;
+			margin-right: 10px;
+			border-color: var(--gray-300);
 		}
 	}
 

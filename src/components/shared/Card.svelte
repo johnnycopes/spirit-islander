@@ -27,6 +27,10 @@
 		:global(.emblem) {
 			margin-left: 8px;
 		}
+
+		:global(.board-emblem) {
+			margin-left: 0;
+		}
 	}
 
 	:global(.card-header) {
@@ -34,9 +38,13 @@
 		background: var(--gray-300);
 		border-radius: var(--border-radius) var(--border-radius) 0 0;
 		box-shadow: inset 0 1px 0 hsl(192, 10%, 35%), var(--downward-box-shadow);
+
+		:global(.separator) {
+			margin: 0 2px;
+		}
 		
 		@media screen and (min-width: 768px) {
-			padding: 8px 16px;
+			padding: 8px 14px;
 		}
 	}
 
