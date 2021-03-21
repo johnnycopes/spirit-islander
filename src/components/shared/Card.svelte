@@ -26,6 +26,7 @@
 
 		:global(.emblem) {
 			margin-left: 8px;
+			flex-shrink: 0;
 		}
 
 		:global(.board-emblem) {

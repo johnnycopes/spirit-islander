@@ -82,7 +82,10 @@
 				<ul class="content">
 					{#each spirits as spirit, index}
 						<li class="datum">
-							<BoardEmblem value={boards[index].name} />
+							<BoardEmblem
+								board={boards[index]}
+								mapName={map.name}
+							/>
 							<Separator />
 							{spirit.name}
 							<ExpansionEmblem value={spirit.expansion} />
@@ -169,7 +172,6 @@
 		}
 
 		:global(.separator) {
-			flex-shrink: 0;
 			margin-left: 12px;
 			margin-right: 10px;
 			border-color: var(--gray-300);
