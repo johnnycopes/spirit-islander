@@ -31,6 +31,7 @@
 	import type { SpiritName } from "@models/game/spirits";
 	import {
 		createAdversariesModel,
+		createBoardsModel,
 		createMapsModel,
 		createScenariosModel,
 		createSpiritsModel,
@@ -58,12 +59,16 @@
 		expansions, players, difficulty, mapNames, boardNames, spiritNames, scenarioNames, adversaryNamesAndIds
 	}};
 	$: { validCombos = getValidCombos(config) };
+	$: jaggedEarthSelected = expansions.includes("Jagged Earth");
+	$: playersError = !jaggedEarthSelected && players > 4;
 	$: spiritsError = players > spiritNames.length;
 	$: mapsError = !mapNames.length;
+	$: boardsError = players > boardNames.length;
 	$: scenariosError = !scenarioNames.length;
 	$: adversariesError = !adversaryNamesAndIds.length;
 	$: difficultyError = !validCombos.length;
-	$: formDisabled = spiritsError || mapsError || scenariosError || adversariesError || difficultyError;
+	$: formDisabled =
+		playersError || spiritsError || mapsError || boardsError || scenariosError || adversariesError || difficultyError;
 
 	// When expansions are selected, update models to include items from selected expansions
 	$: {
@@ -77,33 +82,19 @@
 	function updateModels(expansions: ExpansionName[]): void {
 		spiritNames = createUpdatedModel(createSpiritsModel, spiritNames, expansions);
 		mapNames = createUpdatedModel(createMapsModel, mapNames, expansions);
+		boardNames = createUpdatedModel(createBoardsModel, boardNames, expansions);
 		scenarioNames = createUpdatedModel(createScenariosModel, scenarioNames, expansions);
 		adversaryNamesAndIds = createUpdatedModel(createAdversariesModel, adversaryNamesAndIds, expansions);
 	}
 </script>
 
 <Page>
-	<form class="config page-content">
+	<form class="page-content config"
+		class:jagged-earth={jaggedEarthSelected}
+	>
 		<CardGroup name="You"
 			description="What are you playing with?"
 		>
-			<Card name="players">
-				<Select label="Players"
-					options={createArray(expansions.includes("Jagged Earth") ? 6 : 4)}
-					bind:value={players}
-				/>
-			</Card>
-	
-			<Card name="difficulty"
-				error={difficultyError}
-				errorMessage="Combination of selected maps, adversaries, and scenarios cannot make a game with level {difficulty} difficulty"
-			>
-				<Select label="Difficulty"
-					options={createArray(11, 0)}
-					bind:value={difficulty}
-				/>
-			</Card>
-			
 			<Card name="expansions">
 				<CheckboxesGroup title="Expansions"
 					items={EXPANSIONS}
@@ -112,6 +103,26 @@
 				>
 					{expansion}
 				</CheckboxesGroup>
+			</Card>
+
+			<Card name="players"
+				error={playersError}
+				errorMessage="Cannot generate a setup with more than 4 players unless playing with the Jagged Earth expansion"
+			>
+				<Select label="Players"
+					options={createArray(6)}
+					bind:value={players}
+				/>
+			</Card>
+	
+			<Card name="difficulty"
+				error={difficultyError}
+				errorMessage="Combination of selected maps, adversaries, and scenarios cannot generate a setup with level {difficulty} difficulty"
+			>
+				<Select label="Difficulty"
+					options={createArray(11, 0)}
+					bind:value={difficulty}
+				/>
 			</Card>
 		</CardGroup>
 	
@@ -147,8 +158,8 @@
 			</Card>
 	
 			<Card name="boards"
-				error={false}
-				errorMessage="At least 1 option must be selected"
+				error={boardsError}
+				errorMessage="At least {players} {pluralize(players, "board")} must be selected (must match or exceed player count)"
 			>
 				<CheckboxesGroup title="Boards"
 					items={getOptions(BOARDS, expansions)}
@@ -237,6 +248,7 @@
 			}
 		}
 
+		:global(.players),
 		:global(.difficulty) {
 			position: relative;
 
@@ -247,8 +259,9 @@
 			}
 		}
 
-		:global(.adversaries) :global(.checkboxes-level-1),
-		:global(.expansions) :global(.checkboxes-level-1) {
+		:global(.expansions) :global(.checkboxes-level-1),
+		:global(.boards) :global(.checkboxes-level-1),
+		:global(.adversaries) :global(.checkboxes-level-1) {
 			display: flex;
 			flex-wrap: wrap;
 		}
@@ -264,7 +277,11 @@
 
 		:global(.expansions) :global(.checkbox-item-level-1),
 		:global(.spirits) :global(.checkbox-item-level-1) {
-			flex: 1 0 50%;
+			flex: 0 0 50%;
+		}
+
+		:global(.boards) :global(.checkbox-item-level-1) {
+			flex: 0 0 25%;
 		}
 
 		:global(.adversaries) :global(.checkbox-item-level-1) {
@@ -274,6 +291,12 @@
 			@media screen and (min-width: 768px) {
 				flex: 0 0 25%;
 			}
+		}
+	}
+
+	.config.jagged-earth {
+		:global(.boards) :global(.checkbox-item-level-1) {
+			flex: 0 0 33.33%;
 		}
 	}
 </style>

@@ -33,7 +33,7 @@
 </script>
 
 <Page>
-	<div class="game-setup page-content">
+	<div class="page-content game-setup">
 		<CardGroup name="Setup"
 			description="Details of your generated game setup"
 		>
