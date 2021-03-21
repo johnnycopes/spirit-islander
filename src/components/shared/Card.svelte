@@ -43,12 +43,17 @@
 	:global(.card-error) {
 		display: inline-block;
 		align-self: flex-start;
-		margin: 4px 16px 16px;
-		padding: 8px 16px;
+		margin: 4px 8px 8px;
+		padding: 8px;
 		background: var(--red-200);
 		color: var(--red-100);
 		border-radius: var(--border-radius);
 		font-weight: bold;
 		font-size: 16px;
+
+		@media screen and (min-width: 768px) {
+			margin: 4px 16px 16px;
+			padding: 8px 16px;
+		}
 	}
 </style>

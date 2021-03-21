@@ -222,6 +222,7 @@
 			:global(.card-error) {
 				position: absolute;
 				top: calc(100% - 14px);
+				z-index: 100;
 			}
 		}
 
