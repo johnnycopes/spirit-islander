@@ -19,14 +19,24 @@ export const SCENARIOS: IScenario[] = [
 		expansion: "Branch & Claw",
 	},
 	{
-		name: "Elemental Invocation",
+		name: "A Diversity of Spirits",
 		difficulty: 0,
-		expansion: "Jagged Earth",
+		expansion: "Promo Pack 2",
 	},
 	{
 		name: "Powers Long Forgotten",
 		difficulty: 1,
 		expansion: "Branch & Claw",
+	},
+	{
+		name: "Elemental Invocation",
+		difficulty: 0,
+		expansion: "Jagged Earth",
+	},
+	{
+		name: "Varied Terrains",
+		difficulty: 2,
+		expansion: "Promo Pack 2",
 	},
 	{
 		name: "Despicable Thief",

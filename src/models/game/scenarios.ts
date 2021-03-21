@@ -3,6 +3,7 @@ import type { IExpansionOption } from "./expansions";
 
 export type ScenarioName =
 	"No Scenario" |
+	"A Diversity of Spirits" |
 	"Blitz" |
 	"Dahan Insurrection" |
 	"Despicable Thief" |
@@ -13,6 +14,7 @@ export type ScenarioName =
 	"Rituals of Terror" |
 	"Second Wave" |
 	"The Great River" |
+	"Varied Terrains" |
 	"Ward the Shores";
 
 export interface IScenario extends IDifficultyOption, IExpansionOption {
