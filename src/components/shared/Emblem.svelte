@@ -11,7 +11,9 @@
 <style lang="scss">
 	:global(.emblem) {
 		display: inline-flex;
-		padding: 2px 8px;
+		justify-content: center;
+		padding: 2px 0;
+		width: 30px;
 		font-size: 14px;
 		background: var(--gray-400);
 		border-radius: var(--border-radius);

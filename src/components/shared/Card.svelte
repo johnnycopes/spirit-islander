@@ -26,6 +26,11 @@
 
 		:global(.emblem) {
 			margin-left: 8px;
+			flex-shrink: 0;
+		}
+
+		:global(.board-emblem) {
+			margin-left: 0;
 		}
 	}
 
@@ -34,21 +39,30 @@
 		background: var(--gray-300);
 		border-radius: var(--border-radius) var(--border-radius) 0 0;
 		box-shadow: inset 0 1px 0 hsl(192, 10%, 35%), var(--downward-box-shadow);
+
+		:global(.separator) {
+			margin: 0 2px;
+		}
 		
 		@media screen and (min-width: 768px) {
-			padding: 8px 16px;
+			padding: 8px 14px;
 		}
 	}
 
 	:global(.card-error) {
 		display: inline-block;
 		align-self: flex-start;
-		margin: 4px 16px 16px;
-		padding: 8px 16px;
+		margin: 4px 8px 8px;
+		padding: 8px;
 		background: var(--red-200);
 		color: var(--red-100);
 		border-radius: var(--border-radius);
 		font-weight: bold;
 		font-size: 16px;
+
+		@media screen and (min-width: 768px) {
+			margin: 4px 16px 16px;
+			padding: 8px 16px;
+		}
 	}
 </style>

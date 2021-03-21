@@ -5,6 +5,7 @@
 	import GameSetup from "@components/features/GameSetup.svelte";
 	import { 
 		createAdversariesModel,
+		createBoardsModel,
 		createMapsModel,
 		createScenariosModel,
 		createSpiritsModel,
@@ -23,11 +24,12 @@
 
 	let page: EPage = EPage.Config;
 	let config: IConfig = {
+		expansions: [],
 		players: 1,
 		difficulty: 0,
-		expansions: [],
 		spiritNames: createSpiritsModel(),
 		mapNames: createMapsModel(),
+		boardNames: createBoardsModel(),
 		scenarioNames: createScenariosModel(),
 		adversaryNamesAndIds: createAdversariesModel(),
 	};

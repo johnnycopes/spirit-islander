@@ -1,19 +1,22 @@
 <script lang="ts">
 	import { createEventDispatcher } from "svelte";
+	import BoardEmblem from "@components/shared/BoardEmblem.svelte";
 	import Button from "@components/shared/Button.svelte";
 	import Card from "@components/shared/Card.svelte";
 	import CardGroup from "@components/shared/CardGroup.svelte";
 	import DifficultyEmblem from "@components/shared/DifficultyEmblem.svelte";
 	import ExpansionEmblem from "@components/shared/ExpansionEmblem.svelte";
 	import Page from "@components/shared/Page.svelte";
+	import Separator from "@components/shared/Separator.svelte";
 	import { getAdversaryById } from "@functions/get-adversary-by-id";
 	import { getDifficulty } from "@functions/get-difficulty";
 	import { pluralize } from "@functions/utility/pluralize";
-	import type { IAdversaryLevel } from "@models/game/adversaries";
+	import type { ExpansionName } from "@models/game/expansions";
 	import type { Players } from "@models/game/players";
 	import type { Difficulty } from "@models/game/difficulty";
+	import type { IAdversaryLevel } from "@models/game/adversaries";
+	import type { IBoard } from "@models/game/board";
 	import type { IMap } from "@models/game/maps";
-	import type { ExpansionName } from "@models/game/expansions";
 	import type { IScenario } from "@models/game/scenarios";
 	import type { ISpirit } from "@models/game/spirits";
 
@@ -21,11 +24,12 @@
 		reset: void;
 		generate: void;
 	}>();
+	export let expansions: ExpansionName[];
 	export let players: Players;
 	export let difficulty: Difficulty;
 	export let spirits: ISpirit[];
-	export let expansions: ExpansionName[];
 	export let map: IMap;
+	export let boards: IBoard[];
 	export let adversary: IAdversaryLevel;
 	export let scenario: IScenario;
 
@@ -33,26 +37,10 @@
 </script>
 
 <Page>
-	<div class="game-setup page-content">
+	<div class="page-content game-setup">
 		<CardGroup name="Setup"
 			description="Details of your generated game setup"
 		>
-			<Card name="players">
-				<h3 class="card-header">
-					Players
-				</h3>
-				<p class="content datum">
-					{players}
-				</p>
-			</Card>
-			<Card name="difficulty">
-				<h3 class="card-header">
-					Difficulty
-				</h3>
-				<p class="content datum">
-					{difficulty}
-				</p>
-			</Card>
 			<Card name="expansions">
 				<h3 class="card-header">
 					{pluralize(expansions.length, "Expansion")}
@@ -69,13 +57,36 @@
 					{/if}
 				</ul>
 			</Card>
+			<Card name="players">
+				<h3 class="card-header">
+					Players
+				</h3>
+				<p class="content datum">
+					{players}
+				</p>
+			</Card>
+			<Card name="difficulty">
+				<h3 class="card-header">
+					Difficulty
+				</h3>
+				<p class="content datum">
+					{difficulty}
+				</p>
+			</Card>
 			<Card name="spirits">
 				<h3 class="card-header">
+					{pluralize(players, "Board")}
+					<Separator />
 					{pluralize(players, "Spirit")}
 				</h3>
 				<ul class="content">
-					{#each spirits as spirit}
+					{#each spirits as spirit, index}
 						<li class="datum">
+							<BoardEmblem
+								board={boards[index]}
+								mapName={map.name}
+							/>
+							<Separator />
 							{spirit.name}
 							<ExpansionEmblem value={spirit.expansion} />
 						</li>
@@ -142,7 +153,7 @@
 
 			@media screen and (min-width: 768px) {
 				grid-template-areas:
-					"players difficulty expansions expansions"
+					"expansions expansions players difficulty"
 					"spirits spirits map map"
 					"scenario scenario adversary adversary";
 			}
@@ -158,6 +169,12 @@
 
 		@media screen and (min-width: 768px) {
 			padding: 16px;
+		}
+
+		:global(.separator) {
+			margin-left: 12px;
+			margin-right: 10px;
+			border-color: var(--gray-300);
 		}
 	}
 

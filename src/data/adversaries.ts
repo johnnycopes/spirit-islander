@@ -70,7 +70,7 @@ export const ADVERSARIES: IAdversary[] = [
 	},
 	{
 		name: "Scotland",
-		expansion: "Jagged Earth",
+		expansion: "Promo Pack 2",
 		levels: [
 			{ id: "sc-0", level: 0, difficulty: 1 },
 			{ id: "sc-1", level: 1, difficulty: 3 },
