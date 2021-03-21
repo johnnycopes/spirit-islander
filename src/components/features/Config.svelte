@@ -9,6 +9,7 @@
 	import Page from "@components/shared/Page.svelte";
 	import Select from "@components/shared/Select.svelte";
 	import { ADVERSARIES } from "@data/adversaries";
+	import { BOARDS } from "@data/boards";
 	import { EXPANSIONS } from "@data/expansions";
 	import { MAPS } from "@data/maps";
 	import { SCENARIOS } from "@data/scenarios";
@@ -19,6 +20,7 @@
 	import { getValidCombos } from "@functions/get-valid-combos";
 	import { pluralize } from "@functions/utility/pluralize";
 	import type { AdversaryName, AdversaryLevelId } from "@models/game/adversaries";
+	import type { BalancedBoardName } from "@models/game/board";
 	import type { Difficulty } from "@models/game/difficulty";
 	import type { ExpansionName } from "@models/game/expansions";
 	import type { ICombo } from "@models/combo.interface";
@@ -35,11 +37,12 @@
 		createUpdatedModel,
 	} from "@functions/create-model";
 
+	export let expansions: ExpansionName[];
 	export let players: Players;
 	export let difficulty: Difficulty;
-	export let expansions: ExpansionName[];
 	export let spiritNames: SpiritName[];
 	export let mapNames: MapName[];
+	export let boardNames: BalancedBoardName[]
 	export let scenarioNames: ScenarioName[];
 	export let adversaryNamesAndIds: (AdversaryName | AdversaryLevelId)[];
 	const dispatcher = createEventDispatcher<{
@@ -51,7 +54,9 @@
 
 	let config: IConfig;
 	let validCombos: ICombo[];
-	$: { config = { players, expansions, difficulty, mapNames, spiritNames, scenarioNames, adversaryNamesAndIds }};
+	$: { config = {
+		expansions, players, difficulty, mapNames, boardNames, spiritNames, scenarioNames, adversaryNamesAndIds
+	}};
 	$: { validCombos = getValidCombos(config) };
 	$: spiritsError = players > spiritNames.length;
 	$: mapsError = !mapNames.length;
@@ -84,7 +89,7 @@
 		>
 			<Card name="players">
 				<Select label="Players"
-					options={createArray(4)}
+					options={createArray(expansions.includes("Jagged Earth") ? 6 : 4)}
 					bind:value={players}
 				/>
 			</Card>
@@ -126,7 +131,7 @@
 					{spirit.name} <ExpansionEmblem value={spirit.expansion} />
 				</CheckboxesGroup>
 			</Card>
-	
+
 			<Card name="maps"
 				error={mapsError}
 				errorMessage="At least 1 option must be selected"
@@ -138,6 +143,36 @@
 					bind:model={mapNames}
 				>
 					{map.name} <DifficultyEmblem value={getDifficulty(map.difficulty, expansions)} />
+				</CheckboxesGroup>
+			</Card>
+	
+			<Card name="boards"
+				error={false}
+				errorMessage="At least 1 option must be selected"
+			>
+				<CheckboxesGroup title="Boards"
+					items={getOptions(BOARDS, expansions)}
+					getId={(board) => board.name}
+					let:item={board}
+					bind:model={boardNames}
+				>
+					{board.name} <ExpansionEmblem value={board.expansion} />
+				</CheckboxesGroup>
+			</Card>
+
+			<Card name="scenarios"
+				error={scenariosError}
+				errorMessage="At least 1 option must be selected"
+			>
+				<CheckboxesGroup title="Scenarios"
+					items={getOptions(SCENARIOS, expansions)}
+					getId={(scenario) => scenario.name}
+					let:item={scenario}
+					bind:model={scenarioNames}
+				>
+					{scenario.name}
+					<DifficultyEmblem value={scenario.difficulty} />
+					<ExpansionEmblem value={scenario.expansion} />
 				</CheckboxesGroup>
 			</Card>
 	
@@ -159,22 +194,6 @@
 					{/if}
 				</CheckboxesGroup>
 			</Card>
-		
-			<Card name="scenarios"
-				error={scenariosError}
-				errorMessage="At least 1 option must be selected"
-			>
-				<CheckboxesGroup title="Scenarios"
-					items={getOptions(SCENARIOS, expansions)}
-					getId={(scenario) => scenario.name}
-					let:item={scenario}
-					bind:model={scenarioNames}
-				>
-					{scenario.name}
-					<DifficultyEmblem value={scenario.difficulty} />
-					<ExpansionEmblem value={scenario.expansion} />
-				</CheckboxesGroup>
-			</Card>
 		</CardGroup>
 	</form>
 
@@ -192,12 +211,12 @@
 
 		:global(.card-group.you) {
 			grid-template-areas:
-				"players players difficulty difficulty"
-				"expansions expansions expansions expansions";
+				"expansions expansions expansions expansions"
+				"players players difficulty difficulty";
 
 			@media screen and (min-width: 768px) {
 				grid-template-areas:
-					"players difficulty expansions expansions";
+					"expansions expansions players difficulty";
 			}
 		}
 
@@ -205,6 +224,7 @@
 			grid-template-areas:
 				"spirits spirits spirits spirits"
 				"maps maps maps maps"
+				"boards boards boards boards"
 				"scenarios scenarios scenarios scenarios"
 				"adversaries adversaries adversaries adversaries";
 
@@ -212,6 +232,7 @@
 				grid-template-areas:
 					"spirits spirits spirits spirits"
 					"maps maps scenarios scenarios"
+					"boards boards scenarios scenarios"
 					"adversaries adversaries adversaries adversaries";
 			}
 		}

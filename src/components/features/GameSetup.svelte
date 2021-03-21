@@ -37,22 +37,6 @@
 		<CardGroup name="Setup"
 			description="Details of your generated game setup"
 		>
-			<Card name="players">
-				<h3 class="card-header">
-					Players
-				</h3>
-				<p class="content datum">
-					{players}
-				</p>
-			</Card>
-			<Card name="difficulty">
-				<h3 class="card-header">
-					Difficulty
-				</h3>
-				<p class="content datum">
-					{difficulty}
-				</p>
-			</Card>
 			<Card name="expansions">
 				<h3 class="card-header">
 					{pluralize(expansions.length, "Expansion")}
@@ -68,6 +52,22 @@
 						<li>No Expansions</li>
 					{/if}
 				</ul>
+			</Card>
+			<Card name="players">
+				<h3 class="card-header">
+					Players
+				</h3>
+				<p class="content datum">
+					{players}
+				</p>
+			</Card>
+			<Card name="difficulty">
+				<h3 class="card-header">
+					Difficulty
+				</h3>
+				<p class="content datum">
+					{difficulty}
+				</p>
 			</Card>
 			<Card name="spirits">
 				<h3 class="card-header">
@@ -142,7 +142,7 @@
 
 			@media screen and (min-width: 768px) {
 				grid-template-areas:
-					"players difficulty expansions expansions"
+					"expansions expansions players difficulty"
 					"spirits spirits map map"
 					"scenario scenario adversary adversary";
 			}

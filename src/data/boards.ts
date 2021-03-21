@@ -2,29 +2,29 @@ import type { IBoard } from "@models/game/board";
 
 export const BOARDS: IBoard[] = [
 	{
-		balanced: "A",
-		thematic: "Northeast",
+		name: "A",
+		thematicName: "Northeast",
 	},
 	{
-		balanced: "B",
-		thematic: "East",
+		name: "B",
+		thematicName: "East",
 	},
 	{
-		balanced: "C",
-		thematic: "Northwest",
+		name: "C",
+		thematicName: "Northwest",
 	},
 	{
-		balanced: "D",
-		thematic: "West",
+		name: "D",
+		thematicName: "West",
 	},
 	{
-		balanced: "E",
-		thematic: "Southeast",
+		name: "E",
+		thematicName: "Southeast",
 		expansion: "Jagged Earth",
 	},
 	{
-		balanced: "F",
-		thematic: "Southwest",
+		name: "F",
+		thematicName: "Southwest",
 		expansion: "Jagged Earth",
 	},
 ];

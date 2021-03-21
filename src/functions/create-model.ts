@@ -1,8 +1,10 @@
 import { ADVERSARIES } from "@data/adversaries";
+import { BOARDS } from "@data/boards";
 import { MAPS } from "@data/maps";
 import { SCENARIOS } from "@data/scenarios";
 import { SPIRITS } from "@data/spirits";
 import type { AdversaryLevelId, AdversaryName } from "@models/game/adversaries";
+import type { BalancedBoardName } from "@models/game/board";
 import type { ExpansionName, IExpansionOption } from "@models/game/expansions";
 import type { MapName } from "@models/game/maps";
 import type { ScenarioName } from "@models/game/scenarios";
@@ -15,6 +17,10 @@ export function createSpiritsModel(expansions: ExpansionName[] = []): SpiritName
 
 export function createMapsModel(expansions: ExpansionName[] = []): MapName[] {
 	return createModel(MAPS, expansions);
+}
+
+export function createBoardsModel(expansions: ExpansionName[] = []): BalancedBoardName[] {
+	return createModel(BOARDS, expansions);
 }
 
 export function createScenariosModel(expansions: ExpansionName[] = []): ScenarioName[] {

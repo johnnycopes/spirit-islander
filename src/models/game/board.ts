@@ -17,6 +17,6 @@ export type ThematicBoardName =
 	"Southwest";
 
 export interface IBoard extends IExpansionOption {
-	balanced: BalancedBoardName;
-	thematic: ThematicBoardName;
+	name: BalancedBoardName;
+	thematicName: ThematicBoardName;
 }
