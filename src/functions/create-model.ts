@@ -51,12 +51,13 @@ export function createUpdatedModel<T>(
 	];
 }
 
-interface INameOption<T> {
-	name: T;
+interface IGenericExpansionOption<TName extends string> extends IExpansionOption {
+	name: TName;
 }
 
-interface IOption<TName> extends INameOption<TName>, IExpansionOption { }
-
-function createModel<TName>(options: IOption<TName>[], expansions: ExpansionName[]): TName[] {
+function createModel<TName extends string>(
+	options: IGenericExpansionOption<TName>[],
+	expansions: ExpansionName[]
+): TName[] {
 	return getOptions(options, expansions).map(option => option.name);
 }
