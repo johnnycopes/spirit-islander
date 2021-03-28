@@ -6,7 +6,7 @@ import { selectRandom } from "./utility/select-random";
 import { selectBoards } from "./select-boards";
 
 export function createGameSetup(config: IConfig, validCombos: ICombo[]): IGameSetup {
-	const [selectedMap, selectedAdversary, selectedScenario] = selectRandom(validCombos)[0];
+	const [selectedMap, selectedAdversaryLevel, selectedScenario] = selectRandom(validCombos)[0];
 	const randomSpiritNames = selectRandom(config.spiritNames, config.players);
 	const selectedSpirits = getSpiritsByName(randomSpiritNames);
 	const selectedBoards = selectBoards(selectedMap.name, config.players, config.boardNames);
@@ -19,6 +19,6 @@ export function createGameSetup(config: IConfig, validCombos: ICombo[]): IGameSe
 		boards: selectedBoards,
 		map: selectedMap,
 		scenario: selectedScenario,
-		adversary: selectedAdversary,
+		adversaryLevel: selectedAdversaryLevel,
 	}
 }

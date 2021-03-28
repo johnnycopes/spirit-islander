@@ -193,15 +193,16 @@
 			>
 				<CheckboxesGroup title="Adversaries"
 					items={getOptions(ADVERSARIES, expansions)}
-					getId={(entity => entity.name || entity.id)}
+					getId={(entity => entity.id || entity.name)}
 					getChildren={(entity) => entity.levels}
 					bind:model={adversaryNamesAndIds}
 					let:item={entity}
 				>
-					{#if entity.name}
-						{entity.name} <ExpansionEmblem value={entity.expansion} />
+					{entity.name}
+					{#if entity.id}
+						<DifficultyEmblem value={getDifficulty(entity.difficulty, expansions)} />
 					{:else}
-						Level {entity.level} <DifficultyEmblem value={getDifficulty(entity.difficulty, expansions)} />
+						<ExpansionEmblem value={entity.expansion} />
 					{/if}
 				</CheckboxesGroup>
 			</Card>

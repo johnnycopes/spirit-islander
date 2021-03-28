@@ -1,3 +1,5 @@
+import type { IOption } from "./option";
+
 export type ExpansionName =
 	"Branch & Claw" |
 	"Jagged Earth" |
@@ -5,6 +7,6 @@ export type ExpansionName =
 	"Promo Pack 2"
 ;
 
-export interface IExpansionOption {
+export interface IExpansionOption extends IOption {
 	expansion?: ExpansionName;
 }

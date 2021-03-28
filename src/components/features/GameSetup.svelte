@@ -30,10 +30,10 @@
 	export let spirits: ISpirit[];
 	export let map: IMap;
 	export let boards: IBoard[];
-	export let adversary: IAdversaryLevel;
+	export let adversaryLevel: IAdversaryLevel;
 	export let scenario: IScenario;
 
-	$: adversaryName = getAdversaryById(adversary.id);
+	$: adversaryName = getAdversaryById(adversaryLevel.id);
 </script>
 
 <Page>
@@ -121,8 +121,8 @@
 				<p class="content datum">
 					{adversaryName}
 					{#if adversaryName !== "No Adversary"}
-						Level {adversary.level}
-						<DifficultyEmblem value={getDifficulty(adversary.difficulty, expansions)} />
+						{adversaryLevel.name}
+						<DifficultyEmblem value={getDifficulty(adversaryLevel.difficulty, expansions)} />
 					{/if}
 				</p>
 			</Card>

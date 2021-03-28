@@ -1,4 +1,4 @@
-import type { Difficulty, IDifficultyOption } from "./difficulty";
+import type { IDifficultyOption } from "./difficulty";
 import type { IExpansionOption } from "./expansions";
 
 export type AdversaryName =
@@ -11,13 +11,19 @@ export type AdversaryName =
 	"Scotland" |
 	"Sweden";
 
+export type AdversaryLevelName =
+	"Level 0" |
+	"Level 1" |
+	"Level 2" |
+	"Level 3" |
+	"Level 4" |
+	"Level 5" |
+	"Level 6";
+
 export interface IAdversaryLevel extends IDifficultyOption {
 	id: AdversaryLevelId;
-	level: AdversaryLevelValue;
-	difficulty: Difficulty;
+	name: AdversaryLevelName;
 };
-
-export type AdversaryLevelValue = 0 | 1 | 2 | 3 | 4 | 5 | 6;
 
 export type AdversaryLevelId = "none" |
 	"bp-0" | "bp-1" | "bp-2" | "bp-3" | "bp-4" | "bp-5" | "bp-6" |

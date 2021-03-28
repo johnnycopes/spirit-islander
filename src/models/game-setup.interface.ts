@@ -19,5 +19,5 @@ export interface IGameSetup {
 	map: IMap;
 	boards: IBoard[];
 	scenario: IScenario;
-	adversary: IAdversaryLevel;
+	adversaryLevel: IAdversaryLevel;
 }
