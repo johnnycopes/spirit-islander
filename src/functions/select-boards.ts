@@ -1,7 +1,8 @@
+import { BOARDS } from "@data/boards";
 import type { BalancedBoardName, IBoard } from "@models/game/board";
 import type { MapName } from "@models/game/maps";
 import type { Players } from "@models/game/players";
-import { getBoardsByName } from "./get-boards-by-name";
+import { getOptionsByName } from "./get-options";
 import { selectRandom } from "./utility/select-random";
 
 export function selectBoards(
@@ -33,4 +34,8 @@ export function selectBoards(
 			return getBoardsByName(["D", "B", "A", "C", "F", "E"]);
 		}
 	};
+}
+
+function getBoardsByName(boardNames: BalancedBoardName[]): IBoard[] {
+	return getOptionsByName(BOARDS, boardNames);
 }

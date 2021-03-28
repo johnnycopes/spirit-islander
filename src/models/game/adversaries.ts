@@ -12,6 +12,7 @@ export type AdversaryName =
 	"Sweden";
 
 export type AdversaryLevelName =
+	"N/A" |
 	"Level 0" |
 	"Level 1" |
 	"Level 2" |

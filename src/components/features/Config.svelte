@@ -16,7 +16,7 @@
 	import { SPIRITS } from "@data/spirits";
 	import { createArray } from "@functions/utility/create-array";
 	import { getDifficulty } from "@functions/get-difficulty";
-	import { getOptions } from "@functions/get-options";
+	import { getOptionsByExpansion } from "@functions/get-options";
 	import { getValidCombos } from "@functions/get-valid-combos";
 	import { pluralize } from "@functions/utility/pluralize";
 	import type { AdversaryName, AdversaryLevelId } from "@models/game/adversaries";
@@ -134,7 +134,7 @@
 				errorMessage={`At least ${players} ${pluralize(players, "spirit")} must be selected`}
 			>
 				<CheckboxesGroup title="Spirits"
-					items={getOptions(SPIRITS, expansions)}
+					items={getOptionsByExpansion(SPIRITS, expansions)}
 					getId={(spirit) => spirit.name}
 					bind:model={spiritNames}
 					let:item={spirit}
@@ -148,7 +148,7 @@
 				errorMessage="At least 1 option must be selected"
 			>
 				<CheckboxesGroup title="Maps"
-					items={getOptions(MAPS, expansions)}
+					items={getOptionsByExpansion(MAPS, expansions)}
 					getId={(map) => map.name}
 					let:item={map}
 					bind:model={mapNames}
@@ -162,7 +162,7 @@
 				errorMessage="At least {players} {pluralize(players, "board")} must be selected (must match or exceed player count)"
 			>
 				<CheckboxesGroup title="Boards"
-					items={getOptions(BOARDS, expansions)}
+					items={getOptionsByExpansion(BOARDS, expansions)}
 					getId={(board) => board.name}
 					let:item={board}
 					bind:model={boardNames}
@@ -176,7 +176,7 @@
 				errorMessage="At least 1 option must be selected"
 			>
 				<CheckboxesGroup title="Scenarios"
-					items={getOptions(SCENARIOS, expansions)}
+					items={getOptionsByExpansion(SCENARIOS, expansions)}
 					getId={(scenario) => scenario.name}
 					let:item={scenario}
 					bind:model={scenarioNames}
@@ -192,7 +192,7 @@
 				errorMessage="At least 1 option must be selected"
 			>
 				<CheckboxesGroup title="Adversaries"
-					items={getOptions(ADVERSARIES, expansions)}
+					items={getOptionsByExpansion(ADVERSARIES, expansions)}
 					getId={(entity => entity.id || entity.name)}
 					getChildren={(entity) => entity.levels}
 					bind:model={adversaryNamesAndIds}

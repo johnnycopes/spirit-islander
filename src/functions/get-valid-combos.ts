@@ -18,7 +18,7 @@ export function getValidCombos(config: IConfig): [IMap, IAdversaryLevel, IScenar
 	const adversaries: IAdversaryLevel[] = [];
 
 	if (adversaryNamesAndIds.includes("No Adversary")) {
-		adversaries.push({ id: "none", level: 0, difficulty: 0 });
+		adversaries.push({ id: "none", name: "N/A", difficulty: 0 });
 	}
 	ADVERSARIES.forEach(adversary => {
 		const adversaryLevels = adversary.levels
