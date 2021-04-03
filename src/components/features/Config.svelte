@@ -30,12 +30,14 @@
 	import type { ScenarioName } from "@models/game/scenarios";
 	import type { SpiritName } from "@models/game/spirits";
 	import {
+		augmentModel,
 		createAdversariesModel,
 		createBoardsModel,
 		createMapsModel,
 		createScenariosModel,
 		createSpiritsModel,
 		createUpdatedModel,
+		purgeModel,
 	} from "@functions/create-model";
 
 	export let expansions: ExpansionName[];
@@ -70,21 +72,32 @@
 	$: formDisabled =
 		playersError || spiritsError || mapsError || boardsError || scenariosError || adversariesError || difficultyError;
 
-	// When expansions are selected, update models to include items from selected expansions
-	$: {
-		updateModels(expansions);
-	}
-
 	function onSubmit(): void {
 		dispatcher("generate", { config, validCombos });
 	}
 
-	function updateModels(expansions: ExpansionName[]): void {
-		spiritNames = createUpdatedModel(createSpiritsModel, spiritNames, expansions);
-		mapNames = createUpdatedModel(createMapsModel, mapNames, expansions);
-		boardNames = createUpdatedModel(createBoardsModel, boardNames, expansions);
-		scenarioNames = createUpdatedModel(createScenariosModel, scenarioNames, expansions);
-		adversaryNamesAndIds = createUpdatedModel(createAdversariesModel, adversaryNamesAndIds, expansions);
+	function updateModels(target: "Expansions" | ExpansionName): void {
+		if (target === "Expansions") {
+			spiritNames = createUpdatedModel(createSpiritsModel, spiritNames, expansions);
+			mapNames = createUpdatedModel(createMapsModel, mapNames, expansions);
+			boardNames = createUpdatedModel(createBoardsModel, boardNames, expansions);
+			scenarioNames = createUpdatedModel(createScenariosModel, scenarioNames, expansions);
+			adversaryNamesAndIds = createUpdatedModel(createAdversariesModel, adversaryNamesAndIds, expansions);
+		} else {
+			if (expansions.includes(target)) {
+				spiritNames = augmentModel(createSpiritsModel, spiritNames, target);
+				mapNames = augmentModel(createMapsModel, mapNames, target);
+				boardNames = augmentModel(createBoardsModel, boardNames, target);
+				scenarioNames = augmentModel(createScenariosModel, scenarioNames, target);
+				adversaryNamesAndIds = augmentModel(createAdversariesModel, adversaryNamesAndIds, target);
+			} else {
+				spiritNames = purgeModel(createSpiritsModel, spiritNames, target);
+				mapNames = purgeModel(createMapsModel, mapNames, target);
+				boardNames = purgeModel(createBoardsModel, boardNames, target);
+				scenarioNames = purgeModel(createScenariosModel, scenarioNames, target);
+				adversaryNamesAndIds = purgeModel(createAdversariesModel, adversaryNamesAndIds, target);
+			}
+		}
 	}
 </script>
 
@@ -98,8 +111,9 @@
 			<Card name="expansions">
 				<CheckboxesGroup title="Expansions"
 					items={EXPANSIONS}
-					let:item={expansion}
 					bind:model={expansions}
+					on:target={e => updateModels(e.detail)}
+					let:item={expansion}
 				>
 					{expansion}
 				</CheckboxesGroup>
@@ -150,8 +164,8 @@
 				<CheckboxesGroup title="Maps"
 					items={getOptionsByExpansion(MAPS, expansions)}
 					getId={(map) => map.name}
-					let:item={map}
 					bind:model={mapNames}
+					let:item={map}
 				>
 					{map.name} <DifficultyEmblem value={getDifficulty(map.difficulty, expansions)} />
 				</CheckboxesGroup>
@@ -164,8 +178,8 @@
 				<CheckboxesGroup title="Boards"
 					items={getOptionsByExpansion(BOARDS, expansions)}
 					getId={(board) => board.name}
-					let:item={board}
 					bind:model={boardNames}
+					let:item={board}
 				>
 					{board.name} <ExpansionEmblem value={board.expansion} />
 				</CheckboxesGroup>
@@ -178,8 +192,8 @@
 				<CheckboxesGroup title="Scenarios"
 					items={getOptionsByExpansion(SCENARIOS, expansions)}
 					getId={(scenario) => scenario.name}
-					let:item={scenario}
 					bind:model={scenarioNames}
+					let:item={scenario}
 				>
 					{scenario.name}
 					<DifficultyEmblem value={scenario.difficulty} />

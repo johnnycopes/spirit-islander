@@ -39,6 +39,7 @@
 		indeterminate={headerIndeterminate}
 		disabled={headerDisabled}
 		on:change={toggleAll}
+		on:target
 	>
 		{title}
 	</Checkbox>
@@ -51,6 +52,7 @@
 	{getChildren}
 	{model}
 	on:change={e => model = e.detail}
+	on:target
 	let:item
 >
 	<slot {item}></slot>
