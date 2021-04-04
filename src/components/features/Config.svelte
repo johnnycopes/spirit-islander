@@ -30,14 +30,12 @@
 	import type { ScenarioName } from "@models/game/scenarios";
 	import type { SpiritName } from "@models/game/spirits";
 	import {
-		augmentModel,
 		createAdversariesModel,
 		createBoardsModel,
 		createMapsModel,
 		createScenariosModel,
 		createSpiritsModel,
-		purgeModel,
-		recreateModel,
+		updateModel,
 	} from "@functions/create-model";
 
 	export let expansions: ExpansionName[];
@@ -77,30 +75,11 @@
 	}
 
 	function updateModels(target: "Expansions" | ExpansionName): void {
-		if (target === "Expansions") {
-			spiritNames = recreateModel(createSpiritsModel, spiritNames, expansions);
-			mapNames = recreateModel(createMapsModel, mapNames, expansions);
-			boardNames = recreateModel(createBoardsModel, boardNames, expansions);
-			scenarioNames = recreateModel(createScenariosModel, scenarioNames, expansions);
-			adversaryNamesAndIds = recreateModel(createAdversariesModel, adversaryNamesAndIds, expansions);
-		} else {
-			if (expansions.includes(target)) {
-				spiritNames = augmentModel(createSpiritsModel, spiritNames, [target]);
-				// spiritNames = recreateModel(createSpiritsModel, spiritNames, expansions);
-				mapNames = augmentModel(createMapsModel, mapNames, [target]);
-				boardNames = augmentModel(createBoardsModel, boardNames, [target]);
-				scenarioNames = augmentModel(createScenariosModel, scenarioNames, [target]);
-				adversaryNamesAndIds = augmentModel(createAdversariesModel, adversaryNamesAndIds, [target]);
-			} else {
-				spiritNames = purgeModel(createSpiritsModel, spiritNames, [target]);
-				// spiritNames = recreateModel(createSpiritsModel, spiritNames, expansions);
-				mapNames = purgeModel(createMapsModel, mapNames, [target]);
-				boardNames = purgeModel(createBoardsModel, boardNames, [target]);
-				scenarioNames = purgeModel(createScenariosModel, scenarioNames, [target]);
-				adversaryNamesAndIds = purgeModel(createAdversariesModel, adversaryNamesAndIds, [target]);
-			}
-		}
-		console.log(spiritNames);
+		spiritNames = updateModel(createSpiritsModel, spiritNames, expansions, target);
+		mapNames = updateModel(createMapsModel, mapNames, expansions, target);
+		boardNames = updateModel(createBoardsModel, boardNames, expansions, target);
+		scenarioNames = updateModel(createScenariosModel, scenarioNames, expansions, target);
+		adversaryNamesAndIds = updateModel(createAdversariesModel, adversaryNamesAndIds, expansions, target);
 	}
 </script>
 

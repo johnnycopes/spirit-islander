@@ -37,46 +37,20 @@ export function createAdversariesModel(expansions: ExpansionName[] = []): (Adver
 	}, [] as (AdversaryName | AdversaryLevelId)[])
 }
 
-export function recreateModel<TName>(
+export function updateModel<TName>(
 	createModel: (expansions?: ExpansionName[]) => TName[],
 	existingModel: TName[],
 	expansions: ExpansionName[],
+	target: "Expansions" | ExpansionName
 ): TName[] {
-	const expansionItemNames = getExpansionItemNames(createModel, expansions);
-	const allowedItemNames = createModel(expansions);
-	return [
-		...existingModel.filter(name => allowedItemNames.includes(name)),
-		...expansionItemNames
-	];
-}
-
-export function augmentModel<TName>(
-	createModel: (expansions?: ExpansionName[]) => TName[],
-	existingModel: TName[],
-	expansionsToAdd: ExpansionName[],
-): TName[] {
-	const expansionItemNames = getExpansionItemNames(createModel, expansionsToAdd);
-	return [
-		...existingModel,
-		...expansionItemNames,
-	];
-}
-
-export function purgeModel<TName>(
-	createModel: (expansions?: ExpansionName[]) => TName[],
-	existingModel: TName[],
-	expansionsToRemove: ExpansionName[],
-): TName[] {
-	const expansionItemNames = getExpansionItemNames(createModel, expansionsToRemove);
-	return existingModel.filter(name => !expansionItemNames.includes(name));
-}
-
-function getExpansionItemNames<TName>(
-	createModel: (expansions?: ExpansionName[]) => TName[],
-	expansions: ExpansionName[]
-): TName[] {
-	const baseItemNames = createModel();
-	return createModel(expansions).filter(name => !baseItemNames.includes(name));
+	if (target === "Expansions") {
+		return recreateModel(createModel, existingModel, expansions);
+	}
+	if (expansions.includes(target)) {
+		return augmentModel(createModel, existingModel, target);
+	} else {
+		return purgeModel(createModel, existingModel, target);
+	}
 }
 
 interface IGenericExpansionOption<TName extends string> extends IExpansionOption {
@@ -88,4 +62,46 @@ function createModel<TName extends string>(
 	expansions: ExpansionName[]
 ): TName[] {
 	return getOptionsByExpansion(options, expansions).map(option => option.name);
+}
+
+function recreateModel<TName>(
+	createModel: (expansions?: ExpansionName[]) => TName[],
+	existingModel: TName[],
+	expansions: ExpansionName[]
+): TName[] {
+	const expansionItemNames = getExpansionItemNames(createModel, expansions);
+	const allowedItemNames = createModel(expansions);
+	return [
+		...existingModel.filter(name => allowedItemNames.includes(name)),
+		...expansionItemNames
+	];
+}
+
+function augmentModel<TName>(
+	createModel: (expansions?: ExpansionName[]) => TName[],
+	existingModel: TName[],
+	expansionToAdd: ExpansionName,
+): TName[] {
+	const expansionItemNames = getExpansionItemNames(createModel, [expansionToAdd]);
+	return [
+		...existingModel,
+		...expansionItemNames,
+	];
+}
+
+function purgeModel<TName>(
+	createModel: (expansions?: ExpansionName[]) => TName[],
+	existingModel: TName[],
+	expansionToRemove: ExpansionName
+): TName[] {
+	const expansionItemNames = getExpansionItemNames(createModel, [expansionToRemove]);
+	return existingModel.filter(name => !expansionItemNames.includes(name));
+}
+
+function getExpansionItemNames<TName>(
+	createModel: (expansions?: ExpansionName[]) => TName[],
+	expansions: ExpansionName[]
+): TName[] {
+	const baseItemNames = createModel();
+	return createModel(expansions).filter(name => !baseItemNames.includes(name));
 }
