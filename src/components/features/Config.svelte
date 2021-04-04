@@ -36,8 +36,8 @@
 		createMapsModel,
 		createScenariosModel,
 		createSpiritsModel,
-		createUpdatedModel,
 		purgeModel,
+		recreateModel,
 	} from "@functions/create-model";
 
 	export let expansions: ExpansionName[];
@@ -78,26 +78,29 @@
 
 	function updateModels(target: "Expansions" | ExpansionName): void {
 		if (target === "Expansions") {
-			spiritNames = createUpdatedModel(createSpiritsModel, spiritNames, expansions);
-			mapNames = createUpdatedModel(createMapsModel, mapNames, expansions);
-			boardNames = createUpdatedModel(createBoardsModel, boardNames, expansions);
-			scenarioNames = createUpdatedModel(createScenariosModel, scenarioNames, expansions);
-			adversaryNamesAndIds = createUpdatedModel(createAdversariesModel, adversaryNamesAndIds, expansions);
+			spiritNames = recreateModel(createSpiritsModel, spiritNames, expansions);
+			mapNames = recreateModel(createMapsModel, mapNames, expansions);
+			boardNames = recreateModel(createBoardsModel, boardNames, expansions);
+			scenarioNames = recreateModel(createScenariosModel, scenarioNames, expansions);
+			adversaryNamesAndIds = recreateModel(createAdversariesModel, adversaryNamesAndIds, expansions);
 		} else {
 			if (expansions.includes(target)) {
-				spiritNames = augmentModel(createSpiritsModel, spiritNames, target);
-				mapNames = augmentModel(createMapsModel, mapNames, target);
-				boardNames = augmentModel(createBoardsModel, boardNames, target);
-				scenarioNames = augmentModel(createScenariosModel, scenarioNames, target);
-				adversaryNamesAndIds = augmentModel(createAdversariesModel, adversaryNamesAndIds, target);
+				spiritNames = augmentModel(createSpiritsModel, spiritNames, [target]);
+				// spiritNames = recreateModel(createSpiritsModel, spiritNames, expansions);
+				mapNames = augmentModel(createMapsModel, mapNames, [target]);
+				boardNames = augmentModel(createBoardsModel, boardNames, [target]);
+				scenarioNames = augmentModel(createScenariosModel, scenarioNames, [target]);
+				adversaryNamesAndIds = augmentModel(createAdversariesModel, adversaryNamesAndIds, [target]);
 			} else {
-				spiritNames = purgeModel(createSpiritsModel, spiritNames, target);
-				mapNames = purgeModel(createMapsModel, mapNames, target);
-				boardNames = purgeModel(createBoardsModel, boardNames, target);
-				scenarioNames = purgeModel(createScenariosModel, scenarioNames, target);
-				adversaryNamesAndIds = purgeModel(createAdversariesModel, adversaryNamesAndIds, target);
+				spiritNames = purgeModel(createSpiritsModel, spiritNames, [target]);
+				// spiritNames = recreateModel(createSpiritsModel, spiritNames, expansions);
+				mapNames = purgeModel(createMapsModel, mapNames, [target]);
+				boardNames = purgeModel(createBoardsModel, boardNames, [target]);
+				scenarioNames = purgeModel(createScenariosModel, scenarioNames, [target]);
+				adversaryNamesAndIds = purgeModel(createAdversariesModel, adversaryNamesAndIds, [target]);
 			}
 		}
+		console.log(spiritNames);
 	}
 </script>
 
