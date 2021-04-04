@@ -17,12 +17,6 @@
 	import type { IConfig } from "@models/config.interface";
 	import type { IGameSetup } from "@models/game-setup.interface";
 
-	// import { MOCK_CONFIG, MOCK_VALID_COMBOS, MOCK_GAME_SETUP } from "@debugging/mock-data";
-	// 	let page: EPage = EPage.GameSetup;
-	// 	let config: IConfig = MOCK_CONFIG;
-	// 	let validCombos: ICombo[] | undefined = MOCK_VALID_COMBOS;
-	// 	let gameSetup: IGameSetup | undefined = MOCK_GAME_SETUP;
-
 	let page: EPage = EPage.Config;
 	let config: IConfig = {
 		expansions: [],
