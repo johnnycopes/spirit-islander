@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { onMount } from "svelte";
 	import Header from "@components/core/Header.svelte";
 	import Footer from "@components/core/Footer.svelte";
 	import Config from "@components/features/Config.svelte";
@@ -35,6 +36,18 @@
 	};
 	let validCombos: ICombo[] | undefined;
 	let gameSetup: IGameSetup | undefined;
+
+	onMount(() => {
+		const configJSON = localStorage.getItem("SPIRIT_ISLANDER_CONFIG");
+		if (configJSON) {
+			config = JSON.parse(configJSON);
+		}
+	});
+
+	function setConfigInLocalStorage(config: IConfig): void {
+		const configJSON = JSON.stringify(config);
+		localStorage.setItem("SPIRIT_ISLANDER_CONFIG", configJSON);
+	}
 </script>
 
 <Header />
@@ -45,6 +58,7 @@
 			config = e.detail.config;
 			validCombos = e.detail.validCombos;
 			gameSetup = createGameSetup(config, validCombos);
+			setConfigInLocalStorage(config);
 		}}
 	/>
 {:else if page === EPage.GameSetup && gameSetup && validCombos}
