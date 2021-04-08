@@ -8,11 +8,17 @@ import type { BalancedBoardName } from "@models/game/board";
 import type { ExpansionName, IExpansionOption } from "@models/game/expansions";
 import type { MapName } from "@models/game/maps";
 import type { ScenarioName } from "@models/game/scenarios";
-import type { SpiritName } from "@models/game/spirits";
+import type { SpiritName, AspectName } from "@models/game/spirits";
 import { getOptionsByExpansion } from "./get-options";
 
-export function createSpiritsModel(expansions: ExpansionName[] = []): SpiritName[] {
-	return createModel(SPIRITS, expansions);
+export function createSpiritsModel(expansions: ExpansionName[] = []): (SpiritName | AspectName)[] {
+	return getOptionsByExpansion(SPIRITS, expansions).reduce((spiritsOrAspects, spirit) => {
+		spiritsOrAspects.push(spirit.name);
+		spirit.aspects?.forEach(aspect => {
+			spiritsOrAspects.push(aspect.name);
+		});
+		return spiritsOrAspects;
+	}, [] as (SpiritName | AspectName)[])
 }
 
 export function createMapsModel(expansions: ExpansionName[] = []): MapName[] {
