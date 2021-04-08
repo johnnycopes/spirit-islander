@@ -7,7 +7,9 @@ export function selectSpirits(
     quantity: number
 ) : (SpiritName | AspectName)[] {
     // Get distinct spirit names
-    const possibleSpiritNames = possibleNames.filter(n => SPIRITS.find(s => s.name == n) !== undefined);
+    const possibleSpiritNames = possibleNames.filter(n => 
+        SPIRITS.find(s => s.name == n) !== undefined || 
+        SPIRITS.find(s => s.aspects?.find(a => a.name == n)) !== undefined);
     // Select 1 random spirit for each player
     const spiritNames = selectRandom(possibleSpiritNames, quantity);
 
