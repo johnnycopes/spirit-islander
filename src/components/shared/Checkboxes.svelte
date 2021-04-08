@@ -73,6 +73,7 @@
 				indeterminate={calculateIndeterminate(item, model)}
 				disabled={getDisabled(item)}
 				on:change={e => onChange(e.detail, item)}
+				on:target
 			>
 				<slot {item}></slot>
 			</Checkbox>

@@ -7,6 +7,7 @@
 	export let indeterminate: boolean = false;
 	export let disabled: boolean = false;
 	const dispatcher = createEventDispatcher<{
+		target: string;
 		change: boolean;
 	}>();
 </script>
@@ -19,7 +20,10 @@
 		bind:checked={checked}
 		{indeterminate}
 		{disabled}
-		on:change={_ => dispatcher("change", checked)}
+		on:change={_ => {
+			dispatcher("change", checked);
+			dispatcher("target", id);
+		}}
 	/>
 	<div class="checkbox"></div>
 	<div class="checkbox-label"

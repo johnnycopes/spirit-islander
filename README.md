@@ -8,7 +8,6 @@ Spirit Islander is built with [Svelte](https://svelte.dev/) and [TypeScript](htt
 
 #### Future Improvements
 
-1. Save the user's preferences is their browser's local storage so that the configuration preferences will persist on page refresh
 1. Enable shift + click usage to select/deselect a range of checkboxes at once
 1. A "Play" feature accessible from the Game Setup screen that has a victory/defeat calculator so that the player can tally their final game score
 
