@@ -89,6 +89,10 @@
 							<Separator />
 							{spirit.name}
 							<ExpansionEmblem value={spirit.expansion} />
+							{#if spirit.aspects}
+								({spirit.aspects[0].name}
+								<ExpansionEmblem value={spirit.aspects[0].expansion} />)
+							{/if}
 						</li>
 					{/each}
 				</ul>

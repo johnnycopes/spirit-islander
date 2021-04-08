@@ -27,5 +27,24 @@ export type SpiritName =
 	"Volcano Looming High";
 
 export interface ISpirit extends IExpansionOption {
-	name: SpiritName;
+	name: SpiritName,
+	aspects?: IAspect[];
+}
+
+export type AspectName =
+	"None" |
+	"Immense" |
+	"Pandemonium" |
+	"Wind" |
+	"Sunshine" |
+	"Travel" |
+	"Amorphous" |
+	"Foreboding" |
+	"Madness" |
+	"Reach" |
+	"Might" |
+	"Resilience";
+
+export interface IAspect extends IExpansionOption {
+	name: AspectName;
 }

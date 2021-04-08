@@ -22,7 +22,7 @@
 		expansions: [],
 		players: 1,
 		difficulty: 0,
-		spiritNames: createSpiritsModel(),
+		spiritOrAspectNames: createSpiritsModel(),
 		mapNames: createMapsModel(),
 		boardNames: createBoardsModel(),
 		scenarioNames: createScenariosModel(),

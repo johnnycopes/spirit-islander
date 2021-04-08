@@ -37,11 +37,15 @@ export function getOptionsByExpansion<TOption extends IExpansionOption>(
 	options: TOption[],
 	expansions: ExpansionName[]
 ): TOption[] {
-	return options.filter(item => {
-		if (item.expansion) {
-			return expansions.includes(item.expansion);
-		} else {
-			return true;
-		}
-	});
+	if(options){
+		return options.filter(item => {
+			if (item.expansion) {
+				return expansions.includes(item.expansion);
+			} else {
+				return true;
+			}
+		});
+	} else {
+		return [];
+	}
 }

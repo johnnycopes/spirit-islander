@@ -28,7 +28,7 @@
 	import type { MapName } from "@models/game/maps";
 	import type { Players } from "@models/game/players";
 	import type { ScenarioName } from "@models/game/scenarios";
-	import type { SpiritName } from "@models/game/spirits";
+	import type { AspectName, SpiritName } from "@models/game/spirits";
 	import {
 		createAdversariesModel,
 		createBoardsModel,
@@ -41,7 +41,7 @@
 	export let expansions: ExpansionName[];
 	export let players: Players;
 	export let difficulty: Difficulty;
-	export let spiritNames: SpiritName[];
+	export let spiritOrAspectNames: (SpiritName | AspectName)[];
 	export let mapNames: MapName[];
 	export let boardNames: BalancedBoardName[]
 	export let scenarioNames: ScenarioName[];
@@ -56,12 +56,12 @@
 	let config: IConfig;
 	let validCombos: ICombo[];
 	$: { config = {
-		expansions, players, difficulty, mapNames, boardNames, spiritNames, scenarioNames, adversaryNamesAndIds
+		expansions, players, difficulty, mapNames, boardNames, spiritOrAspectNames, scenarioNames, adversaryNamesAndIds
 	}};
 	$: { validCombos = getValidCombos(config) };
 	$: jaggedEarthSelected = expansions.includes("Jagged Earth");
 	$: playersError = !jaggedEarthSelected && players > 4;
-	$: spiritsError = players > spiritNames.length;
+	$: spiritsError = players > spiritOrAspectNames.filter(n => SPIRITS.find(s => s.name == n) !== undefined).length;
 	$: mapsError = !mapNames.length;
 	$: boardsError = players > boardNames.length;
 	$: scenariosError = !scenarioNames.length;
@@ -75,7 +75,7 @@
 	}
 
 	function updateModels(target: "Expansions" | ExpansionName): void {
-		spiritNames = updateModel(createSpiritsModel, spiritNames, expansions, target);
+		spiritOrAspectNames = updateModel(createSpiritsModel, spiritOrAspectNames, expansions, target);
 		mapNames = updateModel(createMapsModel, mapNames, expansions, target);
 		boardNames = updateModel(createBoardsModel, boardNames, expansions, target);
 		scenarioNames = updateModel(createScenariosModel, scenarioNames, expansions, target);
@@ -131,11 +131,12 @@
 			>
 				<CheckboxesGroup title="Spirits"
 					items={getOptionsByExpansion(SPIRITS, expansions)}
-					getId={(spirit) => spirit.name}
-					bind:model={spiritNames}
-					let:item={spirit}
+					getId={(spiritOrAspect) => spiritOrAspect.name}
+					getChildren={(entity) => getOptionsByExpansion(entity.aspects, expansions)}
+					bind:model={spiritOrAspectNames}
+					let:item={spiritOrAspect}
 				>
-					{spirit.name} <ExpansionEmblem value={spirit.expansion} />
+					{spiritOrAspect.name} <ExpansionEmblem value={spiritOrAspect.expansion} />
 				</CheckboxesGroup>
 			</Card>
 

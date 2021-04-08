@@ -1,5 +1,6 @@
 import type { IConfig } from "@models/config.interface";
 import type { AdversaryName, AdversaryLevelId } from "@models/game/adversaries";
+import type { SpiritName, AspectName } from "@models/game/spirits";
 import { ADVERSARIES } from "@data/adversaries";
 import { BOARDS } from "@data/boards";
 import { EXPANSIONS } from "@data/expansions";
@@ -13,7 +14,11 @@ export const MOCK_CONFIG: IConfig = {
 	expansions: EXPANSIONS,
 	players: 4,
 	difficulty: 8,
-	spiritNames: SPIRITS.map(spirit => spirit.name),
+	spiritOrAspectNames: SPIRITS.reduce((model, spirit) => {
+		model.push(spirit.name);
+		spirit.aspects?.forEach(aspect => model.push(aspect.name));
+		return model;		
+	}, [] as (SpiritName | AspectName)[]),
 	mapNames: MAPS.map(map => map.name),
 	boardNames: BOARDS.map(board => board.name),
 	scenarioNames: SCENARIOS.map(scenario => scenario.name),
