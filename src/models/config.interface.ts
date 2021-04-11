@@ -14,7 +14,7 @@ import type { ScenarioName } from "./game/scenarios";
 export interface IConfig {
 	expansions: ExpansionName[];
 	players: Players;
-	difficultyRange: Difficulty[];
+	difficulty: Difficulty;
 	spiritNames: SpiritName[];
 	mapNames: MapName[];
 	boardNames: BalancedBoardName[];

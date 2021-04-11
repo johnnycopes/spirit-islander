@@ -28,12 +28,8 @@ export function getValidCombos(config: IConfig): [IMap, IAdversaryLevel, IScenar
 
 	return comboAnalyzer.getPossibleCombos(
 		[maps, adversaries, scenarios],
-		options => {
-			const [min, max] = config.difficultyRange;
-			const difficulty = options.reduce((accum, option) =>
-				accum + getDifficulty(option.difficulty, config.expansions),
-			0);
-			return difficulty >= min && difficulty <= max;
-		}
+		options => options.reduce((difficulty, option) =>
+			difficulty + getDifficulty(option.difficulty, config.expansions),
+		0) === config.difficulty
 	);
 }
