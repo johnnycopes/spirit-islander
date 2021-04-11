@@ -42,7 +42,7 @@
 
 	:global(.card-group) {
 		display: grid;
-		grid-template-columns: repeat(4, 1fr);
+		grid-template-columns: repeat(6, 1fr);
 		grid-template-rows: auto;
 		gap: 8px;
 	}

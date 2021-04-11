@@ -7,35 +7,33 @@
 	$: id = snakeCase(label);
 </script>
 
-<div class="card-header">
-	<label for={id}>
-		{label}
-	</label>
-</div>
+<!-- Expose the id so consumers can set up their own custom <label> -->
+<slot {id}></slot>
 
-<select {id}
-	name="players"
-	bind:value={value}
->
-	{#each options as option}
-		<option value={option}>
-			{option}
-		</option>
-	{/each}
-</select>
+<!-- Wrapper div gives consumers the opportunity to adjust menu container styling -->
+<div class="select">
+	<select
+		{id}
+		bind:value={value}
+	>
+		{#each options as option}
+			<option value={option}>
+				{option}
+			</option>
+		{/each}
+	</select>
+</div>
 
 <style lang="scss">
 	select {
 		width: 64px;
 		padding: 8px;
-		margin: 16px 8px;
 		font-size: 16px;
 		font-family: var(--font);
 		border: 0;
 		border-radius: var(--border-radius);
 
 		@media screen and (min-width: 768px) {
-			margin: 16px;
 			font-size: 20px;
 		}
 	}
