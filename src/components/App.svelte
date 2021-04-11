@@ -21,7 +21,7 @@
 	let config: IConfig = {
 		expansions: [],
 		players: 1,
-		difficultyRange: [0, 1],
+		difficulty: 0,
 		spiritNames: createSpiritsModel(),
 		mapNames: createMapsModel(),
 		boardNames: createBoardsModel(),

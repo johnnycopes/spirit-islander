@@ -4,7 +4,6 @@
   "scripts": {
     "build": "rollup -c",
     "dev": "rollup -c -w",
-    "deploy-test": "npm run build && cd public && surge . --domain https://si-test.surge.sh",
     "start": "sirv public",
     "validate": "svelte-check"
   },

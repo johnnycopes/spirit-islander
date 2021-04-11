@@ -38,7 +38,7 @@
 	:global(.checkbox-label) {
 		display: inline-flex;
 		align-items: center;
-		margin-left: 12px;
+		padding-left: 30px;
 	}
 	
 	:global(.checkbox-label--disabled) {
@@ -47,8 +47,6 @@
 	}
 
 	.container {
-		display: flex;
-		align-items: center;
 		position: relative;
 
 		&:hover .checkbox {
@@ -57,7 +55,10 @@
 	}
 
 	.checkbox {
-		position: relative;
+		position: absolute;
+		top: 50%;
+		transform: translateY(-50%);
+		left: 0;
 		height: 14px;
 		width: 14px;
 		background: var(--gray-500);
@@ -74,7 +75,6 @@
 	// Hide the default checkbox input
 	input {
 		position: absolute;
-		margin: 0;
 		opacity: 0;
 	}
 

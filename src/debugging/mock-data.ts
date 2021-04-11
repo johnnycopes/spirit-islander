@@ -12,7 +12,7 @@ import { getValidCombos } from "@functions/get-valid-combos";
 export const MOCK_CONFIG: IConfig = {
 	expansions: EXPANSIONS,
 	players: 4,
-	difficultyRange: [5, 8],
+	difficulty: 8,
 	spiritNames: SPIRITS.map(spirit => spirit.name),
 	mapNames: MAPS.map(map => map.name),
 	boardNames: BOARDS.map(board => board.name),
