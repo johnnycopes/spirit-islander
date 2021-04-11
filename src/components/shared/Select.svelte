@@ -7,14 +7,10 @@
 	$: id = snakeCase(label);
 </script>
 
-<div class="card-header">
-	<label for={id}>
-		{label}
-	</label>
-</div>
+<slot {id}></slot>
 
-<select {id}
-	name="players"
+<select class="select"
+	{id}
 	bind:value={value}
 >
 	{#each options as option}
@@ -25,17 +21,15 @@
 </select>
 
 <style lang="scss">
-	select {
+	:global(.select) {
 		width: 64px;
 		padding: 8px;
-		margin: 16px 8px;
 		font-size: 16px;
 		font-family: var(--font);
 		border: 0;
 		border-radius: var(--border-radius);
 
 		@media screen and (min-width: 768px) {
-			margin: 16px;
 			font-size: 20px;
 		}
 	}
