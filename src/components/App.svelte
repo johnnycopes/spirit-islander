@@ -31,8 +31,21 @@
 	let validCombos: ICombo[] | undefined;
 	let gameSetup: IGameSetup | undefined;
 
+	const OLD_KEY = "SPIRIT_ISLANDER_CONFIG";
+	const NEW_KEY = "SPIRIT_ISLANDER_CONFIG_NEW";
+
 	onMount(() => {
-		const configJSON = localStorage.getItem("SPIRIT_ISLANDER_CONFIG");
+		/*
+			A recent breaking change to the app can cause the app to not work
+			if the user had a cached config in local storage. For now, I'm saving
+			the config under a different key and will eventually move it back to the
+			preferred key of "SPIRIT_ISLANDER_CONFIG"
+		*/
+		if (localStorage.getItem(OLD_KEY)) {
+			localStorage.removeItem(OLD_KEY);
+		}
+
+		const configJSON = localStorage.getItem(NEW_KEY);
 		if (configJSON) {
 			config = JSON.parse(configJSON);
 		}
@@ -40,7 +53,7 @@
 
 	function setConfigInLocalStorage(config: IConfig): void {
 		const configJSON = JSON.stringify(config);
-		localStorage.setItem("SPIRIT_ISLANDER_CONFIG", configJSON);
+		localStorage.setItem(NEW_KEY, configJSON);
 	}
 </script>
 
