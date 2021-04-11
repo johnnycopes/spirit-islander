@@ -7,7 +7,8 @@
 	import DifficultyEmblem from "@components/shared/DifficultyEmblem.svelte";
 	import ExpansionEmblem from "@components/shared/ExpansionEmblem.svelte";
 	import Page from "@components/shared/Page.svelte";
-	import Select from "@components/shared/Select.svelte";
+	import SelectOne from "@components/shared/SelectOne.svelte";
+	import SelectRange from "@components/shared/SelectRange.svelte";
 	import { ADVERSARIES } from "@data/adversaries";
 	import { BOARDS } from "@data/boards";
 	import { EXPANSIONS } from "@data/expansions";
@@ -40,7 +41,7 @@
 
 	export let expansions: ExpansionName[];
 	export let players: Players;
-	export let difficulty: Difficulty;
+	export let difficultyRange: Difficulty[];
 	export let spiritNames: SpiritName[];
 	export let mapNames: MapName[];
 	export let boardNames: BalancedBoardName[]
@@ -56,7 +57,7 @@
 	let config: IConfig;
 	let validCombos: ICombo[];
 	$: { config = {
-		expansions, players, difficulty, mapNames, boardNames, spiritNames, scenarioNames, adversaryNamesAndIds
+		expansions, players, difficultyRange, mapNames, boardNames, spiritNames, scenarioNames, adversaryNamesAndIds
 	}};
 	$: { validCombos = getValidCombos(config) };
 	$: jaggedEarthSelected = expansions.includes("Jagged Earth");
@@ -80,6 +81,16 @@
 		boardNames = updateModel(createBoardsModel, boardNames, expansions, target);
 		scenarioNames = updateModel(createScenariosModel, scenarioNames, expansions, target);
 		adversaryNamesAndIds = updateModel(createAdversariesModel, adversaryNamesAndIds, expansions, target);
+	}
+
+	function getDifficultyErrorMessage(difficultyRange: Difficulty[]): string {
+		const [min, max] = difficultyRange;
+		if (min > max) {
+			return "Minimum cannot exceed maximum";
+		} else {
+			return `Combination of selected maps, adversaries, and scenarios cannot
+			generate a setup between difficulty levels ${min} and ${max}`;
+		}
 	}
 </script>
 
@@ -105,19 +116,20 @@
 				error={playersError}
 				errorMessage="Cannot generate a setup with more than 4 players unless playing with the Jagged Earth expansion"
 			>
-				<Select label="Players"
+				<SelectOne label="Players"
 					options={createArray(6)}
 					bind:value={players}
+					let:id={id}
 				/>
 			</Card>
 	
 			<Card name="difficulty"
 				error={difficultyError}
-				errorMessage="Combination of selected maps, adversaries, and scenarios cannot generate a setup with level {difficulty} difficulty"
+				errorMessage={getDifficultyErrorMessage(difficultyRange)}
 			>
-				<Select label="Difficulty"
+				<SelectRange label="Difficulty"
 					options={createArray(11, 0)}
-					bind:value={difficulty}
+					bind:values={difficultyRange}
 				/>
 			</Card>
 		</CardGroup>
@@ -219,29 +231,29 @@
 
 		:global(.card-group.you) {
 			grid-template-areas:
-				"expansions expansions expansions expansions"
-				"players players difficulty difficulty";
+				"expansions expansions expansions expansions expansions expansions"
+				"players players difficulty difficulty difficulty difficulty";
 
 			@media screen and (min-width: 768px) {
 				grid-template-areas:
-					"expansions expansions players difficulty";
+					"expansions expansions expansions players difficulty difficulty";
 			}
 		}
 
 		:global(.card-group.the-game) {
 			grid-template-areas:
-				"spirits spirits spirits spirits"
-				"maps maps maps maps"
-				"boards boards boards boards"
-				"scenarios scenarios scenarios scenarios"
-				"adversaries adversaries adversaries adversaries";
+				"spirits spirits spirits spirits spirits spirits"
+				"maps maps maps maps maps maps"
+				"boards boards boards boards boards boards"
+				"scenarios scenarios scenarios scenarios scenarios scenarios"
+				"adversaries adversaries adversaries adversaries adversaries adversaries";
 
 			@media screen and (min-width: 768px) {
 				grid-template-areas:
-					"spirits spirits spirits spirits"
-					"maps maps scenarios scenarios"
-					"boards boards scenarios scenarios"
-					"adversaries adversaries adversaries adversaries";
+					"spirits spirits spirits spirits spirits spirits"
+					"maps maps maps scenarios scenarios scenarios"
+					"boards boards boards scenarios scenarios scenarios"
+					"adversaries adversaries adversaries adversaries adversaries adversaries";
 			}
 		}
 
