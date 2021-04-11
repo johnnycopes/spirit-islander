@@ -41,8 +41,7 @@
 
 	export let expansions: ExpansionName[];
 	export let players: Players;
-	export let difficulty: Difficulty;
-	export let difficultyRange: Difficulty[] = [2, 5];
+	export let difficultyRange: Difficulty[];
 	export let spiritNames: SpiritName[];
 	export let mapNames: MapName[];
 	export let boardNames: BalancedBoardName[]
@@ -58,7 +57,7 @@
 	let config: IConfig;
 	let validCombos: ICombo[];
 	$: { config = {
-		expansions, players, difficulty, mapNames, boardNames, spiritNames, scenarioNames, adversaryNamesAndIds
+		expansions, players, difficultyRange, mapNames, boardNames, spiritNames, scenarioNames, adversaryNamesAndIds
 	}};
 	$: { validCombos = getValidCombos(config) };
 	$: jaggedEarthSelected = expansions.includes("Jagged Earth");
@@ -82,6 +81,16 @@
 		boardNames = updateModel(createBoardsModel, boardNames, expansions, target);
 		scenarioNames = updateModel(createScenariosModel, scenarioNames, expansions, target);
 		adversaryNamesAndIds = updateModel(createAdversariesModel, adversaryNamesAndIds, expansions, target);
+	}
+
+	function getDifficultyErrorMessage(difficultyRange: Difficulty[]): string {
+		const [min, max] = difficultyRange;
+		if (min > max) {
+			return "Minimum cannot exceed maximum";
+		} else {
+			return `Combination of selected maps, adversaries, and scenarios cannot
+			generate a setup between difficulty levels ${min} and ${max}`;
+		}
 	}
 </script>
 
@@ -116,7 +125,7 @@
 	
 			<Card name="difficulty"
 				error={difficultyError}
-				errorMessage="Combination of selected maps, adversaries, and scenarios cannot generate a setup with level {difficulty} difficulty"
+				errorMessage={getDifficultyErrorMessage(difficultyRange)}
 			>
 				<SelectRange label="Difficulty"
 					options={createArray(11, 0)}
@@ -233,11 +242,11 @@
 
 		:global(.card-group.the-game) {
 			grid-template-areas:
-				"spirits spirits spirits spirits"
-				"maps maps maps maps"
-				"boards boards boards boards"
-				"scenarios scenarios scenarios scenarios"
-				"adversaries adversaries adversaries adversaries";
+				"spirits spirits spirits spirits spirits spirits"
+				"maps maps maps maps maps maps"
+				"boards boards boards boards boards boards"
+				"scenarios scenarios scenarios scenarios scenarios scenarios"
+				"adversaries adversaries adversaries adversaries adversaries adversaries";
 
 			@media screen and (min-width: 768px) {
 				grid-template-areas:
