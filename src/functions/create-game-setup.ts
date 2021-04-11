@@ -5,17 +5,27 @@ import type { IGameSetup } from "@models/game-setup.interface";
 import { selectRandom } from "./utility/select-random";
 import { selectBoards } from "./select-boards";
 import { getOptionsByName } from "./get-options";
+import { getDifficulty } from "./get-difficulty";
+import type { Difficulty } from "@models/game/difficulty";
 
 export function createGameSetup(config: IConfig, validCombos: ICombo[]): IGameSetup {
+	const {players, expansions, spiritNames, boardNames} = config;
+
+	// Randomly choose a combination of a map, adversary, and scenario and determine the total difficulty
 	const [selectedMap, selectedAdversaryLevel, selectedScenario] = selectRandom(validCombos)[0];
-	const randomSpiritNames = selectRandom(config.spiritNames, config.players);
+	const difficulty = getDifficulty(selectedMap.difficulty, expansions) +
+		getDifficulty(selectedAdversaryLevel.difficulty, expansions) +
+		getDifficulty(selectedScenario.difficulty, expansions) as Difficulty;
+
+	// Randomly select spirits and boards
+	const randomSpiritNames = selectRandom(spiritNames, players);
 	const selectedSpirits = getOptionsByName(SPIRITS, randomSpiritNames);
-	const selectedBoards = selectBoards(selectedMap.name, config.players, config.boardNames);
+	const selectedBoards = selectBoards(selectedMap.name, players, boardNames);
 
 	return {
-		players: config.players,
-		difficulty: config.difficulty,
-		expansions: config.expansions,
+		players,
+		difficulty,
+		expansions,
 		spirits: selectedSpirits,
 		boards: selectedBoards,
 		map: selectedMap,

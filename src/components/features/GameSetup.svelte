@@ -144,18 +144,18 @@
 
 		:global(.card-group.setup) {
 			grid-template-areas:
-				"players players difficulty difficulty"
-				"expansions expansions expansions expansions"
-				"spirits spirits spirits spirits"
-				"map map map map"
-				"scenario scenario scenario scenario"
-				"adversary adversary adversary adversary";
+				"players players players difficulty difficulty difficulty"
+				"expansions expansions expansions expansions expansions expansions"
+				"spirits spirits spirits spirits spirits spirits"
+				"map map map map map map"
+				"scenario scenario scenario scenario scenario scenario"
+				"adversary adversary adversary adversary adversary adversary";
 
 			@media screen and (min-width: 768px) {
 				grid-template-areas:
-					"expansions expansions players difficulty"
-					"spirits spirits map map"
-					"scenario scenario adversary adversary";
+					"expansions expansions expansions players difficulty difficulty"
+					"spirits spirits spirits map map map"
+					"scenario scenario scenario adversary adversary adversary";
 			}
 		}
 	}
