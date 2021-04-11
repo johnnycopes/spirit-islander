@@ -41,19 +41,19 @@
 	.menus {
 		display: flex;
 		align-items: center;
-		margin: 16px 8px;
-
-		@media screen and (min-width: 768px) {
-			margin: 16px;
-		}
 	}
 
 	.menu {
 		display: flex;
 		align-items: center;
-		
+		margin: 16px 8px;
+
 		&:not(:last-of-type) {
 			margin-right: 16px;
+		}
+
+		@media screen and (min-width: 768px) {
+			margin: 16px;
 		}
 
 		label {

@@ -7,22 +7,25 @@
 	$: id = snakeCase(label);
 </script>
 
-<!-- Expose the id so a consumer can set up their own custom <label> -->
+<!-- Expose the id so consumers can set up their own custom <label> -->
 <slot {id}></slot>
 
-<select class="select"
-	{id}
-	bind:value={value}
->
-	{#each options as option}
-		<option value={option}>
-			{option}
-		</option>
-	{/each}
-</select>
+<!-- Wrapper div gives consumers the opportunity to adjust menu container styling -->
+<div class="select">
+	<select
+		{id}
+		bind:value={value}
+	>
+		{#each options as option}
+			<option value={option}>
+				{option}
+			</option>
+		{/each}
+	</select>
+</div>
 
 <style lang="scss">
-	:global(.select) {
+	select {
 		width: 64px;
 		padding: 8px;
 		font-size: 16px;
