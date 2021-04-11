@@ -11,7 +11,7 @@
 	{label}
 </div>
 
-<div class="select-range">
+<div class="menus">
 	<div class="menu min">
 		<Select label={`Min-${label}`}
 			{options}
@@ -38,7 +38,7 @@
 </div>
 
 <style lang="scss">
-	.select-range {
+	.menus {
 		display: flex;
 		align-items: center;
 		margin: 16px 8px;

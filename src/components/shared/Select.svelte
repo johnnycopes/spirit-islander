@@ -7,6 +7,7 @@
 	$: id = snakeCase(label);
 </script>
 
+<!-- Expose the id so a consumer can set up their own custom <label> -->
 <slot {id}></slot>
 
 <select class="select"
