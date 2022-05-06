@@ -2,7 +2,12 @@
   "extends": "@tsconfig/svelte/tsconfig.json",
 
   "include": ["src/**/*"],
-  "exclude": ["node_modules/*", "__sapper__/*", "public/*"],
+  "exclude": [
+		"node_modules/*",
+		"__sapper__/*",
+		"public/*",
+		"**/*.spec.ts"
+	],
 	"compilerOptions": {
 		"strict": true,
 		"noImplicitAny": true,
@@ -19,5 +24,12 @@
 			"esnext",
 			"dom"
 		],
+		"types": [
+			"jest"
+		],
+		"typeRoots": [
+			"./types",
+			"./node_modules/@types"
+		]
 	}
 }
