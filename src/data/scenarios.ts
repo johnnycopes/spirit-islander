@@ -39,7 +39,7 @@ export const SCENARIOS: IScenario[] = [
 		expansion: "Promo Pack 2",
 	},
 	{
-		name: "Despicable Thief",
+		name: "Despicable Theft",
 		difficulty: 2,
 		expansion: "Jagged Earth",
 	},
