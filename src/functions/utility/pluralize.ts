@@ -1,4 +1,4 @@
-export function pluralize(length: number, name: string, plural?: string): string {
+export function pluralize(count: number, name: string, plural?: string): string {
 	const pluralName = plural ?? name + "s";
-	return length === 1 ? name : pluralName;
+	return Math.abs(count) === 1 ? name : pluralName;
 }
