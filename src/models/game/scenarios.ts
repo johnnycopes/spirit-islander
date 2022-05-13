@@ -6,7 +6,7 @@ export type ScenarioName =
 	"A Diversity of Spirits" |
 	"Blitz" |
 	"Dahan Insurrection" |
-	"Despicable Thief" |
+	"Despicable Theft" |
 	"Elemental Invocation" |
 	"Guard the Isle's Heart" |
 	"Powers Long Forgotten" |
