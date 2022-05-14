@@ -2,13 +2,13 @@ import { createSpiritsModel } from "./create-model";
 import { updateModel } from "./update-model";
 
 describe("updateModel", () => {
-	it("adds items from individual expansion to existing model", () => {
+	it("adds individual expansion's items to existing model", () => {
 		expect(updateModel(
 			createSpiritsModel,
 			[],
 			["Branch & Claw"],
-			"Branch & Claw")
-		).toStrictEqual([
+			"Branch & Claw",
+		)).toStrictEqual([
 			"Keeper of the Forbidden Wilds",
 			"Sharp Fangs Behind the Leaves",
 		]);
@@ -17,8 +17,8 @@ describe("updateModel", () => {
 			createSpiritsModel,
 			["Thunderspeaker"],
 			["Branch & Claw"],
-			"Branch & Claw")
-		).toStrictEqual([
+			"Branch & Claw",
+		)).toStrictEqual([
 			"Thunderspeaker",
 			"Keeper of the Forbidden Wilds",
 			"Sharp Fangs Behind the Leaves",
@@ -28,8 +28,8 @@ describe("updateModel", () => {
 			createSpiritsModel,
 			["Heart of the Wildfire", "Thunderspeaker"],
 			["Branch & Claw", "Promo Pack 1"],
-			"Branch & Claw")
-		).toStrictEqual([
+			"Branch & Claw",
+		)).toStrictEqual([
 			"Heart of the Wildfire",
 			"Thunderspeaker",
 			"Keeper of the Forbidden Wilds",
@@ -37,13 +37,13 @@ describe("updateModel", () => {
 		]);
 	});
 
-	it("adds items from all expansions to existing model", () => {
+	it("adds all expansions' items to existing model", () => {
 		expect(updateModel(
 			createSpiritsModel,
 			[],
 			["Branch & Claw", "Jagged Earth", "Promo Pack 1", "Promo Pack 2"],
-			"Expansions")
-		).toStrictEqual([
+			"Expansions",
+		)).toStrictEqual([
 			"Downpour Drenches the World",
 			"Finder of Paths Unseen",
 			"Fractured Days Split the Sky",
@@ -64,11 +64,11 @@ describe("updateModel", () => {
 
 		expect(updateModel(
 			createSpiritsModel,
-			["Ocean's Hungry Grasp"],
+			["Thunderspeaker"],
 			["Branch & Claw", "Jagged Earth", "Promo Pack 1", "Promo Pack 2"],
-			"Expansions")
-		).toStrictEqual([
-			"Ocean's Hungry Grasp",
+			"Expansions",
+		)).toStrictEqual([
+			"Thunderspeaker",
 			"Downpour Drenches the World",
 			"Finder of Paths Unseen",
 			"Fractured Days Split the Sky",
@@ -89,12 +89,12 @@ describe("updateModel", () => {
 
 		expect(updateModel(
 			createSpiritsModel,
-			["Keeper of the Forbidden Wilds", "Ocean's Hungry Grasp"],
+			["Keeper of the Forbidden Wilds", "Thunderspeaker"],
 			["Branch & Claw", "Jagged Earth", "Promo Pack 1", "Promo Pack 2"],
-			"Expansions")
-		).toStrictEqual([
+			"Expansions",
+		)).toStrictEqual([
 			"Keeper of the Forbidden Wilds",
-			"Ocean's Hungry Grasp",
+			"Thunderspeaker",
 			"Downpour Drenches the World",
 			"Finder of Paths Unseen",
 			"Fractured Days Split the Sky",
@@ -114,7 +114,7 @@ describe("updateModel", () => {
 		]);
 	});
 
-	it("removes expansion items from existing model", () => {
+	it("removes individual expansion's items from existing model", () => {
 		expect(updateModel(
 			createSpiritsModel,
 			["Keeper of the Forbidden Wilds", "Sharp Fangs Behind the Leaves"],
@@ -140,5 +140,46 @@ describe("updateModel", () => {
 			["Promo Pack 1"],
 			"Branch & Claw",
 		)).toStrictEqual(["Heart of the Wildfire", "Thunderspeaker"]);
+	});
+
+	it("removes all expansions' items from existing model", () => {
+		expect(updateModel(
+			createSpiritsModel,
+			[],
+			[],
+			"Expansions",
+		)).toStrictEqual([]);
+
+		expect(updateModel(
+			createSpiritsModel,
+			["Thunderspeaker"],
+			[],
+			"Expansions",
+		)).toStrictEqual(["Thunderspeaker"]);
+
+		expect(updateModel(
+			createSpiritsModel,
+			[
+				"Downpour Drenches the World",
+				"Finder of Paths Unseen",
+				"Fractured Days Split the Sky",
+				"Grinning Trickster Stirs Up Trouble",
+				"Heart of the Wildfire",
+				"Keeper of the Forbidden Wilds",
+				"Lure of the Deep Wilderness",
+				"Many Minds Move as One",
+				"Serpent Slumbering Beneath the Island",
+				"Sharp Fangs Behind the Leaves",
+				"Shifting Memory of Ages",
+				"Shroud of Silent Mist",
+				"Starlight Seeks Its Form",
+				"Stone's Unyielding Defiance",
+				"Thunderspeaker",
+				"Vengeance as a Burning Plague",
+				"Volcano Looming High",
+			],
+			[],
+			"Expansions",
+		)).toStrictEqual(["Thunderspeaker"]);
 	});
 });
