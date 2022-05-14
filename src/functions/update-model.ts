@@ -6,7 +6,6 @@ export function updateModel<TName>(
 	expansions: ExpansionName[],
 	target: "Expansions" | ExpansionName
 ): TName[] {
-	// console.log(expansions);
 	if (target === "Expansions") {
 		return recreateModel(createModel, existingModel, expansions);
 	}
@@ -26,7 +25,7 @@ function recreateModel<TName>(
 	const allowedItemNames = createModel(expansions);
 	return [
 		...existingModel.filter(name => allowedItemNames.includes(name)),
-		...expansionItemNames
+		...expansionItemNames.filter(name => !existingModel.includes(name)),
 	];
 }
 

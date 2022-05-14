@@ -134,8 +134,6 @@
 			</Card>
 		</CardGroup>
 	
-		<!-- { spiritNames.map(name => name) } -->
-		{ spiritNames }
 		<CardGroup name="The Game"
 			description="What are you open to playing with?"
 		>

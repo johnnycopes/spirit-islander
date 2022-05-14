@@ -100,7 +100,6 @@ describe("updateModel", () => {
 			"Fractured Days Split the Sky",
 			"Grinning Trickster Stirs Up Trouble",
 			"Heart of the Wildfire",
-			"Keeper of the Forbidden Wilds", // TODO: fix this bug where an item can be added twice if it already exists in the model and "Expansions" is selected
 			"Lure of the Deep Wilderness",
 			"Many Minds Move as One",
 			"Serpent Slumbering Beneath the Island",
