@@ -36,8 +36,8 @@
 		createMapsModel,
 		createScenariosModel,
 		createSpiritsModel,
-		updateModel,
 	} from "@functions/create-model";
+	import { updateModel } from "@functions/update-model";
 
 	export let expansions: ExpansionName[];
 	export let players: Players;
@@ -134,6 +134,8 @@
 			</Card>
 		</CardGroup>
 	
+		<!-- { spiritNames.map(name => name) } -->
+		{ spiritNames }
 		<CardGroup name="The Game"
 			description="What are you open to playing with?"
 		>
