@@ -6,7 +6,6 @@
 		"node_modules/*",
 		"__sapper__/*",
 		"public/*",
-		"**/*.spec.ts"
 	],
 	"compilerOptions": {
 		"strict": true,
