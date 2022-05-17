@@ -15,12 +15,14 @@ export function getOptionsByName<TOption extends IOption, TName extends string>(
 	names: TName[]
 ): TOption[] {
 	const filteredOptions: TOption[] = [];
+
 	for (let name of names) {
 		const foundOption = options.find(option => option.name === name);
 		if (foundOption) {
 			filteredOptions.push(foundOption);
 		}
 	}
+
 	return filteredOptions;
 }
 

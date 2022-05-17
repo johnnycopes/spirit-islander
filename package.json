@@ -51,6 +51,13 @@
       "js",
       "ts",
       "svelte"
-    ]
+    ],
+    "moduleNameMapper": {
+      "@components/(.*)": "<rootDir>/src/components/$1",
+			"@data/(.*)": "<rootDir>/src/data/$1",
+			"@debugging/(.*)": "<rootDir>/src/debugging/$1",
+			"@models/(.*)": "<rootDir>/src/models/$1",
+			"@functions/(.*)": "<rootDir>/src/functions/$1"
+		}
   }
 }

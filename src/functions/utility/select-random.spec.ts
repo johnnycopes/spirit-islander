@@ -16,7 +16,7 @@ describe("selectRandom", () => {
 		const options = [1, 2];
 		const selected = selectRandom(options, 2);
 		expect(selected[0]).not.toBe(selected[1]);
-		expect(options.includes(selected[0])).toBe(true);
-		expect(options.includes(selected[1])).toBe(true);
+		expect(options).toContainEqual(selected[0]);
+		expect(options).toContainEqual(selected[1]);
 	});
 });

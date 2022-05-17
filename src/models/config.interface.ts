@@ -8,7 +8,7 @@ import type { AdversaryName, AdversaryLevelId } from "./game/adversaries";
 import type { ScenarioName } from "./game/scenarios";
 
 /**
- * A collection of selected options that a user either 
+ * Collection of selected options that a user either 
  * wants or would be willing to have in a `IGameSetup`
  */
 export interface IConfig {

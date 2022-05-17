@@ -36,8 +36,8 @@
 		createMapsModel,
 		createScenariosModel,
 		createSpiritsModel,
-		updateModel,
 	} from "@functions/create-model";
+	import { updateModel } from "@functions/update-model";
 
 	export let expansions: ExpansionName[];
 	export let players: Players;
