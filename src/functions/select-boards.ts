@@ -33,7 +33,7 @@ export function selectBoards(
 		case 6: {
 			return getBoardsByName(["D", "B", "A", "C", "F", "E"]);
 		}
-	};
+	}
 }
 
 function getBoardsByName(boardNames: BalancedBoardName[]): IBoard[] {

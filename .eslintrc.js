@@ -32,7 +32,7 @@ module.exports = {
     }
   ],
   rules: {
-    // quotes: ["error", "double"]
+    quotes: ["error", "double"]
   },
   settings: {
     "svelte3/typescript": true,
