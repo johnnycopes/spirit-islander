@@ -3,14 +3,14 @@
   "version": "1.0.0",
   "scripts": {
     "build": "rollup -c",
-    "dev": "rollup -c -w",
     "deploy-test": "npm run build && cd public && surge . --domain https://si-test.surge.sh",
+    "dev": "rollup -c -w",
     "lint": "eslint . --ext .ts,.svelte",
+    "prepare": "husky install",
     "start": "sirv public",
     "test": "jest src",
     "test:watch": "npm run test -- --watch",
-    "validate": "svelte-check",
-    "prepare": "husky install"
+    "validate": "svelte-check"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^17.0.0",
