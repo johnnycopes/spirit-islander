@@ -1,6 +1,6 @@
-export function getDynamicValue<Value extends object | string | number | boolean | undefined | null, Arg>(
-	value: Value | ((arg: Arg) => Value),
+export function getDynamicValue<T extends object | string | number | boolean | undefined | null, Arg>(
+	value: T | ((arg: Arg) => T),
 	arg: Arg
-): Value {
-	return typeof value === "function" ? value(arg) : value;
+): T {
+	return typeof value === "function" ? value(arg) as T : value;
 }

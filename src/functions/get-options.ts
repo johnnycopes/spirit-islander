@@ -16,7 +16,7 @@ export function getOptionsByName<TOption extends IOption, TName extends string>(
 ): TOption[] {
 	const filteredOptions: TOption[] = [];
 
-	for (let name of names) {
+	for (const name of names) {
 		const foundOption = options.find(option => option.name === name);
 		if (foundOption) {
 			filteredOptions.push(foundOption);

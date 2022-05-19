@@ -340,7 +340,7 @@ export class ComboAnalyzer<TOption> {
 		allOptionsLibrary: TOption[][],
 		isValidCombo: (options: TOption[]) => boolean = () => true,
 		possibleCombos: TOption[][] = [],
-		allOptionsIndex: number = 0,
+		allOptionsIndex = 0,
 		currentCombo: TOption[] = [],
 	): TOption[][] {
 		// Check if combo is complete

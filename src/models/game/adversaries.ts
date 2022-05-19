@@ -24,7 +24,7 @@ export type AdversaryLevelName =
 export interface IAdversaryLevel extends IDifficultyOption {
 	id: AdversaryLevelId;
 	name: AdversaryLevelName;
-};
+}
 
 export type AdversaryLevelId = "none" |
 	"bp-0" | "bp-1" | "bp-2" | "bp-3" | "bp-4" | "bp-5" | "bp-6" |

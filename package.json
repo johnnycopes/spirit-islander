@@ -3,8 +3,10 @@
   "version": "1.0.0",
   "scripts": {
     "build": "rollup -c",
-    "dev": "rollup -c -w",
     "deploy-test": "npm run build && cd public && surge . --domain https://si-test.surge.sh",
+    "dev": "rollup -c -w",
+    "lint": "eslint . --ext .ts,.svelte",
+    "prepare": "husky install",
     "start": "sirv public",
     "test": "jest src",
     "test:watch": "npm run test -- --watch",
@@ -16,8 +18,18 @@
     "@rollup/plugin-typescript": "^8.0.0",
     "@tsconfig/svelte": "^1.0.0",
     "@types/jest": "^27.5.0",
+    "@typescript-eslint/eslint-plugin": "^5.25.0",
+    "@typescript-eslint/parser": "^5.25.0",
     "autoprefixer": "^10.2.5",
+    "eslint": "^8.15.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^6.0.0",
+    "eslint-plugin-standard": "^5.0.0",
+    "eslint-plugin-svelte3": "^4.0.0",
+    "husky": "^8.0.0",
     "jest": "^28.1.0",
+    "lint-staged": "^12.4.1",
     "rollup": "^2.3.4",
     "rollup-plugin-css-only": "^3.1.0",
     "rollup-plugin-livereload": "^2.0.0",
@@ -54,10 +66,13 @@
     ],
     "moduleNameMapper": {
       "@components/(.*)": "<rootDir>/src/components/$1",
-			"@data/(.*)": "<rootDir>/src/data/$1",
-			"@debugging/(.*)": "<rootDir>/src/debugging/$1",
-			"@models/(.*)": "<rootDir>/src/models/$1",
-			"@functions/(.*)": "<rootDir>/src/functions/$1"
-		}
+      "@data/(.*)": "<rootDir>/src/data/$1",
+      "@debugging/(.*)": "<rootDir>/src/debugging/$1",
+      "@models/(.*)": "<rootDir>/src/models/$1",
+      "@functions/(.*)": "<rootDir>/src/functions/$1"
+    }
+  },
+  "lint-staged": {
+    "*.{ts,svelte}": ["eslint", "jest --bail --findRelatedTests"]
   }
 }
