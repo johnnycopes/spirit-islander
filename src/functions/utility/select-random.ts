@@ -1,9 +1,9 @@
-export function selectRandom<T>(options: T[], quantity: number = 1): T[] {
+export function selectRandom<T>(options: T[], quantity = 1): T[] {
 	if (quantity > options.length) {
 		throw new Error("More options requested than available");
 	}
 	const selectedOptions: T[] = [];
-	let usedIndexes = new Set<number>();
+	const usedIndexes = new Set<number>();
 
 	for (let i = 0; i < quantity; i++) {
 		let randomIndex: number;
