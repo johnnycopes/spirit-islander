@@ -1,4 +1,4 @@
-import type { IOption } from "./option";
+import type { Option } from "./option";
 
 export type ExpansionName =
 	"Branch & Claw" |
@@ -7,6 +7,6 @@ export type ExpansionName =
 	"Promo Pack 2"
 ;
 
-export interface IExpansionOption extends IOption {
+export interface ExpansionOption extends Option {
 	expansion?: ExpansionName;
 }

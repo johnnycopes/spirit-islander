@@ -1,5 +1,5 @@
-import type { IDifficultyOption } from "./difficulty";
-import type { IExpansionOption } from "./expansions";
+import type { DifficultyOption } from "./difficulty";
+import type { ExpansionOption } from "./expansions";
 
 export type ScenarioName =
 	"No Scenario" |
@@ -17,6 +17,6 @@ export type ScenarioName =
 	"Varied Terrains" |
 	"Ward the Shores";
 
-export interface IScenario extends IDifficultyOption, IExpansionOption {
+export interface Scenario extends DifficultyOption, ExpansionOption {
 	name: ScenarioName;
 }

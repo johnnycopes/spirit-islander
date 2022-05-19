@@ -12,13 +12,13 @@
 		createSpiritsModel,
 	} from "@functions/create-model";
 	import { createGameSetup } from "@functions/create-game-setup";
-	import { EPage } from "@models/page.enum";
-	import type { ICombo } from "@models/combo.interface";
-	import type { IConfig } from "@models/config.interface";
-	import type { IGameSetup } from "@models/game-setup.interface";
+	import { Page } from "@models/page.enum";
+	import type { Combo } from "@models/combo.interface";
+	import type { Config } from "@models/config.interface";
+	import type { GameSetup } from "@models/game-setup.interface";
 
-	let page: EPage = EPage.Config;
-	let config: IConfig = {
+	let page: Page = Page.Config;
+	let config: Config = {
 		expansions: [],
 		players: 1,
 		difficultyRange: [0, 1],
@@ -28,8 +28,8 @@
 		scenarioNames: createScenariosModel(),
 		adversaryNamesAndIds: createAdversariesModel(),
 	};
-	let validCombos: ICombo[] | undefined;
-	let gameSetup: IGameSetup | undefined;
+	let validCombos: Combo[] | undefined;
+	let gameSetup: GameSetup | undefined;
 
 	const OLD_KEY = "SPIRIT_ISLANDER_CONFIG";
 	const NEW_KEY = "SPIRIT_ISLANDER_CONFIG_NEW";
@@ -51,26 +51,26 @@
 		}
 	});
 
-	function setConfigInLocalStorage(config: IConfig): void {
+	function setConfigInLocalStorage(config: Config): void {
 		const configJSON = JSON.stringify(config);
 		localStorage.setItem(NEW_KEY, configJSON);
 	}
 </script>
 
 <Header />
-{#if page === EPage.Config}
+{#if page === Page.Config}
 	<Config {...config}
 		on:generate={(e) => {
-			page = EPage.GameSetup;
+			page = Page.GameSetup;
 			config = e.detail.config;
 			validCombos = e.detail.validCombos;
 			gameSetup = createGameSetup(config, validCombos);
 			setConfigInLocalStorage(config);
 		}}
 	/>
-{:else if page === EPage.GameSetup && gameSetup && validCombos}
+{:else if page === Page.GameSetup && gameSetup && validCombos}
 	<GameSetup {...gameSetup}
-		on:reset={() => page = EPage.Config}
+		on:reset={() => page = Page.Config}
 		on:generate={() => {
 			if (validCombos) {
 				gameSetup = createGameSetup(config, validCombos);

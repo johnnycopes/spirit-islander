@@ -1,3 +1,3 @@
-export interface IOption {
+export interface Option {
 	name: string;
 }

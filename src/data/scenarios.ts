@@ -1,6 +1,6 @@
-import type { IScenario } from "@models/game/scenarios";
+import type { Scenario } from "@models/game/scenarios";
 
-export const SCENARIOS: IScenario[] = [
+export const SCENARIOS: Scenario[] = [
 	{
 		name: "No Scenario",
 		difficulty: 0,

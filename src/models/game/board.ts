@@ -1,4 +1,4 @@
-import type { IExpansionOption } from "./expansions";
+import type { ExpansionOption } from "./expansions";
 
 export type BalancedBoardName =
 	"A" |
@@ -16,7 +16,7 @@ export type ThematicBoardName =
 	"Southeast" |
 	"Southwest";
 
-export interface IBoard extends IExpansionOption {
+export interface Board extends ExpansionOption {
 	name: BalancedBoardName;
 	thematicName: ThematicBoardName;
 }

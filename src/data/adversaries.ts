@@ -1,6 +1,6 @@
-import type { IAdversary } from "@models/game/adversaries";
+import type { Adversary } from "@models/game/adversaries";
 
-export const ADVERSARIES: IAdversary[] = [
+export const ADVERSARIES: Adversary[] = [
 	{
 		name: "No Adversary",
 		levels: [],

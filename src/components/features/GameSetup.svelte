@@ -14,11 +14,11 @@
 	import type { ExpansionName } from "@models/game/expansions";
 	import type { Players } from "@models/game/players";
 	import type { Difficulty } from "@models/game/difficulty";
-	import type { IAdversaryLevel } from "@models/game/adversaries";
-	import type { IBoard } from "@models/game/board";
-	import type { IMap } from "@models/game/maps";
-	import type { IScenario } from "@models/game/scenarios";
-	import type { ISpirit } from "@models/game/spirits";
+	import type { AdversaryLevel } from "@models/game/adversaries";
+	import type { Board } from "@models/game/board";
+	import type { Map } from "@models/game/maps";
+	import type { Scenario } from "@models/game/scenarios";
+	import type { Spirit } from "@models/game/spirits";
 
 	const dispatcher = createEventDispatcher<{
 		reset: void;
@@ -27,11 +27,11 @@
 	export let expansions: ExpansionName[];
 	export let players: Players;
 	export let difficulty: Difficulty;
-	export let spirits: ISpirit[];
-	export let map: IMap;
-	export let boards: IBoard[];
-	export let adversaryLevel: IAdversaryLevel;
-	export let scenario: IScenario;
+	export let spirits: Spirit[];
+	export let map: Map;
+	export let boards: Board[];
+	export let adversaryLevel: AdversaryLevel;
+	export let scenario: Scenario;
 
 	$: adversaryName = getAdversaryById(adversaryLevel.id);
 </script>

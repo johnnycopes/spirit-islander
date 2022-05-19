@@ -1,9 +1,9 @@
-import type { IDifficultyOption } from "@models/game/difficulty";
+import type { DifficultyOption } from "@models/game/difficulty";
 import { getDifficulty } from "./get-difficulty";
 
 describe("getDifficulty", () => {
 	it("returns static difficulty value", () => {
-		const mockItem: IDifficultyOption = {
+		const mockItem: DifficultyOption = {
 			name: "Fake Item",
 			difficulty: 4,
 		};
@@ -23,7 +23,7 @@ describe("getDifficulty", () => {
 	});
 
 	it("returns dynamic difficulty value", () => {
-		const mockItem: IDifficultyOption = {
+		const mockItem: DifficultyOption = {
 			name: "Fake Item",
 			difficulty: expansions => {
 				if (expansions.length >= 2) {

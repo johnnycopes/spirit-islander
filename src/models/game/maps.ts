@@ -1,8 +1,8 @@
-import type { IDifficultyOption } from "./difficulty";
-import type { IExpansionOption } from "./expansions";
+import type { DifficultyOption } from "./difficulty";
+import type { ExpansionOption } from "./expansions";
 
 export type MapName = "Balanced" | "Thematic";
 
-export interface IMap extends IDifficultyOption, IExpansionOption {
+export interface Map extends DifficultyOption, ExpansionOption {
 	name: MapName;
 }
