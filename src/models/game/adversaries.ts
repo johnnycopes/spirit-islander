@@ -1,5 +1,5 @@
-import type { IDifficultyOption } from "./difficulty";
-import type { IExpansionOption } from "./expansions";
+import type { DifficultyOption } from "./difficulty";
+import type { ExpansionOption } from "./expansions";
 
 export type AdversaryName =
 	"No Adversary" |
@@ -21,7 +21,7 @@ export type AdversaryLevelName =
 	"Level 5" |
 	"Level 6";
 
-export interface IAdversaryLevel extends IDifficultyOption {
+export interface AdversaryLevel extends DifficultyOption {
 	id: AdversaryLevelId;
 	name: AdversaryLevelName;
 }
@@ -35,7 +35,7 @@ export type AdversaryLevelId = "none" |
 	"sc-0" | "sc-1" | "sc-2" | "sc-3" | "sc-4" | "sc-5" | "sc-6" |
 	"sw-0" | "sw-1" | "sw-2" | "sw-3" | "sw-4" | "sw-5" | "sw-6";
 
-export interface IAdversary extends IExpansionOption {
+export interface Adversary extends ExpansionOption {
 	name: AdversaryName,
-	levels: IAdversaryLevel[];
+	levels: AdversaryLevel[];
 }

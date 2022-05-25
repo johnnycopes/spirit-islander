@@ -1,5 +1,5 @@
 import { getValidCombos } from "./get-valid-combos";
-import type { IConfig } from "@models/config.interface";
+import type { Config } from "@models/config.interface";
 import type { AdversaryName, AdversaryLevelId } from "@models/game/adversaries";
 import { ADVERSARIES } from "@data/adversaries";
 import { BOARDS } from "@data/boards";
@@ -10,7 +10,7 @@ import { SPIRITS } from "@data/spirits";
 
 describe("getValidCombos", () => {
 	it("returns possible combinations for lowest difficulty", () => {
-		const mockConfig: IConfig = {
+		const mockConfig: Config = {
 			expansions: EXPANSIONS,
 			players: 1,
 			difficultyRange: [0, 0],
@@ -60,7 +60,7 @@ describe("getValidCombos", () => {
 	});
 
 	it("returns all possible combinations", () => {
-		const mockConfig: IConfig = {
+		const mockConfig: Config = {
 			expansions: EXPANSIONS,
 			players: 1,
 			difficultyRange: [0, 11],

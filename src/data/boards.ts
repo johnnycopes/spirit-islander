@@ -1,6 +1,6 @@
-import type { IBoard } from "@models/game/board";
+import type { Board } from "@models/game/board";
 
-export const BOARDS: IBoard[] = [
+export const BOARDS: Board[] = [
 	{
 		name: "A",
 		thematicName: "Northeast",

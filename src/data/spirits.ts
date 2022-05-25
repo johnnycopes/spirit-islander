@@ -1,6 +1,6 @@
-import type { ISpirit } from "@models/game/spirits";
+import type { Spirit } from "@models/game/spirits";
 
-export const SPIRITS: ISpirit[] = [
+export const SPIRITS: Spirit[] = [
 	{ name: "A Spread of Rampant Green" },
 	{ name: "Bringer of Dreams and Nightmares" },
 	{ name: "Downpour Drenches the World", expansion: "Promo Pack 2" },

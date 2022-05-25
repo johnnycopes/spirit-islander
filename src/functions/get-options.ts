@@ -1,5 +1,5 @@
-import type { ExpansionName, IExpansionOption } from "@models/game/expansions";
-import type { IOption } from "@models/game/option";
+import type { ExpansionName, ExpansionOption } from "@models/game/expansions";
+import type { Option } from "@models/game/option";
 
 /**
  * Get options that have specified names
@@ -10,7 +10,7 @@ import type { IOption } from "@models/game/option";
  * @returns 
  * Array of options that have specified names
  */
-export function getOptionsByName<TOption extends IOption, TName extends string>(
+export function getOptionsByName<TOption extends Option, TName extends string>(
 	options: TOption[],
 	names: TName[]
 ): TOption[] {
@@ -35,7 +35,7 @@ export function getOptionsByName<TOption extends IOption, TName extends string>(
  * @returns 
  * Array of options from base game and specified expansions
  */
-export function getOptionsByExpansion<TOption extends IExpansionOption>(
+export function getOptionsByExpansion<TOption extends ExpansionOption>(
 	options: TOption[],
 	expansions: ExpansionName[]
 ): TOption[] {

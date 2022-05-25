@@ -11,7 +11,7 @@ import type { ScenarioName } from "./game/scenarios";
  * Collection of selected options that a user either 
  * wants or would be willing to have in a `IGameSetup`
  */
-export interface IConfig {
+export interface Config {
 	expansions: ExpansionName[];
 	players: Players;
 	difficultyRange: Difficulty[];

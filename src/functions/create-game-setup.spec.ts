@@ -4,14 +4,14 @@ import { EXPANSIONS } from "@data/expansions";
 import { MAPS } from "@data/maps";
 import { SCENARIOS } from "@data/scenarios";
 import { SPIRITS } from "@data/spirits";
-import type { IConfig } from "@models/config.interface";
+import type { Config } from "@models/config.interface";
 import type { AdversaryName, AdversaryLevelId } from "@models/game/adversaries";
 import { createGameSetup } from "./create-game-setup";
 import { getValidCombos } from "./get-valid-combos";
 
 describe("createGameSetup", () => {
 	it("returns a randomly-generated game setup", () => {
-		const mockConfig: IConfig = {
+		const mockConfig: Config = {
 			expansions: EXPANSIONS,
 			players: 4,
 			difficultyRange: [5, 8],

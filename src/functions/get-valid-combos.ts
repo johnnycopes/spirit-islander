@@ -1,21 +1,21 @@
-import type { IDifficultyOption } from "@models/game/difficulty";
-import type { IConfig } from "@models/config.interface";
-import type { IAdversaryLevel } from "@models/game/adversaries";
-import type { IMap } from "@models/game/maps";
-import type { IScenario } from "@models/game/scenarios";
+import type { DifficultyOption } from "@models/game/difficulty";
+import type { Config } from "@models/config.interface";
+import type { AdversaryLevel } from "@models/game/adversaries";
+import type { Map } from "@models/game/maps";
+import type { Scenario } from "@models/game/scenarios";
 import { ADVERSARIES } from "@data/adversaries";
 import { MAPS } from "@data/maps";
 import { SCENARIOS } from "@data/scenarios";
 import { getDifficulty } from "./get-difficulty";
 import { ComboAnalyzer } from "./utility/combo-analyzer";
 
-const comboAnalyzer = new ComboAnalyzer<IDifficultyOption>();
+const comboAnalyzer = new ComboAnalyzer<DifficultyOption>();
 
-export function getValidCombos(config: IConfig): [IMap, IAdversaryLevel, IScenario][] {
+export function getValidCombos(config: Config): [Map, AdversaryLevel, Scenario][] {
 	const { mapNames, scenarioNames, adversaryNamesAndIds } = config;
 	const maps = MAPS.filter(map => mapNames.includes(map.name));
 	const scenarios = SCENARIOS.filter(scenario => scenarioNames.includes(scenario.name));
-	const adversaries: IAdversaryLevel[] = [];
+	const adversaries: AdversaryLevel[] = [];
 
 	if (adversaryNamesAndIds.includes("No Adversary")) {
 		adversaries.push({ id: "none", name: "N/A", difficulty: 0 });

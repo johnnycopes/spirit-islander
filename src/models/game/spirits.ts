@@ -1,4 +1,4 @@
-import type { IExpansionOption } from "./expansions";
+import type { ExpansionOption } from "./expansions";
 
 export type SpiritName =
 	"A Spread of Rampant Green" |
@@ -26,6 +26,6 @@ export type SpiritName =
 	"Vital Strength of the Earth" |
 	"Volcano Looming High";
 
-export interface ISpirit extends IExpansionOption {
+export interface Spirit extends ExpansionOption {
 	name: SpiritName;
 }

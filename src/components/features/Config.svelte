@@ -24,8 +24,8 @@
 	import type { BalancedBoardName } from "@models/game/board";
 	import type { Difficulty } from "@models/game/difficulty";
 	import type { ExpansionName } from "@models/game/expansions";
-	import type { ICombo } from "@models/combo.interface";
-	import type { IConfig } from "@models/config.interface";
+	import type { Combo } from "@models/combo.interface";
+	import type { Config } from "@models/config.interface";
 	import type { MapName } from "@models/game/maps";
 	import type { Players } from "@models/game/players";
 	import type { ScenarioName } from "@models/game/scenarios";
@@ -49,13 +49,13 @@
 	export let adversaryNamesAndIds: (AdversaryName | AdversaryLevelId)[];
 	const dispatcher = createEventDispatcher<{
 		generate: {
-			config: IConfig,
-			validCombos: ICombo[],
+			config: Config,
+			validCombos: Combo[],
 		}
 	}>();
 
-	let config: IConfig;
-	let validCombos: ICombo[];
+	let config: Config;
+	let validCombos: Combo[];
 	$: { config = {
 		expansions, players, difficultyRange, mapNames, boardNames, spiritNames, scenarioNames, adversaryNamesAndIds
 	}};

@@ -1,10 +1,10 @@
 import { getOptionsByExpansion, getOptionsByName } from "./get-options";
-import type { BalancedBoardName, IBoard } from "../models/game/board";
-import type { ISpirit, SpiritName } from "../models/game/spirits";
+import type { BalancedBoardName, Board } from "../models/game/board";
+import type { Spirit, SpiritName } from "../models/game/spirits";
 
 describe("getOptions", () => {
-	let mockSpirits: ISpirit[];
-	let mockBoards: IBoard[];
+	let mockSpirits: Spirit[];
+	let mockBoards: Board[];
 
 	beforeEach(() => {
 		mockSpirits = [
@@ -28,7 +28,7 @@ describe("getOptions", () => {
 				{ name: "Keeper of the Forbidden Wilds", expansion: "Branch & Claw" },
 			]);
 
-			expect(getOptionsByName<ISpirit, SpiritName>(mockSpirits, ["Fractured Days Split the Sky", "Downpour Drenches the World"])).toStrictEqual([
+			expect(getOptionsByName<Spirit, SpiritName>(mockSpirits, ["Fractured Days Split the Sky", "Downpour Drenches the World"])).toStrictEqual([
 				{ name: "Fractured Days Split the Sky", expansion: "Jagged Earth" },
 				{ name: "Downpour Drenches the World", expansion: "Promo Pack 2" },
 			]);
@@ -40,7 +40,7 @@ describe("getOptions", () => {
 				{ name: "D", thematicName: "West" },
 			]);
  
-			expect(getOptionsByName<IBoard, BalancedBoardName>(mockBoards, ["E"])).toStrictEqual([
+			expect(getOptionsByName<Board, BalancedBoardName>(mockBoards, ["E"])).toStrictEqual([
 				{ name: "E", thematicName: "Southeast", expansion: "Jagged Earth" },
 			]);
 		});

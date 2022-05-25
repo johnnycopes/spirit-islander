@@ -5,7 +5,7 @@ import { SCENARIOS } from "@data/scenarios";
 import { SPIRITS } from "@data/spirits";
 import type { AdversaryLevelId, AdversaryName } from "@models/game/adversaries";
 import type { BalancedBoardName } from "@models/game/board";
-import type { ExpansionName, IExpansionOption } from "@models/game/expansions";
+import type { ExpansionName, ExpansionOption } from "@models/game/expansions";
 import type { MapName } from "@models/game/maps";
 import type { ScenarioName } from "@models/game/scenarios";
 import type { SpiritName } from "@models/game/spirits";
@@ -37,12 +37,12 @@ export function createAdversariesModel(expansions: ExpansionName[] = []): (Adver
 	}, [] as (AdversaryName | AdversaryLevelId)[])
 }
 
-interface IGenericExpansionOption<TName extends string> extends IExpansionOption {
+interface GenericExpansionOption<TName extends string> extends ExpansionOption {
 	name: TName;
 }
 
 function createModel<TName extends string>(
-	options: IGenericExpansionOption<TName>[],
+	options: GenericExpansionOption<TName>[],
 	expansions: ExpansionName[]
 ): TName[] {
 	return getOptionsByExpansion(options, expansions).map(option => option.name);

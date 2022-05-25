@@ -1,5 +1,5 @@
 import { BOARDS } from "@data/boards";
-import type { BalancedBoardName, IBoard } from "@models/game/board";
+import type { BalancedBoardName, Board } from "@models/game/board";
 import type { MapName } from "@models/game/maps";
 import type { Players } from "@models/game/players";
 import { getOptionsByName } from "./get-options";
@@ -9,7 +9,7 @@ export function selectBoards(
 	mapName: MapName,
 	players: Players,
 	boardNames: BalancedBoardName[]
-): IBoard[] {
+): Board[] {
 	if (mapName === "Balanced") {
 		const randomBoardNames = selectRandom(boardNames, players);
 		return getBoardsByName(randomBoardNames);
@@ -36,6 +36,6 @@ export function selectBoards(
 	}
 }
 
-function getBoardsByName(boardNames: BalancedBoardName[]): IBoard[] {
+function getBoardsByName(boardNames: BalancedBoardName[]): Board[] {
 	return getOptionsByName(BOARDS, boardNames);
 }

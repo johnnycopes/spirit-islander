@@ -1,10 +1,10 @@
 <script lang="ts">
 	import Emblem from "./Emblem.svelte";
-	import type { BalancedBoardName, IBoard, ThematicBoardName } from "@models/game/board";
+	import type { BalancedBoardName, Board, ThematicBoardName } from "@models/game/board";
 	import type { MapName } from "@models/game/maps";
 	import { snakeCase } from "@functions/utility/snake-case";
 
-	export let board: IBoard;
+	export let board: Board;
 	export let mapName: MapName;
 	let boardName: BalancedBoardName | string;
 

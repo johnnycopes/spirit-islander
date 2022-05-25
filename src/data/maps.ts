@@ -1,6 +1,6 @@
-import type { IMap } from "@models/game/maps";
+import type { Map } from "@models/game/maps";
 
-export const MAPS: IMap[] = [
+export const MAPS: Map[] = [
 	{
 		name: "Balanced",
 		difficulty: 0,
