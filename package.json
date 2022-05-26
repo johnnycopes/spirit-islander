@@ -73,6 +73,6 @@
     }
   },
   "lint-staged": {
-    "*.{ts,svelte}": ["eslint", "jest --bail --findRelatedTests"]
+    "*.{ts,svelte}": ["eslint", "jest --bail --findRelatedTests --passWithNoTests"]
   }
 }
