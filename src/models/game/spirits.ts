@@ -26,6 +26,4 @@ export type SpiritName =
 	"Vital Strength of the Earth" |
 	"Volcano Looming High";
 
-export interface Spirit extends ExpansionOption {
-	name: SpiritName;
-}
+export interface Spirit extends ExpansionOption<SpiritName> {}

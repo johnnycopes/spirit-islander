@@ -3,6 +3,4 @@ import type { ExpansionOption } from "./expansions";
 
 export type MapName = "Balanced" | "Thematic";
 
-export interface Map extends DifficultyOption, ExpansionOption {
-	name: MapName;
-}
+export interface Map extends DifficultyOption<MapName>, ExpansionOption<MapName> {}

@@ -9,7 +9,7 @@ import { getDifficulty } from "./get-difficulty";
 import type { Difficulty } from "@models/game/difficulty";
 
 export function createGameSetup(config: Config, validCombos: Combo[]): GameSetup {
-	const {players, expansions, spiritNames, boardNames} = config;
+	const { players, expansions, spiritNames, boardNames } = config;
 
 	// Randomly choose a combination of a map, adversary, and scenario and determine the total difficulty
 	const [selectedMap, selectedAdversaryLevel, selectedScenario] = selectRandom(validCombos)[0];

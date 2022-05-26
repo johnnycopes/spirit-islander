@@ -16,7 +16,6 @@ export type ThematicBoardName =
 	"Southeast" |
 	"Southwest";
 
-export interface Board extends ExpansionOption {
-	name: BalancedBoardName;
+export interface Board extends ExpansionOption<BalancedBoardName> {
 	thematicName: ThematicBoardName;
 }

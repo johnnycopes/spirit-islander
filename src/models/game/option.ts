@@ -1,3 +1,3 @@
-export interface Option {
-	name: string;
+export interface Option<TName extends string> {
+	name: TName;
 }
