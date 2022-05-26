@@ -14,11 +14,11 @@
 	import { createGameSetup } from "@functions/create-game-setup";
 	import { Page } from "@models/page.enum";
 	import type { Combo } from "@models/combo.interface";
-	import type { Config } from "@models/config.interface";
-	import type { GameSetup } from "@models/game-setup.interface";
+	import type { Config as IConfig } from "@models/config.interface";
+	import type { GameSetup as IGameSetup } from "@models/game-setup.interface";
 
 	let page: Page = Page.Config;
-	let config: Config = {
+	let config: IConfig = {
 		expansions: [],
 		players: 1,
 		difficultyRange: [0, 1],
@@ -29,7 +29,7 @@
 		adversaryNamesAndIds: createAdversariesModel(),
 	};
 	let validCombos: Combo[] | undefined;
-	let gameSetup: GameSetup | undefined;
+	let gameSetup: IGameSetup | undefined;
 
 	const OLD_KEY = "SPIRIT_ISLANDER_CONFIG";
 	const NEW_KEY = "SPIRIT_ISLANDER_CONFIG_NEW";
@@ -51,7 +51,7 @@
 		}
 	});
 
-	function setConfigInLocalStorage(config: Config): void {
+	function setConfigInLocalStorage(config: IConfig): void {
 		const configJSON = JSON.stringify(config);
 		localStorage.setItem(NEW_KEY, configJSON);
 	}
