@@ -1,15 +1,15 @@
 import type { DifficultyOption } from "@models/game/difficulty";
 import type { Config } from "@models/config.interface";
-import type { AdversaryLevel } from "@models/game/adversaries";
-import type { Map } from "@models/game/maps";
-import type { Scenario } from "@models/game/scenarios";
+import type { AdversaryLevel, AdversaryLevelName } from "@models/game/adversaries";
+import type { Map, MapName } from "@models/game/maps";
+import type { Scenario, ScenarioName } from "@models/game/scenarios";
 import { ADVERSARIES } from "@data/adversaries";
 import { MAPS } from "@data/maps";
 import { SCENARIOS } from "@data/scenarios";
 import { getDifficulty } from "./get-difficulty";
 import { ComboAnalyzer } from "./utility/combo-analyzer";
 
-const comboAnalyzer = new ComboAnalyzer<DifficultyOption>();
+const comboAnalyzer = new ComboAnalyzer<DifficultyOption<MapName | AdversaryLevelName | ScenarioName>>();
 
 export function getValidCombos(config: Config): [Map, AdversaryLevel, Scenario][] {
 	const { mapNames, scenarioNames, adversaryNamesAndIds } = config;

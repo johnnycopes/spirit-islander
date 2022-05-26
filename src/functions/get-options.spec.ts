@@ -28,7 +28,7 @@ describe("getOptions", () => {
 				{ name: "Keeper of the Forbidden Wilds", expansion: "Branch & Claw" },
 			]);
 
-			expect(getOptionsByName<Spirit, SpiritName>(mockSpirits, ["Fractured Days Split the Sky", "Downpour Drenches the World"])).toStrictEqual([
+			expect(getOptionsByName<SpiritName, Spirit>(mockSpirits, ["Fractured Days Split the Sky", "Downpour Drenches the World"])).toStrictEqual([
 				{ name: "Fractured Days Split the Sky", expansion: "Jagged Earth" },
 				{ name: "Downpour Drenches the World", expansion: "Promo Pack 2" },
 			]);
@@ -40,7 +40,7 @@ describe("getOptions", () => {
 				{ name: "D", thematicName: "West" },
 			]);
  
-			expect(getOptionsByName<Board, BalancedBoardName>(mockBoards, ["E"])).toStrictEqual([
+			expect(getOptionsByName<BalancedBoardName, Board>(mockBoards, ["E"])).toStrictEqual([
 				{ name: "E", thematicName: "Southeast", expansion: "Jagged Earth" },
 			]);
 		});

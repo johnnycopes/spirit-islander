@@ -21,9 +21,8 @@ export type AdversaryLevelName =
 	"Level 5" |
 	"Level 6";
 
-export interface AdversaryLevel extends DifficultyOption {
+export interface AdversaryLevel extends DifficultyOption<AdversaryLevelName> {
 	id: AdversaryLevelId;
-	name: AdversaryLevelName;
 }
 
 export type AdversaryLevelId = "none" |
@@ -35,7 +34,6 @@ export type AdversaryLevelId = "none" |
 	"sc-0" | "sc-1" | "sc-2" | "sc-3" | "sc-4" | "sc-5" | "sc-6" |
 	"sw-0" | "sw-1" | "sw-2" | "sw-3" | "sw-4" | "sw-5" | "sw-6";
 
-export interface Adversary extends ExpansionOption {
-	name: AdversaryName,
+export interface Adversary extends ExpansionOption<AdversaryName> {
 	levels: AdversaryLevel[];
 }

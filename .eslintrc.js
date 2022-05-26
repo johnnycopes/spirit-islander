@@ -30,7 +30,13 @@ module.exports = {
     }
   ],
   rules: {
-    quotes: ["error", "double"]
+    quotes: ["error", "double"],
+    "@typescript-eslint/no-empty-interface": [
+      "error",
+      {
+        "allowSingleExtends": true,
+      },
+    ],
   },
   settings: {
     "svelte3/typescript": true,

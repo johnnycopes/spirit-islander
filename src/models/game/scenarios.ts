@@ -17,6 +17,4 @@ export type ScenarioName =
 	"Varied Terrains" |
 	"Ward the Shores";
 
-export interface Scenario extends DifficultyOption, ExpansionOption {
-	name: ScenarioName;
-}
+export interface Scenario extends DifficultyOption<ScenarioName>, ExpansionOption<ScenarioName> {}

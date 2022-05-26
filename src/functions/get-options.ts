@@ -10,7 +10,7 @@ import type { Option } from "@models/game/option";
  * @returns 
  * Array of options that have specified names
  */
-export function getOptionsByName<TOption extends Option, TName extends string>(
+export function getOptionsByName<TName extends string, TOption extends Option<TName>>(
 	options: TOption[],
 	names: TName[]
 ): TOption[] {
@@ -35,7 +35,7 @@ export function getOptionsByName<TOption extends Option, TName extends string>(
  * @returns 
  * Array of options from base game and specified expansions
  */
-export function getOptionsByExpansion<TOption extends ExpansionOption>(
+export function getOptionsByExpansion<TName extends string, TOption extends ExpansionOption<TName>>(
 	options: TOption[],
 	expansions: ExpansionName[]
 ): TOption[] {

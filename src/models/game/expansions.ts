@@ -7,6 +7,6 @@ export type ExpansionName =
 	"Promo Pack 2"
 ;
 
-export interface ExpansionOption extends Option {
+export interface ExpansionOption<TName extends string> extends Option<TName> {
 	expansion?: ExpansionName;
 }

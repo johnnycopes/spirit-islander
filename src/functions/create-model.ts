@@ -37,12 +37,8 @@ export function createAdversariesModel(expansions: ExpansionName[] = []): (Adver
 	}, [] as (AdversaryName | AdversaryLevelId)[])
 }
 
-interface GenericExpansionOption<TName extends string> extends ExpansionOption {
-	name: TName;
-}
-
 function createModel<TName extends string>(
-	options: GenericExpansionOption<TName>[],
+	options: ExpansionOption<TName>[],
 	expansions: ExpansionName[]
 ): TName[] {
 	return getOptionsByExpansion(options, expansions).map(option => option.name);

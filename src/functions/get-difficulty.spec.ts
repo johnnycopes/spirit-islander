@@ -3,7 +3,7 @@ import { getDifficulty } from "./get-difficulty";
 
 describe("getDifficulty", () => {
 	it("returns static difficulty value", () => {
-		const mockItem: DifficultyOption = {
+		const mockItem: DifficultyOption<string> = {
 			name: "Fake Item",
 			difficulty: 4,
 		};
@@ -23,7 +23,7 @@ describe("getDifficulty", () => {
 	});
 
 	it("returns dynamic difficulty value", () => {
-		const mockItem: DifficultyOption = {
+		const mockItem: DifficultyOption<string> = {
 			name: "Fake Item",
 			difficulty: expansions => {
 				if (expansions.length >= 2) {
