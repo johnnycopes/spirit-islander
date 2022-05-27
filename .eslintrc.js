@@ -4,41 +4,26 @@ module.exports = {
     browser: true,
     node: true
   },
-  extends: [
-    "eslint:recommended",
-    "plugin:@typescript-eslint/recommended",
-    "plugin:@typescript-eslint/recommended-requiring-type-checking"
-  ],
+  extends: ["eslint:recommended", "plugin:@typescript-eslint/recommended", "plugin:@typescript-eslint/recommended-requiring-type-checking", "plugin:storybook/recommended"],
   parser: "@typescript-eslint/parser",
   parserOptions: {
     ecmaVersion: "latest",
     project: ["tsconfig.json"],
     sourceType: "module"
   },
-  plugins: [
-    "svelte3",
-    "@typescript-eslint"
-  ],
-  ignorePatterns: [
-    "public/build/",
-    "**/*.spec.ts",
-  ],
-  overrides: [
-    {
-      files: ["**/*.svelte"],
-      processor: "svelte3/svelte3"
-    }
-  ],
+  plugins: ["svelte3", "@typescript-eslint"],
+  ignorePatterns: ["public/build/", "**/*.spec.ts"],
+  overrides: [{
+    files: ["**/*.svelte"],
+    processor: "svelte3/svelte3"
+  }],
   rules: {
     quotes: ["error", "double"],
-    "@typescript-eslint/no-empty-interface": [
-      "error",
-      {
-        "allowSingleExtends": true,
-      },
-    ],
+    "@typescript-eslint/no-empty-interface": ["error", {
+      "allowSingleExtends": true
+    }]
   },
   settings: {
-    "svelte3/typescript": true,
+    "svelte3/typescript": true
   }
-}
+};
