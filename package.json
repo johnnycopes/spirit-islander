@@ -3,24 +3,37 @@
   "version": "1.0.0",
   "scripts": {
     "build": "rollup -c",
+    "build-storybook": "build-storybook",
     "deploy-test": "npm run build && cd public && surge . --domain https://si-test.surge.sh",
     "dev": "rollup -c -w",
     "lint": "eslint . --ext .ts,.svelte",
     "prepare": "husky install",
     "start": "sirv public",
+    "storybook": "start-storybook -p 6006",
     "test": "jest src",
     "test:watch": "npm run test -- --watch",
     "validate": "svelte-check"
   },
   "devDependencies": {
+    "@babel/core": "^7.18.2",
     "@rollup/plugin-commonjs": "^17.0.0",
     "@rollup/plugin-node-resolve": "^11.0.0",
     "@rollup/plugin-typescript": "^8.0.0",
+    "@storybook/addon-actions": "^6.5.6",
+    "@storybook/addon-essentials": "^6.5.6",
+    "@storybook/addon-interactions": "^6.5.6",
+    "@storybook/addon-links": "^6.5.6",
+    "@storybook/addon-svelte-csf": "^2.0.4",
+    "@storybook/builder-webpack4": "^6.5.6",
+    "@storybook/manager-webpack4": "^6.5.6",
+    "@storybook/svelte": "^6.5.6",
+    "@storybook/testing-library": "^0.0.11",
     "@tsconfig/svelte": "^1.0.0",
     "@types/jest": "^27.5.0",
     "@typescript-eslint/eslint-plugin": "^5.25.0",
     "@typescript-eslint/parser": "^5.25.0",
     "autoprefixer": "^10.2.5",
+    "babel-loader": "^8.2.5",
     "eslint": "^8.15.0",
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-node": "^11.1.0",
@@ -39,6 +52,7 @@
     "svelte": "^3.0.0",
     "svelte-check": "^1.0.0",
     "svelte-jester": "^2.3.2",
+    "svelte-loader": "^3.1.2",
     "svelte-preprocess": "^4.10.6",
     "ts-jest": "^28.0.1",
     "tslib": "^2.0.0",
@@ -73,6 +87,9 @@
     }
   },
   "lint-staged": {
-    "*.{ts,svelte}": ["eslint", "jest --bail --findRelatedTests --passWithNoTests"]
+    "*.{ts,svelte}": [
+      "eslint",
+      "jest --bail --findRelatedTests --passWithNoTests"
+    ]
   }
 }
