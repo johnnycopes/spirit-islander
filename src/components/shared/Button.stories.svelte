@@ -16,7 +16,7 @@
 <Template let:args>
   <Button
     {...args}
-    on:click={args.onClick}
+    on:clicked={args.onClick}
   >
     {args.slot}
   </Button>
@@ -27,5 +27,13 @@
   args={{
     slot: "Click me!",
     disabled: false,
+  }}
+/>
+
+<Story
+  name="Disabled"
+  args={{
+    slot: "Click me!",
+    disabled: true,
   }}
 />
