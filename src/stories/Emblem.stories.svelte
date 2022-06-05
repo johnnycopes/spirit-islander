@@ -1,6 +1,6 @@
 <script>
   import { Meta, Template, Story } from "@storybook/addon-svelte-csf";
-  import Emblem from "./Emblem.svelte";
+  import Emblem from "../components/shared/Emblem.svelte";
 </script>
 
 <Meta

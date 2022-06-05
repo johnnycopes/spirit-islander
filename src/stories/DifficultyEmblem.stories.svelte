@@ -1,6 +1,6 @@
 <script>
   import { Meta, Template, Story } from "@storybook/addon-svelte-csf";
-  import DifficultyEmblem from "./DifficultyEmblem.svelte";
+  import DifficultyEmblem from "../components/shared/DifficultyEmblem.svelte";
 </script>
 
 <Meta
