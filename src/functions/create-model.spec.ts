@@ -88,6 +88,24 @@ describe("createModel", () => {
 				"Vital Strength of the Earth",
 			]);
 		});
+
+		it("gets base game + Horizons of Spirit Island spirits", () => {
+			expect(createSpiritsModel(["Horizons of Spirit Island"])).toStrictEqual([
+				"A Spread of Rampant Green",
+				"Bringer of Dreams and Nightmares",
+				"Lightning's Swift Strike",
+				"Ocean's Hungry Grasp",
+				"River Surges in Sunlight",
+				"Shadows Flicker Like Flame",
+				"Thunderspeaker",
+				"Vital Strength of the Earth",
+				"Devouring Teeth Lurk Underfoot",
+				"Eyes Watch From the Trees",
+				"Fathomless Mud of the Swamp",
+				"Rising Heat of Stone and Sand",
+				"Sun-Bright Whirlwind"
+			]);
+		});
 	});
 
 	describe("createMapsModel", () => {

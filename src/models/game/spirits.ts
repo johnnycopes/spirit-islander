@@ -24,6 +24,11 @@ export type SpiritName =
 	"Thunderspeaker" |
 	"Vengeance as a Burning Plague" |
 	"Vital Strength of the Earth" |
-	"Volcano Looming High";
+	"Volcano Looming High" |
+	"Devouring Teeth Lurk Underfoot" | 
+	"Eyes Watch From the Trees" |
+	"Fathomless Mud of the Swamp" | 
+	"Rising Heat of Stone and Sand" | 
+	"Sun-Bright Whirlwind";
 
 export interface Spirit extends ExpansionOption<SpiritName> {}

@@ -25,4 +25,9 @@ export const SPIRITS: Spirit[] = [
 	{ name: "Vengeance as a Burning Plague", expansion: "Jagged Earth" },
 	{ name: "Vital Strength of the Earth" },
 	{ name: "Volcano Looming High", expansion: "Jagged Earth" },
+	{ name: "Devouring Teeth Lurk Underfoot", expansion: "Horizons of Spirit Island" },
+	{ name: "Eyes Watch From the Trees", expansion: "Horizons of Spirit Island" },
+	{ name: "Fathomless Mud of the Swamp", expansion: "Horizons of Spirit Island" },
+	{ name: "Rising Heat of Stone and Sand", expansion: "Horizons of Spirit Island" },
+	{ name: "Sun-Bright Whirlwind", expansion: "Horizons of Spirit Island" }	
 ];

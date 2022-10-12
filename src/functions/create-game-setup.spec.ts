@@ -29,7 +29,7 @@ describe("createGameSetup", () => {
 
 		expect(boards).toHaveLength(4);
 		expect(spirits).toHaveLength(4);
-		expect(expansions).toStrictEqual(["Branch & Claw", "Jagged Earth", "Promo Pack 1", "Promo Pack 2"]);
+		expect(expansions).toStrictEqual(["Branch & Claw", "Jagged Earth", "Promo Pack 1", "Promo Pack 2", "Horizons of Spirit Island"]);
 		expect(difficulty).toBeGreaterThanOrEqual(5);
 		expect(difficulty).toBeLessThanOrEqual(8);
 	});
