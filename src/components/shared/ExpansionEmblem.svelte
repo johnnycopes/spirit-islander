@@ -5,10 +5,14 @@
 	export let value: ExpansionName | undefined;
 	$: abbrevation = getAbbreviation(value);
 
-	function getAbbreviation(name: ExpansionName | undefined): string | undefined {
+	function getAbbreviation(
+		name: ExpansionName | undefined
+	): string | undefined {
 		switch (name) {
 			case "Branch & Claw":
 				return "BC";
+			case "Horizons":
+				return "H";
 			case "Jagged Earth":
 				return "JE";
 			case "Promo Pack 1":
@@ -30,6 +34,11 @@
 <style lang="scss">
 	:global(.BC-emblem.emblem) {
 		background: var(--yellow-100);
+		color: var(--gray-100);
+	}
+
+	:global(.H-emblem.emblem) {
+		background: var(--orange-100);
 		color: var(--gray-100);
 	}
 
