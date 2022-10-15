@@ -5,9 +5,7 @@
 	export let value: ExpansionName | undefined;
 	$: abbrevation = getAbbreviation(value);
 
-	function getAbbreviation(
-		name: ExpansionName | undefined
-	): string | undefined {
+	function getAbbreviation(name: ExpansionName | undefined): string | undefined {
 		switch (name) {
 			case "Branch & Claw":
 				return "BC";
