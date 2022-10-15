@@ -36,6 +36,24 @@ describe("createModel", () => {
 			]);
 		});
 
+		it("gets base game + Horizons spirits", () => {
+			expect(createSpiritsModel(["Horizons"])).toStrictEqual([
+				"A Spread of Rampant Green",
+				"Bringer of Dreams and Nightmares",
+				"Devouring Teeth Lurk Underfoot",
+				"Eyes Watch From the Trees",
+				"Fathomless Mud of the Swamp",
+				"Lightning's Swift Strike",
+				"Ocean's Hungry Grasp",
+				"Rising Heat of Stone and Sand",
+				"River Surges in Sunlight",
+				"Shadows Flicker Like Flame",
+				"Sun-Bright Whirlwind",
+				"Thunderspeaker",
+				"Vital Strength of the Earth",
+			]);
+		});
+
 		it("gets base game + Jagged Earth spirits", () => {
 			expect(createSpiritsModel(["Jagged Earth"])).toStrictEqual([
 				"A Spread of Rampant Green",
