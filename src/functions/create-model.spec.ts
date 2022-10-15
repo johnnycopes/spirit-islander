@@ -36,8 +36,8 @@ describe("createModel", () => {
 			]);
 		});
 
-		it("gets base game + Horizons of Spirit Island spirits", () => {
-			expect(createSpiritsModel(["Horizons of Spirit Island"])).toStrictEqual([
+		it("gets base game + Horizons spirits", () => {
+			expect(createSpiritsModel(["Horizons"])).toStrictEqual([
 				"A Spread of Rampant Green",
 				"Bringer of Dreams and Nightmares",
 				"Devouring Teeth Lurk Underfoot",
