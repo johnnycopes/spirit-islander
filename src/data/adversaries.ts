@@ -93,4 +93,17 @@ export const ADVERSARIES: Adversary[] = [
 			{ id: "sw-6", name: "Level 6", difficulty: 8 },
 		],
 	},
+	{
+		name: "Habsburg Mining Expedition",
+		expansion: "Nature Incarnate",
+		levels: [
+			{ id: "hme-0", name: "Level 0", difficulty: 1 },
+			{ id: "hme-1", name: "Level 1", difficulty: 3 },
+			{ id: "hme-2", name: "Level 2", difficulty: 4 },
+			{ id: "hme-3", name: "Level 3", difficulty: 5 },
+			{ id: "hme-4", name: "Level 4", difficulty: 7 },
+			{ id: "hme-5", name: "Level 5", difficulty: 9 },
+			{ id: "hme-6", name: "Level 6", difficulty: 10 },
+		],
+	},
 ];

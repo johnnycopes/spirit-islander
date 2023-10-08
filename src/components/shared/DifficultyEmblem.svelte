@@ -5,9 +5,13 @@
 	export let value: Difficulty;
 </script>
 
-{#if value > 0}
+{#if value != 0}
 	<Emblem name="difficulty">
-		+<span class="value">{value}</span>
+{#if value > 0}
+		+
+{/if}
+		<span class="value">{value}</span>
+
 	</Emblem>
 {/if}
 

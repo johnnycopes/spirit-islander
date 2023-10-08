@@ -5,5 +5,6 @@ export const EXPANSIONS: ExpansionName[] = [
 	"Horizons",
 	"Jagged Earth",
 	"Promo Pack 1",
-	"Promo Pack 2"
+	"Promo Pack 2",
+	"Nature Incarnate"
 ];

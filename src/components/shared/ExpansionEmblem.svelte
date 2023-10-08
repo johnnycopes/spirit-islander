@@ -17,6 +17,8 @@
 				return "P1";
 			case "Promo Pack 2":
 				return "P2";
+			case "Nature Incarnate":
+				return "NI";
 			default:
 				return undefined;
 		}
@@ -42,6 +44,11 @@
 
 	:global(.JE-emblem.emblem) {
 		background: var(--green-100);
+		color: var(--gray-100);
+	}
+
+	:global(.NI-emblem.emblem) {
+		background: var(--red-200);
 		color: var(--gray-100);
 	}
 

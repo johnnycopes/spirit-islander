@@ -2,6 +2,11 @@ import type { Scenario } from "@models/game/scenarios";
 
 export const SCENARIOS: Scenario[] = [
 	{
+		name: "Destiny Unfolds",
+		difficulty: -1,
+		expansion: "Nature Incarnate",
+	},
+	{
 		name: "No Scenario",
 		difficulty: 0,
 	},
@@ -49,6 +54,11 @@ export const SCENARIOS: Scenario[] = [
 		expansion: "Branch & Claw",
 	},
 	{
+		name: "Surges of Colonization",
+		difficulty: 2,
+		expansion: "Nature Incarnate",
+	},
+	{
 		name: "Rituals of Destroying Flame",
 		difficulty: 3,
 		expansion: "Branch & Claw",
@@ -65,5 +75,10 @@ export const SCENARIOS: Scenario[] = [
 	{
 		name: "Dahan Insurrection",
 		difficulty: 4,
+	},
+	{
+		name: "Surges of Colonization (Hard)",
+		difficulty: 7,
+		expansion: "Nature Incarnate",
 	},
 ];
