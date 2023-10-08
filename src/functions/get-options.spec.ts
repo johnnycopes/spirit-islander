@@ -13,6 +13,7 @@ describe("getOptions", () => {
 			{ name: "Fractured Days Split the Sky", expansion: "Jagged Earth" },
 			{ name: "Keeper of the Forbidden Wilds", expansion: "Branch & Claw" },
 			{ name: "Serpent Slumbering Beneath the Island", expansion: "Promo Pack 1" },
+			{ name: "Hearth-Vigil", expansion: "Nature Incarnate" },
 		];
 		mockBoards = [
 			{ name: "D", thematicName: "West" },
@@ -39,7 +40,7 @@ describe("getOptions", () => {
 			expect(getOptionsByName(mockBoards, boardNames)).toStrictEqual([
 				{ name: "D", thematicName: "West" },
 			]);
- 
+
 			expect(getOptionsByName<BalancedBoardName, Board>(mockBoards, ["E"])).toStrictEqual([
 				{ name: "E", thematicName: "Southeast", expansion: "Jagged Earth" },
 			]);
@@ -61,6 +62,11 @@ describe("getOptions", () => {
 				{ name: "Bringer of Dreams and Nightmares" },
 				{ name: "Downpour Drenches the World", expansion: "Promo Pack 2" },
 				{ name: "Serpent Slumbering Beneath the Island", expansion: "Promo Pack 1" },
+			]);
+
+			expect(getOptionsByExpansion(mockSpirits, ["Nature Incarnate"])).toStrictEqual([
+				{ name: "Bringer of Dreams and Nightmares" },
+				{ name: "Hearth-Vigil", expansion: "Nature Incarnate" },
 			]);
 		});
 

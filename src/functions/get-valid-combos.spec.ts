@@ -17,7 +17,8 @@ describe("getValidCombos", () => {
 			spiritNames: SPIRITS.map(spirit => spirit.name),
 			mapNames: MAPS.map(map => map.name),
 			boardNames: BOARDS.map(board => board.name),
-			scenarioNames: SCENARIOS.map(scenario => scenario.name),
+			// ignore NI as Destiny Unfurls -1 difficulty creates too many options
+			scenarioNames: SCENARIOS.filter(scenario => scenario.expansion !== "Nature Incarnate").map(scenario => scenario.name),
 			adversaryNamesAndIds: ADVERSARIES.reduce((model, adversary) => {
 				model.push(adversary.name);
 				adversary.levels.forEach(level => model.push(level.id));
@@ -74,6 +75,6 @@ describe("getValidCombos", () => {
 				return model;
 			}, [] as (AdversaryName | AdversaryLevelId)[]),
 		};
-		expect(getValidCombos(mockConfig)).toHaveLength(1215);
+		expect(getValidCombos(mockConfig)).toHaveLength(1632);
 	});
 });

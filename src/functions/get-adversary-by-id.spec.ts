@@ -45,6 +45,16 @@ describe("getAdversaryById", () => {
 		expect(getAdversaryById("hm-6")).toBe("Habsburg Monarchy");
 	});
 
+	it("returns 'Habsburg Mining Expedition'", () => {
+		expect(getAdversaryById("hme-0")).toBe("Habsburg Mining Expedition");
+		expect(getAdversaryById("hme-1")).toBe("Habsburg Mining Expedition");
+		expect(getAdversaryById("hme-2")).toBe("Habsburg Mining Expedition");
+		expect(getAdversaryById("hme-3")).toBe("Habsburg Mining Expedition");
+		expect(getAdversaryById("hme-4")).toBe("Habsburg Mining Expedition");
+		expect(getAdversaryById("hme-5")).toBe("Habsburg Mining Expedition");
+		expect(getAdversaryById("hme-6")).toBe("Habsburg Mining Expedition");
+	});
+
 	it("returns 'Russia'", () => {
 		expect(getAdversaryById("ru-0")).toBe("Russia");
 		expect(getAdversaryById("ru-1")).toBe("Russia");
