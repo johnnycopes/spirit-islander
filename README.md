@@ -1,5 +1,7 @@
 # Spirit Islander
 
+## NOTE: this project is now being maintained in a [different repo](https://github.com/johnnycopes/atocha).
+
 ### Live site: [https://www.spiritislander.com](https://www.spiritislander.com)
 
 This is a setup generator for the board game [Spirit Island](https://www.boardgamegeek.com/boardgame/162886/spirit-island) by R. Eric Reuss. Spirit Island is a modular game with many different configurations that add interesting variety and challenge. This tool removes the burden of having to calculate these configurations manually by instantaneously generating randomized game setups that adhere to the player's prefences.
